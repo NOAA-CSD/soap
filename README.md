@@ -33,3 +33,16 @@ The PPT retrieves data through the command `[address]P1<cr>`; here `[address]` i
 ```
 
 The `CP` here indicates a temperature compensated pressure.
+
+## Heaters
+
+The heaters are run off of individual PWMs.  The inputs required for control are the PID control parameters as well as the setpoints.  These values are set at the controller level through two messages:
+
+* `Change Heater SP` - requires an `id` and the setpoint
+* `Change Heater Ctl` - requires an `id` string and the input parameters `p`, `i` and `d`
+
+In each case, the message needs an `id` string.  These strings are 
+
+* `pas.heater1`
+* `pas.heater2`
+* `crd.heater`
