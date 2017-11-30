@@ -1,0 +1,145 @@
+{
+  "crd": {
+    "lambda": [
+      660,
+      660
+    ],
+    "lcell": [
+      0.91,
+      0.91
+    ],
+    "fit": [
+      "LRS",
+      "LRS"
+    ],
+    "ids": [
+      "cell_0",
+      "cell_1"
+    ],
+    "f": 1000,
+    "samp_per_cycle": 400,
+    "heater": {
+      "pid": [
+        1,
+        0,
+        0
+      ],
+      "sp": 18
+    }
+  },
+  "pas": {
+    "b": [
+      0,
+      0
+    ],
+    "m": [
+      1,
+      1
+    ],
+    "laser": {
+      "fmod": [
+        1350,
+        1350
+      ]
+    },
+    "heater0": {
+      "pid": [
+        1,
+        0,
+        0
+      ],
+      "sp": 18
+    },
+    "heater1": {
+      "pid": [
+        1,
+        0,
+        0
+      ],
+      "sp": 19
+    },
+    "spk": {
+      "period": 300,
+      "length": 20,
+      "auto": false,
+      "vscale": 5,
+      "voffset": 0,
+      "center": 1350,
+      "df": 150,
+      "pos": true
+    }
+  },
+  "filter": {
+    "period": 240,
+    "length": 60,
+    "auto": false,
+    "cell": 0
+  },
+  "general": {
+    "vacuum_pump": true
+  },
+  "calibration": {
+    "uv_lamp": false,
+    "o2_add": false,
+    "o3_add": false
+  },
+  "device": {
+    "crd_purge": {
+      "type": "alicat",
+      "label": "CRD Purge",
+      "sn": "83605",
+      "controller": true,
+      "address": "C",
+      "model": "MC-5SLPM-D",
+      "active": true,
+      "sp": 0
+    },
+    "sample": {
+      "type": "vaisala",
+      "label": "Sample",
+      "sn": "J3910005",
+      "controller": false,
+      "address": "2",
+      "model": "Humicap180R",
+      "active": true
+    },
+    "pas_ppt": {
+      "type": "ppt",
+      "label": "PAS Pressure",
+      "sn": "-1",
+      "controller": false,
+      "address": "01",
+      "model": "Not Available",
+      "active": true
+    },
+    "pas_0": {
+      "type": "alicat",
+      "label": "PAS Cell 0",
+      "sn": "-1",
+      "controller": true,
+      "address": "B",
+      "model": "MC-1SLPM-D",
+      "active": true,
+      "sp": 0
+    },
+    "crd_ppt": {
+      "type": "ppt",
+      "label": "CRD Pressure",
+      "sn": "-1",
+      "controller": false,
+      "address": "02",
+      "model": "Not Available",
+      "active": true
+    },
+    "pas_1": {
+      "type": "alicat",
+      "label": "PAS Cell 1",
+      "sn": "83606",
+      "controller": true,
+      "address": "D",
+      "model": "MC-5SLPM-D",
+      "active": true,
+      "sp": 0
+    }
+  }
+}
