@@ -1,0 +1,39 @@
+{
+  "alicat": {"port": "COM1",
+    "devices": [
+      {"id": "alicat_1", "address": "A", "label": "Cell 0", "SP": 0, "is-controller": true, "dtype": "MC", "serial-number": ""},
+      {"id": "alicat_2", "address": "B", "label": "Cell 1", "SP": 1, "is-controller":false, "dtype": "MC", "serial-number": ""},
+      {"id": "alicat_3", "address": "C", "label": "Ozone", "SP": 1, "is-controller":true, "dtype": "MC", "serial-number": ""}]
+  },
+  "ppt": {
+    "port":"COM2",
+    "devices": [
+      {"address": "01", "label": "Cell 0"},
+      {"address": "02", "label": "Cell 1"}]
+  },
+  "vaisala": {
+    "port": "COM3",
+    "devices": [
+      {
+        "address": "01",
+        "label": "Cell 0"
+      },
+      {
+        "address": "02",
+        "label": "Cell 1"
+      }
+    ]
+  },
+  "tec":{"devices":[{"sp": 18, "p": 1.0, "i": 0.0, "d": 0.0, "label": "PAS Cell 0", "id": "pas-0", "power": false},
+                    {"sp": 18, "p": 1.0, "i": 0.0, "d": 0.0, "label": "PAS CEll 1", "id": "pas-1", "power": false},
+                    {"sp": 18, "p": 1.0, "i": 0.0, "d": 0.0, "label": "CRD", "id": "crd", "power": false}]},
+  "crd": {"labels": ["Default Cell"],"dc": "0.5", "frequency": "1000", "laser-power": true},
+  "save": true,
+  "filter": "cell-0",
+  "o3-addition": false,
+  "o2-addition": false,
+  "fans": {"power": 2.5, "speed": 5.0},
+  "power": {"pump": true, "uv-lamp": false, "usb-hub": true},
+  "pas": {"cells": [{"label": "532 nm", "spk-power": false, "drive": "laser", "frequency": 1300},
+                    {"label": "605 nm", "spk-power": false, "drive": "laser", "frequency": 1300}]}
+}

@@ -1,0 +1,7 @@
+{
+  "alicats": [
+    {"id": "alicat_1", "pressure": 850.12,  "temperature": 18.35, "mass_flow": 0.52, "setpoint": 1.0, "output": 1.01},
+    {"id": "alicat_2", "pressure": 850.12,  "temperature": 18.35, "mass_flow": 0.52, "setpoint": 1.0, "output": 1.01},
+    {"id": "alicat_3", "pressure": 850.12,  "temperature": 18.35, "mass_flow": 0.52, "setpoint": 1.0, "output": 1.01}
+  ]
+}

@@ -1,0 +1,632 @@
+var _jinjor$elm_contextmenu$ContextMenu$position = A3(
+	_elm_lang$core$Json_Decode$map2,
+	_elm_lang$mouse$Mouse$Position,
+	A2(_elm_lang$core$Json_Decode$field, 'clientX', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode$field, 'clientY', _elm_lang$core$Json_Decode$int));
+var _jinjor$elm_contextmenu$ContextMenu$annotationFontSize = 10;
+var _jinjor$elm_contextmenu$ContextMenu$annotationHeight = 12;
+var _jinjor$elm_contextmenu$ContextMenu$fontSize = 13;
+var _jinjor$elm_contextmenu$ContextMenu$defaultItemHeight = 20;
+var _jinjor$elm_contextmenu$ContextMenu$partitionMargin = 6;
+var _jinjor$elm_contextmenu$ContextMenu$partitionWidth = 1;
+var _jinjor$elm_contextmenu$ContextMenu$partition = A2(
+	_elm_lang$html$Html$hr,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			A2(_jinjor$elm_contextmenu$Styles$partition, _jinjor$elm_contextmenu$ContextMenu$partitionWidth, _jinjor$elm_contextmenu$ContextMenu$partitionMargin)),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
+var _jinjor$elm_contextmenu$ContextMenu$joinGroupsWithPartition = function (groups) {
+	return A3(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (group, prev) {
+				var _p0 = prev;
+				if (_p0.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Just(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							group,
+							{ctor: '::', _0: _jinjor$elm_contextmenu$ContextMenu$partition, _1: _p0._0}));
+				} else {
+					return _elm_lang$core$Maybe$Just(group);
+				}
+			}),
+		_elm_lang$core$Maybe$Nothing,
+		groups);
+};
+var _jinjor$elm_contextmenu$ContextMenu$containerPadding = 4;
+var _jinjor$elm_contextmenu$ContextMenu$containerBorderWidth = 1;
+var _jinjor$elm_contextmenu$ContextMenu$menuWidthWithBorders = function (menuWidth) {
+	return menuWidth + (_jinjor$elm_contextmenu$ContextMenu$containerBorderWidth * 2);
+};
+var _jinjor$elm_contextmenu$ContextMenu$calculateMenuHeight = function (groups) {
+	var items = _elm_lang$core$List$sum(
+		A2(
+			_elm_lang$core$List$map,
+			function (items) {
+				return _elm_lang$core$List$sum(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p1) {
+							var _p2 = _p1;
+							return _p2._0.height;
+						},
+						items));
+			},
+			groups));
+	var partitions = (_elm_lang$core$List$length(groups) - 1) * ((_jinjor$elm_contextmenu$ContextMenu$partitionMargin * 2) + _jinjor$elm_contextmenu$ContextMenu$partitionWidth);
+	var containerPaddings = _jinjor$elm_contextmenu$ContextMenu$containerPadding * 2;
+	var containerBorders = _jinjor$elm_contextmenu$ContextMenu$containerBorderWidth * 2;
+	return ((containerBorders + containerPaddings) + partitions) + items;
+};
+var _jinjor$elm_contextmenu$ContextMenu$shortcutTextColor = A3(_elm_lang$core$Color$rgb, 200, 200, 200);
+var _jinjor$elm_contextmenu$ContextMenu$annotationTextColor = A3(_elm_lang$core$Color$rgb, 200, 200, 200);
+var _jinjor$elm_contextmenu$ContextMenu$annotationView = F3(
+	function (s, ann, disabled) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							_jinjor$elm_contextmenu$Styles$text(_jinjor$elm_contextmenu$ContextMenu$defaultItemHeight)),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(s),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								A4(_jinjor$elm_contextmenu$Styles$annotation, _jinjor$elm_contextmenu$ContextMenu$annotationTextColor, _jinjor$elm_contextmenu$ContextMenu$annotationHeight, _jinjor$elm_contextmenu$ContextMenu$annotationFontSize, disabled)),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(ann),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _jinjor$elm_contextmenu$ContextMenu$disabledTextColor = A3(_elm_lang$core$Color$rgb, 200, 200, 200);
+var _jinjor$elm_contextmenu$ContextMenu$setHoverState = F2(
+	function (hover, openState) {
+		return A2(
+			_elm_lang$core$Maybe$map,
+			function (_p3) {
+				var _p4 = _p3;
+				return {ctor: '_Tuple4', _0: _p4._0, _1: _p4._1, _2: hover, _3: _p4._3};
+			},
+			openState);
+	});
+var _jinjor$elm_contextmenu$ContextMenu$getItemIndex = function (hover) {
+	var _p5 = hover;
+	if (_p5.ctor === 'ItemIndex') {
+		return _elm_lang$core$Maybe$Just(_p5._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _jinjor$elm_contextmenu$ContextMenu$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {width: a, direction: b, overflowX: c, overflowY: d, containerColor: e, hoverColor: f, invertText: g, cursor: h, rounded: i, fontFamily: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _jinjor$elm_contextmenu$ContextMenu$ContextMenu = function (a) {
+	return {ctor: 'ContextMenu', _0: a};
+};
+var _jinjor$elm_contextmenu$ContextMenu$setOnDehover = F2(
+	function (closeOnDehover, _p6) {
+		var _p7 = _p6;
+		return _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+			_elm_lang$core$Native_Utils.update(
+				_p7._0,
+				{closeOnDehover: closeOnDehover}));
+	});
+var _jinjor$elm_contextmenu$ContextMenu$init = {
+	ctor: '_Tuple2',
+	_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+		{openState: _elm_lang$core$Maybe$Nothing, closeOnDehover: false}),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _jinjor$elm_contextmenu$ContextMenu$None = {ctor: 'None'};
+var _jinjor$elm_contextmenu$ContextMenu$leaveContainer = function (openState) {
+	return A2(_jinjor$elm_contextmenu$ContextMenu$setHoverState, _jinjor$elm_contextmenu$ContextMenu$None, openState);
+};
+var _jinjor$elm_contextmenu$ContextMenu$ItemIndex = function (a) {
+	return {ctor: 'ItemIndex', _0: a};
+};
+var _jinjor$elm_contextmenu$ContextMenu$enterItem = F2(
+	function (index, openState) {
+		return A2(
+			_jinjor$elm_contextmenu$ContextMenu$setHoverState,
+			_jinjor$elm_contextmenu$ContextMenu$ItemIndex(index),
+			openState);
+	});
+var _jinjor$elm_contextmenu$ContextMenu$Container = {ctor: 'Container'};
+var _jinjor$elm_contextmenu$ContextMenu$shouldCloseOnClick = F2(
+	function (closeOnDehover, openState) {
+		var _p8 = openState;
+		if (_p8.ctor === 'Just') {
+			return closeOnDehover ? false : (!_elm_lang$core$Native_Utils.eq(_p8._0._2, _jinjor$elm_contextmenu$ContextMenu$Container));
+		} else {
+			return true;
+		}
+	});
+var _jinjor$elm_contextmenu$ContextMenu$leaveItem = function (openState) {
+	return A2(_jinjor$elm_contextmenu$ContextMenu$setHoverState, _jinjor$elm_contextmenu$ContextMenu$Container, openState);
+};
+var _jinjor$elm_contextmenu$ContextMenu$enterContainer = function (openState) {
+	return A2(_jinjor$elm_contextmenu$ContextMenu$setHoverState, _jinjor$elm_contextmenu$ContextMenu$Container, openState);
+};
+var _jinjor$elm_contextmenu$ContextMenu$LeaveContainer = {ctor: 'LeaveContainer'};
+var _jinjor$elm_contextmenu$ContextMenu$EnterContainer = {ctor: 'EnterContainer'};
+var _jinjor$elm_contextmenu$ContextMenu$LeaveItem = {ctor: 'LeaveItem'};
+var _jinjor$elm_contextmenu$ContextMenu$EnterItem = function (a) {
+	return {ctor: 'EnterItem', _0: a};
+};
+var _jinjor$elm_contextmenu$ContextMenu$Close = {ctor: 'Close'};
+var _jinjor$elm_contextmenu$ContextMenu$subscriptions = function (_p9) {
+	var _p10 = _p9;
+	var _p12 = _p10._0;
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_jinjor$elm_contextmenu$ContextMenu$shouldCloseOnClick, _p12.closeOnDehover, _p12.openState) ? _elm_lang$mouse$Mouse$downs(
+				function (_p11) {
+					return _jinjor$elm_contextmenu$ContextMenu$Close;
+				}) : _elm_lang$core$Platform_Sub$none,
+			_1: {ctor: '[]'}
+		});
+};
+var _jinjor$elm_contextmenu$ContextMenu$Open = F3(
+	function (a, b, c) {
+		return {ctor: 'Open', _0: a, _1: b, _2: c};
+	});
+var _jinjor$elm_contextmenu$ContextMenu$update = F2(
+	function (msg, _p13) {
+		update:
+		while (true) {
+			var _p14 = _p13;
+			var _p16 = _p14._0;
+			var _p15 = msg;
+			switch (_p15.ctor) {
+				case 'NoOp':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(_p16),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'RequestOpen':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(_p16),
+						_1: A2(
+							_elm_lang$core$Task$perform,
+							A2(_jinjor$elm_contextmenu$ContextMenu$Open, _p15._0, _p15._1),
+							_elm_lang$window$Window$size)
+					};
+				case 'Open':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+							_elm_lang$core$Native_Utils.update(
+								_p16,
+								{
+									openState: _elm_lang$core$Maybe$Just(
+										{ctor: '_Tuple4', _0: _p15._1, _1: _p15._2, _2: _jinjor$elm_contextmenu$ContextMenu$None, _3: _p15._0})
+								})),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'Close':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+							_elm_lang$core$Native_Utils.update(
+								_p16,
+								{openState: _elm_lang$core$Maybe$Nothing})),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'EnterItem':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+							_elm_lang$core$Native_Utils.update(
+								_p16,
+								{
+									openState: A2(_jinjor$elm_contextmenu$ContextMenu$enterItem, _p15._0, _p16.openState)
+								})),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'LeaveItem':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+							_elm_lang$core$Native_Utils.update(
+								_p16,
+								{
+									openState: _jinjor$elm_contextmenu$ContextMenu$leaveItem(_p16.openState)
+								})),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'EnterContainer':
+					return {
+						ctor: '_Tuple2',
+						_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+							_elm_lang$core$Native_Utils.update(
+								_p16,
+								{
+									openState: _jinjor$elm_contextmenu$ContextMenu$enterContainer(_p16.openState)
+								})),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				default:
+					if (_p16.closeOnDehover) {
+						var _v9 = _jinjor$elm_contextmenu$ContextMenu$Close,
+							_v10 = _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+							_elm_lang$core$Native_Utils.update(
+								_p16,
+								{
+									openState: _jinjor$elm_contextmenu$ContextMenu$leaveContainer(_p16.openState)
+								}));
+						msg = _v9;
+						_p13 = _v10;
+						continue update;
+					} else {
+						return {
+							ctor: '_Tuple2',
+							_0: _jinjor$elm_contextmenu$ContextMenu$ContextMenu(
+								_elm_lang$core$Native_Utils.update(
+									_p16,
+									{
+										openState: _jinjor$elm_contextmenu$ContextMenu$leaveContainer(_p16.openState)
+									})),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					}
+			}
+		}
+	});
+var _jinjor$elm_contextmenu$ContextMenu$RequestOpen = F2(
+	function (a, b) {
+		return {ctor: 'RequestOpen', _0: a, _1: b};
+	});
+var _jinjor$elm_contextmenu$ContextMenu$NoOp = {ctor: 'NoOp'};
+var _jinjor$elm_contextmenu$ContextMenu$openIf = F3(
+	function (condition, transform, context) {
+		return condition ? A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'contextmenu',
+			{preventDefault: true, stopPropagation: true},
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				transform,
+				A2(
+					_elm_lang$core$Json_Decode$map,
+					_jinjor$elm_contextmenu$ContextMenu$RequestOpen(context),
+					_jinjor$elm_contextmenu$ContextMenu$position))) : A2(
+			_elm_lang$html$Html_Events$on,
+			'contextmenu',
+			_elm_lang$core$Json_Decode$succeed(
+				transform(_jinjor$elm_contextmenu$ContextMenu$NoOp)));
+	});
+var _jinjor$elm_contextmenu$ContextMenu$open = F2(
+	function (transform, context) {
+		return A3(_jinjor$elm_contextmenu$ContextMenu$openIf, true, transform, context);
+	});
+var _jinjor$elm_contextmenu$ContextMenu$Item = function (a) {
+	return {ctor: 'Item', _0: a};
+};
+var _jinjor$elm_contextmenu$ContextMenu$disabled = F2(
+	function (disabled_, _p17) {
+		var _p18 = _p17;
+		return _jinjor$elm_contextmenu$ContextMenu$Item(
+			_elm_lang$core$Native_Utils.update(
+				_p18._0,
+				{disabled: disabled_}));
+	});
+var _jinjor$elm_contextmenu$ContextMenu$shortcut = F2(
+	function (shortcut, _p19) {
+		var _p20 = _p19;
+		return _jinjor$elm_contextmenu$ContextMenu$Item(
+			_elm_lang$core$Native_Utils.update(
+				_p20._0,
+				{shortcut: shortcut}));
+	});
+var _jinjor$elm_contextmenu$ContextMenu$icon = F3(
+	function (icon_, color, _p21) {
+		var _p22 = _p21;
+		return _jinjor$elm_contextmenu$ContextMenu$Item(
+			_elm_lang$core$Native_Utils.update(
+				_p22._0,
+				{
+					icon: _elm_lang$core$Maybe$Just(
+						{ctor: '_Tuple2', _0: icon_, _1: color})
+				}));
+	});
+var _jinjor$elm_contextmenu$ContextMenu$Custom = function (a) {
+	return {ctor: 'Custom', _0: a};
+};
+var _jinjor$elm_contextmenu$ContextMenu$custom = F2(
+	function (height, content) {
+		return _jinjor$elm_contextmenu$ContextMenu$Item(
+			{
+				height: A2(_elm_lang$core$Basics$max, _jinjor$elm_contextmenu$ContextMenu$defaultItemHeight, height),
+				icon: _elm_lang$core$Maybe$Nothing,
+				content: _jinjor$elm_contextmenu$ContextMenu$Custom(content),
+				shortcut: '',
+				disabled: false
+			});
+	});
+var _jinjor$elm_contextmenu$ContextMenu$itemWithAnnotation = F2(
+	function (s, ann) {
+		return A2(
+			_jinjor$elm_contextmenu$ContextMenu$custom,
+			(_jinjor$elm_contextmenu$ContextMenu$defaultItemHeight + _jinjor$elm_contextmenu$ContextMenu$annotationHeight) - 2,
+			A2(_jinjor$elm_contextmenu$ContextMenu$annotationView, s, ann));
+	});
+var _jinjor$elm_contextmenu$ContextMenu$Text = function (a) {
+	return {ctor: 'Text', _0: a};
+};
+var _jinjor$elm_contextmenu$ContextMenu$item = function (s) {
+	return _jinjor$elm_contextmenu$ContextMenu$Item(
+		{
+			height: _jinjor$elm_contextmenu$ContextMenu$defaultItemHeight,
+			icon: _elm_lang$core$Maybe$Nothing,
+			content: _jinjor$elm_contextmenu$ContextMenu$Text(s),
+			shortcut: '',
+			disabled: false
+		});
+};
+var _jinjor$elm_contextmenu$ContextMenu$RightBottom = {ctor: 'RightBottom'};
+var _jinjor$elm_contextmenu$ContextMenu$LeftBottom = {ctor: 'LeftBottom'};
+var _jinjor$elm_contextmenu$ContextMenu$Mirror = {ctor: 'Mirror'};
+var _jinjor$elm_contextmenu$ContextMenu$Shift = {ctor: 'Shift'};
+var _jinjor$elm_contextmenu$ContextMenu$calculateX = F5(
+	function (direction, overflow, windowWidth, menuWidth, x) {
+		return A2(
+			_elm_lang$core$Basics$max,
+			0,
+			function () {
+				var _p23 = direction;
+				if (_p23.ctor === 'LeftBottom') {
+					return (_elm_lang$core$Native_Utils.cmp(x - menuWidth, 0) < 0) ? (_elm_lang$core$Native_Utils.eq(overflow, _jinjor$elm_contextmenu$ContextMenu$Shift) ? 0 : x) : (x - menuWidth);
+				} else {
+					return (_elm_lang$core$Native_Utils.cmp(x + menuWidth, windowWidth) > 0) ? (_elm_lang$core$Native_Utils.eq(overflow, _jinjor$elm_contextmenu$ContextMenu$Shift) ? (windowWidth - menuWidth) : (x - menuWidth)) : x;
+				}
+			}());
+	});
+var _jinjor$elm_contextmenu$ContextMenu$calculateY = F4(
+	function (overflow, windowHeight, menuHeight, y) {
+		return A2(
+			_elm_lang$core$Basics$max,
+			0,
+			(_elm_lang$core$Native_Utils.cmp(y + menuHeight, windowHeight) > 0) ? (_elm_lang$core$Native_Utils.eq(overflow, _jinjor$elm_contextmenu$ContextMenu$Shift) ? (windowHeight - menuHeight) : (y - menuHeight)) : y);
+	});
+var _jinjor$elm_contextmenu$ContextMenu$Pointer = {ctor: 'Pointer'};
+var _jinjor$elm_contextmenu$ContextMenu$defaultConfig = {
+	width: 300,
+	direction: _jinjor$elm_contextmenu$ContextMenu$RightBottom,
+	overflowX: _jinjor$elm_contextmenu$ContextMenu$Mirror,
+	overflowY: _jinjor$elm_contextmenu$ContextMenu$Mirror,
+	containerColor: _elm_lang$core$Color$white,
+	hoverColor: A3(_elm_lang$core$Color$rgb, 240, 240, 240),
+	invertText: false,
+	cursor: _jinjor$elm_contextmenu$ContextMenu$Pointer,
+	rounded: false,
+	fontFamily: 'initial'
+};
+var _jinjor$elm_contextmenu$ContextMenu$itemView = F6(
+	function (config, transform, hoverIndex, groupIndex, index, _p24) {
+		var _p25 = _p24;
+		var _p28 = _p25._0._0;
+		var content = function () {
+			var _p26 = _p28.content;
+			if (_p26.ctor === 'Text') {
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							_jinjor$elm_contextmenu$Styles$text(_p28.height)),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p26._0),
+						_1: {ctor: '[]'}
+					});
+			} else {
+				return _p26._0(_p28.disabled);
+			}
+		}();
+		var icon = function () {
+			var _p27 = _p28.icon;
+			if (_p27.ctor === 'Just') {
+				return A2(
+					_elm_lang$html$Html$map,
+					_elm_lang$core$Basics$never,
+					A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								_jinjor$elm_contextmenu$Styles$icon(_jinjor$elm_contextmenu$ContextMenu$fontSize)),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_p27._0._0,
+								_p28.disabled ? _jinjor$elm_contextmenu$ContextMenu$disabledTextColor : _p27._0._1,
+								_jinjor$elm_contextmenu$ContextMenu$fontSize),
+							_1: {ctor: '[]'}
+						}));
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		}();
+		var events = _p28.disabled ? {ctor: '[]'} : {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onMouseEnter(
+				transform(
+					_jinjor$elm_contextmenu$ContextMenu$EnterItem(
+						{ctor: '_Tuple2', _0: groupIndex, _1: index}))),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onMouseLeave(
+					transform(_jinjor$elm_contextmenu$ContextMenu$LeaveItem)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onMouseDown(_p25._1),
+					_1: {ctor: '[]'}
+				}
+			}
+		};
+		var hovered = _elm_lang$core$Native_Utils.eq(
+			hoverIndex,
+			_elm_lang$core$Maybe$Just(
+				{ctor: '_Tuple2', _0: groupIndex, _1: index}));
+		var styles = _elm_lang$html$Html_Attributes$style(
+			A8(
+				_jinjor$elm_contextmenu$Styles$row,
+				config.hoverColor,
+				_jinjor$elm_contextmenu$ContextMenu$disabledTextColor,
+				config.invertText,
+				_elm_lang$core$Native_Utils.eq(config.cursor, _jinjor$elm_contextmenu$ContextMenu$Pointer),
+				_p28.height,
+				hovered,
+				_p28.disabled,
+				!_elm_lang$core$Native_Utils.eq(
+					_elm_lang$core$String$trim(_p28.shortcut),
+					'')));
+		var shortCut = A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					A3(_jinjor$elm_contextmenu$Styles$shortcut, _jinjor$elm_contextmenu$ContextMenu$shortcutTextColor, _p28.height, hovered)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(_p28.shortcut),
+				_1: {ctor: '[]'}
+			});
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '::', _0: styles, _1: events},
+			{
+				ctor: '::',
+				_0: icon,
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html$map, _elm_lang$core$Basics$never, content),
+					_1: {
+						ctor: '::',
+						_0: shortCut,
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _jinjor$elm_contextmenu$ContextMenu$itemGroupView = F5(
+	function (config, transform, hoverIndex, groupIndex, items) {
+		return A2(
+			_elm_lang$core$List$indexedMap,
+			A4(_jinjor$elm_contextmenu$ContextMenu$itemView, config, transform, hoverIndex, groupIndex),
+			items);
+	});
+var _jinjor$elm_contextmenu$ContextMenu$view = F4(
+	function (config, transform, toItemGroups, _p29) {
+		var _p30 = _p29;
+		var _p31 = _p30._0.openState;
+		if (_p31.ctor === 'Just') {
+			var _p34 = _p31._0._1;
+			var _p33 = _p31._0._0;
+			var groups = toItemGroups(_p31._0._3);
+			var itemGroups = A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$List$map(_elm_lang$core$Tuple$first),
+				groups);
+			var groupsView = A2(
+				_elm_lang$core$List$indexedMap,
+				A3(
+					_jinjor$elm_contextmenu$ContextMenu$itemGroupView,
+					config,
+					transform,
+					_jinjor$elm_contextmenu$ContextMenu$getItemIndex(_p31._0._2)),
+				groups);
+			var _p32 = _jinjor$elm_contextmenu$ContextMenu$joinGroupsWithPartition(groupsView);
+			if (_p32.ctor === 'Just') {
+				var y_ = A4(
+					_jinjor$elm_contextmenu$ContextMenu$calculateY,
+					config.overflowY,
+					_p34.height,
+					_jinjor$elm_contextmenu$ContextMenu$calculateMenuHeight(itemGroups),
+					_p33.y);
+				var x_ = A5(
+					_jinjor$elm_contextmenu$ContextMenu$calculateX,
+					config.direction,
+					config.overflowX,
+					_p34.width,
+					_jinjor$elm_contextmenu$ContextMenu$menuWidthWithBorders(config.width),
+					_p33.x);
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							A9(_jinjor$elm_contextmenu$Styles$container, config.containerColor, _jinjor$elm_contextmenu$ContextMenu$containerBorderWidth, _jinjor$elm_contextmenu$ContextMenu$containerPadding, config.rounded, config.width, x_, y_, config.fontFamily, _jinjor$elm_contextmenu$ContextMenu$fontSize)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onMouseEnter(
+								transform(_jinjor$elm_contextmenu$ContextMenu$EnterContainer)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onMouseLeave(
+									transform(_jinjor$elm_contextmenu$ContextMenu$LeaveContainer)),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p32._0);
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		} else {
+			return _elm_lang$html$Html$text('');
+		}
+	});
+var _jinjor$elm_contextmenu$ContextMenu$Arrow = {ctor: 'Arrow'};

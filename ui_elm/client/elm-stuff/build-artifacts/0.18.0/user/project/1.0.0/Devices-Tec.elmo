@@ -1,0 +1,143 @@
+var _user$project$Devices_Tec$idAndDeviceData = A3(
+	_elm_lang$core$Json_Decode$map2,
+	F2(
+		function (v0, v1) {
+			return {ctor: '_Tuple2', _0: v0, _1: v1};
+		}),
+	A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'val', _elm_lang$core$Json_Decode$float));
+var _user$project$Devices_Tec$tecData = A2(
+	_elm_lang$core$Json_Decode$map,
+	_elm_lang$core$Dict$fromList,
+	_elm_lang$core$Json_Decode$list(_user$project$Devices_Tec$idAndDeviceData));
+var _user$project$Devices_Tec$Cvt = F6(
+	function (a, b, c, d, e, f) {
+		return {label: a, setpoint: b, p: c, i: d, d: e, power: f};
+	});
+var _user$project$Devices_Tec$defaultCvt = A6(_user$project$Devices_Tec$Cvt, 'Default Tec', '18', '1', '0.1', '0', false);
+var _user$project$Devices_Tec$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'UpdateP':
+				var _p1 = _p0._0;
+				var data = A2(
+					_elm_lang$core$Maybe$withDefault,
+					_user$project$Devices_Tec$defaultCvt,
+					A2(_elm_lang$core$Dict$get, _p1, model.cvt));
+				var d = _elm_lang$core$Native_Utils.update(
+					data,
+					{p: _p0._1});
+				var cvt_ = A3(_elm_lang$core$Dict$insert, _p1, d, model.cvt);
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{cvt: cvt_});
+			case 'UpdateI':
+				var _p2 = _p0._0;
+				var data = A2(
+					_elm_lang$core$Maybe$withDefault,
+					_user$project$Devices_Tec$defaultCvt,
+					A2(_elm_lang$core$Dict$get, _p2, model.cvt));
+				var d = _elm_lang$core$Native_Utils.update(
+					data,
+					{i: _p0._1});
+				var cvt_ = A3(_elm_lang$core$Dict$insert, _p2, d, model.cvt);
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{cvt: cvt_});
+			case 'UpdateD':
+				var _p3 = _p0._0;
+				var data = A2(
+					_elm_lang$core$Maybe$withDefault,
+					_user$project$Devices_Tec$defaultCvt,
+					A2(_elm_lang$core$Dict$get, _p3, model.cvt));
+				var data_ = _elm_lang$core$Native_Utils.update(
+					data,
+					{d: _p0._1});
+				var cvt_ = A3(_elm_lang$core$Dict$insert, _p3, data_, model.cvt);
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{cvt: cvt_});
+			case 'UpdateSp':
+				var _p4 = _p0._0;
+				var data = A2(
+					_elm_lang$core$Maybe$withDefault,
+					_user$project$Devices_Tec$defaultCvt,
+					A2(_elm_lang$core$Dict$get, _p4, model.cvt));
+				var d = _elm_lang$core$Native_Utils.update(
+					data,
+					{setpoint: _p0._1});
+				var cvt_ = A3(_elm_lang$core$Dict$insert, _p4, d, model.cvt);
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{cvt: cvt_});
+			case 'SendCurrentValues':
+				return model;
+			default:
+				var _p7 = _p0._0;
+				var _p5 = A2(_elm_lang$core$Dict$get, _p7, model.cvt);
+				if (_p5.ctor === 'Just') {
+					var _p6 = _p5._0;
+					var n_data = _elm_lang$core$Native_Utils.update(
+						_p6,
+						{power: !_p6.power});
+					var cvt_ = A3(_elm_lang$core$Dict$insert, _p7, n_data, model.cvt);
+					return _elm_lang$core$Native_Utils.update(
+						model,
+						{cvt: cvt_});
+				} else {
+					return model;
+				}
+		}
+	});
+var _user$project$Devices_Tec$decodeCvt = A7(
+	_elm_lang$core$Json_Decode$map6,
+	_user$project$Devices_Tec$Cvt,
+	A2(_elm_lang$core$Json_Decode$field, 'label', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'p', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'i', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'd', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'power', _elm_lang$core$Json_Decode$bool));
+var _user$project$Devices_Tec$idAndDevice = A3(
+	_elm_lang$core$Json_Decode$map2,
+	F2(
+		function (v0, v1) {
+			return {ctor: '_Tuple2', _0: v0, _1: v1};
+		}),
+	A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string),
+	_user$project$Devices_Tec$decodeCvt);
+var _user$project$Devices_Tec$tecCvt = A2(
+	_elm_lang$core$Json_Decode$map,
+	_elm_lang$core$Dict$fromList,
+	_elm_lang$core$Json_Decode$list(_user$project$Devices_Tec$idAndDevice));
+var _user$project$Devices_Tec$Model = F2(
+	function (a, b) {
+		return {data: a, cvt: b};
+	});
+var _user$project$Devices_Tec$init = A2(
+	_user$project$Devices_Tec$Model,
+	A2(_elm_lang$core$Dict$singleton, 'Default_Tec', 0),
+	A2(_elm_lang$core$Dict$singleton, 'Default TEC', _user$project$Devices_Tec$defaultCvt));
+var _user$project$Devices_Tec$TogglePower = function (a) {
+	return {ctor: 'TogglePower', _0: a};
+};
+var _user$project$Devices_Tec$SendCurrentValues = function (a) {
+	return {ctor: 'SendCurrentValues', _0: a};
+};
+var _user$project$Devices_Tec$UpdateSp = F2(
+	function (a, b) {
+		return {ctor: 'UpdateSp', _0: a, _1: b};
+	});
+var _user$project$Devices_Tec$UpdateD = F2(
+	function (a, b) {
+		return {ctor: 'UpdateD', _0: a, _1: b};
+	});
+var _user$project$Devices_Tec$UpdateI = F2(
+	function (a, b) {
+		return {ctor: 'UpdateI', _0: a, _1: b};
+	});
+var _user$project$Devices_Tec$UpdateP = F2(
+	function (a, b) {
+		return {ctor: 'UpdateP', _0: a, _1: b};
+	});

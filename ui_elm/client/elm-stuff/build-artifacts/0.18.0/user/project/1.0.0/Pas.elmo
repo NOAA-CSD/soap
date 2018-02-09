@@ -1,0 +1,579 @@
+var _user$project$Pas$floatString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$float);
+var _user$project$Pas$intString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$int);
+var _user$project$Pas$toggleLaserPower = F2(
+	function (cell, cvt) {
+		var new_cvt = function () {
+			var _p0 = cell;
+			switch (_p0) {
+				case 0:
+					return _elm_lang$core$Native_Utils.update(
+						cvt,
+						{enable_0: !cvt.enable_0});
+				case 1:
+					return _elm_lang$core$Native_Utils.update(
+						cvt,
+						{enable_1: !cvt.enable_1});
+				default:
+					return cvt;
+			}
+		}();
+		return new_cvt;
+	});
+var _user$project$Pas$setFrequency1 = F2(
+	function (f, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{fmod_1: f});
+	});
+var _user$project$Pas$setFrequency0 = F2(
+	function (f, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{fmod_0: f});
+	});
+var _user$project$Pas$setSpk = F2(
+	function (spk, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{spk: spk});
+	});
+var _user$project$Pas$asSpeakerIn = _elm_lang$core$Basics$flip(_user$project$Pas$setSpk);
+var _user$project$Pas$asCvtIn = F2(
+	function (model, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{cvt: cvt});
+	});
+var _user$project$Pas$setPasHeater1 = F2(
+	function (htr, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{heater_1: htr});
+	});
+var _user$project$Pas$setPasHeater0 = F2(
+	function (htr, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{heater_0: htr});
+	});
+var _user$project$Pas$asHeater0In = _elm_lang$core$Basics$flip(_user$project$Pas$setPasHeater0);
+var _user$project$Pas$asHeater1In = _elm_lang$core$Basics$flip(_user$project$Pas$setPasHeater0);
+var _user$project$Pas$setSpkVscale = F2(
+	function (vscale, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{vscale: vscale});
+	});
+var _user$project$Pas$setHeaterPID = F2(
+	function (pid, htr) {
+		return _elm_lang$core$Native_Utils.update(
+			htr,
+			{pid: pid});
+	});
+var _user$project$Pas$setHeaterSP = F2(
+	function (sp, htr) {
+		return _elm_lang$core$Native_Utils.update(
+			htr,
+			{sp: sp});
+	});
+var _user$project$Pas$toggleSpeakerCycle = function (spk) {
+	return _elm_lang$core$Native_Utils.update(
+		spk,
+		{auto: !spk.auto});
+};
+var _user$project$Pas$setLengthSpk = F2(
+	function (length, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{length: length});
+	});
+var _user$project$Pas$setPeriodSpk = F2(
+	function (period, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{period: period});
+	});
+var _user$project$Pas$setDfSpk = F2(
+	function (df, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{df: df});
+	});
+var _user$project$Pas$setFcenterSpk = F2(
+	function (fcenter, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{center: fcenter});
+	});
+var _user$project$Pas$setVoffsetSpk = F2(
+	function (voffset, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{voffset: voffset});
+	});
+var _user$project$Pas$setVscaleSpk = F2(
+	function (vscale, spk) {
+		return _elm_lang$core$Native_Utils.update(
+			spk,
+			{vscale: vscale});
+	});
+var _user$project$Pas$asDataIn = F2(
+	function (model, data) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{data: data});
+	});
+var _user$project$Pas$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'UpdateFreq':
+				return model;
+			case 'HandleGeneric':
+				return model;
+			case 'UpdateSpkVscale':
+				var new_model = A2(
+					_user$project$Pas$asCvtIn,
+					model,
+					A2(
+						_user$project$Pas$asSpeakerIn,
+						model.cvt,
+						A2(_user$project$Pas$setSpkVscale, _p1._0, model.cvt.spk)));
+				return new_model;
+			case 'UpdateSpkVoffset':
+				var new_model = A2(
+					_user$project$Pas$asCvtIn,
+					model,
+					A2(
+						_user$project$Pas$asSpeakerIn,
+						model.cvt,
+						A2(_user$project$Pas$setVoffsetSpk, _p1._0, model.cvt.spk)));
+				return new_model;
+			case 'UpdateSpkDf':
+				var new_model = A2(
+					_user$project$Pas$asCvtIn,
+					model,
+					A2(
+						_user$project$Pas$asSpeakerIn,
+						model.cvt,
+						A2(_user$project$Pas$setDfSpk, _p1._0, model.cvt.spk)));
+				return new_model;
+			case 'UpdateSpkFcenter':
+				var new_model = A2(
+					_user$project$Pas$asCvtIn,
+					model,
+					A2(
+						_user$project$Pas$asSpeakerIn,
+						model.cvt,
+						A2(_user$project$Pas$setFcenterSpk, _p1._0, model.cvt.spk)));
+				return new_model;
+			case 'UpdateSpkLength':
+				var new_model = A2(
+					_user$project$Pas$asCvtIn,
+					model,
+					A2(
+						_user$project$Pas$asSpeakerIn,
+						model.cvt,
+						A2(_user$project$Pas$setLengthSpk, _p1._0, model.cvt.spk)));
+				return new_model;
+			default:
+				var new_model = A2(
+					_user$project$Pas$asCvtIn,
+					model,
+					A2(
+						_user$project$Pas$asSpeakerIn,
+						model.cvt,
+						A2(_user$project$Pas$setPeriodSpk, _p1._0, model.cvt.spk)));
+				return new_model;
+		}
+	});
+var _user$project$Pas$Model = F2(
+	function (a, b) {
+		return {cvt: a, data: b};
+	});
+var _user$project$Pas$PasData = F2(
+	function (a, b) {
+		return {cell: a, drive: b};
+	});
+var _user$project$Pas$PasCell = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {resonant_frequency: a, integrated_area: b, q: c, max: d, absorption: e, laserRMS: f, laserDiodeData: g, frequencyData: h, timeData: i, fittedData: j, iaBackground: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Pas$decodeCellData = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'IABack',
+	_elm_lang$core$Json_Decode$float,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+		{
+			ctor: '::',
+			_0: 'FittedData',
+			_1: {
+				ctor: '::',
+				_0: 'Y',
+				_1: {ctor: '[]'}
+			}
+		},
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$float),
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+			{
+				ctor: '::',
+				_0: 'MicTime',
+				_1: {
+					ctor: '::',
+					_0: 'Y',
+					_1: {ctor: '[]'}
+				}
+			},
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int),
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+				{
+					ctor: '::',
+					_0: 'MicFreq',
+					_1: {
+						ctor: '::',
+						_0: 'Y',
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$float),
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+					{
+						ctor: '::',
+						_0: 'PhotoDiode',
+						_1: {
+							ctor: '::',
+							_0: 'Y',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int),
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'lRMS',
+						_elm_lang$core$Json_Decode$float,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+							{
+								ctor: '::',
+								_0: 'derived',
+								_1: {
+									ctor: '::',
+									_0: 'ext',
+									_1: {ctor: '[]'}
+								}
+							},
+							_elm_lang$core$Json_Decode$float,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+								{
+									ctor: '::',
+									_0: 'derived',
+									_1: {
+										ctor: '::',
+										_0: 'max',
+										_1: {ctor: '[]'}
+									}
+								},
+								_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$float),
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+									{
+										ctor: '::',
+										_0: 'derived',
+										_1: {
+											ctor: '::',
+											_0: 'Q',
+											_1: {ctor: '[]'}
+										}
+									},
+									_elm_lang$core$Json_Decode$float,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+										{
+											ctor: '::',
+											_0: 'derived',
+											_1: {
+												ctor: '::',
+												_0: 'IA',
+												_1: {ctor: '[]'}
+											}
+										},
+										_elm_lang$core$Json_Decode$float,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+											{
+												ctor: '::',
+												_0: 'derived',
+												_1: {
+													ctor: '::',
+													_0: 'f0',
+													_1: {ctor: '[]'}
+												}
+											},
+											_elm_lang$core$Json_Decode$float,
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Pas$PasCell))))))))))));
+var _user$project$Pas$defaultPasCellData = _elm_lang$core$Array$fromList(
+	{
+		ctor: '::',
+		_0: _user$project$Pas$PasCell(0)(0)(0)(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {
+					ctor: '::',
+					_0: 0,
+					_1: {ctor: '[]'}
+				}
+			})(0)(0)(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(0),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Pas$PasCvt = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {spk: a, b: b, m: c, fmod_0: d, fmod_1: e, heater_0: f, heater_1: g, enable_0: h, enable_1: i};
+	});
+var _user$project$Pas$Speaker_ = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {period: a, length: b, auto: c, vscale: d, voffset: e, center: f, df: g, pos: h};
+	});
+var _user$project$Pas$Heater = F2(
+	function (a, b) {
+		return {pid: a, sp: b};
+	});
+var _user$project$Pas$decodeHeater = A3(
+	_elm_lang$core$Json_Decode$map2,
+	_user$project$Pas$Heater,
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'pid',
+		_elm_lang$core$Json_Decode$array(_elm_lang$core$Json_Decode$float)),
+	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$float));
+var _user$project$Pas$defaultHeater = A2(
+	_user$project$Pas$Heater,
+	_elm_lang$core$Array$fromList(
+		{
+			ctor: '::',
+			_0: 1,
+			_1: {
+				ctor: '::',
+				_0: 0,
+				_1: {
+					ctor: '::',
+					_0: 0,
+					_1: {ctor: '[]'}
+				}
+			}
+		}),
+	18);
+var _user$project$Pas$UpdateSpkLength = function (a) {
+	return {ctor: 'UpdateSpkLength', _0: a};
+};
+var _user$project$Pas$UpdateSpkPeriod = function (a) {
+	return {ctor: 'UpdateSpkPeriod', _0: a};
+};
+var _user$project$Pas$UpdateSpkFcenter = function (a) {
+	return {ctor: 'UpdateSpkFcenter', _0: a};
+};
+var _user$project$Pas$UpdateSpkDf = function (a) {
+	return {ctor: 'UpdateSpkDf', _0: a};
+};
+var _user$project$Pas$UpdateSpkVoffset = function (a) {
+	return {ctor: 'UpdateSpkVoffset', _0: a};
+};
+var _user$project$Pas$UpdateSpkVscale = function (a) {
+	return {ctor: 'UpdateSpkVscale', _0: a};
+};
+var _user$project$Pas$HandleGeneric = function (a) {
+	return {ctor: 'HandleGeneric', _0: a};
+};
+var _user$project$Pas$UpdateFreq = F2(
+	function (a, b) {
+		return {ctor: 'UpdateFreq', _0: a, _1: b};
+	});
+var _user$project$Pas$Speaker = {ctor: 'Speaker'};
+var _user$project$Pas$defaultSpk = A8(_user$project$Pas$Speaker_, '360', '30', true, '1', '0.5', '1350', '100', _user$project$Pas$Speaker);
+var _user$project$Pas$defaultCvt = A9(
+	_user$project$Pas$PasCvt,
+	_user$project$Pas$defaultSpk,
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {
+			ctor: '::',
+			_0: 0,
+			_1: {ctor: '[]'}
+		}
+	},
+	{
+		ctor: '::',
+		_0: 1,
+		_1: {
+			ctor: '::',
+			_0: 1,
+			_1: {ctor: '[]'}
+		}
+	},
+	1350,
+	1350,
+	_user$project$Pas$defaultHeater,
+	_user$project$Pas$defaultHeater,
+	false,
+	false);
+var _user$project$Pas$Laser = {ctor: 'Laser'};
+var _user$project$Pas$toggleSpeakerPosition = function (spk) {
+	var drive = _elm_lang$core$Native_Utils.eq(spk.pos, _user$project$Pas$Speaker) ? _user$project$Pas$Laser : _user$project$Pas$Speaker;
+	return _elm_lang$core$Native_Utils.update(
+		spk,
+		{pos: drive});
+};
+var _user$project$Pas$defaultPasData = A2(_user$project$Pas$PasData, _user$project$Pas$defaultPasCellData, _user$project$Pas$Laser);
+var _user$project$Pas$init = {cvt: _user$project$Pas$defaultCvt, data: _user$project$Pas$defaultPasData};
+var _user$project$Pas$decodeDrive = function () {
+	var helper = function (d) {
+		return d ? _elm_lang$core$Json_Decode$succeed(_user$project$Pas$Speaker) : _elm_lang$core$Json_Decode$succeed(_user$project$Pas$Laser);
+	};
+	return A2(_elm_lang$core$Json_Decode$andThen, helper, _elm_lang$core$Json_Decode$bool);
+}();
+var _user$project$Pas$decodePASData = A3(
+	_elm_lang$core$Json_Decode$map2,
+	_user$project$Pas$PasData,
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'CellData',
+		_elm_lang$core$Json_Decode$array(_user$project$Pas$decodeCellData)),
+	A2(_elm_lang$core$Json_Decode$field, 'Drive', _user$project$Pas$decodeDrive));
+var _user$project$Pas$retrievePasData = F3(
+	function (head, data, model) {
+		var new_model = A2(
+			_user$project$Pas$asDataIn,
+			model,
+			A2(
+				_elm_lang$core$Result$withDefault,
+				model.data,
+				A2(
+					_elm_lang$core$Json_Decode$decodeString,
+					A2(_elm_lang$core$Json_Decode$field, head, _user$project$Pas$decodePASData),
+					data)));
+		return new_model;
+	});
+var _user$project$Pas$decodeSpeaker = A9(
+	_elm_lang$core$Json_Decode$map8,
+	_user$project$Pas$Speaker_,
+	A2(_elm_lang$core$Json_Decode$field, 'period', _user$project$Pas$intString),
+	A2(_elm_lang$core$Json_Decode$field, 'length', _user$project$Pas$intString),
+	A2(_elm_lang$core$Json_Decode$field, 'auto', _elm_lang$core$Json_Decode$bool),
+	A2(_elm_lang$core$Json_Decode$field, 'vscale', _user$project$Pas$floatString),
+	A2(_elm_lang$core$Json_Decode$field, 'voffset', _user$project$Pas$floatString),
+	A2(_elm_lang$core$Json_Decode$field, 'center', _user$project$Pas$intString),
+	A2(_elm_lang$core$Json_Decode$field, 'df', _user$project$Pas$intString),
+	A2(_elm_lang$core$Json_Decode$field, 'pos', _user$project$Pas$decodeDrive));
+var _user$project$Pas$decodePasCvt = function (cvt) {
+	return A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+		{
+			ctor: '::',
+			_0: 'ch1',
+			_1: {
+				ctor: '::',
+				_0: 'laser_enable',
+				_1: {ctor: '[]'}
+			}
+		},
+		_elm_lang$core$Json_Decode$bool,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+			{
+				ctor: '::',
+				_0: 'ch0',
+				_1: {
+					ctor: '::',
+					_0: 'laser_enable',
+					_1: {ctor: '[]'}
+				}
+			},
+			_elm_lang$core$Json_Decode$bool,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'heater1',
+				_user$project$Pas$decodeHeater,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'heater0',
+					_user$project$Pas$decodeHeater,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'fmod_1',
+						_elm_lang$core$Json_Decode$int,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'fmod_0',
+							_elm_lang$core$Json_Decode$int,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'm',
+								_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$float),
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'b',
+									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$float),
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'spk',
+										_user$project$Pas$decodeSpeaker,
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Pas$PasCvt))))))))));
+};
+var _user$project$Pas$retrievePasCvt = F3(
+	function (heading, data, cvt) {
+		return _elm_lang$core$Native_Utils.eq(data, '{}') ? cvt : A2(
+			_elm_lang$core$Result$withDefault,
+			cvt,
+			A2(
+				_elm_lang$core$Json_Decode$decodeString,
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					heading,
+					_user$project$Pas$decodePasCvt(cvt)),
+				data));
+	});

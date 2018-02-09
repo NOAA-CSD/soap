@@ -1,0 +1,58 @@
+var _user$project$GcrdTypes$defaultPptData = {id: 'default', pressure: 0, temperature: 0};
+var _user$project$GcrdTypes$defaultVaisalaData = {id: 'default', temperature: 0, relative_humidity: 0, dewpoint: 0};
+var _user$project$GcrdTypes$defaultData = {
+	vaisala: {
+		ctor: '::',
+		_0: _user$project$GcrdTypes$defaultVaisalaData,
+		_1: {ctor: '[]'}
+	},
+	ppt: {
+		ctor: '::',
+		_0: _user$project$GcrdTypes$defaultPptData,
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$GcrdTypes$VaisalaData = F4(
+	function (a, b, c, d) {
+		return {id: a, temperature: b, relative_humidity: c, dewpoint: d};
+	});
+var _user$project$GcrdTypes$PptData = F3(
+	function (a, b, c) {
+		return {id: a, pressure: b, temperature: c};
+	});
+var _user$project$GcrdTypes$Data = F2(
+	function (a, b) {
+		return {vaisala: a, ppt: b};
+	});
+var _user$project$GcrdTypes$DeviceValues = F2(
+	function (a, b) {
+		return {port_: a, devices: b};
+	});
+var _user$project$GcrdTypes$Cvt = F6(
+	function (a, b, c, d, e, f) {
+		return {fans: a, power: b, valves: c, filter: d, ppt: e, vaisala: f};
+	});
+var _user$project$GcrdTypes$Cell_2 = {ctor: 'Cell_2'};
+var _user$project$GcrdTypes$Cell_1 = {ctor: 'Cell_1'};
+var _user$project$GcrdTypes$defaultCvtData = {
+	fans: {power: 2.5, speed: 5},
+	power: {pump: true, uv_lamp: false, usb_hub: true},
+	valves: {o3_addition: false, o2_addition: false},
+	filter: _user$project$GcrdTypes$Cell_1,
+	ppt: {
+		port_: 'COM1',
+		devices: {
+			ctor: '::',
+			_0: {address: '01', label: 'Default_PPT'},
+			_1: {ctor: '[]'}
+		}
+	},
+	vaisala: {
+		port_: 'COM2',
+		devices: {
+			ctor: '::',
+			_0: {address: '01', label: 'Default_Vaisala'},
+			_1: {ctor: '[]'}
+		}
+	}
+};
