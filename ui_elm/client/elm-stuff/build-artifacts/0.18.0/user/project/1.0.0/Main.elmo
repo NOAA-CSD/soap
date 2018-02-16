@@ -366,19 +366,6 @@ var _user$project$Main$ringdownTitle = A2(
 		}
 	},
 	'Ringdown Data');
-var _user$project$Main$viewCal = function (model) {
-	return A2(
-		_debois$elm_mdl$Material_Grid$grid,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_debois$elm_mdl$Material_Grid$cell,
-				{ctor: '[]'},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
-};
 var _user$project$Main$getHeaterSP = F2(
 	function (model, heater) {
 		var _p7 = heater;
@@ -829,7 +816,6 @@ var _user$project$Main$TogglePasPlot = function (a) {
 	return {ctor: 'TogglePasPlot', _0: a};
 };
 var _user$project$Main$SyncTime = {ctor: 'SyncTime'};
-var _user$project$Main$UpdateSpkParams = {ctor: 'UpdateSpkParams'};
 var _user$project$Main$UpdateTime = {ctor: 'UpdateTime'};
 var _user$project$Main$SendDevSP = function (a) {
 	return {ctor: 'SendDevSP', _0: a};
@@ -864,8 +850,9 @@ var _user$project$Main$UpdateMod0 = function (a) {
 };
 var _user$project$Main$UpdateChirp = {ctor: 'UpdateChirp'};
 var _user$project$Main$SendSpkVoltage = {ctor: 'SendSpkVoltage'};
-var _user$project$Main$ToggleSpeakerAuto = {ctor: 'ToggleSpeakerAuto'};
-var _user$project$Main$ToggleSpeaker = {ctor: 'ToggleSpeaker'};
+var _user$project$Main$ToggleSpeaker = function (a) {
+	return {ctor: 'ToggleSpeaker', _0: a};
+};
 var _user$project$Main$HandleGeneric = function (a) {
 	return {ctor: 'HandleGeneric', _0: a};
 };
@@ -882,7 +869,7 @@ var _user$project$Main$toggleSave = function (model) {
 };
 var _user$project$Main$sendDevSp = F3(
 	function (idx, dev, model) {
-		var sp = A2(_elm_lang$core$Maybe$withDefault, '0', dev.sp);
+		var sp = A2(_elm_lang$core$Maybe$withDefault, 0, dev.sp);
 		return A2(
 			_elm_lang$http$Http$send,
 			_user$project$Main$HandleGeneric,
@@ -895,7 +882,7 @@ var _user$project$Main$sendDevSp = F3(
 						'UpdateDevSP?sp=',
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							sp,
+							_elm_lang$core$Basics$toString(sp),
 							A2(_elm_lang$core$Basics_ops['++'], '&idx=', idx))))));
 	});
 var _user$project$Main$updateWaveforms = function (model) {
@@ -962,8 +949,8 @@ var _user$project$Main$sendChirp = function (model) {
 						center,
 						A2(_elm_lang$core$Basics_ops['++'], '&df=', df))))));
 };
-var _user$project$Main$toggleSpk = F2(
-	function (model, val) {
+var _user$project$Main$toggleSpk = F3(
+	function (model, val, cell) {
 		return A2(
 			_elm_lang$http$Http$send,
 			_user$project$Main$HandleGeneric,
@@ -974,33 +961,11 @@ var _user$project$Main$toggleSpk = F2(
 					A2(
 						_elm_lang$core$Basics_ops['++'],
 						'PAS/SpeakerState?state=',
-						A2(_elm_lang$core$Basics_ops['++'], val, '&cell=0')))));
-	});
-var _user$project$Main$updateSpkParams = function (model) {
-	var period = model.pas.cvt.spk.period;
-	var length = model.pas.cvt.spk.length;
-	var auto = model.pas.cvt.spk.auto ? '1' : '0';
-	return A2(
-		_elm_lang$http$Http$send,
-		_user$project$Main$HandleGeneric,
-		_elm_lang$http$Http$getString(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				_user$project$Network$buildAddress(model.network),
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'PAS/SpkCycle?auto=',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						auto,
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							'&length=',
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								length,
-								A2(_elm_lang$core$Basics_ops['++'], '&period=', period))))))));
-};
+							val,
+							A2(_elm_lang$core$Basics_ops['++'], '&cell=', cell))))));
+	});
 var _user$project$Main$sendSpkVoltage = function (model) {
 	return A2(
 		_elm_lang$http$Http$send,
@@ -2549,7 +2514,10 @@ var _user$project$Main$viewAux = function (model) {
 												_elm_lang$core$List$indexedMap,
 												F2(
 													function (i, dev) {
-														var device = _elm_lang$core$Tuple$second(dev);
+														var device = A2(
+															_elm_lang$core$Debug$log,
+															'alicat info',
+															_elm_lang$core$Tuple$second(dev));
 														var idx = _elm_lang$core$Tuple$first(dev);
 														var m = (device.active && device.controller) ? A5(
 															_debois$elm_mdl$Material_Textfield$render,
@@ -2572,7 +2540,11 @@ var _user$project$Main$viewAux = function (model) {
 																		_1: {
 																			ctor: '::',
 																			_0: _debois$elm_mdl$Material_Textfield$value(
-																				A2(_elm_lang$core$Maybe$withDefault, '0', device.sp)),
+																				_elm_lang$core$Basics$toString(
+																					A2(
+																						_elm_lang$core$Maybe$withDefault,
+																						0,
+																						A2(_elm_lang$core$Debug$log, 'sp', device.sp)))),
 																			_1: {
 																				ctor: '::',
 																				_0: _debois$elm_mdl$Material_Options$onInput(
@@ -2595,7 +2567,8 @@ var _user$project$Main$viewAux = function (model) {
 															{ctor: '[]'}) : _elm_lang$html$Html$text('');
 														return m;
 													}),
-												_elm_lang$core$Dict$toList(model.alicats.cvt))),
+												_elm_lang$core$Dict$toList(
+													A2(_elm_lang$core$Debug$log, 'alicats', model.alicats.cvt)))),
 										_1: {
 											ctor: '::',
 											_0: A2(
@@ -4094,6 +4067,424 @@ var _user$project$Main$viewCrd = function (model) {
 			}
 		});
 };
+var _user$project$Main$viewCal = function (model) {
+	return A2(
+		_debois$elm_mdl$Material_Grid$grid,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_debois$elm_mdl$Material_Grid$cell,
+				{
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A5(
+						_debois$elm_mdl$Material_Toggles$switch,
+						_user$project$Main$Mdl,
+						{
+							ctor: '::',
+							_0: 11,
+							_1: {ctor: '[]'}
+						},
+						model.mdl,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Toggles$ripple,
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Run Sequence'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A5(
+							_debois$elm_mdl$Material_Button$render,
+							_user$project$Main$Mdl,
+							{
+								ctor: '::',
+								_0: 106,
+								_1: {ctor: '[]'}
+							},
+							model.mdl,
+							{
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Button$raised,
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Button$ripple,
+									_1: {
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Button$primary,
+										_1: {
+											ctor: '::',
+											_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Reset Sequence'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_Grid$cell,
+					{
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_List$ul,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_List$li,
+									{
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_List$withBody,
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_List$content,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Speaker'),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$body,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Use this to toggle the speaker.  '),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_List$li,
+										{
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_List$withBody,
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$content,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Flow Path'),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_debois$elm_mdl$Material_List$body,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Use this to toggle the flow path. '),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_List$li,
+											{
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_List$withBody,
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$content,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('UV Lamp'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_debois$elm_mdl$Material_List$body,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Toggle power to the UV lamp.'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$li,
+												{
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_List$withBody,
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$content,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('O2 Valve'),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_debois$elm_mdl$Material_List$body,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Toggle O2 valve.'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$li,
+													{
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_List$withBody,
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_debois$elm_mdl$Material_List$content,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('O3 Valve'),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_debois$elm_mdl$Material_List$body,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Toggle O3 valve.'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_debois$elm_mdl$Material_Grid$cell,
+						{
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_debois$elm_mdl$Material_List$ul,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_List$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$content,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Speaker'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$content2,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A5(
+															_debois$elm_mdl$Material_Toggles$checkbox,
+															_user$project$Main$Mdl,
+															{
+																ctor: '::',
+																_0: 4,
+																_1: {ctor: '[]'}
+															},
+															model.mdl,
+															{
+																ctor: '::',
+																_0: _debois$elm_mdl$Material_Toggles$value(true),
+																_1: {ctor: '[]'}
+															},
+															{ctor: '[]'}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_List$li,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$content,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Radio button!'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$content2,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_debois$elm_mdl$Material_Options$span,
+																{
+																	ctor: '::',
+																	_0: _debois$elm_mdl$Material_List$action2,
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: A5(
+																		_debois$elm_mdl$Material_Toggles$radio,
+																		_user$project$Main$Mdl,
+																		{
+																			ctor: '::',
+																			_0: 5,
+																			_1: {ctor: '[]'}
+																		},
+																		model.mdl,
+																		{
+																			ctor: '::',
+																			_0: _debois$elm_mdl$Material_Toggles$value(true),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(_debois$elm_mdl$Material_Options$css, 'display', 'inline'),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{ctor: '[]'}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$li,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$content,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Include switch?'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_debois$elm_mdl$Material_List$content2,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A5(
+																	_debois$elm_mdl$Material_Toggles$switch,
+																	_user$project$Main$Mdl,
+																	{
+																		ctor: '::',
+																		_0: 6,
+																		_1: {ctor: '[]'}
+																	},
+																	model.mdl,
+																	{
+																		ctor: '::',
+																		_0: _debois$elm_mdl$Material_Toggles$value(true),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 var _user$project$Main$viewStatus = function (model) {
 	return A2(
 		_debois$elm_mdl$Material_Grid$grid,
@@ -4379,7 +4770,10 @@ var _user$project$Main$update = F2(
 					var dev_cvt = A2(
 						_elm_lang$core$Result$withDefault,
 						_user$project$Devices_Device$defaultDeviceDict,
-						A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Devices_Device$decodeDeviceCvt, _p28));
+						A2(
+							_elm_lang$core$Debug$log,
+							'devicecvt',
+							A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Devices_Device$decodeDeviceCvt, _p28)));
 					var a_model = A2(
 						_user$project$Main$asAlicatIn,
 						model,
@@ -4549,43 +4943,46 @@ var _user$project$Main$update = F2(
 					_1: A2(_user$project$Main$getCvtData, new_model, '1')
 				};
 			case 'ToggleSpeaker':
-				var new_model = A2(
-					_user$project$Main$asPasIn,
-					model,
-					A2(
-						_user$project$Pas$asCvtIn,
-						model.pas,
-						A2(
-							_user$project$Pas$asSpeakerIn,
-							model.pas.cvt,
-							_user$project$Pas$toggleSpeakerPosition(model.pas.cvt.spk))));
-				var val = _elm_lang$core$Native_Utils.eq(new_model.pas.cvt.spk.pos, _user$project$Pas$Speaker) ? '1' : '0';
+				var _p33 = _p27._0;
+				var ncell = _elm_lang$core$Native_Utils.eq(_p33, 0) ? '0' : '1';
+				var new_model = function () {
+					var _p31 = _p33;
+					switch (_p31) {
+						case 0:
+							return A2(
+								_user$project$Main$asPasIn,
+								model,
+								A2(
+									_user$project$Pas$asCvtIn,
+									model.pas,
+									_user$project$Pas$toggleSpeaker0Position(model.pas.cvt)));
+						case 1:
+							return A2(
+								_user$project$Main$asPasIn,
+								model,
+								A2(
+									_user$project$Pas$asCvtIn,
+									model.pas,
+									_user$project$Pas$toggleSpeaker1Position(model.pas.cvt)));
+						default:
+							return model;
+					}
+				}();
+				var val = function () {
+					var _p32 = _p33;
+					switch (_p32) {
+						case 0:
+							return new_model.pas.cvt.speaker_0 ? '1' : '0';
+						case 1:
+							return new_model.pas.cvt.speaker_1 ? '1' : '0';
+						default:
+							return '1';
+					}
+				}();
 				return {
 					ctor: '_Tuple2',
 					_0: new_model,
-					_1: A2(_user$project$Main$toggleSpk, new_model, val)
-				};
-			case 'ToggleSpeakerAuto':
-				var new_model = A2(
-					_user$project$Main$asPasIn,
-					model,
-					A2(
-						_user$project$Pas$asCvtIn,
-						model.pas,
-						A2(
-							_user$project$Pas$asSpeakerIn,
-							model.pas.cvt,
-							_user$project$Pas$toggleSpeakerCycle(model.pas.cvt.spk))));
-				return {
-					ctor: '_Tuple2',
-					_0: new_model,
-					_1: _user$project$Main$updateSpkParams(new_model)
-				};
-			case 'UpdateSpkParams':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$Main$updateSpkParams(model)
+					_1: A3(_user$project$Main$toggleSpk, new_model, val, ncell)
 				};
 			case 'UpdateMod0':
 				var f_ = A2(
@@ -4614,17 +5011,17 @@ var _user$project$Main$update = F2(
 						A2(_user$project$Pas$setFrequency1, f_, model.pas.cvt)));
 				return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SendModulation':
-				var _p31 = _p27._0;
-				var freq = _elm_lang$core$Native_Utils.eq(_p31, '1') ? model.pas.cvt.fmod_1 : model.pas.cvt.fmod_0;
+				var _p34 = _p27._0;
+				var freq = _elm_lang$core$Native_Utils.eq(_p34, '1') ? model.pas.cvt.fmod_1 : model.pas.cvt.fmod_0;
 				var f = _elm_lang$core$Basics$toString(freq);
 				var index = A2(
 					_elm_lang$core$Result$withDefault,
 					0,
-					_elm_lang$core$String$toInt(_p31));
+					_elm_lang$core$String$toInt(_p34));
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: A3(_user$project$Main$setCellFrequency, model, _p31, f)
+					_1: A3(_user$project$Main$setCellFrequency, model, _p34, f)
 				};
 			case 'SendCrdFrequency':
 				return {
@@ -4653,9 +5050,9 @@ var _user$project$Main$update = F2(
 					_1: A2(_user$project$Main$toggleCrdPower, model, val)
 				};
 			case 'UpdateHeaterSP':
-				var _p33 = _p27._1;
-				var _p32 = _p27._0;
-				switch (_p32.ctor) {
+				var _p36 = _p27._1;
+				var _p35 = _p27._0;
+				switch (_p35.ctor) {
 					case 'CrdHeater':
 						return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 					case 'Pas0Heater':
@@ -4663,7 +5060,7 @@ var _user$project$Main$update = F2(
 						var new_sp = A2(
 							_elm_lang$core$Result$withDefault,
 							old_sp,
-							_elm_lang$core$String$toFloat(_p33));
+							_elm_lang$core$String$toFloat(_p36));
 						var new_model = A2(
 							_user$project$Main$asPasIn,
 							model,
@@ -4680,7 +5077,7 @@ var _user$project$Main$update = F2(
 						var new_sp = A2(
 							_elm_lang$core$Result$withDefault,
 							old_sp,
-							_elm_lang$core$String$toFloat(_p33));
+							_elm_lang$core$String$toFloat(_p36));
 						var new_model = A2(
 							_user$project$Main$asPasIn,
 							model,
@@ -4694,32 +5091,32 @@ var _user$project$Main$update = F2(
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
 			case 'TogglePasLaserPower':
-				var _p35 = _p27._0;
-				var c = _elm_lang$core$Basics$toString(_p35);
+				var _p38 = _p27._0;
+				var c = _elm_lang$core$Basics$toString(_p38);
 				var new_model = A2(
 					_user$project$Main$asPasIn,
 					model,
 					A2(
 						_user$project$Pas$asCvtIn,
 						model.pas,
-						A2(_user$project$Pas$toggleLaserPower, _p35, model.pas.cvt)));
+						A2(_user$project$Pas$toggleLaserPower, _p38, model.pas.cvt)));
 				var cmd = function () {
-					var _p34 = _p35;
-					switch (_p34) {
+					var _p37 = _p38;
+					switch (_p37) {
 						case 0:
 							var val = new_model.pas.cvt.enable_0 ? '1' : '0';
 							return A3(
 								_user$project$Main$togglePasLaserPower,
 								new_model,
 								val,
-								_elm_lang$core$Basics$toString(_p35));
+								_elm_lang$core$Basics$toString(_p38));
 						case 1:
 							var val = new_model.pas.cvt.enable_1 ? '1' : '0';
 							return A3(
 								_user$project$Main$togglePasLaserPower,
 								new_model,
 								val,
-								_elm_lang$core$Basics$toString(_p35));
+								_elm_lang$core$Basics$toString(_p38));
 						default:
 							return _elm_lang$core$Platform_Cmd$none;
 					}
@@ -4769,61 +5166,62 @@ var _user$project$Main$update = F2(
 					_1: _user$project$Main$sendFanVoltage(new_model)
 				};
 			case 'UpdateDevSP':
-				var _p36 = _p27._0;
+				var _p39 = _p27._0;
 				var dev = A2(
 					_elm_lang$core$Maybe$withDefault,
 					_user$project$Devices_Device$defaultDevice,
-					A2(_elm_lang$core$Dict$get, _p36, model.alicats.cvt));
-				var new_dev = A2(_user$project$Devices_Device$setSpIn, _p27._1, dev);
+					A2(_elm_lang$core$Dict$get, _p39, model.alicats.cvt));
+				var new_dev = A2(
+					_user$project$Devices_Device$setSpIn,
+					A2(
+						_elm_lang$core$Result$withDefault,
+						0,
+						_elm_lang$core$String$toFloat(_p27._1)),
+					dev);
 				var new_model = A2(
 					_user$project$Main$asAlicatIn,
 					model,
 					A2(
 						_user$project$Devices_Alicat$asCvtIn,
 						model.alicats,
-						A3(_elm_lang$core$Dict$insert, _p36, new_dev, model.alicats.cvt)));
+						A3(_elm_lang$core$Dict$insert, _p39, new_dev, model.alicats.cvt)));
 				return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SendDevSP':
-				var _p37 = _p27._0;
+				var _p40 = _p27._0;
 				var dev = A2(
 					_elm_lang$core$Maybe$withDefault,
 					_user$project$Devices_Device$defaultDevice,
-					A2(_elm_lang$core$Dict$get, _p37, model.alicats.cvt));
+					A2(_elm_lang$core$Dict$get, _p40, model.alicats.cvt));
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: A3(_user$project$Main$sendDevSp, _p37, dev, model)
+					_1: A3(_user$project$Main$sendDevSp, _p40, dev, model)
 				};
 			case 'UpdateTime':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SyncTime':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'TogglePasPlot':
-				var _p38 = _p27._0;
-				var d = A4(
-					_elm_lang$core$Debug$log,
-					'newinputVal',
+				var _p41 = _p27._0;
+				var d = A2(
 					_elm_lang$core$Maybe$withDefault,
 					false,
-					A2(_elm_community$list_extra$List_Extra$getAt, _p38, model.pasPlotData));
+					A2(_elm_community$list_extra$List_Extra$getAt, _p41, model.pasPlotData));
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						pasPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p38, !d, model.pasPlotData)
+						pasPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p41, !d, model.pasPlotData)
 					});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'UpdatePasRange':
 				var range = model.pasRange;
 				var v = A2(
-					_elm_lang$core$Debug$log,
-					'newVal',
-					A2(
-						_elm_lang$core$Result$withDefault,
-						0,
-						_elm_lang$core$String$toFloat(_p27._1)));
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toFloat(_p27._1));
 				var newRange = function () {
-					var _p39 = _p27._0;
-					switch (_p39) {
+					var _p42 = _p27._0;
+					switch (_p42) {
 						case 'xmin':
 							return _elm_lang$core$Native_Utils.update(
 								range,
@@ -4892,15 +5290,12 @@ var _user$project$Main$update = F2(
 			case 'UpdateCrdRange':
 				var range = model.crdRange;
 				var v = A2(
-					_elm_lang$core$Debug$log,
-					'newVal',
-					A2(
-						_elm_lang$core$Result$withDefault,
-						0,
-						_elm_lang$core$String$toFloat(_p27._1)));
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toFloat(_p27._1));
 				var newRange = function () {
-					var _p40 = _p27._0;
-					switch (_p40) {
+					var _p43 = _p27._0;
+					switch (_p43) {
 						case 'xmin':
 							return _elm_lang$core$Native_Utils.update(
 								range,
@@ -4963,15 +5358,15 @@ var _user$project$Main$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
-				var _p41 = _p27._0;
+				var _p44 = _p27._0;
 				var d = A2(
 					_elm_lang$core$Maybe$withDefault,
 					false,
-					A2(_elm_community$list_extra$List_Extra$getAt, _p41, model.crdPlotData));
+					A2(_elm_community$list_extra$List_Extra$getAt, _p44, model.crdPlotData));
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						crdPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p41, !d, model.crdPlotData)
+						crdPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p44, !d, model.crdPlotData)
 					});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 		}
@@ -5249,18 +5644,18 @@ var _user$project$Main$viewPas = function (model) {
 											_0: _debois$elm_mdl$Material_Toggles$ripple,
 											_1: {
 												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$value(
-													_elm_lang$core$Native_Utils.eq(model.pas.cvt.spk.pos, _user$project$Pas$Speaker)),
+												_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.speaker_0),
 												_1: {
 													ctor: '::',
-													_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleSpeaker),
+													_0: _debois$elm_mdl$Material_Options$onToggle(
+														_user$project$Main$ToggleSpeaker(0)),
 													_1: {ctor: '[]'}
 												}
 											}
 										},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('Position'),
+											_0: _elm_lang$html$Html$text('Cell 0'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
@@ -5279,17 +5674,18 @@ var _user$project$Main$viewPas = function (model) {
 												_0: _debois$elm_mdl$Material_Toggles$ripple,
 												_1: {
 													ctor: '::',
-													_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.spk.auto),
+													_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.speaker_1),
 													_1: {
 														ctor: '::',
-														_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleSpeakerAuto),
+														_0: _debois$elm_mdl$Material_Options$onToggle(
+															_user$project$Main$ToggleSpeaker(1)),
 														_1: {ctor: '[]'}
 													}
 												}
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Auto'),
+												_0: _elm_lang$html$Html$text('Cell 1'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {
@@ -5299,7 +5695,7 @@ var _user$project$Main$viewPas = function (model) {
 												_user$project$Main$Mdl,
 												{
 													ctor: '::',
-													_0: 12,
+													_0: 14,
 													_1: {ctor: '[]'}
 												},
 												model.mdl,
@@ -5314,20 +5710,20 @@ var _user$project$Main$viewPas = function (model) {
 															_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
 															_1: {
 																ctor: '::',
-																_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.period),
+																_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.center),
 																_1: {
 																	ctor: '::',
 																	_0: _debois$elm_mdl$Material_Options$onInput(
-																		function (_p42) {
+																		function (_p45) {
 																			return _user$project$Main$Pas(
-																				_user$project$Pas$UpdateSpkPeriod(_p42));
+																				_user$project$Pas$UpdateSpkFcenter(_p45));
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateSpkParams),
+																		_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateChirp),
 																		_1: {
 																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$label('Period (s)'),
+																			_0: _debois$elm_mdl$Material_Textfield$label('Center (Hz)'),
 																			_1: {ctor: '[]'}
 																		}
 																	}
@@ -5344,7 +5740,7 @@ var _user$project$Main$viewPas = function (model) {
 													_user$project$Main$Mdl,
 													{
 														ctor: '::',
-														_0: 13,
+														_0: 15,
 														_1: {ctor: '[]'}
 													},
 													model.mdl,
@@ -5359,20 +5755,20 @@ var _user$project$Main$viewPas = function (model) {
 																_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
 																_1: {
 																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.length),
+																	_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.df),
 																	_1: {
 																		ctor: '::',
 																		_0: _debois$elm_mdl$Material_Options$onInput(
-																			function (_p43) {
+																			function (_p46) {
 																				return _user$project$Main$Pas(
-																					_user$project$Pas$UpdateSpkLength(_p43));
+																					_user$project$Pas$UpdateSpkDf(_p46));
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateSpkParams),
+																			_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateChirp),
 																			_1: {
 																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Textfield$label('Length (s)'),
+																				_0: _debois$elm_mdl$Material_Textfield$label('Df (Hz)'),
 																				_1: {ctor: '[]'}
 																			}
 																		}
@@ -5389,7 +5785,7 @@ var _user$project$Main$viewPas = function (model) {
 														_user$project$Main$Mdl,
 														{
 															ctor: '::',
-															_0: 14,
+															_0: 16,
 															_1: {ctor: '[]'}
 														},
 														model.mdl,
@@ -5404,20 +5800,20 @@ var _user$project$Main$viewPas = function (model) {
 																	_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
 																	_1: {
 																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.center),
+																		_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.vscale),
 																		_1: {
 																			ctor: '::',
 																			_0: _debois$elm_mdl$Material_Options$onInput(
-																				function (_p44) {
+																				function (_p47) {
 																					return _user$project$Main$Pas(
-																						_user$project$Pas$UpdateSpkFcenter(_p44));
+																						_user$project$Pas$UpdateSpkVscale(_p47));
 																				}),
 																			_1: {
 																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateChirp),
+																				_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$SendSpkVoltage),
 																				_1: {
 																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Textfield$label('Center (Hz)'),
+																					_0: _debois$elm_mdl$Material_Textfield$label('Vscale (V)'),
 																					_1: {ctor: '[]'}
 																				}
 																			}
@@ -5434,7 +5830,7 @@ var _user$project$Main$viewPas = function (model) {
 															_user$project$Main$Mdl,
 															{
 																ctor: '::',
-																_0: 15,
+																_0: 17,
 																_1: {ctor: '[]'}
 															},
 															model.mdl,
@@ -5449,20 +5845,20 @@ var _user$project$Main$viewPas = function (model) {
 																		_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
 																		_1: {
 																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.df),
+																			_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.voffset),
 																			_1: {
 																				ctor: '::',
 																				_0: _debois$elm_mdl$Material_Options$onInput(
-																					function (_p45) {
+																					function (_p48) {
 																						return _user$project$Main$Pas(
-																							_user$project$Pas$UpdateSpkDf(_p45));
+																							_user$project$Pas$UpdateSpkVoffset(_p48));
 																					}),
 																				_1: {
 																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateChirp),
+																					_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$SendSpkVoltage),
 																					_1: {
 																						ctor: '::',
-																						_0: _debois$elm_mdl$Material_Textfield$label('Df (Hz)'),
+																						_0: _debois$elm_mdl$Material_Textfield$label('Voffset (V)'),
 																						_1: {ctor: '[]'}
 																					}
 																				}
@@ -5472,99 +5868,7 @@ var _user$project$Main$viewPas = function (model) {
 																}
 															},
 															{ctor: '[]'}),
-														_1: {
-															ctor: '::',
-															_0: A5(
-																_debois$elm_mdl$Material_Textfield$render,
-																_user$project$Main$Mdl,
-																{
-																	ctor: '::',
-																	_0: 16,
-																	_1: {ctor: '[]'}
-																},
-																model.mdl,
-																{
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-																	_1: {
-																		ctor: '::',
-																		_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-																		_1: {
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-																			_1: {
-																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.vscale),
-																				_1: {
-																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Options$onInput(
-																						function (_p46) {
-																							return _user$project$Main$Pas(
-																								_user$project$Pas$UpdateSpkVscale(_p46));
-																						}),
-																					_1: {
-																						ctor: '::',
-																						_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$SendSpkVoltage),
-																						_1: {
-																							ctor: '::',
-																							_0: _debois$elm_mdl$Material_Textfield$label('Vscale (V)'),
-																							_1: {ctor: '[]'}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																},
-																{ctor: '[]'}),
-															_1: {
-																ctor: '::',
-																_0: A5(
-																	_debois$elm_mdl$Material_Textfield$render,
-																	_user$project$Main$Mdl,
-																	{
-																		ctor: '::',
-																		_0: 17,
-																		_1: {ctor: '[]'}
-																	},
-																	model.mdl,
-																	{
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-																		_1: {
-																			ctor: '::',
-																			_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-																			_1: {
-																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-																				_1: {
-																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.voffset),
-																					_1: {
-																						ctor: '::',
-																						_0: _debois$elm_mdl$Material_Options$onInput(
-																							function (_p47) {
-																								return _user$project$Main$Pas(
-																									_user$project$Pas$UpdateSpkVoffset(_p47));
-																							}),
-																						_1: {
-																							ctor: '::',
-																							_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$SendSpkVoltage),
-																							_1: {
-																								ctor: '::',
-																								_0: _debois$elm_mdl$Material_Textfield$label('Voffset (V)'),
-																								_1: {ctor: '[]'}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	},
-																	{ctor: '[]'}),
-																_1: {ctor: '[]'}
-															}
-														}
+														_1: {ctor: '[]'}
 													}
 												}
 											}
@@ -6240,8 +6544,8 @@ var _user$project$Main$viewBody = function (model) {
 				{
 					ctor: '::',
 					_0: function () {
-						var _p48 = model.selectedTab;
-						switch (_p48) {
+						var _p49 = model.selectedTab;
+						switch (_p49) {
 							case 0:
 								return _user$project$Main$viewMain(model);
 							case 1:
@@ -6250,6 +6554,8 @@ var _user$project$Main$viewBody = function (model) {
 								return _user$project$Main$viewCrd(model);
 							case 3:
 								return _user$project$Main$viewAux(model);
+							case 4:
+								return _user$project$Main$viewCal(model);
 							case 5:
 								return _user$project$Main$viewConfig(model);
 							case 6:

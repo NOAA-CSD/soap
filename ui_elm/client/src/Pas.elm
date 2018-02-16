@@ -38,8 +38,6 @@ type Msg
     | UpdateSpkVoffset String
     | UpdateSpkDf String
     | UpdateSpkFcenter String
-    | UpdateSpkPeriod String
-    | UpdateSpkLength String
 
 
 
@@ -110,26 +108,6 @@ update msg model =
             in
             new_model
 
-        UpdateSpkLength len ->
-            let
-                new_model =
-                    model.cvt.spk
-                        |> setLengthSpk len
-                        |> asSpeakerIn model.cvt
-                        |> asCvtIn model
-            in
-            new_model
-
-        UpdateSpkPeriod period ->
-            let
-                new_model =
-                    model.cvt.spk
-                        |> setPeriodSpk period
-                        |> asSpeakerIn model.cvt
-                        |> asCvtIn model
-            in
-            new_model
-
 
 {-| The type `Drive` is used to indicate whether the PAS is operating the laser or speaker.
 -}
@@ -171,20 +149,18 @@ type alias PasCvt =
     , heater_1 : Heater
     , enable_0 : Bool
     , enable_1 : Bool
+    , speaker_0 : Bool
+    , speaker_1 : Bool
     }
-
 
 
 type alias Speaker_ =
-    { period : String
-    , length : String
-    , auto : Bool
-    , vscale : String
+    { vscale : String
     , voffset : String
     , center : String
     , df : String
-    , pos : Drive
     }
+
 
 type alias Heater =
     { pid : Array Float
@@ -250,44 +226,23 @@ setDfSpk df spk =
     { spk | df = df }
 
 
-setPeriodSpk : String -> Speaker_ -> Speaker_
-setPeriodSpk period spk =
-    { spk | period = period }
+toggleSpeaker0Position : PasCvt -> PasCvt
+toggleSpeaker0Position cvt =
+    { cvt | speaker_0 = not cvt.speaker_0 }
 
 
-setLengthSpk : String -> Speaker_ -> Speaker_
-setLengthSpk length spk =
-    { spk | length = length }
-
-
-toggleSpeakerPosition : Speaker_ -> Speaker_
-toggleSpeakerPosition spk =
-    let
-        drive =
-            if spk.pos == Speaker then
-                Laser
-            else
-                Speaker
-    in
-    { spk | pos = drive }
-
-
-toggleSpeakerCycle : Speaker_ -> Speaker_
-toggleSpeakerCycle spk =
-    { spk | auto = not spk.auto }
+toggleSpeaker1Position : PasCvt -> PasCvt
+toggleSpeaker1Position cvt =
+    { cvt | speaker_1 = not cvt.speaker_1 }
 
 
 decodeSpeaker : Decoder Speaker_
 decodeSpeaker =
-    map8 Speaker_
-        (field "period" intString)
-        (field "length" intString)
-        (field "auto" bool)
+    map4 Speaker_
         (field "vscale" floatString)
         (field "voffset" floatString)
         (field "center" intString)
         (field "df" intString)
-        (field "pos" decodeDrive)
 
 
 setHeaterSP : Float -> Heater -> Heater
@@ -381,12 +336,12 @@ defaultHeater =
 
 defaultSpk : Speaker_
 defaultSpk =
-    Speaker_ "360" "30" True "1" "0.5" "1350" "100" Speaker
+    Speaker_ "1" "0.5" "1350" "100"
 
 
 defaultCvt : PasCvt
 defaultCvt =
-    PasCvt defaultSpk [ 0, 0 ] [ 1, 1 ] 1350 1350 defaultHeater defaultHeater False False
+    PasCvt defaultSpk [ 0, 0 ] [ 1, 1 ] 1350 1350 defaultHeater defaultHeater False False True True
 
 
 decodePasCvt : PasCvt -> Decoder PasCvt
@@ -395,12 +350,14 @@ decodePasCvt cvt =
         |> required "spk" decodeSpeaker
         |> required "b" (list float)
         |> required "m" (list float)
-        |> required "fmod_0" int
-        |> required "fmod_1" int
+        |> requiredAt [ "ch0", "mod" ] int
+        |> requiredAt [ "ch1", "mod" ] int
         |> required "heater0" decodeHeater
         |> required "heater1" decodeHeater
         |> requiredAt [ "ch0", "laser_enable" ] bool
         |> requiredAt [ "ch1", "laser_enable" ] bool
+        |> requiredAt [ "ch0", "spk" ] bool
+        |> requiredAt [ "ch1", "spk" ] bool
 
 
 retrievePasCvt : String -> String -> PasCvt -> PasCvt
@@ -437,12 +394,17 @@ decodeDrive =
     in
     bool |> andThen helper
 
+
+
 -- The following functions are used to take CVT data that comes back as a number in the
 -- server string but is stored as a string
+
+
 intString : Decoder String
 intString =
-  map toString int
+    map toString int
+
 
 floatString : Decoder String
 floatString =
-  map toString float
+    map toString float

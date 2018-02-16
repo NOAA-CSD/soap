@@ -342,8 +342,7 @@ type Msg
     | GetData (Result Http.Error String)
     | InitializeNetwork ( String, String )
     | HandleGeneric (Result Http.Error String)
-    | ToggleSpeaker
-    | ToggleSpeakerAuto
+    | ToggleSpeaker Int
     | SendSpkVoltage
     | UpdateChirp
     | UpdateMod0 String
@@ -360,7 +359,6 @@ type Msg
     | UpdateDevSP String String
     | SendDevSP String
     | UpdateTime
-    | UpdateSpkParams
     | SyncTime
     | TogglePasPlot Int
     | UpdatePasRange String String
@@ -513,7 +511,7 @@ update msg model =
                 dev_cvt =
                     Result.withDefault
                         Device.defaultDeviceDict
-                        (Decoder.decodeString Device.decodeDeviceCvt data)
+                        (Debug.log "devicecvt" (Decoder.decodeString Device.decodeDeviceCvt data))
 
                 a_model =
                     Alicat.insertAlicatDev dev_cvt model.alicats
@@ -636,36 +634,49 @@ update msg model =
             in
             ( new_model, getCvtData new_model "1" )
 
-        ToggleSpeaker ->
+        ToggleSpeaker cell ->
             let
                 new_model =
-                    model.pas.cvt.spk
-                        |> Pas.toggleSpeakerPosition
-                        |> Pas.asSpeakerIn model.pas.cvt
-                        |> Pas.asCvtIn model.pas
-                        |> asPasIn model
+                    case cell of
+                        0 ->
+                            model.pas.cvt
+                                |> Pas.toggleSpeaker0Position
+                                |> Pas.asCvtIn model.pas
+                                |> asPasIn model
+
+                        1 ->
+                            model.pas.cvt
+                                |> Pas.toggleSpeaker1Position
+                                |> Pas.asCvtIn model.pas
+                                |> asPasIn model
+
+                        default ->
+                            model
 
                 val =
-                    if new_model.pas.cvt.spk.pos == Pas.Speaker then
-                        "1"
-                    else
+                    case cell of
+                        0 ->
+                            if new_model.pas.cvt.speaker_0 then
+                                "1"
+                            else
+                                "0"
+
+                        1 ->
+                            if new_model.pas.cvt.speaker_1 then
+                                "1"
+                            else
+                                "0"
+
+                        default ->
+                            "1"
+
+                ncell =
+                    if cell == 0 then
                         "0"
+                    else
+                        "1"
             in
-            ( new_model, toggleSpk new_model val )
-
-        ToggleSpeakerAuto ->
-            let
-                new_model =
-                    model.pas.cvt.spk
-                        |> Pas.toggleSpeakerCycle
-                        |> Pas.asSpeakerIn model.pas.cvt
-                        |> Pas.asCvtIn model.pas
-                        |> asPasIn model
-            in
-            ( new_model, updateSpkParams new_model )
-
-        UpdateSpkParams ->
-            ( model, updateSpkParams model )
+            ( new_model, toggleSpk new_model val ncell )
 
         UpdateMod0 f ->
             let
@@ -846,7 +857,7 @@ update msg model =
                         (Dict.get idx model.alicats.cvt)
 
                 new_dev =
-                    Device.setSpIn sp dev
+                    Device.setSpIn (Result.withDefault 0 (String.toFloat sp)) dev
 
                 new_model =
                     Dict.insert idx new_dev model.alicats.cvt
@@ -874,7 +885,7 @@ update msg model =
         TogglePasPlot input ->
             let
                 d =
-                    Debug.log "newinputVal" Maybe.withDefault False (ListExtra.getAt input model.pasPlotData)
+                    Maybe.withDefault False (ListExtra.getAt input model.pasPlotData)
 
                 newModel =
                     { model | pasPlotData = ListExtra.setAt input (not d) model.pasPlotData }
@@ -884,7 +895,7 @@ update msg model =
         UpdatePasRange entry val ->
             let
                 v =
-                    Debug.log "newVal" (Result.withDefault 0 (String.toFloat val))
+                    Result.withDefault 0 (String.toFloat val)
 
                 range =
                     model.pasRange
@@ -934,7 +945,7 @@ update msg model =
         UpdateCrdRange entry val ->
             let
                 v =
-                    Debug.log "newVal" (Result.withDefault 0 (String.toFloat val))
+                    Result.withDefault 0 (String.toFloat val)
 
                 range =
                     model.crdRange
@@ -1032,13 +1043,13 @@ sendDevSp : String -> Device.Device -> Model -> Cmd Msg
 sendDevSp idx dev model =
     let
         sp =
-            Maybe.withDefault "0" dev.sp
+            Maybe.withDefault 0 dev.sp
     in
     Http.send HandleGeneric <|
         Http.getString
             (Network.buildAddress model.network
                 ++ "UpdateDevSP?sp="
-                ++ sp
+                ++ toString sp
                 ++ "&idx="
                 ++ idx
             )
@@ -1119,36 +1130,15 @@ sendChirp model =
             )
 
 
-toggleSpk : Model -> String -> Cmd Msg
-toggleSpk model val =
-    Http.send HandleGeneric <|
-        Http.getString (Network.buildAddress model.network ++ "PAS/SpeakerState?state=" ++ val ++ "&cell=0")
-
-
-updateSpkParams : Model -> Cmd Msg
-updateSpkParams model =
-    let
-        auto =
-            if model.pas.cvt.spk.auto then
-                "1"
-            else
-                "0"
-
-        length =
-            model.pas.cvt.spk.length
-
-        period =
-            model.pas.cvt.spk.period
-    in
+toggleSpk : Model -> String -> String -> Cmd Msg
+toggleSpk model val cell =
     Http.send HandleGeneric <|
         Http.getString
             (Network.buildAddress model.network
-                ++ "PAS/SpkCycle?auto="
-                ++ auto
-                ++ "&length="
-                ++ length
-                ++ "&period="
-                ++ period
+                ++ "PAS/SpeakerState?state="
+                ++ val
+                ++ "&cell="
+                ++ cell
             )
 
 
@@ -1471,6 +1461,9 @@ viewBody model =
                 3 ->
                     viewAux model
 
+                4 ->
+                    viewCal model
+
                 5 ->
                     viewConfig model
 
@@ -1647,7 +1640,11 @@ viewAux model =
                         ]
                 )
                 [ "PAS 0", "PAS 1", "CRD" ]
-            ++ [ Grid.cell [ Grid.size Grid.All 12 ] [ Material.Options.styled Html.p [ Typo.headline ] [ Html.text "Fan Control" ] ]
+            ++ [ Grid.cell [ Grid.size Grid.All 12 ]
+                    [ Material.Options.styled Html.p
+                        [ Typo.headline ]
+                        [ Html.text "Fan Control" ]
+                    ]
                , Grid.cell [ Grid.size Grid.All 10 ]
                     [ Slider.view
                         [ Slider.value model.cvt.fan_voltage
@@ -1671,7 +1668,11 @@ viewAux model =
                                         ]
                                     , MList.content2
                                         []
-                                        [ Html.text (printableNumeric (getTemperature index model.genData.temperatures)) ]
+                                        [ Html.text
+                                            (printableNumeric
+                                                (getTemperature index model.genData.temperatures)
+                                            )
+                                        ]
                                     ]
                             )
                             [ "PAS Cell 1"
@@ -1748,7 +1749,7 @@ viewAux model =
                                     Tuple.first dev
 
                                 device =
-                                    Tuple.second dev
+                                    Debug.log "alicat info" (Tuple.second dev)
 
                                 m =
                                     if device.active && device.controller then
@@ -1758,7 +1759,7 @@ viewAux model =
                                             [ Textfield.floatingLabel
                                             , css "width" "125px"
                                             , Textfield.maxlength 15
-                                            , Textfield.value (Maybe.withDefault "0" device.sp)
+                                            , Textfield.value (toString (Maybe.withDefault 0 (Debug.log "sp" device.sp)))
                                             , onInput (UpdateDevSP idx)
                                             , onBlur (SendDevSP idx)
                                             , Textfield.label device.label
@@ -1769,7 +1770,7 @@ viewAux model =
                             in
                             m
                         )
-                        (Dict.toList model.alicats.cvt)
+                        (Dict.toList (Debug.log "alicats" model.alicats.cvt))
                     )
                , Grid.cell [ Grid.size Grid.All 10 ]
                     [ Table.table []
@@ -1983,42 +1984,18 @@ viewPas model =
                     [ 10 ]
                     model.mdl
                     [ Toggles.ripple
-                    , Toggles.value (model.pas.cvt.spk.pos == Pas.Speaker)
-                    , Material.Options.onToggle ToggleSpeaker
+                    , Toggles.value model.pas.cvt.speaker_0
+                    , Material.Options.onToggle (ToggleSpeaker 0)
                     ]
-                    [ Html.text "Position" ]
+                    [ Html.text "Cell 0" ]
                 , Toggles.switch Mdl
                     [ 11 ]
                     model.mdl
                     [ Toggles.ripple
-                    , Toggles.value model.pas.cvt.spk.auto
-                    , Material.Options.onToggle ToggleSpeakerAuto
+                    , Toggles.value model.pas.cvt.speaker_1
+                    , Material.Options.onToggle (ToggleSpeaker 1)
                     ]
-                    [ Html.text "Auto" ]
-                , Textfield.render Mdl
-                    [ 12 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value model.pas.cvt.spk.period
-                    , onInput (Pas << Pas.UpdateSpkPeriod)
-                    , onBlur UpdateSpkParams
-                    , Textfield.label "Period (s)"
-                    ]
-                    []
-                , Textfield.render Mdl
-                    [ 13 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value model.pas.cvt.spk.length
-                    , onInput (Pas << Pas.UpdateSpkLength)
-                    , onBlur UpdateSpkParams
-                    , Textfield.label "Length (s)"
-                    ]
-                    []
+                    [ Html.text "Cell 1" ]
                 , Textfield.render Mdl
                     [ 14 ]
                     model.mdl
@@ -2398,8 +2375,107 @@ viewCrd model =
 viewCal : Model -> Html Msg
 viewCal model =
     Grid.grid []
-        [ Grid.cell []
-            []
+        [ Grid.cell [ Grid.size Grid.All 12 ]
+            [ Toggles.switch Mdl
+                [ 11 ]
+                model.mdl
+                [ Toggles.ripple
+                ]
+                [ Html.text "Run Sequence" ]
+            , Material.Button.render Mdl
+                [ 106 ]
+                model.mdl
+                [ Material.Button.raised
+                , Material.Button.ripple
+                , Material.Button.primary
+                , css "margin-top" "10px"
+                ]
+                [ Html.text "Reset Sequence" ]
+            ]
+        , Grid.cell [ Grid.size Grid.All 3 ]
+            [ MList.ul []
+                [ MList.li [ MList.withBody ]
+                    [ MList.content []
+                        [ Html.text "Speaker"
+                        , MList.body [] [ Html.text "Use this to toggle the speaker.  " ]
+                        ]
+                    ]
+                , MList.li [ MList.withBody ]
+                    [ MList.content []
+                        [ Html.text "Flow Path"
+                        , MList.body []
+                            [ Html.text "Use this to toggle the flow path. "
+                            ]
+                        ]
+                    ]
+                , MList.li [ MList.withBody ]
+                    [ MList.content []
+                        [ Html.text "UV Lamp"
+                        , MList.body []
+                            [ Html.text "Toggle power to the UV lamp."
+                            ]
+                        ]
+                    ]
+                , MList.li [ MList.withBody ]
+                    [ MList.content []
+                        [ Html.text "O2 Valve"
+                        , MList.body []
+                            [ Html.text "Toggle O2 valve."
+                            ]
+                        ]
+                    ]
+                , MList.li [ MList.withBody ]
+                    [ MList.content []
+                        [ Html.text "O3 Valve"
+                        , MList.body []
+                            [ Html.text "Toggle O3 valve."
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        , Grid.cell [ Grid.size Grid.All 3 ]
+            [ MList.ul []
+                [ MList.li []
+                    [ MList.content []
+                        [ Html.text "Speaker" ]
+                    , MList.content2 []
+                        [ Toggles.checkbox Mdl
+                            [ 4 ]
+                            model.mdl
+                            [ Toggles.value True
+                            ]
+                            []
+                        ]
+                    ]
+                , MList.li []
+                    [ MList.content [] [ Html.text "Radio button!" ]
+                    , MList.content2 []
+                        [ Material.Options.span
+                            [ MList.action2 ]
+                            [ Toggles.radio Mdl
+                                [ 5 ]
+                                model.mdl
+                                [ Toggles.value True
+                                , Material.Options.css "display" "inline"
+                                ]
+                                []
+                            ]
+                        ]
+                    ]
+                , MList.li []
+                    [ MList.content [] [ Html.text "Include switch?" ]
+                    , MList.content2 []
+                        [ Toggles.switch Mdl
+                            [ 6 ]
+                            model.mdl
+                            [ Toggles.value True
+                            ]
+                            []
+                        ]
+                    ]
+                ]
+            ]
         ]
 
 

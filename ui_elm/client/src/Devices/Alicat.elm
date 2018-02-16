@@ -123,7 +123,7 @@ accepts two strings - the first defines the id of the device with which we are c
 the `Dict`) while the second is a numeric that defines the new setpoint.
 -}
 type Msg
-    = UpdateSetpoint String String
+    = UpdateSetpoint String Float
     | SendNewSetpoint String
 
 

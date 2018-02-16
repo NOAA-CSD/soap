@@ -1,7 +1,6 @@
 module GcrdTypes exposing (..)
 
 import Array as Array
-import Dict
 import Json.Decode exposing (..)
 import Json.Decode.Pipeline exposing (decode, optional, required, requiredAt)
 
@@ -71,13 +70,11 @@ defaultData =
 
 
 --type FilterPos = Cell_1 | Cell_2
+-- TODO: Clean this up so that we don't need this.
 
 
 type alias Filter =
-    { period : Int
-    , length : Int
-    , auto : Bool
-    , pos : Int
+    { pos : Int
     }
 
 
@@ -91,11 +88,6 @@ toggleFilterPosition f =
                 0
     in
     { f | pos = val }
-
-
-toggleFilterAuto : Filter -> Filter
-toggleFilterAuto f =
-    { f | auto = not f.auto }
 
 
 {-| -}
@@ -238,7 +230,7 @@ defaultCvtData =
     { pump = False
     , cal_state = Calibration False False False
     , devIds = []
-    , filter = Filter 360 30 True 0
+    , filter = Filter 0
     , fan = False
     , fan_voltage = 0
     }
@@ -246,10 +238,7 @@ defaultCvtData =
 
 decodeFilter : Decoder Filter
 decodeFilter =
-    map4 Filter
-        (field "period" int)
-        (field "length" int)
-        (field "auto" bool)
+    map Filter
         (field "cell" int)
 
 

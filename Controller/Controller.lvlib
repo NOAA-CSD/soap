@@ -36,7 +36,15 @@
 	<Item Name="Commands" Type="Folder">
 		<Item Name="Exe Write Main CMD.lvclass" Type="LVClass" URL="../Commands/Exe Write Main CMD/Exe Write Main CMD.lvclass"/>
 	</Item>
+	<Item Name="Sequence" Type="Folder">
+		<Item Name="O3 Valve Step.lvclass" Type="LVClass" URL="../Sequence/O3 Valve Step/O3 Valve Step.lvclass"/>
+		<Item Name="Speaker Step.lvclass" Type="LVClass" URL="../Sequence/Speaker Step/Speaker Step.lvclass"/>
+		<Item Name="UV Power Step.lvclass" Type="LVClass" URL="../Sequence/UV Power Step/UV Power Step.lvclass"/>
+		<Item Name="O2 Valve Step.lvclass" Type="LVClass" URL="../Sequence/O2 Valve Step/O2 Valve Step.lvclass"/>
+		<Item Name="Filter Step.lvclass" Type="LVClass" URL="../Sequence/Filter Step/Filter Step.lvclass"/>
+		<Item Name="O3 Flow Rate Step.lvclass" Type="LVClass" URL="../Sequence/O3 Flow Rate Step/O3 Flow Rate Step.lvclass"/>
+		<Item Name="Wait Step.lvclass" Type="LVClass" URL="../Sequence/Wait Step/Wait Step.lvclass"/>
+	</Item>
 	<Item Name="SOAP Data.lvclass" Type="LVClass" URL="../../Data/SOAP Data.lvclass"/>
-	<Item Name="General Configuration.vi" Type="VI" URL="../Configuration/General Configuration.vi"/>
 	<Item Name="gController.lvclass" Type="LVClass" URL="../gController.lvclass"/>
 </Library>

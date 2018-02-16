@@ -104,11 +104,6 @@ var _user$project$GcrdTypes$setFilter = F2(
 			{filter: filt});
 	});
 var _user$project$GcrdTypes$asFilterIn = _elm_lang$core$Basics$flip(_user$project$GcrdTypes$setFilter);
-var _user$project$GcrdTypes$toggleFilterAuto = function (f) {
-	return _elm_lang$core$Native_Utils.update(
-		f,
-		{auto: !f.auto});
-};
 var _user$project$GcrdTypes$toggleFilterPosition = function (f) {
 	var val = _elm_lang$core$Native_Utils.eq(f.pos, 0) ? 1 : 0;
 	return _elm_lang$core$Native_Utils.update(
@@ -135,16 +130,12 @@ var _user$project$GcrdTypes$Data = F4(
 	function (a, b, c, d) {
 		return {time: a, msg: b, interlock: c, temperatures: d};
 	});
-var _user$project$GcrdTypes$Filter = F4(
-	function (a, b, c, d) {
-		return {period: a, length: b, auto: c, pos: d};
-	});
-var _user$project$GcrdTypes$decodeFilter = A5(
-	_elm_lang$core$Json_Decode$map4,
+var _user$project$GcrdTypes$Filter = function (a) {
+	return {pos: a};
+};
+var _user$project$GcrdTypes$decodeFilter = A2(
+	_elm_lang$core$Json_Decode$map,
 	_user$project$GcrdTypes$Filter,
-	A2(_elm_lang$core$Json_Decode$field, 'period', _elm_lang$core$Json_Decode$int),
-	A2(_elm_lang$core$Json_Decode$field, 'length', _elm_lang$core$Json_Decode$int),
-	A2(_elm_lang$core$Json_Decode$field, 'auto', _elm_lang$core$Json_Decode$bool),
 	A2(_elm_lang$core$Json_Decode$field, 'cell', _elm_lang$core$Json_Decode$int));
 var _user$project$GcrdTypes$Temperatures = function (a) {
 	return function (b) {
@@ -245,7 +236,7 @@ var _user$project$GcrdTypes$defaultCvtData = {
 	pump: false,
 	cal_state: A3(_user$project$GcrdTypes$Calibration, false, false, false),
 	devIds: {ctor: '[]'},
-	filter: A4(_user$project$GcrdTypes$Filter, 360, 30, true, 0),
+	filter: _user$project$GcrdTypes$Filter(0),
 	fan: false,
 	fan_voltage: 0
 };

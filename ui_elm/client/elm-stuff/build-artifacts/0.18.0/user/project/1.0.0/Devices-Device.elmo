@@ -35,7 +35,7 @@ var _user$project$Devices_Device$decodeDevice = A9(
 	A2(_elm_lang$core$Json_Decode$field, 'model', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode$field, 'active', _elm_lang$core$Json_Decode$bool),
 	_elm_lang$core$Json_Decode$maybe(
-		A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string)));
+		A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$float)));
 var _user$project$Devices_Device$decodeDeviceCvt = A2(
 	_elm_lang$core$Json_Decode$field,
 	'device',
