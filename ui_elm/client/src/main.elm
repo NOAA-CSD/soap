@@ -54,7 +54,7 @@ import Time.DateTime as DateTime exposing (zero)
 -}
 webService : String
 webService =
-    "gcrd_pas"
+    "soaps"
 
 
 
@@ -366,6 +366,7 @@ type Msg
     | UpdateCrdRange String String
     | UpdateCrdScaling
     | ToggleCrdPlot Int
+    | SequenceState String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -996,30 +997,8 @@ update msg model =
             in
             ( newModel, Cmd.none )
 
-
-max3 : ( Float, Float, Float ) -> ( Float, Float, Float ) -> ( Float, Float, Float )
-max3 ( x, y, z ) ( newX, newY, newZ ) =
-    ( max x newX, max y newY, max z newZ )
-
-
-min3 : ( Float, Float, Float ) -> ( Float, Float, Float ) -> ( Float, Float, Float )
-min3 ( x, y, z ) ( newX, newY, newZ ) =
-    ( min x newX, min y newY, min z newZ )
-
-
-thirdElement : ( a, b, c ) -> c
-thirdElement ( _, _, c ) =
-    c
-
-
-firstElement : ( a, b, c ) -> a
-firstElement ( a, _, _ ) =
-    a
-
-
-secondElement : ( a, b, c ) -> b
-secondElement ( _, b, _ ) =
-    b
+        SequenceState newState ->
+            ( model, Cmd.none )
 
 
 toggleSave : Model -> Cmd Msg
@@ -1362,7 +1341,7 @@ viewDrawer model =
         , Material.Options.onToggle ToggleFilter
         , css "margin-top" "10px"
         ]
-        [ Html.text "Cell 1" ]
+        [ Html.text "Channel 1" ]
     , Html.div []
         [ Toggles.radio Mdl
             [ 3 ]
@@ -1374,7 +1353,7 @@ viewDrawer model =
             , Material.Options.onToggle ToggleFilter
             , css "margin-top" "10px"
             ]
-            [ Html.text "Cell 2" ]
+            [ Html.text "Channel 2" ]
         ]
     , Toggles.switch Mdl
         [ 7 ]
@@ -1675,8 +1654,8 @@ viewAux model =
                                         ]
                                     ]
                             )
-                            [ "PAS Cell 1"
-                            , "PAS Cell 2"
+                            [ "PAS Channel 1"
+                            , "PAS Channel 2"
                             , "PAS Laser Head 1"
                             , "PAS Laser Head 2"
                             , "CJC 0"
@@ -1947,7 +1926,7 @@ viewPas model =
                     , Textfield.value (toString model.pas.cvt.fmod_0)
                     , onInput UpdateMod0
                     , onBlur (SendModulation <| "0")
-                    , Textfield.label "Cell 0"
+                    , Textfield.label "Channel 1"
                     ]
                     []
                 , Toggles.switch Mdl
@@ -1967,7 +1946,7 @@ viewPas model =
                     , Textfield.value (toString model.pas.cvt.fmod_1)
                     , onInput UpdateMod1
                     , onBlur (SendModulation <| "1")
-                    , Textfield.label "Cell 1"
+                    , Textfield.label "Channel 2"
                     ]
                     []
                 ]
@@ -1987,7 +1966,7 @@ viewPas model =
                     , Toggles.value model.pas.cvt.speaker_0
                     , Material.Options.onToggle (ToggleSpeaker 0)
                     ]
-                    [ Html.text "Cell 0" ]
+                    [ Html.text "Channel 1" ]
                 , Toggles.switch Mdl
                     [ 11 ]
                     model.mdl
@@ -1995,7 +1974,7 @@ viewPas model =
                     , Toggles.value model.pas.cvt.speaker_1
                     , Material.Options.onToggle (ToggleSpeaker 1)
                     ]
-                    [ Html.text "Cell 1" ]
+                    [ Html.text "Channel 2" ]
                 , Textfield.render Mdl
                     [ 14 ]
                     model.mdl
@@ -2061,6 +2040,7 @@ viewPas model =
                                 , Table.th [] [ Html.text "Q" ]
                                 , Table.th [] [ Html.text "IA" ]
                                 , Table.th [] [ Html.span [ property "innerHTML" (string "&sigma;<sub>abs</sub>") ] [] ]
+                                , Table.th [] [ Html.span [ property "innerHTML" (string "V<sub>rms</sub>") ] [] ]
                                 ]
                             , Table.tr []
                                 [ Table.th [] []
@@ -2068,6 +2048,7 @@ viewPas model =
                                 , Table.th [] [ Html.text "(a.u.)" ]
                                 , Table.th [] [ Html.text "(a.u.)" ]
                                 , Table.th [] [ Html.span [ property "innerHTML" (string "(Mm<sup>-1</sup>)") ] [] ]
+                                , Table.th [] [ Html.text "(V)" ]
                                 ]
                             ]
                         , Table.tbody []
@@ -2086,10 +2067,11 @@ viewPas model =
                                         , Table.td [] [ Html.text (printableNumeric data.q) ]
                                         , Table.td [] [ Html.text (printableNumeric data.integrated_area) ]
                                         , Table.td [] [ Html.text (printableNumeric data.absorption) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.laserRMS) ]
                                         ]
                                 )
                              <|
-                                List.map2 (,) [ "Cell 0", "Cell 1" ] (Array.toList model.pas.data.cell)
+                                List.map2 (,) [ "Channel 1", "Channel 2" ] (Array.toList model.pas.data.cell)
                             )
                         ]
                     ]
@@ -2114,7 +2096,7 @@ viewPas model =
                         , Material.Options.onToggle (TogglePasPlot 0)
                         , css "color" "blue"
                         ]
-                        [ Html.text "Cell 0" ]
+                        [ Html.text "Channel 1" ]
                     , Toggles.checkbox Mdl
                         [ 101 ]
                         model.mdl
@@ -2123,7 +2105,7 @@ viewPas model =
                         , Toggles.ripple
                         , css "color" "red"
                         ]
-                        [ Html.text "Cell 1" ]
+                        [ Html.text "Channel 2" ]
                     , Toggles.switch Mdl
                         [ 102 ]
                         model.mdl
@@ -2138,9 +2120,9 @@ viewPas model =
                         [ let
                             s =
                                 if Maybe.withDefault False (ListExtra.getAt 2 model.pasPlotData) then
-                                    "Time"
-                                else
                                     "Frequency"
+                                else
+                                    "Time"
                           in
                           Html.text s
                         ]
@@ -2302,7 +2284,7 @@ viewCrd model =
                         , Material.Options.onToggle (ToggleCrdPlot 0)
                         , css "color" "blue"
                         ]
-                        [ Html.text "Cell 0" ]
+                        [ Html.text "Channel 1" ]
                     , Toggles.checkbox Mdl
                         [ 101 ]
                         model.mdl
@@ -2311,7 +2293,7 @@ viewCrd model =
                         , Toggles.ripple
                         , css "color" "red"
                         ]
-                        [ Html.text "Cell 1" ]
+                        [ Html.text "Channel 2" ]
                     , Textfield.render Mdl
                         [ 103 ]
                         model.mdl
@@ -2754,3 +2736,28 @@ the individual lists at the index provided.
 findAll : Int -> List (List a) -> List a
 findAll idx lists =
     List.filterMap (ListExtra.getAt idx) lists
+
+
+max3 : ( Float, Float, Float ) -> ( Float, Float, Float ) -> ( Float, Float, Float )
+max3 ( x, y, z ) ( newX, newY, newZ ) =
+    ( max x newX, max y newY, max z newZ )
+
+
+min3 : ( Float, Float, Float ) -> ( Float, Float, Float ) -> ( Float, Float, Float )
+min3 ( x, y, z ) ( newX, newY, newZ ) =
+    ( min x newX, min y newY, min z newZ )
+
+
+thirdElement : ( a, b, c ) -> c
+thirdElement ( _, _, c ) =
+    c
+
+
+firstElement : ( a, b, c ) -> a
+firstElement ( a, _, _ ) =
+    a
+
+
+secondElement : ( a, b, c ) -> b
+secondElement ( _, b, _ ) =
+    b

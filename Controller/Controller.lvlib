@@ -21,7 +21,6 @@
 		<Item Name="Update gController Data MSG.lvclass" Type="LVClass" URL="../Messages/Update Controller Data MSG/Update gController Data MSG.lvclass"/>
 		<Item Name="Update Vacuum Pump State MSG.lvclass" Type="LVClass" URL="../Messages/Update Vacuum Pump State MSG/Update Vacuum Pump State MSG.lvclass"/>
 		<Item Name="Stop MSG.lvclass" Type="LVClass" URL="../Messages/Stop MSG/Stop MSG.lvclass"/>
-		<Item Name="Change AutoCycle Params MSG.lvclass" Type="LVClass" URL="../Messages/Change AutoCycle Params MSG/Change AutoCycle Params MSG.lvclass"/>
 		<Item Name="Change Heater Ctl Params.lvclass" Type="LVClass" URL="../Messages/Change Heater Ctl Params MSG/Change Heater Ctl Params.lvclass"/>
 		<Item Name="Update Device Config MSG.lvclass" Type="LVClass" URL="../Messages/Update Device Configuration/Update Device Config MSG.lvclass"/>
 		<Item Name="Change Heater SP MSG.lvclass" Type="LVClass" URL="../Messages/Change Heater SP MSG/Change Heater SP MSG.lvclass"/>
@@ -32,6 +31,7 @@
 		<Item Name="Update Ctl Device Setpoint MSG.lvclass" Type="LVClass" URL="../Messages/Update Ctl Device Setpoint MSG/Update Ctl Device Setpoint MSG.lvclass"/>
 		<Item Name="Toggle AC Spare MSG.lvclass" Type="LVClass" URL="../Messages/Toggle AC Spare MSG/Toggle AC Spare MSG.lvclass"/>
 		<Item Name="Save Data MSG.lvclass" Type="LVClass" URL="../Messages/Save Data MSG/Save Data MSG.lvclass"/>
+		<Item Name="Change Sequence State MSG.lvclass" Type="LVClass" URL="../Messages/Change Sequence State MSG/Change Sequence State MSG.lvclass"/>
 	</Item>
 	<Item Name="Commands" Type="Folder">
 		<Item Name="Exe Write Main CMD.lvclass" Type="LVClass" URL="../Commands/Exe Write Main CMD/Exe Write Main CMD.lvclass"/>
@@ -44,6 +44,7 @@
 		<Item Name="Filter Step.lvclass" Type="LVClass" URL="../Sequence/Filter Step/Filter Step.lvclass"/>
 		<Item Name="O3 Flow Rate Step.lvclass" Type="LVClass" URL="../Sequence/O3 Flow Rate Step/O3 Flow Rate Step.lvclass"/>
 		<Item Name="Wait Step.lvclass" Type="LVClass" URL="../Sequence/Wait Step/Wait Step.lvclass"/>
+		<Item Name="sequenceState.ctl" Type="VI" URL="../Sequencer/sequenceState.ctl"/>
 	</Item>
 	<Item Name="SOAP Data.lvclass" Type="LVClass" URL="../../Data/SOAP Data.lvclass"/>
 	<Item Name="gController.lvclass" Type="LVClass" URL="../gController.lvclass"/>

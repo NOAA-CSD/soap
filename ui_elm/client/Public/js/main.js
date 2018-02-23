@@ -25583,6 +25583,40 @@ var _user$project$Pas$retrievePasData = F3(
 		return new_model;
 	});
 
+var _user$project$Main$secondElement = function (_p0) {
+	var _p1 = _p0;
+	return _p1._1;
+};
+var _user$project$Main$firstElement = function (_p2) {
+	var _p3 = _p2;
+	return _p3._0;
+};
+var _user$project$Main$thirdElement = function (_p4) {
+	var _p5 = _p4;
+	return _p5._2;
+};
+var _user$project$Main$min3 = F2(
+	function (_p7, _p6) {
+		var _p8 = _p7;
+		var _p9 = _p6;
+		return {
+			ctor: '_Tuple3',
+			_0: A2(_elm_lang$core$Basics$min, _p8._0, _p9._0),
+			_1: A2(_elm_lang$core$Basics$min, _p8._1, _p9._1),
+			_2: A2(_elm_lang$core$Basics$min, _p8._2, _p9._2)
+		};
+	});
+var _user$project$Main$max3 = F2(
+	function (_p11, _p10) {
+		var _p12 = _p11;
+		var _p13 = _p10;
+		return {
+			ctor: '_Tuple3',
+			_0: A2(_elm_lang$core$Basics$max, _p12._0, _p13._0),
+			_1: A2(_elm_lang$core$Basics$max, _p12._1, _p13._1),
+			_2: A2(_elm_lang$core$Basics$max, _p12._2, _p13._2)
+		};
+	});
 var _user$project$Main$findAll = F2(
 	function (idx, lists) {
 		return A2(
@@ -25713,8 +25747,8 @@ var _user$project$Main$getPasTimeData = F2(
 				})(0),
 			A2(_elm_lang$core$Array$get, 0, model.pas.data.cell));
 		var data_in = function () {
-			var _p0 = dataType;
-			switch (_p0.ctor) {
+			var _p14 = dataType;
+			switch (_p14.ctor) {
 				case 'MicFreq':
 					return {ctor: '_Tuple2', _0: cell_0.frequencyData, _1: cell_1.frequencyData};
 				case 'MicTime':
@@ -25811,13 +25845,13 @@ var _user$project$Main$plotData = F2(
 		var plotf = function (coords) {
 			return A2(
 				_elm_lang$core$List$map,
-				function (_p1) {
-					var _p2 = _p1;
+				function (_p15) {
+					var _p16 = _p15;
 					return A3(
 						_terezka$elm_plot$Plot$dot,
 						A2(_terezka$elm_plot$Plot$viewCircle, 2, 'blue'),
-						_p2._0,
-						_p2._1);
+						_p16._0,
+						_p16._1);
 				},
 				coords);
 		};
@@ -25871,26 +25905,26 @@ var _user$project$Main$timeData = F4(
 		var cell0 = function (coords) {
 			return A2(
 				_elm_lang$core$List$map,
-				function (_p3) {
-					var _p4 = _p3;
+				function (_p17) {
+					var _p18 = _p17;
 					return A3(
 						_terezka$elm_plot$Plot$dot,
 						A2(_terezka$elm_plot$Plot$viewCircle, 2, 'blue'),
-						_p4._0,
-						_p4._1);
+						_p18._0,
+						_p18._1);
 				},
 				coords);
 		};
 		var cell1 = function (coords) {
 			return A2(
 				_elm_lang$core$List$map,
-				function (_p5) {
-					var _p6 = _p5;
+				function (_p19) {
+					var _p20 = _p19;
 					return A3(
 						_terezka$elm_plot$Plot$dot,
 						A2(_terezka$elm_plot$Plot$viewCircle, 2, 'red'),
-						_p6._0,
-						_p6._2);
+						_p20._0,
+						_p20._2);
 				},
 				coords);
 		};
@@ -25953,8 +25987,8 @@ var _user$project$Main$ringdownTitle = A2(
 	'Ringdown Data');
 var _user$project$Main$getHeaterSP = F2(
 	function (model, heater) {
-		var _p7 = heater;
-		switch (_p7) {
+		var _p21 = heater;
+		switch (_p21) {
 			case 0:
 				return _elm_lang$core$Basics$toString(model.pas.cvt.heater_0.sp);
 			case 1:
@@ -25967,8 +26001,8 @@ var _user$project$Main$getHeaterSP = F2(
 	});
 var _user$project$Main$getHeaterPid = F3(
 	function (model, heater, pid) {
-		var _p8 = heater;
-		switch (_p8) {
+		var _p22 = heater;
+		switch (_p22) {
 			case 0:
 				return _elm_lang$core$Basics$toString(
 					A2(
@@ -26175,40 +26209,6 @@ var _user$project$Main$pageHeader = function (model) {
 		_1: {ctor: '[]'}
 	};
 };
-var _user$project$Main$secondElement = function (_p9) {
-	var _p10 = _p9;
-	return _p10._1;
-};
-var _user$project$Main$firstElement = function (_p11) {
-	var _p12 = _p11;
-	return _p12._0;
-};
-var _user$project$Main$thirdElement = function (_p13) {
-	var _p14 = _p13;
-	return _p14._2;
-};
-var _user$project$Main$min3 = F2(
-	function (_p16, _p15) {
-		var _p17 = _p16;
-		var _p18 = _p15;
-		return {
-			ctor: '_Tuple3',
-			_0: A2(_elm_lang$core$Basics$min, _p17._0, _p18._0),
-			_1: A2(_elm_lang$core$Basics$min, _p17._1, _p18._1),
-			_2: A2(_elm_lang$core$Basics$min, _p17._2, _p18._2)
-		};
-	});
-var _user$project$Main$max3 = F2(
-	function (_p20, _p19) {
-		var _p21 = _p20;
-		var _p22 = _p19;
-		return {
-			ctor: '_Tuple3',
-			_0: A2(_elm_lang$core$Basics$max, _p21._0, _p22._0),
-			_1: A2(_elm_lang$core$Basics$max, _p21._1, _p22._1),
-			_2: A2(_elm_lang$core$Basics$max, _p21._2, _p22._2)
-		};
-	});
 var _user$project$Main$setCvt = F2(
 	function (cvt, mdl) {
 		return _elm_lang$core$Native_Utils.update(
@@ -26384,6 +26384,9 @@ var _user$project$Main$Pas1Heater = {ctor: 'Pas1Heater'};
 var _user$project$Main$Pas0Heater = {ctor: 'Pas0Heater'};
 var _user$project$Main$CrdHeater = {ctor: 'CrdHeater'};
 var _user$project$Main$RunningData = {ctor: 'RunningData'};
+var _user$project$Main$SequenceState = function (a) {
+	return {ctor: 'SequenceState', _0: a};
+};
 var _user$project$Main$ToggleCrdPlot = function (a) {
 	return {ctor: 'ToggleCrdPlot', _0: a};
 };
@@ -27168,7 +27171,7 @@ var _user$project$Main$viewDrawer = function (model) {
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Cell 1'),
+							_0: _elm_lang$html$Html$text('Channel 2'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -27795,10 +27798,10 @@ var _user$project$Main$viewAux = function (model) {
 											}),
 										{
 											ctor: '::',
-											_0: 'PAS Cell 1',
+											_0: 'PAS Channel 1',
 											_1: {
 												ctor: '::',
-												_0: 'PAS Cell 2',
+												_0: 'PAS Channel 2',
 												_1: {
 													ctor: '::',
 													_0: 'PAS Laser Head 1',
@@ -29400,7 +29403,7 @@ var _user$project$Main$viewCrd = function (model) {
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('Cell 0'),
+														_0: _elm_lang$html$Html$text('Channel 1'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
@@ -29438,7 +29441,7 @@ var _user$project$Main$viewCrd = function (model) {
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('Cell 1'),
+															_0: _elm_lang$html$Html$text('Channel 2'),
 															_1: {ctor: '[]'}
 														}),
 													_1: {
@@ -30942,7 +30945,7 @@ var _user$project$Main$update = F2(
 						{crdRange: range}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'ToggleCrdPlot':
 				var _p44 = _p27._0;
 				var d = A2(
 					_elm_lang$core$Maybe$withDefault,
@@ -30954,6 +30957,8 @@ var _user$project$Main$update = F2(
 						crdPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p44, !d, model.crdPlotData)
 					});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
 var _user$project$Main$viewPas = function (model) {
@@ -31080,7 +31085,7 @@ var _user$project$Main$viewPas = function (model) {
 																	_user$project$Main$SendModulation('0')),
 																_1: {
 																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Textfield$label('Cell 0'),
+																	_0: _debois$elm_mdl$Material_Textfield$label('Channel 1'),
 																	_1: {ctor: '[]'}
 																}
 															}
@@ -31153,7 +31158,7 @@ var _user$project$Main$viewPas = function (model) {
 																			_user$project$Main$SendModulation('1')),
 																		_1: {
 																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$label('Cell 1'),
+																			_0: _debois$elm_mdl$Material_Textfield$label('Channel 2'),
 																			_1: {ctor: '[]'}
 																		}
 																	}
@@ -31240,7 +31245,7 @@ var _user$project$Main$viewPas = function (model) {
 										},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('Cell 0'),
+											_0: _elm_lang$html$Html$text('Channel 1'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
@@ -31270,7 +31275,7 @@ var _user$project$Main$viewPas = function (model) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Cell 1'),
+												_0: _elm_lang$html$Html$text('Channel 2'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {
@@ -31580,7 +31585,28 @@ var _user$project$Main$viewPas = function (model) {
 																							{ctor: '[]'}),
 																						_1: {ctor: '[]'}
 																					}),
-																				_1: {ctor: '[]'}
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_debois$elm_mdl$Material_Table$th,
+																						{ctor: '[]'},
+																						{
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$span,
+																								{
+																									ctor: '::',
+																									_0: A2(
+																										_elm_lang$html$Html_Attributes$property,
+																										'innerHTML',
+																										_elm_lang$core$Json_Encode$string('V<sub>rms</sub>')),
+																									_1: {ctor: '[]'}
+																								},
+																								{ctor: '[]'}),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {ctor: '[]'}
+																				}
 																			}
 																		}
 																	}
@@ -31647,7 +31673,18 @@ var _user$project$Main$viewPas = function (model) {
 																								{ctor: '[]'}),
 																							_1: {ctor: '[]'}
 																						}),
-																					_1: {ctor: '[]'}
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_debois$elm_mdl$Material_Table$th,
+																							{ctor: '[]'},
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html$text('(V)'),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
 																				}
 																			}
 																		}
@@ -31723,7 +31760,19 @@ var _user$project$Main$viewPas = function (model) {
 																									_user$project$Main$printableNumeric(data.absorption)),
 																								_1: {ctor: '[]'}
 																							}),
-																						_1: {ctor: '[]'}
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_debois$elm_mdl$Material_Table$td,
+																								{ctor: '[]'},
+																								{
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text(
+																										_user$project$Main$printableNumeric(data.laserRMS)),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
 																					}
 																				}
 																			}
@@ -31738,10 +31787,10 @@ var _user$project$Main$viewPas = function (model) {
 																	}),
 																{
 																	ctor: '::',
-																	_0: 'Cell 0',
+																	_0: 'Channel 1',
 																	_1: {
 																		ctor: '::',
-																		_0: 'Cell 1',
+																		_0: 'Channel 2',
 																		_1: {ctor: '[]'}
 																	}
 																},
@@ -31820,7 +31869,7 @@ var _user$project$Main$viewPas = function (model) {
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('Cell 0'),
+														_0: _elm_lang$html$Html$text('Channel 1'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
@@ -31858,7 +31907,7 @@ var _user$project$Main$viewPas = function (model) {
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('Cell 1'),
+															_0: _elm_lang$html$Html$text('Channel 2'),
 															_1: {ctor: '[]'}
 														}),
 													_1: {
@@ -31892,7 +31941,7 @@ var _user$project$Main$viewPas = function (model) {
 																	var s = A2(
 																		_elm_lang$core$Maybe$withDefault,
 																		false,
-																		A2(_elm_community$list_extra$List_Extra$getAt, 2, model.pasPlotData)) ? 'Time' : 'Frequency';
+																		A2(_elm_community$list_extra$List_Extra$getAt, 2, model.pasPlotData)) ? 'Frequency' : 'Time';
 																	return _elm_lang$html$Html$text(s);
 																}(),
 																_1: {ctor: '[]'}
