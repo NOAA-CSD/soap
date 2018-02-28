@@ -76,7 +76,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         UpdateSpkVoffset v ->
             let
@@ -86,7 +86,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         UpdateSpkDf df ->
             let
@@ -96,7 +96,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         UpdateSpkFcenter fcenter ->
             let
@@ -106,7 +106,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
 
 {-| The type `Drive` is used to indicate whether the PAS is operating the laser or speaker.
@@ -203,7 +203,7 @@ retrievePasData head data model =
             Result.withDefault model.data (decodeString (field head decodePASData) data)
                 |> asDataIn model
     in
-    new_model
+        new_model
 
 
 setVscaleSpk : String -> Speaker_ -> Speaker_
@@ -326,7 +326,45 @@ toggleLaserPower cell cvt =
                 _ ->
                     cvt
     in
-    new_cvt
+        new_cvt
+
+
+asFreqIn : PasCell -> List Float -> PasCell
+asFreqIn cell freqData =
+    { cell | frequencyData = freqData }
+
+
+setCellData : Model -> Int -> PasCell -> Model
+setCellData model cint cell =
+    let
+        newCell =
+            Array.set cint cell model.data.cell
+
+        n_data =
+            model.data
+
+        nn_data =
+            { n_data | cell = newCell }
+    in
+        { model | data = nn_data }
+
+
+truncateFrequencyData : Int -> Int -> Int -> Model -> Model
+truncateFrequencyData cell min max model =
+    let
+        defaultCell =
+            PasCell 0 0 0 [ 0, 0 ] 0 0 [ 0 ] [ 0 ] [ 0 ] [ 0 ] 0
+
+        cellData =
+            Maybe.withDefault defaultCell (Array.get cell model.data.cell)
+
+        newFreqData =
+            Array.toList (Array.slice min max (Array.fromList cellData.frequencyData))
+
+        new_cell =
+            asFreqIn cellData newFreqData
+    in
+        setCellData model cell new_cell
 
 
 defaultHeater : Heater
@@ -392,7 +430,7 @@ decodeDrive =
             else
                 succeed Laser
     in
-    bool |> andThen helper
+        bool |> andThen helper
 
 
 

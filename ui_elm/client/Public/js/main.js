@@ -24860,11 +24860,12 @@ var _user$project$GcrdTypes$defaultCvtData = {
 	devIds: {ctor: '[]'},
 	filter: _user$project$GcrdTypes$Filter(0),
 	fan: false,
-	fan_voltage: 0
+	fan_voltage: 0,
+	sequence_state: 'Pause'
 };
-var _user$project$GcrdTypes$Cvt = F6(
-	function (a, b, c, d, e, f) {
-		return {pump: a, cal_state: b, devIds: c, filter: d, fan: e, fan_voltage: f};
+var _user$project$GcrdTypes$Cvt = F7(
+	function (a, b, c, d, e, f, g) {
+		return {pump: a, cal_state: b, devIds: c, filter: d, fan: e, fan_voltage: f, sequence_state: g};
 	});
 var _user$project$GcrdTypes$decodeCvt = function (cvt) {
 	return A3(
@@ -24874,11 +24875,11 @@ var _user$project$GcrdTypes$decodeCvt = function (cvt) {
 			_0: 'general',
 			_1: {
 				ctor: '::',
-				_0: 'fan_speed',
+				_0: 'seq_state',
 				_1: {ctor: '[]'}
 			}
 		},
-		_elm_lang$core$Json_Decode$float,
+		_elm_lang$core$Json_Decode$string,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
 			{
@@ -24886,44 +24887,56 @@ var _user$project$GcrdTypes$decodeCvt = function (cvt) {
 				_0: 'general',
 				_1: {
 					ctor: '::',
-					_0: 'fan',
+					_0: 'fan_speed',
 					_1: {ctor: '[]'}
 				}
 			},
-			_elm_lang$core$Json_Decode$bool,
+			_elm_lang$core$Json_Decode$float,
 			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'filter',
-				_user$project$GcrdTypes$decodeFilter,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
-					{
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+				{
+					ctor: '::',
+					_0: 'general',
+					_1: {
 						ctor: '::',
-						_0: 'general',
-						_1: {
-							ctor: '::',
-							_0: 'dev_ids',
-							_1: {ctor: '[]'}
-						}
-					},
-					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+						_0: 'fan',
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$Json_Decode$bool,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'filter',
+					_user$project$GcrdTypes$decodeFilter,
 					A3(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-						'calibration',
-						_user$project$GcrdTypes$decodeCal,
-						A3(
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
-							{
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+						{
+							ctor: '::',
+							_0: 'general',
+							_1: {
 								ctor: '::',
-								_0: 'general',
-								_1: {
+								_0: 'dev_ids',
+								_1: {ctor: '[]'}
+							}
+						},
+						_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'calibration',
+							_user$project$GcrdTypes$decodeCal,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+								{
 									ctor: '::',
-									_0: 'vacuum_pump',
-									_1: {ctor: '[]'}
-								}
-							},
-							_elm_lang$core$Json_Decode$bool,
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$GcrdTypes$Cvt)))))));
+									_0: 'general',
+									_1: {
+										ctor: '::',
+										_0: 'vacuum_pump',
+										_1: {ctor: '[]'}
+									}
+								},
+								_elm_lang$core$Json_Decode$bool,
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$GcrdTypes$Cvt))))))));
 };
 
 var _user$project$Network$buildAddress = function (model) {
@@ -24995,6 +25008,23 @@ var _user$project$Network$UpdateIP = function (a) {
 
 var _user$project$Pas$floatString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$float);
 var _user$project$Pas$intString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$int);
+var _user$project$Pas$setCellData = F3(
+	function (model, cint, cell) {
+		var n_data = model.data;
+		var newCell = A3(_elm_lang$core$Array$set, cint, cell, model.data.cell);
+		var nn_data = _elm_lang$core$Native_Utils.update(
+			n_data,
+			{cell: newCell});
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{data: nn_data});
+	});
+var _user$project$Pas$asFreqIn = F2(
+	function (cell, freqData) {
+		return _elm_lang$core$Native_Utils.update(
+			cell,
+			{frequencyData: freqData});
+	});
 var _user$project$Pas$toggleLaserPower = F2(
 	function (cell, cvt) {
 		var new_cvt = function () {
@@ -25305,6 +25335,51 @@ var _user$project$Pas$decodeCellData = A3(
 											},
 											_elm_lang$core$Json_Decode$float,
 											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Pas$PasCell))))))))))));
+var _user$project$Pas$truncateFrequencyData = F4(
+	function (cell, min, max, model) {
+		var defaultCell = _user$project$Pas$PasCell(0)(0)(0)(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {
+					ctor: '::',
+					_0: 0,
+					_1: {ctor: '[]'}
+				}
+			})(0)(0)(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(0);
+		var cellData = A2(
+			_elm_lang$core$Maybe$withDefault,
+			defaultCell,
+			A2(_elm_lang$core$Array$get, cell, model.data.cell));
+		var newFreqData = _elm_lang$core$Array$toList(
+			A3(
+				_elm_lang$core$Array$slice,
+				min,
+				max,
+				_elm_lang$core$Array$fromList(cellData.frequencyData)));
+		var new_cell = A2(_user$project$Pas$asFreqIn, cellData, newFreqData);
+		return A3(_user$project$Pas$setCellData, model, cell, new_cell);
+	});
 var _user$project$Pas$defaultPasCellData = _elm_lang$core$Array$fromList(
 	{
 		ctor: '::',
@@ -25678,8 +25753,8 @@ var _user$project$Main$convertToFloat = _elm_lang$core$List$map(
 	function (a) {
 		return _elm_lang$core$Basics$toFloat(a);
 	});
-var _user$project$Main$getPasTimeData = F2(
-	function (model, dataType) {
+var _user$project$Main$getPasTimeData = F3(
+	function (model, xstart, dataType) {
 		var cell_1 = A2(
 			_elm_lang$core$Maybe$withDefault,
 			_user$project$Pas$PasCell(0)(0)(0)(
@@ -25769,7 +25844,7 @@ var _user$project$Main$getPasTimeData = F2(
 			_elm_lang$core$List$map3,
 			F3(
 				function (i, a, b) {
-					return {ctor: '_Tuple3', _0: i, _1: a, _2: b};
+					return {ctor: '_Tuple3', _0: xstart + i, _1: a, _2: b};
 				}),
 			_user$project$Main$convertToFloat(
 				A2(
@@ -26258,6 +26333,12 @@ var _user$project$Main$asDataIn = F2(
 			model,
 			{genData: data});
 	});
+var _user$project$Main$asCrdRunningDataIn = F2(
+	function (model, ldata) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{crdRunningData: ldata});
+	});
 var _user$project$Main$asRunningDataIn = F2(
 	function (model, ldata) {
 		return _elm_lang$core$Native_Utils.update(
@@ -26270,7 +26351,7 @@ var _user$project$Main$getPasCvt = function (model) {
 var _user$project$Main$getCrdCvt = function (model) {
 	return model.crd.cvt;
 };
-var _user$project$Main$webService = 'gcrd_pas';
+var _user$project$Main$webService = 'soap';
 var _user$project$Main$RangeData = F4(
 	function (a, b, c, d) {
 		return {xmin: a, xmax: b, ymin: c, ymax: d};
@@ -26285,8 +26366,13 @@ var _user$project$Main$defaultModelData = {
 	dt: _Bogdanp$elm_time$Time_DateTime$fromTuple(
 		{ctor: '_Tuple7', _0: 0, _1: 0, _2: 0, _3: 0, _4: 0, _5: 0, _6: 0}),
 	mdl: _debois$elm_mdl$Material$model,
-	network: {ip: '192.168.172.123', port_: '8001', service: 'gcrd_pas'},
+	network: {ip: '192.168.172.123', port_: '8001', service: 'soap'},
 	runningData: {
+		ctor: '::',
+		_0: {ctor: '[]'},
+		_1: {ctor: '[]'}
+	},
+	crdRunningData: {
 		ctor: '::',
 		_0: {ctor: '[]'},
 		_1: {ctor: '[]'}
@@ -26360,7 +26446,9 @@ var _user$project$Main$Model = function (a) {
 																return function (q) {
 																	return function (r) {
 																		return function (s) {
-																			return {pas: a, crd: b, genData: c, cvt: d, save: e, selectedTab: f, dt: g, mdl: h, network: i, runningData: j, currentMsgList: k, alicats: l, vaisalas: m, ppts: n, msgs: o, pasPlotData: p, pasRange: q, crdPlotData: r, crdRange: s};
+																			return function (t) {
+																				return {pas: a, crd: b, genData: c, cvt: d, save: e, selectedTab: f, dt: g, mdl: h, network: i, runningData: j, crdRunningData: k, currentMsgList: l, alicats: m, vaisalas: n, ppts: o, msgs: p, pasPlotData: q, pasRange: r, crdPlotData: s, crdRange: t};
+																			};
 																		};
 																	};
 																};
@@ -26384,9 +26472,8 @@ var _user$project$Main$Pas1Heater = {ctor: 'Pas1Heater'};
 var _user$project$Main$Pas0Heater = {ctor: 'Pas0Heater'};
 var _user$project$Main$CrdHeater = {ctor: 'CrdHeater'};
 var _user$project$Main$RunningData = {ctor: 'RunningData'};
-var _user$project$Main$SequenceState = function (a) {
-	return {ctor: 'SequenceState', _0: a};
-};
+var _user$project$Main$ResetSequence = {ctor: 'ResetSequence'};
+var _user$project$Main$SequenceState = {ctor: 'SequenceState'};
 var _user$project$Main$ToggleCrdPlot = function (a) {
 	return {ctor: 'ToggleCrdPlot', _0: a};
 };
@@ -26444,6 +26531,17 @@ var _user$project$Main$ToggleSpeaker = function (a) {
 var _user$project$Main$HandleGeneric = function (a) {
 	return {ctor: 'HandleGeneric', _0: a};
 };
+var _user$project$Main$changeSequenceState = F2(
+	function (state, model) {
+		return A2(
+			_elm_lang$http$Http$send,
+			_user$project$Main$HandleGeneric,
+			_elm_lang$http$Http$getString(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_user$project$Network$buildAddress(model.network),
+					A2(_elm_lang$core$Basics_ops['++'], 'SequenceState?st=', state))));
+	});
 var _user$project$Main$toggleSave = function (model) {
 	var s = model.save ? '1' : '0';
 	return A2(
@@ -27171,7 +27269,7 @@ var _user$project$Main$viewDrawer = function (model) {
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Channel 2'),
+							_0: _elm_lang$html$Html$text('Channel 1'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -27218,7 +27316,7 @@ var _user$project$Main$viewDrawer = function (model) {
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Cell 2'),
+										_0: _elm_lang$html$Html$text('Channel 2'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -27810,24 +27908,20 @@ var _user$project$Main$viewAux = function (model) {
 														_0: 'PAS Laser Head 2',
 														_1: {
 															ctor: '::',
-															_0: 'CJC 0',
+															_0: 'Box Exit',
 															_1: {
 																ctor: '::',
-																_0: 'Box Exit',
+																_0: 'CRD Heater',
 																_1: {
 																	ctor: '::',
-																	_0: 'CRD Heater',
+																	_0: 'Box Inlet',
 																	_1: {
 																		ctor: '::',
-																		_0: 'Box Inlet',
+																		_0: 'CRD Laser Head',
 																		_1: {
 																			ctor: '::',
-																			_0: 'CRD Laser Head',
-																			_1: {
-																				ctor: '::',
-																				_0: 'CJC 1',
-																				_1: {ctor: '[]'}
-																			}
+																			_0: 'CJC 1',
+																			_1: {ctor: '[]'}
 																		}
 																	}
 																}
@@ -29645,7 +29739,22 @@ var _user$project$Main$viewCrd = function (model) {
 													}
 												}
 											}),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_Grid$cell,
+												{
+													ctor: '::',
+													_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(_user$project$Main$plotData, model.crdRunningData, 0),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							}),
@@ -29682,7 +29791,16 @@ var _user$project$Main$viewCal = function (model) {
 						{
 							ctor: '::',
 							_0: _debois$elm_mdl$Material_Toggles$ripple,
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Toggles$value(
+									_elm_lang$core$Native_Utils.eq(model.cvt.sequence_state, 'Run')),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$SequenceState),
+									_1: {ctor: '[]'}
+								}
+							}
 						},
 						{
 							ctor: '::',
@@ -29711,8 +29829,12 @@ var _user$project$Main$viewCal = function (model) {
 										_0: _debois$elm_mdl$Material_Button$primary,
 										_1: {
 											ctor: '::',
-											_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-											_1: {ctor: '[]'}
+											_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$ResetSequence),
+											_1: {
+												ctor: '::',
+												_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+												_1: {ctor: '[]'}
+											}
 										}
 									}
 								}
@@ -30410,6 +30532,32 @@ var _user$project$Main$update = F2(
 			case 'GetData':
 				if (_p27._0.ctor === 'Ok') {
 					var _p29 = _p27._0._0;
+					var rCrdData = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Crd$CrdsCell(0)(0)(0)(0)(0)(0)(0)(0)(0)(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '::',
+									_0: 0,
+									_1: {ctor: '[]'}
+								},
+								_1: {ctor: '[]'}
+							}),
+						A2(_elm_lang$core$Array$get, 1, model.crd.data));
+					var cListData = {
+						ctor: '::',
+						_0: rCrdData.tau,
+						_1: {
+							ctor: '::',
+							_0: rCrdData.tau0,
+							_1: {
+								ctor: '::',
+								_0: rCrdData.max,
+								_1: {ctor: '[]'}
+							}
+						}
+					};
 					var rPasData = A2(
 						_elm_lang$core$Maybe$withDefault,
 						_user$project$Pas$PasCell(0)(0)(0)(
@@ -30490,15 +30638,29 @@ var _user$project$Main$update = F2(
 					var pas_model = A2(
 						_user$project$Main$asPasIn,
 						newer_model,
-						A3(_user$project$Pas$retrievePasData, 'PAS', _p29, newer_model.pas));
+						A4(
+							_user$project$Pas$truncateFrequencyData,
+							1,
+							1200,
+							1500,
+							A4(
+								_user$project$Pas$truncateFrequencyData,
+								0,
+								1200,
+								1500,
+								A3(_user$project$Pas$retrievePasData, 'PAS', _p29, newer_model.pas))));
 					var n_model = A2(
 						_user$project$Main$asRunningDataIn,
 						pas_model,
 						A3(_user$project$Main$addDataToList, 10, listData, pas_model.runningData));
-					var nn_msgs = _elm_lang$core$Native_Utils.update(
+					var nn_model = A2(
+						_user$project$Main$asCrdRunningDataIn,
 						n_model,
+						A3(_user$project$Main$addDataToList, 100, cListData, n_model.crdRunningData));
+					var nn_msgs = _elm_lang$core$Native_Utils.update(
+						nn_model,
 						{
-							currentMsgList: A2(_elm_lang$core$List$append, n_model.currentMsgList, n_model.genData.msg)
+							currentMsgList: A2(_elm_lang$core$List$append, nn_model.currentMsgList, nn_model.genData.msg)
 						});
 					return {ctor: '_Tuple2', _0: nn_msgs, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
@@ -30846,12 +31008,12 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$List$foldl,
 					_user$project$Main$max3,
 					{ctor: '_Tuple3', _0: 0, _1: 0, _2: 0},
-					A2(_user$project$Main$getPasTimeData, model, d));
+					A3(_user$project$Main$getPasTimeData, model, 1200, d));
 				var mindata = A3(
 					_elm_lang$core$List$foldl,
 					_user$project$Main$min3,
 					maxdata,
-					A2(_user$project$Main$getPasTimeData, model, d));
+					A3(_user$project$Main$getPasTimeData, model, 1200, d));
 				var range = {
 					xmin: _user$project$Main$firstElement(mindata),
 					xmax: _user$project$Main$firstElement(maxdata),
@@ -30957,8 +31119,19 @@ var _user$project$Main$update = F2(
 						crdPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p44, !d, model.crdPlotData)
 					});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'SequenceState':
+				var newState = _elm_lang$core$Native_Utils.eq(model.cvt.sequence_state, 'Run') ? 'Pause' : 'Run';
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(_user$project$Main$changeSequenceState, newState, model)
+				};
 			default:
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(_user$project$Main$changeSequenceState, 'Reset', model)
+				};
 		}
 	});
 var _user$project$Main$viewPas = function (model) {
@@ -31820,7 +31993,7 @@ var _user$project$Main$viewPas = function (model) {
 													_user$project$Main$timeData,
 													model,
 													model.pasRange,
-													A2(_user$project$Main$getPasTimeData, model, p),
+													A3(_user$project$Main$getPasTimeData, model, 1200, p),
 													A2(_elm_lang$core$List$take, 2, model.pasPlotData));
 											}(),
 											_1: {ctor: '[]'}

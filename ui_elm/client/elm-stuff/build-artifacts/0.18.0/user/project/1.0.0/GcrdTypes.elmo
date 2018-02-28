@@ -238,11 +238,12 @@ var _user$project$GcrdTypes$defaultCvtData = {
 	devIds: {ctor: '[]'},
 	filter: _user$project$GcrdTypes$Filter(0),
 	fan: false,
-	fan_voltage: 0
+	fan_voltage: 0,
+	sequence_state: 'Pause'
 };
-var _user$project$GcrdTypes$Cvt = F6(
-	function (a, b, c, d, e, f) {
-		return {pump: a, cal_state: b, devIds: c, filter: d, fan: e, fan_voltage: f};
+var _user$project$GcrdTypes$Cvt = F7(
+	function (a, b, c, d, e, f, g) {
+		return {pump: a, cal_state: b, devIds: c, filter: d, fan: e, fan_voltage: f, sequence_state: g};
 	});
 var _user$project$GcrdTypes$decodeCvt = function (cvt) {
 	return A3(
@@ -252,11 +253,11 @@ var _user$project$GcrdTypes$decodeCvt = function (cvt) {
 			_0: 'general',
 			_1: {
 				ctor: '::',
-				_0: 'fan_speed',
+				_0: 'seq_state',
 				_1: {ctor: '[]'}
 			}
 		},
-		_elm_lang$core$Json_Decode$float,
+		_elm_lang$core$Json_Decode$string,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
 			{
@@ -264,42 +265,54 @@ var _user$project$GcrdTypes$decodeCvt = function (cvt) {
 				_0: 'general',
 				_1: {
 					ctor: '::',
-					_0: 'fan',
+					_0: 'fan_speed',
 					_1: {ctor: '[]'}
 				}
 			},
-			_elm_lang$core$Json_Decode$bool,
+			_elm_lang$core$Json_Decode$float,
 			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'filter',
-				_user$project$GcrdTypes$decodeFilter,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
-					{
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+				{
+					ctor: '::',
+					_0: 'general',
+					_1: {
 						ctor: '::',
-						_0: 'general',
-						_1: {
-							ctor: '::',
-							_0: 'dev_ids',
-							_1: {ctor: '[]'}
-						}
-					},
-					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+						_0: 'fan',
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$Json_Decode$bool,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'filter',
+					_user$project$GcrdTypes$decodeFilter,
 					A3(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-						'calibration',
-						_user$project$GcrdTypes$decodeCal,
-						A3(
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
-							{
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+						{
+							ctor: '::',
+							_0: 'general',
+							_1: {
 								ctor: '::',
-								_0: 'general',
-								_1: {
+								_0: 'dev_ids',
+								_1: {ctor: '[]'}
+							}
+						},
+						_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'calibration',
+							_user$project$GcrdTypes$decodeCal,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+								{
 									ctor: '::',
-									_0: 'vacuum_pump',
-									_1: {ctor: '[]'}
-								}
-							},
-							_elm_lang$core$Json_Decode$bool,
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$GcrdTypes$Cvt)))))));
+									_0: 'general',
+									_1: {
+										ctor: '::',
+										_0: 'vacuum_pump',
+										_1: {ctor: '[]'}
+									}
+								},
+								_elm_lang$core$Json_Decode$bool,
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$GcrdTypes$Cvt))))))));
 };

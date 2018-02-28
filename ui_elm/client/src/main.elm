@@ -54,7 +54,7 @@ import Time.DateTime as DateTime exposing (zero)
 -}
 webService : String
 webService =
-    "soaps"
+    "soap"
 
 
 
@@ -194,6 +194,7 @@ type alias Model =
     , mdl : Material.Model
     , network : Network.Model
     , runningData : List (List Float)
+    , crdRunningData : List (List Float)
     , currentMsgList : List String
     , alicats : Alicat.Model
     , vaisalas : Vaisala.Model
@@ -219,6 +220,11 @@ getPasCvt model =
 asRunningDataIn : Model -> List (List Float) -> Model
 asRunningDataIn model ldata =
     { model | runningData = ldata }
+
+
+asCrdRunningDataIn : Model -> List (List Float) -> Model
+asCrdRunningDataIn model ldata =
+    { model | crdRunningData = ldata }
 
 
 asDataIn : Model -> Data -> Model
@@ -280,8 +286,9 @@ defaultModelData =
     , selectedTab = 0
     , dt = DateTime.fromTuple ( 0, 0, 0, 0, 0, 0, 0 )
     , mdl = Material.model
-    , network = { ip = "192.168.172.123", port_ = "8001", service = "gcrd_pas" }
+    , network = { ip = "192.168.172.123", port_ = "8001", service = "soap" }
     , runningData = [ [] ]
+    , crdRunningData = [ [] ]
     , currentMsgList = []
     , alicats = Alicat.init
     , vaisalas = Vaisala.init
@@ -366,7 +373,8 @@ type Msg
     | UpdateCrdRange String String
     | UpdateCrdScaling
     | ToggleCrdPlot Int
-    | SequenceState String
+    | SequenceState
+    | ResetSequence
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -584,12 +592,28 @@ update msg model =
                 pas_model =
                     newer_model.pas
                         |> Pas.retrievePasData "PAS" data
+                        |> Pas.truncateFrequencyData 0 1200 1500
+                        |> Pas.truncateFrequencyData 1 1200 1500
                         |> asPasIn newer_model
 
+                -- The following is for testing purposes for handling running data.  There is a better, more generic
+                -- way of doing this that needs to be implemented.
+                -- TODO: implement generic functionality for doing running data.
                 rPasData =
                     Maybe.withDefault
                         (Pas.PasCell 0 0 0 [ 0, 0 ] 0 0 [ 0 ] [ 0 ] [ 0 ] [ 0 ] 0)
                         (Array.get 1 model.pas.data.cell)
+
+                rCrdData =
+                    Maybe.withDefault
+                        (Crd.CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ])
+                        (Array.get 1 model.crd.data)
+
+                cListData =
+                    [ rCrdData.tau
+                    , rCrdData.tau0
+                    , rCrdData.max
+                    ]
 
                 listData =
                     [ rPasData.resonant_frequency
@@ -602,8 +626,15 @@ update msg model =
                     addDataToList 10 listData pas_model.runningData
                         |> asRunningDataIn pas_model
 
+                nn_model =
+                    addDataToList 100 cListData n_model.crdRunningData
+                        |> asCrdRunningDataIn n_model
+
                 nn_msgs =
-                    { n_model | currentMsgList = List.append n_model.currentMsgList n_model.genData.msg }
+                    { nn_model
+                        | currentMsgList =
+                            List.append nn_model.currentMsgList nn_model.genData.msg
+                    }
             in
             ( nn_msgs, Cmd.none )
 
@@ -893,6 +924,7 @@ update msg model =
             in
             ( newModel, Cmd.none )
 
+        -- TODO: Make this more generic for range entry
         UpdatePasRange entry val ->
             let
                 v =
@@ -929,10 +961,10 @@ update msg model =
                         MicTime
 
                 maxdata =
-                    List.foldl max3 ( 0, 0, 0 ) (getPasTimeData model d)
+                    List.foldl max3 ( 0, 0, 0 ) (getPasTimeData model 1200 d)
 
                 mindata =
-                    List.foldl min3 maxdata (getPasTimeData model d)
+                    List.foldl min3 maxdata (getPasTimeData model 1200 d)
 
                 range =
                     { xmin = firstElement mindata
@@ -997,8 +1029,32 @@ update msg model =
             in
             ( newModel, Cmd.none )
 
-        SequenceState newState ->
-            ( model, Cmd.none )
+        SequenceState ->
+            let
+                newState =
+                    if model.cvt.sequence_state == "Run" then
+                        "Pause"
+                    else
+                        "Run"
+            in
+            ( model, changeSequenceState newState model )
+
+        ResetSequence ->
+            ( model, changeSequenceState "Reset" model )
+
+
+
+--http://10.172.240.107:8001/soap/SequenceState?st={value}
+
+
+changeSequenceState : String -> Model -> Cmd Msg
+changeSequenceState state model =
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "SequenceState?st="
+                ++ state
+            )
 
 
 toggleSave : Model -> Cmd Msg
@@ -1658,7 +1714,6 @@ viewAux model =
                             , "PAS Channel 2"
                             , "PAS Laser Head 1"
                             , "PAS Laser Head 2"
-                            , "CJC 0"
                             , "Box Exit"
                             , "CRD Heater"
                             , "Box Inlet"
@@ -2085,7 +2140,7 @@ viewPas model =
                             else
                                 MicTime
                       in
-                      timeData model model.pasRange (getPasTimeData model p) (List.take 2 model.pasPlotData)
+                      timeData model model.pasRange (getPasTimeData model 1200 p) (List.take 2 model.pasPlotData)
                     ]
                 , Grid.cell [ Grid.size Grid.All 12 ]
                     [ Toggles.checkbox Mdl
@@ -2349,6 +2404,9 @@ viewCrd model =
                         ]
                         [ Html.text "Autoscale 1x" ]
                     ]
+                , Grid.cell [ Grid.size Grid.All 12 ]
+                    [ plotData model.crdRunningData 0
+                    ]
                 ]
             ]
         ]
@@ -2362,6 +2420,8 @@ viewCal model =
                 [ 11 ]
                 model.mdl
                 [ Toggles.ripple
+                , Toggles.value (model.cvt.sequence_state == "Run")
+                , Material.Options.onToggle SequenceState
                 ]
                 [ Html.text "Run Sequence" ]
             , Material.Button.render Mdl
@@ -2370,6 +2430,7 @@ viewCal model =
                 [ Material.Button.raised
                 , Material.Button.ripple
                 , Material.Button.primary
+                , Material.Options.onClick ResetSequence
                 , css "margin-top" "10px"
                 ]
                 [ Html.text "Reset Sequence" ]
@@ -2644,8 +2705,8 @@ type PasDataType
     | PhotoDiodDiode
 
 
-getPasTimeData : Model -> PasDataType -> List ( Float, Float, Float )
-getPasTimeData model dataType =
+getPasTimeData : Model -> Float -> PasDataType -> List ( Float, Float, Float )
+getPasTimeData model xstart dataType =
     let
         cell_0 =
             Maybe.withDefault
@@ -2668,7 +2729,7 @@ getPasTimeData model dataType =
                 PhotoDiodDiode ->
                     ( convertToFloat cell_0.laserDiodeData, convertToFloat cell_1.laserDiodeData )
     in
-    List.map3 (\i a b -> ( i, a, b ))
+    List.map3 (\i a b -> ( xstart + i, a, b ))
         (convertToFloat (List.range 0 (List.length (Tuple.first data_in))))
         (Tuple.first data_in)
         (Tuple.second data_in)

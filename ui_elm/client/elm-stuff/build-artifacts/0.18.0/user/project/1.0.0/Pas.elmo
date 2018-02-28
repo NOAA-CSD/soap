@@ -1,5 +1,22 @@
 var _user$project$Pas$floatString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$float);
 var _user$project$Pas$intString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$int);
+var _user$project$Pas$setCellData = F3(
+	function (model, cint, cell) {
+		var n_data = model.data;
+		var newCell = A3(_elm_lang$core$Array$set, cint, cell, model.data.cell);
+		var nn_data = _elm_lang$core$Native_Utils.update(
+			n_data,
+			{cell: newCell});
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{data: nn_data});
+	});
+var _user$project$Pas$asFreqIn = F2(
+	function (cell, freqData) {
+		return _elm_lang$core$Native_Utils.update(
+			cell,
+			{frequencyData: freqData});
+	});
 var _user$project$Pas$toggleLaserPower = F2(
 	function (cell, cvt) {
 		var new_cvt = function () {
@@ -310,6 +327,51 @@ var _user$project$Pas$decodeCellData = A3(
 											},
 											_elm_lang$core$Json_Decode$float,
 											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Pas$PasCell))))))))))));
+var _user$project$Pas$truncateFrequencyData = F4(
+	function (cell, min, max, model) {
+		var defaultCell = _user$project$Pas$PasCell(0)(0)(0)(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {
+					ctor: '::',
+					_0: 0,
+					_1: {ctor: '[]'}
+				}
+			})(0)(0)(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			})(0);
+		var cellData = A2(
+			_elm_lang$core$Maybe$withDefault,
+			defaultCell,
+			A2(_elm_lang$core$Array$get, cell, model.data.cell));
+		var newFreqData = _elm_lang$core$Array$toList(
+			A3(
+				_elm_lang$core$Array$slice,
+				min,
+				max,
+				_elm_lang$core$Array$fromList(cellData.frequencyData)));
+		var new_cell = A2(_user$project$Pas$asFreqIn, cellData, newFreqData);
+		return A3(_user$project$Pas$setCellData, model, cell, new_cell);
+	});
 var _user$project$Pas$defaultPasCellData = _elm_lang$core$Array$fromList(
 	{
 		ctor: '::',
