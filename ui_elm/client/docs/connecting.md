@@ -15,7 +15,7 @@ The static page for the web service can be accessed via the expected IP
 and port at
 
 ```
-http://[ip-address]:[port]//soap
+http://[ip-address]:[port]/soap
 ```
 
 This brings up the web page for access and control of the instrument.
