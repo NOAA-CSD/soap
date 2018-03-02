@@ -123,7 +123,7 @@ accepts two strings - the first defines the id of the device with which we are c
 the `Dict`) while the second is a numeric that defines the new setpoint.
 -}
 type Msg
-    = UpdateSetpoint String Float
+    = UpdateSetpoint String String
     | SendNewSetpoint String
 
 
@@ -137,7 +137,7 @@ update msg model =
                 Just device ->
                     let
                         n_device =
-                            updateSPinDev sp device
+                            setSpIn sp device
 
                         n_dict =
                             Dict.insert id n_device model.cvt

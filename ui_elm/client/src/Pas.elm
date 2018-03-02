@@ -76,7 +76,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-                new_model
+            new_model
 
         UpdateSpkVoffset v ->
             let
@@ -86,7 +86,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-                new_model
+            new_model
 
         UpdateSpkDf df ->
             let
@@ -96,7 +96,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-                new_model
+            new_model
 
         UpdateSpkFcenter fcenter ->
             let
@@ -106,7 +106,7 @@ update msg model =
                         |> asSpeakerIn model.cvt
                         |> asCvtIn model
             in
-                new_model
+            new_model
 
 
 {-| The type `Drive` is used to indicate whether the PAS is operating the laser or speaker.
@@ -163,8 +163,8 @@ type alias Speaker_ =
 
 
 type alias Heater =
-    { pid : Array Float
-    , sp : Float
+    { pid : Array String
+    , sp : String
     }
 
 
@@ -203,7 +203,7 @@ retrievePasData head data model =
             Result.withDefault model.data (decodeString (field head decodePASData) data)
                 |> asDataIn model
     in
-        new_model
+    new_model
 
 
 setVscaleSpk : String -> Speaker_ -> Speaker_
@@ -245,12 +245,12 @@ decodeSpeaker =
         (field "df" intString)
 
 
-setHeaterSP : Float -> Heater -> Heater
+setHeaterSP : String -> Heater -> Heater
 setHeaterSP sp htr =
     { htr | sp = sp }
 
 
-setHeaterPID : Array Float -> Heater -> Heater
+setHeaterPID : Array String -> Heater -> Heater
 setHeaterPID pid htr =
     { htr | pid = pid }
 
@@ -258,8 +258,8 @@ setHeaterPID pid htr =
 decodeHeater : Decoder Heater
 decodeHeater =
     map2 Heater
-        (field "pid" (array float))
-        (field "sp" float)
+        (field "pid" (array string))
+        (field "sp" string)
 
 
 setSpkVscale : String -> Speaker_ -> Speaker_
@@ -326,7 +326,7 @@ toggleLaserPower cell cvt =
                 _ ->
                     cvt
     in
-        new_cvt
+    new_cvt
 
 
 asFreqIn : PasCell -> List Float -> PasCell
@@ -346,7 +346,7 @@ setCellData model cint cell =
         nn_data =
             { n_data | cell = newCell }
     in
-        { model | data = nn_data }
+    { model | data = nn_data }
 
 
 truncateFrequencyData : Int -> Int -> Int -> Model -> Model
@@ -364,12 +364,12 @@ truncateFrequencyData cell min max model =
         new_cell =
             asFreqIn cellData newFreqData
     in
-        setCellData model cell new_cell
+    setCellData model cell new_cell
 
 
 defaultHeater : Heater
 defaultHeater =
-    Heater (Array.fromList [ 1, 0, 0 ]) 18
+    Heater (Array.fromList [ "1", "0", "0" ]) "18"
 
 
 defaultSpk : Speaker_
@@ -430,7 +430,7 @@ decodeDrive =
             else
                 succeed Laser
     in
-        bool |> andThen helper
+    bool |> andThen helper
 
 
 

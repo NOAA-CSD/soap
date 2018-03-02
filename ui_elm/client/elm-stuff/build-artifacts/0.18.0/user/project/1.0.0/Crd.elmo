@@ -313,18 +313,18 @@ var _user$project$Crd$defaultCvt = A5(
 		_elm_lang$core$Array$fromList(
 			{
 				ctor: '::',
-				_0: 1,
+				_0: '1',
 				_1: {
 					ctor: '::',
-					_0: 0,
+					_0: '0',
 					_1: {
 						ctor: '::',
-						_0: 0,
+						_0: '0',
 						_1: {ctor: '[]'}
 					}
 				}
 			}),
-		18),
+		'18'),
 	false);
 var _user$project$Crd$init = {
 	cvt: _user$project$Crd$defaultCvt,
@@ -350,8 +350,8 @@ var _user$project$Crd$decodeHeater = A3(
 	A2(
 		_elm_lang$core$Json_Decode$field,
 		'pid',
-		_elm_lang$core$Json_Decode$array(_elm_lang$core$Json_Decode$float)),
-	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$float));
+		_elm_lang$core$Json_Decode$array(_elm_lang$core$Json_Decode$string)),
+	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string));
 var _user$project$Crd$decodeCvt = function (cvt) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,

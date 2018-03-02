@@ -33,6 +33,7 @@
 		<Item Name="Save Data MSG.lvclass" Type="LVClass" URL="../Messages/Save Data MSG/Save Data MSG.lvclass"/>
 		<Item Name="Change Sequence State MSG.lvclass" Type="LVClass" URL="../Messages/Change Sequence State MSG/Change Sequence State MSG.lvclass"/>
 		<Item Name="Update Heater DC MSG.lvclass" Type="LVClass" URL="../Messages/Update Heater DC MSG/Update Heater DC MSG.lvclass"/>
+		<Item Name="Sync Time MSG.lvclass" Type="LVClass" URL="../Messages/Sync Time MSG/Sync Time MSG.lvclass"/>
 	</Item>
 	<Item Name="Commands" Type="Folder">
 		<Item Name="Exe Write Main CMD.lvclass" Type="LVClass" URL="../Commands/Exe Write Main CMD/Exe Write Main CMD.lvclass"/>

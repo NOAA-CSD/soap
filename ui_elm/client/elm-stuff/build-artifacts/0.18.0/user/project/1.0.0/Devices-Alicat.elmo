@@ -5,7 +5,7 @@ var _user$project$Devices_Alicat$update = F2(
 			var _p2 = _p0._0;
 			var _p1 = A2(_elm_lang$core$Dict$get, _p2, model.cvt);
 			if (_p1.ctor === 'Just') {
-				var n_device = A2(_user$project$Devices_Device$updateSPinDev, _p0._1, _p1._0);
+				var n_device = A2(_user$project$Devices_Device$setSpIn, _p0._1, _p1._0);
 				var n_dict = A3(_elm_lang$core$Dict$insert, _p2, n_device, model.cvt);
 				return _elm_lang$core$Native_Utils.update(
 					model,

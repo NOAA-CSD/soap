@@ -86,14 +86,14 @@ type alias CrdCvt =
 
 
 type alias Heater =
-    { pid : Array Float
-    , sp : Float
+    { pid : Array String
+    , sp : String
     }
 
 
 defaultCvt : CrdCvt
 defaultCvt =
-    CrdCvt [ "cell_0", "cell_1" ] 1000 400 (Heater (Array.fromList [ 1, 0, 0 ]) 18) False
+    CrdCvt [ "cell_0", "cell_1" ] 1000 400 (Heater (Array.fromList [ "1", "0", "0" ]) "18") False
 
 
 setRate : Int -> CrdCvt -> CrdCvt
@@ -111,12 +111,12 @@ togglePower cvt =
     { cvt | power = not cvt.power }
 
 
-setHeaterSP : Float -> Heater -> Heater
+setHeaterSP : String -> Heater -> Heater
 setHeaterSP sp htr =
     { htr | sp = sp }
 
 
-setHeaterPID : Array Float -> Heater -> Heater
+setHeaterPID : Array String -> Heater -> Heater
 setHeaterPID pid htr =
     { htr | pid = pid }
 
@@ -124,8 +124,8 @@ setHeaterPID pid htr =
 decodeHeater : Decoder Heater
 decodeHeater =
     map2 Heater
-        (field "pid" (array float))
-        (field "sp" float)
+        (field "pid" (array string))
+        (field "sp" string)
 
 
 asCvtIn : Model -> CrdCvt -> Model

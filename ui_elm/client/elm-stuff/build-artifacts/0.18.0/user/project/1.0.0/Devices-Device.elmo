@@ -3,14 +3,6 @@ var _user$project$Devices_Device$checkEmptyDevice = function (devt) {
 		_elm_lang$core$Tuple$first(devt),
 		'');
 };
-var _user$project$Devices_Device$updateSPinDev = F2(
-	function (sp, dev) {
-		return _elm_lang$core$Native_Utils.update(
-			dev,
-			{
-				sp: _elm_lang$core$Maybe$Just(sp)
-			});
-	});
 var _user$project$Devices_Device$defaultDevice = {type_: 'n', label: 'label', sn: '-1', controller: false, address: '-1', model: 'not_present', active: false, sp: _elm_lang$core$Maybe$Nothing};
 var _user$project$Devices_Device$setSpIn = F2(
 	function (sp, dev) {
@@ -35,7 +27,7 @@ var _user$project$Devices_Device$decodeDevice = A9(
 	A2(_elm_lang$core$Json_Decode$field, 'model', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode$field, 'active', _elm_lang$core$Json_Decode$bool),
 	_elm_lang$core$Json_Decode$maybe(
-		A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$float)));
+		A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string)));
 var _user$project$Devices_Device$decodeDeviceCvt = A2(
 	_elm_lang$core$Json_Decode$field,
 	'device',

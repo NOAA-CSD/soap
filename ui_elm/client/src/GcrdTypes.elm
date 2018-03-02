@@ -203,6 +203,7 @@ type alias Cvt =
     , fan : Bool
     , fan_voltage : Float
     , sequence_state : String
+    , save : Bool
     }
 
 
@@ -235,6 +236,7 @@ defaultCvtData =
     , fan = False
     , fan_voltage = 0
     , sequence_state = "Pause"
+    , save = False
     }
 
 
@@ -254,6 +256,7 @@ decodeCvt cvt =
         |> requiredAt [ "general", "fan" ] bool
         |> requiredAt [ "general", "fan_speed" ] float
         |> requiredAt [ "general", "seq_state" ] string
+        |> requiredAt [ "general", "save" ] bool
 
 
 

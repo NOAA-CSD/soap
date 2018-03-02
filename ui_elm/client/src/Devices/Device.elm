@@ -49,11 +49,11 @@ type alias Device =
     , address : String
     , model : String
     , active : Bool
-    , sp : Maybe Float
+    , sp : Maybe String
     }
 
 
-setSpIn : Float -> Device -> Device
+setSpIn : String -> Device -> Device
 setSpIn sp dev =
     { dev | sp = Just sp }
 
@@ -81,12 +81,7 @@ decodeDevice =
         (field "address" string)
         (field "model" string)
         (field "active" bool)
-        (maybe (field "sp" float))
-
-
-updateSPinDev : Float -> Device -> Device
-updateSPinDev sp dev =
-    { dev | sp = Just sp }
+        (maybe (field "sp" string))
 
 
 defaultDeviceDict : Dict.Dict String Device

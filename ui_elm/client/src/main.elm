@@ -46,6 +46,7 @@ import Plot exposing (defaultSeriesPlotCustomizations)
 import Round
 import Svg exposing (Svg)
 import Svg.Attributes
+import Task
 import Time as Time
 import Time.DateTime as DateTime exposing (zero)
 
@@ -365,7 +366,7 @@ type Msg
     | UpdateFanVoltage Float
     | UpdateDevSP String String
     | SendDevSP String
-    | UpdateTime
+    | UpdateTime Time.Time
     | SyncTime
     | TogglePasPlot Int
     | UpdatePasRange String String
@@ -520,7 +521,7 @@ update msg model =
                 dev_cvt =
                     Result.withDefault
                         Device.defaultDeviceDict
-                        (Debug.log "devicecvt" (Decoder.decodeString Device.decodeDeviceCvt data))
+                        (Decoder.decodeString Device.decodeDeviceCvt data)
 
                 a_model =
                     Alicat.insertAlicatDev dev_cvt model.alicats
@@ -592,8 +593,8 @@ update msg model =
                 pas_model =
                     newer_model.pas
                         |> Pas.retrievePasData "PAS" data
-                        |> Pas.truncateFrequencyData 0 1200 1500
-                        |> Pas.truncateFrequencyData 1 1200 1500
+                        --|> Pas.truncateFrequencyData 0 1200 1500
+                        --|> Pas.truncateFrequencyData 1 1200 1500
                         |> asPasIn newer_model
 
                 -- The following is for testing purposes for handling running data.  There is a better, more generic
@@ -781,15 +782,9 @@ update msg model =
 
                 Pas0Heater ->
                     let
-                        old_sp =
-                            model.pas.cvt.heater_0.sp
-
-                        new_sp =
-                            Result.withDefault old_sp (String.toFloat sp)
-
                         new_model =
                             model.pas.cvt.heater_0
-                                |> Pas.setHeaterSP new_sp
+                                |> Pas.setHeaterSP sp
                                 |> Pas.asHeater1In model.pas.cvt
                                 |> Pas.asCvtIn model.pas
                                 |> asPasIn model
@@ -798,15 +793,9 @@ update msg model =
 
                 Pas1Heater ->
                     let
-                        old_sp =
-                            model.pas.cvt.heater_1.sp
-
-                        new_sp =
-                            Result.withDefault old_sp (String.toFloat sp)
-
                         new_model =
                             model.pas.cvt.heater_1
-                                |> Pas.setHeaterSP new_sp
+                                |> Pas.setHeaterSP sp
                                 |> Pas.asHeater1In model.pas.cvt
                                 |> Pas.asCvtIn model.pas
                                 |> asPasIn model
@@ -889,7 +878,7 @@ update msg model =
                         (Dict.get idx model.alicats.cvt)
 
                 new_dev =
-                    Device.setSpIn (Result.withDefault 0 (String.toFloat sp)) dev
+                    Device.setSpIn sp dev
 
                 new_model =
                     Dict.insert idx new_dev model.alicats.cvt
@@ -908,11 +897,13 @@ update msg model =
             ( model, sendDevSp idx dev model )
 
         -- TODO: Implement time updating so that user can apply correct time to server.
-        UpdateTime ->
-            ( model, Cmd.none )
+        UpdateTime t ->
+            ( model, sendNewTime t model )
 
         SyncTime ->
-            ( model, Cmd.none )
+            -- This is called when the sync button is pushed; this gets the current time and
+            -- fires the message above - UpdateTime - which then executes the function sendNewTime
+            ( model, getCurrentTime )
 
         TogglePasPlot input ->
             let
@@ -1047,6 +1038,33 @@ update msg model =
 --http://10.172.240.107:8001/soap/SequenceState?st={value}
 
 
+getCurrentTime : Cmd Msg
+getCurrentTime =
+    Time.now |> Task.perform UpdateTime
+
+
+sendNewTime : Time.Time -> Model -> Cmd Msg
+sendNewTime t model =
+    let
+        -- Take the current time which is unix time (1970) and subtract a new zero
+        -- (2014) which forms the base for LabVIEW time
+        -- Divide by 1000 to convert to seconds
+        lvTime =
+            (t
+                - (DateTime.dateTime { zero | year = 1904 }
+                    |> DateTime.toTimestamp
+                  )
+            )
+                / 1000
+    in
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "time?t="
+                ++ toString lvTime
+            )
+
+
 changeSequenceState : String -> Model -> Cmd Msg
 changeSequenceState state model =
     Http.send HandleGeneric <|
@@ -1078,13 +1096,13 @@ sendDevSp : String -> Device.Device -> Model -> Cmd Msg
 sendDevSp idx dev model =
     let
         sp =
-            Maybe.withDefault 0 dev.sp
+            Maybe.withDefault "0" dev.sp
     in
     Http.send HandleGeneric <|
         Http.getString
             (Network.buildAddress model.network
                 ++ "UpdateDevSP?sp="
-                ++ toString sp
+                ++ sp
                 ++ "&idx="
                 ++ idx
             )
@@ -1361,7 +1379,7 @@ viewDrawer model =
         [ 10 ]
         model.mdl
         [ Toggles.ripple
-        , Toggles.value model.save
+        , Toggles.value model.cvt.save
         , Material.Options.onToggle SaveData
         ]
         [ Html.text "Save" ]
@@ -1580,13 +1598,13 @@ getHeaterPid : Model -> Int -> Int -> String
 getHeaterPid model heater pid =
     case heater of
         0 ->
-            toString (Maybe.withDefault 0 (Array.get pid model.pas.cvt.heater_0.pid))
+            Maybe.withDefault "0" (Array.get pid model.pas.cvt.heater_0.pid)
 
         1 ->
-            toString (Maybe.withDefault 0 (Array.get pid model.pas.cvt.heater_1.pid))
+            Maybe.withDefault "0" (Array.get pid model.pas.cvt.heater_1.pid)
 
         2 ->
-            toString (Maybe.withDefault 0 (Array.get pid model.crd.cvt.heater.pid))
+            Maybe.withDefault "0" (Array.get pid model.crd.cvt.heater.pid)
 
         _ ->
             "0"
@@ -1596,13 +1614,13 @@ getHeaterSP : Model -> Int -> String
 getHeaterSP model heater =
     case heater of
         0 ->
-            toString model.pas.cvt.heater_0.sp
+            model.pas.cvt.heater_0.sp
 
         1 ->
-            toString model.pas.cvt.heater_1.sp
+            model.pas.cvt.heater_1.sp
 
         2 ->
-            toString model.crd.cvt.heater.sp
+            model.crd.cvt.heater.sp
 
         _ ->
             ""
@@ -1783,7 +1801,7 @@ viewAux model =
                                     Tuple.first dev
 
                                 device =
-                                    Debug.log "alicat info" (Tuple.second dev)
+                                    Tuple.second dev
 
                                 m =
                                     if device.active && device.controller then
@@ -1793,7 +1811,7 @@ viewAux model =
                                             [ Textfield.floatingLabel
                                             , css "width" "125px"
                                             , Textfield.maxlength 15
-                                            , Textfield.value (toString (Maybe.withDefault 0 (Debug.log "sp" device.sp)))
+                                            , Textfield.value (Maybe.withDefault "0" device.sp)
                                             , onInput (UpdateDevSP idx)
                                             , onBlur (SendDevSP idx)
                                             , Textfield.label device.label
@@ -1804,7 +1822,7 @@ viewAux model =
                             in
                             m
                         )
-                        (Dict.toList (Debug.log "alicats" model.alicats.cvt))
+                        (Dict.toList model.alicats.cvt)
                     )
                , Grid.cell [ Grid.size Grid.All 10 ]
                     [ Table.table []
