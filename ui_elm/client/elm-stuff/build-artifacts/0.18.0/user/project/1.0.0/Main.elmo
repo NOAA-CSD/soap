@@ -1226,637 +1226,6 @@ var _user$project$Main$SelectTab = function (a) {
 var _user$project$Main$Mdl = function (a) {
 	return {ctor: 'Mdl', _0: a};
 };
-var _user$project$Main$textfield = F6(
-	function (num, model, label, value, input_msg, blur_msg) {
-		return A5(
-			_debois$elm_mdl$Material_Textfield$render,
-			_user$project$Main$Mdl,
-			{
-				ctor: '::',
-				_0: num,
-				_1: {ctor: '[]'}
-			},
-			model.mdl,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-					_1: {
-						ctor: '::',
-						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Textfield$value(value),
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (lab) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Textfield$label(lab),
-									_1: {ctor: '[]'}
-								};
-							},
-							label)),
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (msg) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
-									_1: {ctor: '[]'}
-								};
-							},
-							blur_msg)))),
-			{ctor: '[]'});
-	});
-var _user$project$Main$viewConfig = function (model) {
-	return A2(
-		_debois$elm_mdl$Material_Grid$grid,
-		{
-			ctor: '::',
-			_0: A2(_debois$elm_mdl$Material_Options$css, 'padding-bottom', '50px'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_debois$elm_mdl$Material_Grid$cell,
-				{
-					ctor: '::',
-					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$Desktop, 3),
-					_1: {
-						ctor: '::',
-						_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$Tablet, 5),
-						_1: {
-							ctor: '::',
-							_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$Phone, 3),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A6(
-						_user$project$Main$textfield,
-						0,
-						model,
-						_elm_lang$core$Maybe$Just('IP Address'),
-						model.network.ip,
-						function (_p23) {
-							return _user$project$Main$Network(
-								_user$project$Network$UpdateIP(_p23));
-						},
-						_elm_lang$core$Maybe$Nothing),
-					_1: {
-						ctor: '::',
-						_0: A6(
-							_user$project$Main$textfield,
-							1,
-							model,
-							_elm_lang$core$Maybe$Just('Port'),
-							model.network.port_,
-							function (_p24) {
-								return _user$project$Main$Network(
-									_user$project$Network$UpdatePort(_p24));
-							},
-							_elm_lang$core$Maybe$Nothing),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Main$floatTextfield = F6(
-	function (num, model, label, value, input_msg, blur_msg) {
-		return A5(
-			_debois$elm_mdl$Material_Textfield$render,
-			_user$project$Main$Mdl,
-			{
-				ctor: '::',
-				_0: num,
-				_1: {ctor: '[]'}
-			},
-			model.mdl,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-					_1: {
-						ctor: '::',
-						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Textfield$value(
-									_elm_lang$core$Basics$toString(value)),
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (lab) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Textfield$label(lab),
-									_1: {ctor: '[]'}
-								};
-							},
-							label)),
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (msg) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
-									_1: {ctor: '[]'}
-								};
-							},
-							blur_msg)))),
-			{ctor: '[]'});
-	});
-var _user$project$Main$intTextfield = F6(
-	function (num, model, label, value, input_msg, blur_msg) {
-		return A5(
-			_debois$elm_mdl$Material_Textfield$render,
-			_user$project$Main$Mdl,
-			{
-				ctor: '::',
-				_0: num,
-				_1: {ctor: '[]'}
-			},
-			model.mdl,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-					_1: {
-						ctor: '::',
-						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Textfield$value(
-									_elm_lang$core$Basics$toString(value)),
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (lab) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Textfield$label(lab),
-									_1: {ctor: '[]'}
-								};
-							},
-							label)),
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (msg) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
-									_1: {ctor: '[]'}
-								};
-							},
-							blur_msg)))),
-			{ctor: '[]'});
-	});
-var _user$project$Main$viewDrawer = function (model) {
-	return {
-		ctor: '::',
-		_0: A5(
-			_debois$elm_mdl$Material_Toggles$switch,
-			_user$project$Main$Mdl,
-			{
-				ctor: '::',
-				_0: 10,
-				_1: {ctor: '[]'}
-			},
-			model.mdl,
-			{
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Toggles$ripple,
-				_1: {
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.save),
-					_1: {
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$SaveData),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Save'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A5(
-				_debois$elm_mdl$Material_Button$render,
-				_user$project$Main$Mdl,
-				{
-					ctor: '::',
-					_0: 1,
-					_1: {ctor: '[]'}
-				},
-				model.mdl,
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Button$raised,
-					_1: {
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Button$ripple,
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Button$primary,
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$StopServer),
-								_1: {
-									ctor: '::',
-									_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-									_1: {
-										ctor: '::',
-										_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Stop Server'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A5(
-					_debois$elm_mdl$Material_Button$render,
-					_user$project$Main$Mdl,
-					{
-						ctor: '::',
-						_0: 9,
-						_1: {ctor: '[]'}
-					},
-					model.mdl,
-					{
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Button$raised,
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Button$ripple,
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Button$primary,
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$SyncTime),
-									_1: {
-										ctor: '::',
-										_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-										_1: {
-											ctor: '::',
-											_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Sync Time'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A5(
-						_debois$elm_mdl$Material_Toggles$radio,
-						_user$project$Main$Mdl,
-						{
-							ctor: '::',
-							_0: 2,
-							_1: {ctor: '[]'}
-						},
-						model.mdl,
-						{
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Toggles$value(false),
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Toggles$group('FilterPath'),
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Toggles$ripple,
-									_1: {
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Toggles$value(
-											_elm_lang$core$Native_Utils.eq(model.cvt.filter.pos, 0)),
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleFilter),
-											_1: {
-												ctor: '::',
-												_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Channel 1'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A5(
-									_debois$elm_mdl$Material_Toggles$radio,
-									_user$project$Main$Mdl,
-									{
-										ctor: '::',
-										_0: 3,
-										_1: {ctor: '[]'}
-									},
-									model.mdl,
-									{
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Toggles$value(true),
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Toggles$group('FilterPath'),
-											_1: {
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$ripple,
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Toggles$value(
-														_elm_lang$core$Native_Utils.eq(model.cvt.filter.pos, 1)),
-													_1: {
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleFilter),
-														_1: {
-															ctor: '::',
-															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Channel 2'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A5(
-								_debois$elm_mdl$Material_Toggles$switch,
-								_user$project$Main$Mdl,
-								{
-									ctor: '::',
-									_0: 7,
-									_1: {ctor: '[]'}
-								},
-								model.mdl,
-								{
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Toggles$ripple,
-									_1: {
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.cal_state.o3_add),
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleO3),
-											_1: {
-												ctor: '::',
-												_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('O3 Addition'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A5(
-									_debois$elm_mdl$Material_Toggles$switch,
-									_user$project$Main$Mdl,
-									{
-										ctor: '::',
-										_0: 4,
-										_1: {ctor: '[]'}
-									},
-									model.mdl,
-									{
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Toggles$ripple,
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.cal_state.o2_add),
-											_1: {
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleO2),
-												_1: {
-													ctor: '::',
-													_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('O2 Addition'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A5(
-										_debois$elm_mdl$Material_Toggles$switch,
-										_user$project$Main$Mdl,
-										{
-											ctor: '::',
-											_0: 5,
-											_1: {ctor: '[]'}
-										},
-										model.mdl,
-										{
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Toggles$ripple,
-											_1: {
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.pump),
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$TogglePump),
-													_1: {
-														ctor: '::',
-														_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Pump'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A5(
-											_debois$elm_mdl$Material_Toggles$switch,
-											_user$project$Main$Mdl,
-											{
-												ctor: '::',
-												_0: 6,
-												_1: {ctor: '[]'}
-											},
-											model.mdl,
-											{
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$ripple,
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.cal_state.uv_lamp),
-													_1: {
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleUVLamp),
-														_1: {
-															ctor: '::',
-															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('UV Lamp'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A5(
-												_debois$elm_mdl$Material_Toggles$switch,
-												_user$project$Main$Mdl,
-												{
-													ctor: '::',
-													_0: 8,
-													_1: {ctor: '[]'}
-												},
-												model.mdl,
-												{
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Toggles$ripple,
-													_1: {
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.fan),
-														_1: {
-															ctor: '::',
-															_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleFan),
-															_1: {
-																ctor: '::',
-																_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Fan'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	};
-};
 var _user$project$Main$viewAux = function (model) {
 	return A2(
 		_debois$elm_mdl$Material_Grid$grid,
@@ -3274,6 +2643,538 @@ var _user$project$Main$viewAux = function (model) {
 						}
 					}))));
 };
+var _user$project$Main$textfield = F6(
+	function (num, model, label, value, input_msg, blur_msg) {
+		return A5(
+			_debois$elm_mdl$Material_Textfield$render,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Textfield$value(value),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (lab) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Textfield$label(lab),
+									_1: {ctor: '[]'}
+								};
+							},
+							label)),
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (msg) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
+									_1: {ctor: '[]'}
+								};
+							},
+							blur_msg)))),
+			{ctor: '[]'});
+	});
+var _user$project$Main$viewConfig = function (model) {
+	return A2(
+		_debois$elm_mdl$Material_Grid$grid,
+		{
+			ctor: '::',
+			_0: A2(_debois$elm_mdl$Material_Options$css, 'padding-bottom', '50px'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_debois$elm_mdl$Material_Grid$cell,
+				{
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$Desktop, 3),
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$Tablet, 5),
+						_1: {
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$Phone, 3),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A6(
+						_user$project$Main$textfield,
+						0,
+						model,
+						_elm_lang$core$Maybe$Just('IP Address'),
+						model.network.ip,
+						function (_p23) {
+							return _user$project$Main$Network(
+								_user$project$Network$UpdateIP(_p23));
+						},
+						_elm_lang$core$Maybe$Nothing),
+					_1: {
+						ctor: '::',
+						_0: A6(
+							_user$project$Main$textfield,
+							1,
+							model,
+							_elm_lang$core$Maybe$Just('Port'),
+							model.network.port_,
+							function (_p24) {
+								return _user$project$Main$Network(
+									_user$project$Network$UpdatePort(_p24));
+							},
+							_elm_lang$core$Maybe$Nothing),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$floatTextfield = F6(
+	function (num, model, label, value, input_msg, blur_msg) {
+		return A5(
+			_debois$elm_mdl$Material_Textfield$render,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Textfield$value(
+									_elm_lang$core$Basics$toString(value)),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (lab) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Textfield$label(lab),
+									_1: {ctor: '[]'}
+								};
+							},
+							label)),
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (msg) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
+									_1: {ctor: '[]'}
+								};
+							},
+							blur_msg)))),
+			{ctor: '[]'});
+	});
+var _user$project$Main$button = F4(
+	function (num, btn_txt, model, msg) {
+		return A5(
+			_debois$elm_mdl$Material_Button$render,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Button$raised,
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Button$ripple,
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Button$primary,
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Options$onClick(msg),
+							_1: {
+								ctor: '::',
+								_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+								_1: {
+									ctor: '::',
+									_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(btn_txt),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Main$viewDrawer = function (model) {
+	return {
+		ctor: '::',
+		_0: A5(
+			_debois$elm_mdl$Material_Toggles$switch,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: 10,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Toggles$ripple,
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.save),
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$SaveData),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Save'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A4(_user$project$Main$button, 1, 'Stop Server', model, _user$project$Main$StopServer),
+			_1: {
+				ctor: '::',
+				_0: A4(_user$project$Main$button, 9, 'Sync Time', model, _user$project$Main$SyncTime),
+				_1: {
+					ctor: '::',
+					_0: A5(
+						_debois$elm_mdl$Material_Toggles$radio,
+						_user$project$Main$Mdl,
+						{
+							ctor: '::',
+							_0: 2,
+							_1: {ctor: '[]'}
+						},
+						model.mdl,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Toggles$value(false),
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Toggles$group('FilterPath'),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Toggles$ripple,
+									_1: {
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Toggles$value(
+											_elm_lang$core$Native_Utils.eq(model.cvt.filter.pos, 0)),
+										_1: {
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleFilter),
+											_1: {
+												ctor: '::',
+												_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Channel 1'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A5(
+									_debois$elm_mdl$Material_Toggles$radio,
+									_user$project$Main$Mdl,
+									{
+										ctor: '::',
+										_0: 3,
+										_1: {ctor: '[]'}
+									},
+									model.mdl,
+									{
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Toggles$value(true),
+										_1: {
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Toggles$group('FilterPath'),
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Toggles$ripple,
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Toggles$value(
+														_elm_lang$core$Native_Utils.eq(model.cvt.filter.pos, 1)),
+													_1: {
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleFilter),
+														_1: {
+															ctor: '::',
+															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Channel 2'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A5(
+								_debois$elm_mdl$Material_Toggles$switch,
+								_user$project$Main$Mdl,
+								{
+									ctor: '::',
+									_0: 7,
+									_1: {ctor: '[]'}
+								},
+								model.mdl,
+								{
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Toggles$ripple,
+									_1: {
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.cal_state.o3_add),
+										_1: {
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleO3),
+											_1: {
+												ctor: '::',
+												_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('O3 Addition'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A5(
+									_debois$elm_mdl$Material_Toggles$switch,
+									_user$project$Main$Mdl,
+									{
+										ctor: '::',
+										_0: 4,
+										_1: {ctor: '[]'}
+									},
+									model.mdl,
+									{
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Toggles$ripple,
+										_1: {
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.cal_state.o2_add),
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleO2),
+												_1: {
+													ctor: '::',
+													_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('O2 Addition'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A5(
+										_debois$elm_mdl$Material_Toggles$switch,
+										_user$project$Main$Mdl,
+										{
+											ctor: '::',
+											_0: 5,
+											_1: {ctor: '[]'}
+										},
+										model.mdl,
+										{
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Toggles$ripple,
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.pump),
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$TogglePump),
+													_1: {
+														ctor: '::',
+														_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Pump'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A5(
+											_debois$elm_mdl$Material_Toggles$switch,
+											_user$project$Main$Mdl,
+											{
+												ctor: '::',
+												_0: 6,
+												_1: {ctor: '[]'}
+											},
+											model.mdl,
+											{
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Toggles$ripple,
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.cal_state.uv_lamp),
+													_1: {
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleUVLamp),
+														_1: {
+															ctor: '::',
+															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('UV Lamp'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A5(
+												_debois$elm_mdl$Material_Toggles$switch,
+												_user$project$Main$Mdl,
+												{
+													ctor: '::',
+													_0: 8,
+													_1: {ctor: '[]'}
+												},
+												model.mdl,
+												{
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Toggles$ripple,
+													_1: {
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_Toggles$value(model.cvt.fan),
+														_1: {
+															ctor: '::',
+															_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleFan),
+															_1: {
+																ctor: '::',
+																_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Fan'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	};
+};
 var _user$project$Main$viewCrd = function (model) {
 	return A2(
 		_debois$elm_mdl$Material_Grid$grid,
@@ -4047,41 +3948,7 @@ var _user$project$Main$viewCrd = function (model) {
 																		{ctor: '[]'}),
 																	_1: {
 																		ctor: '::',
-																		_0: A5(
-																			_debois$elm_mdl$Material_Button$render,
-																			_user$project$Main$Mdl,
-																			{
-																				ctor: '::',
-																				_0: 106,
-																				_1: {ctor: '[]'}
-																			},
-																			model.mdl,
-																			{
-																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Button$raised,
-																				_1: {
-																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Button$ripple,
-																					_1: {
-																						ctor: '::',
-																						_0: _debois$elm_mdl$Material_Button$primary,
-																						_1: {
-																							ctor: '::',
-																							_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-																							_1: {
-																								ctor: '::',
-																								_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$UpdateCrdScaling),
-																								_1: {ctor: '[]'}
-																							}
-																						}
-																					}
-																				}
-																			},
-																			{
-																				ctor: '::',
-																				_0: _elm_lang$html$Html$text('Autoscale 1x'),
-																				_1: {ctor: '[]'}
-																			}),
+																		_0: A4(_user$project$Main$button, 106, 'Autoscale 1x', model, _user$project$Main$UpdateCrdScaling),
 																		_1: {ctor: '[]'}
 																	}
 																}
@@ -4160,41 +4027,7 @@ var _user$project$Main$viewCal = function (model) {
 						}),
 					_1: {
 						ctor: '::',
-						_0: A5(
-							_debois$elm_mdl$Material_Button$render,
-							_user$project$Main$Mdl,
-							{
-								ctor: '::',
-								_0: 106,
-								_1: {ctor: '[]'}
-							},
-							model.mdl,
-							{
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Button$raised,
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Button$ripple,
-									_1: {
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Button$primary,
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$ResetSequence),
-											_1: {
-												ctor: '::',
-												_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Reset Sequence'),
-								_1: {ctor: '[]'}
-							}),
+						_0: A4(_user$project$Main$button, 106, 'Reset Sequence', model, _user$project$Main$ResetSequence),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -4632,41 +4465,7 @@ var _user$project$Main$viewStatus = function (model) {
 								model.currentMsgList)),
 						_1: {
 							ctor: '::',
-							_0: A5(
-								_debois$elm_mdl$Material_Button$render,
-								_user$project$Main$Mdl,
-								{
-									ctor: '::',
-									_0: 10,
-									_1: {ctor: '[]'}
-								},
-								model.mdl,
-								{
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Button$raised,
-									_1: {
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Button$ripple,
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Button$primary,
-											_1: {
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$ClearMessages),
-												_1: {
-													ctor: '::',
-													_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Clear'),
-									_1: {ctor: '[]'}
-								}),
+							_0: A4(_user$project$Main$button, 10, 'Clear', model, _user$project$Main$ClearMessages),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -4674,6 +4473,105 @@ var _user$project$Main$viewStatus = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Main$intTextfield = F6(
+	function (num, model, label, value, input_msg, blur_msg) {
+		return A5(
+			_debois$elm_mdl$Material_Textfield$render,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Textfield$value(
+									_elm_lang$core$Basics$toString(value)),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (lab) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Textfield$label(lab),
+									_1: {ctor: '[]'}
+								};
+							},
+							label)),
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (msg) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
+									_1: {ctor: '[]'}
+								};
+							},
+							blur_msg)))),
+			{ctor: '[]'});
+	});
+var _user$project$Main$toggle = F5(
+	function (num, txt, val, model, msg) {
+		return A5(
+			_debois$elm_mdl$Material_Toggles$switch,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Toggles$ripple,
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Toggles$value(val),
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Options$onToggle(msg),
+						_1: {
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(txt),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$Main$PhotoDiodDiode = {ctor: 'PhotoDiodDiode'};
 var _user$project$Main$MicTime = {ctor: 'MicTime'};
 var _user$project$Main$MicFreq = {ctor: 'MicFreq'};
@@ -5524,33 +5422,12 @@ var _user$project$Main$viewPas = function (model) {
 							_1: {
 								ctor: '::',
 								_0: A5(
-									_debois$elm_mdl$Material_Toggles$switch,
-									_user$project$Main$Mdl,
-									{
-										ctor: '::',
-										_0: 18,
-										_1: {ctor: '[]'}
-									},
-									model.mdl,
-									{
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Toggles$ripple,
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.enable_0),
-											_1: {
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Options$onToggle(
-													_user$project$Main$TogglePasLaserPower(0)),
-												_1: {ctor: '[]'}
-											}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Power 0'),
-										_1: {ctor: '[]'}
-									}),
+									_user$project$Main$toggle,
+									18,
+									'Power 1',
+									model.pas.cvt.enable_0,
+									model,
+									_user$project$Main$TogglePasLaserPower(0)),
 								_1: {
 									ctor: '::',
 									_0: A5(
@@ -5597,33 +5474,12 @@ var _user$project$Main$viewPas = function (model) {
 									_1: {
 										ctor: '::',
 										_0: A5(
-											_debois$elm_mdl$Material_Toggles$switch,
-											_user$project$Main$Mdl,
-											{
-												ctor: '::',
-												_0: 19,
-												_1: {ctor: '[]'}
-											},
-											model.mdl,
-											{
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$ripple,
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.enable_1),
-													_1: {
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Options$onToggle(
-															_user$project$Main$TogglePasLaserPower(1)),
-														_1: {ctor: '[]'}
-													}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Power 1'),
-												_1: {ctor: '[]'}
-											}),
+											_user$project$Main$toggle,
+											19,
+											'Power 2',
+											model.pas.cvt.enable_1,
+											model,
+											_user$project$Main$TogglePasLaserPower(1)),
 										_1: {
 											ctor: '::',
 											_0: A5(
@@ -5720,63 +5576,21 @@ var _user$project$Main$viewPas = function (model) {
 								_1: {
 									ctor: '::',
 									_0: A5(
-										_debois$elm_mdl$Material_Toggles$switch,
-										_user$project$Main$Mdl,
-										{
-											ctor: '::',
-											_0: 10,
-											_1: {ctor: '[]'}
-										},
-										model.mdl,
-										{
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Toggles$ripple,
-											_1: {
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.speaker_0),
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Options$onToggle(
-														_user$project$Main$ToggleSpeaker(0)),
-													_1: {ctor: '[]'}
-												}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Channel 1'),
-											_1: {ctor: '[]'}
-										}),
+										_user$project$Main$toggle,
+										10,
+										'Channel 1',
+										model.pas.cvt.speaker_0,
+										model,
+										_user$project$Main$ToggleSpeaker(0)),
 									_1: {
 										ctor: '::',
 										_0: A5(
-											_debois$elm_mdl$Material_Toggles$switch,
-											_user$project$Main$Mdl,
-											{
-												ctor: '::',
-												_0: 11,
-												_1: {ctor: '[]'}
-											},
-											model.mdl,
-											{
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_Toggles$ripple,
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Toggles$value(model.pas.cvt.speaker_1),
-													_1: {
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Options$onToggle(
-															_user$project$Main$ToggleSpeaker(1)),
-														_1: {ctor: '[]'}
-													}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Channel 2'),
-												_1: {ctor: '[]'}
-											}),
+											_user$project$Main$toggle,
+											11,
+											'Channel 2',
+											model.pas.cvt.speaker_1,
+											model,
+											_user$project$Main$ToggleSpeaker(1)),
 										_1: {
 											ctor: '::',
 											_0: A5(
@@ -6603,41 +6417,7 @@ var _user$project$Main$viewPas = function (model) {
 																			{ctor: '[]'}),
 																		_1: {
 																			ctor: '::',
-																			_0: A5(
-																				_debois$elm_mdl$Material_Button$render,
-																				_user$project$Main$Mdl,
-																				{
-																					ctor: '::',
-																					_0: 106,
-																					_1: {ctor: '[]'}
-																				},
-																				model.mdl,
-																				{
-																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Button$raised,
-																					_1: {
-																						ctor: '::',
-																						_0: _debois$elm_mdl$Material_Button$ripple,
-																						_1: {
-																							ctor: '::',
-																							_0: _debois$elm_mdl$Material_Button$primary,
-																							_1: {
-																								ctor: '::',
-																								_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-																								_1: {
-																									ctor: '::',
-																									_0: _debois$elm_mdl$Material_Options$onClick(_user$project$Main$UpdatePasScaling),
-																									_1: {ctor: '[]'}
-																								}
-																							}
-																						}
-																					}
-																				},
-																				{
-																					ctor: '::',
-																					_0: _elm_lang$html$Html$text('Autoscale 1x'),
-																					_1: {ctor: '[]'}
-																				}),
+																			_0: A4(_user$project$Main$button, 106, 'Autoscale 1x', model, _user$project$Main$UpdatePasScaling),
 																			_1: {ctor: '[]'}
 																		}
 																	}
