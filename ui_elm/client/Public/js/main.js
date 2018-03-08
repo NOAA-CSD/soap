@@ -28893,6 +28893,660 @@ var _user$project$Main$viewDrawer = function (model) {
 		}
 	};
 };
+var _user$project$Main$viewCal = function (model) {
+	return A2(
+		_debois$elm_mdl$Material_Grid$grid,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_debois$elm_mdl$Material_Grid$cell,
+				{
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A5(
+						_debois$elm_mdl$Material_Toggles$switch,
+						_user$project$Main$Mdl,
+						{
+							ctor: '::',
+							_0: 11,
+							_1: {ctor: '[]'}
+						},
+						model.mdl,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Toggles$ripple,
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Toggles$value(
+									_elm_lang$core$Native_Utils.eq(model.cvt.sequence_state, 'Run')),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$SequenceState),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Run Sequence'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A4(_user$project$Main$button, 106, 'Reset Sequence', model, _user$project$Main$ResetSequence),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_debois$elm_mdl$Material_Grid$cell,
+					{
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_List$ul,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_List$li,
+									{
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_List$withBody,
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_List$content,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Speaker'),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$body,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Use this to toggle the speaker.  '),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_List$li,
+										{
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_List$withBody,
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$content,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Flow Path'),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_debois$elm_mdl$Material_List$body,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Use this to toggle the flow path. '),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_List$li,
+											{
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_List$withBody,
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$content,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('UV Lamp'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_debois$elm_mdl$Material_List$body,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Toggle power to the UV lamp.'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$li,
+												{
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_List$withBody,
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$content,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('O2 Valve'),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_debois$elm_mdl$Material_List$body,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Toggle O2 valve.'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$li,
+													{
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_List$withBody,
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_debois$elm_mdl$Material_List$content,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('O3 Valve'),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_debois$elm_mdl$Material_List$body,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Toggle O3 valve.'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_debois$elm_mdl$Material_Grid$cell,
+						{
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_debois$elm_mdl$Material_List$ul,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_List$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$content,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Speaker'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$content2,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A5(
+															_debois$elm_mdl$Material_Toggles$checkbox,
+															_user$project$Main$Mdl,
+															{
+																ctor: '::',
+																_0: 4,
+																_1: {ctor: '[]'}
+															},
+															model.mdl,
+															{
+																ctor: '::',
+																_0: _debois$elm_mdl$Material_Toggles$value(true),
+																_1: {ctor: '[]'}
+															},
+															{ctor: '[]'}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_List$li,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_debois$elm_mdl$Material_List$content,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Radio button!'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$content2,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_debois$elm_mdl$Material_Options$span,
+																{
+																	ctor: '::',
+																	_0: _debois$elm_mdl$Material_List$action2,
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: A5(
+																		_debois$elm_mdl$Material_Toggles$radio,
+																		_user$project$Main$Mdl,
+																		{
+																			ctor: '::',
+																			_0: 5,
+																			_1: {ctor: '[]'}
+																		},
+																		model.mdl,
+																		{
+																			ctor: '::',
+																			_0: _debois$elm_mdl$Material_Toggles$value(true),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(_debois$elm_mdl$Material_Options$css, 'display', 'inline'),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{ctor: '[]'}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_List$li,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_debois$elm_mdl$Material_List$content,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Include switch?'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_debois$elm_mdl$Material_List$content2,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A5(
+																	_debois$elm_mdl$Material_Toggles$switch,
+																	_user$project$Main$Mdl,
+																	{
+																		ctor: '::',
+																		_0: 6,
+																		_1: {ctor: '[]'}
+																	},
+																	model.mdl,
+																	{
+																		ctor: '::',
+																		_0: _debois$elm_mdl$Material_Toggles$value(true),
+																		_1: {ctor: '[]'}
+																	},
+																	{ctor: '[]'}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Main$viewStatus = function (model) {
+	return A2(
+		_debois$elm_mdl$Material_Grid$grid,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_debois$elm_mdl$Material_Grid$cell,
+				{
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A3(
+						_debois$elm_mdl$Material_Options$styled,
+						_elm_lang$html$Html$p,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Typography$title,
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('System Messages'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Options$div,
+							{
+								ctor: '::',
+								_0: A2(_debois$elm_mdl$Material_Options$css, 'max-height', '250px'),
+								_1: {
+									ctor: '::',
+									_0: A2(_debois$elm_mdl$Material_Options$css, 'overflow', 'scroll'),
+									_1: {
+										ctor: '::',
+										_0: A2(_debois$elm_mdl$Material_Options$css, 'border', '1px solid grey'),
+										_1: {
+											ctor: '::',
+											_0: A2(_debois$elm_mdl$Material_Options$css, 'border-radius', '4px'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							A2(
+								_elm_lang$core$List$map,
+								function (msg) {
+									var msg_color = A2(_elm_lang$core$String$contains, '[ERROR]', msg) ? 'red' : (A2(_elm_lang$core$String$contains, '[WARNING]', msg) ? 'yellow' : 'black');
+									return A3(
+										_debois$elm_mdl$Material_Options$styled,
+										_elm_lang$html$Html$p,
+										{
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Typography$body1,
+											_1: {
+												ctor: '::',
+												_0: A2(_debois$elm_mdl$Material_Options$css, 'color', msg_color),
+												_1: {
+													ctor: '::',
+													_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '100%'),
+													_1: {
+														ctor: '::',
+														_0: A2(_debois$elm_mdl$Material_Options$css, 'padding', '0'),
+														_1: {
+															ctor: '::',
+															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin', '0'),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(msg),
+											_1: {ctor: '[]'}
+										});
+								},
+								model.currentMsgList)),
+						_1: {
+							ctor: '::',
+							_0: A4(_user$project$Main$button, 10, 'Clear', model, _user$project$Main$ClearMessages),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$intTextfield = F6(
+	function (num, model, label, value, input_msg, blur_msg) {
+		return A5(
+			_debois$elm_mdl$Material_Textfield$render,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Textfield$value(
+									_elm_lang$core$Basics$toString(value)),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (lab) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Textfield$label(lab),
+									_1: {ctor: '[]'}
+								};
+							},
+							label)),
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (msg) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
+									_1: {ctor: '[]'}
+								};
+							},
+							blur_msg)))),
+			{ctor: '[]'});
+	});
+var _user$project$Main$txtfield = F6(
+	function (num, model, label, value, input_msg, blur_msg) {
+		return A5(
+			_debois$elm_mdl$Material_Textfield$render,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
+							_1: {
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Textfield$value(value),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (lab) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Textfield$label(lab),
+									_1: {ctor: '[]'}
+								};
+							},
+							label)),
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (msg) {
+								return {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
+									_1: {ctor: '[]'}
+								};
+							},
+							blur_msg)))),
+			{ctor: '[]'});
+	});
+var _user$project$Main$toggle = F5(
+	function (num, txt, val, model, msg) {
+		return A5(
+			_debois$elm_mdl$Material_Toggles$switch,
+			_user$project$Main$Mdl,
+			{
+				ctor: '::',
+				_0: num,
+				_1: {ctor: '[]'}
+			},
+			model.mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Toggles$ripple,
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Toggles$value(val),
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Options$onToggle(msg),
+						_1: {
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(txt),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$Main$viewCrd = function (model) {
 	return A2(
 		_debois$elm_mdl$Material_Grid$grid,
@@ -29000,33 +29654,7 @@ var _user$project$Main$viewCrd = function (model) {
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: A5(
-								_debois$elm_mdl$Material_Toggles$switch,
-								_user$project$Main$Mdl,
-								{
-									ctor: '::',
-									_0: 11,
-									_1: {ctor: '[]'}
-								},
-								model.mdl,
-								{
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Toggles$ripple,
-									_1: {
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_Toggles$value(model.crd.cvt.power),
-										_1: {
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$ToggleCrdPower),
-											_1: {ctor: '[]'}
-										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Power'),
-									_1: {ctor: '[]'}
-								}),
+							_0: A5(_user$project$Main$toggle, 11, 'Power', model.crd.cvt.power, model, _user$project$Main$ToggleCrdPower),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -29700,596 +30328,6 @@ var _user$project$Main$viewCrd = function (model) {
 			}
 		});
 };
-var _user$project$Main$viewCal = function (model) {
-	return A2(
-		_debois$elm_mdl$Material_Grid$grid,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_debois$elm_mdl$Material_Grid$cell,
-				{
-					ctor: '::',
-					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A5(
-						_debois$elm_mdl$Material_Toggles$switch,
-						_user$project$Main$Mdl,
-						{
-							ctor: '::',
-							_0: 11,
-							_1: {ctor: '[]'}
-						},
-						model.mdl,
-						{
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Toggles$ripple,
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Toggles$value(
-									_elm_lang$core$Native_Utils.eq(model.cvt.sequence_state, 'Run')),
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onToggle(_user$project$Main$SequenceState),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Run Sequence'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A4(_user$project$Main$button, 106, 'Reset Sequence', model, _user$project$Main$ResetSequence),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_debois$elm_mdl$Material_Grid$cell,
-					{
-						ctor: '::',
-						_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_debois$elm_mdl$Material_List$ul,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A2(
-									_debois$elm_mdl$Material_List$li,
-									{
-										ctor: '::',
-										_0: _debois$elm_mdl$Material_List$withBody,
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_debois$elm_mdl$Material_List$content,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Speaker'),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_debois$elm_mdl$Material_List$body,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('Use this to toggle the speaker.  '),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_debois$elm_mdl$Material_List$li,
-										{
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_List$withBody,
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_debois$elm_mdl$Material_List$content,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Flow Path'),
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_debois$elm_mdl$Material_List$body,
-															{ctor: '[]'},
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html$text('Use this to toggle the flow path. '),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_debois$elm_mdl$Material_List$li,
-											{
-												ctor: '::',
-												_0: _debois$elm_mdl$Material_List$withBody,
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: A2(
-													_debois$elm_mdl$Material_List$content,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('UV Lamp'),
-														_1: {
-															ctor: '::',
-															_0: A2(
-																_debois$elm_mdl$Material_List$body,
-																{ctor: '[]'},
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('Toggle power to the UV lamp.'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_debois$elm_mdl$Material_List$li,
-												{
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_List$withBody,
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: A2(
-														_debois$elm_mdl$Material_List$content,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('O2 Valve'),
-															_1: {
-																ctor: '::',
-																_0: A2(
-																	_debois$elm_mdl$Material_List$body,
-																	{ctor: '[]'},
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('Toggle O2 valve.'),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_debois$elm_mdl$Material_List$li,
-													{
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_List$withBody,
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: A2(
-															_debois$elm_mdl$Material_List$content,
-															{ctor: '[]'},
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html$text('O3 Valve'),
-																_1: {
-																	ctor: '::',
-																	_0: A2(
-																		_debois$elm_mdl$Material_List$body,
-																		{ctor: '[]'},
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html$text('Toggle O3 valve.'),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {ctor: '[]'}
-																}
-															}),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_debois$elm_mdl$Material_Grid$cell,
-						{
-							ctor: '::',
-							_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_debois$elm_mdl$Material_List$ul,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: A2(
-										_debois$elm_mdl$Material_List$li,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: A2(
-												_debois$elm_mdl$Material_List$content,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Speaker'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_debois$elm_mdl$Material_List$content2,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: A5(
-															_debois$elm_mdl$Material_Toggles$checkbox,
-															_user$project$Main$Mdl,
-															{
-																ctor: '::',
-																_0: 4,
-																_1: {ctor: '[]'}
-															},
-															model.mdl,
-															{
-																ctor: '::',
-																_0: _debois$elm_mdl$Material_Toggles$value(true),
-																_1: {ctor: '[]'}
-															},
-															{ctor: '[]'}),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_debois$elm_mdl$Material_List$li,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: A2(
-													_debois$elm_mdl$Material_List$content,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Radio button!'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_debois$elm_mdl$Material_List$content2,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: A2(
-																_debois$elm_mdl$Material_Options$span,
-																{
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_List$action2,
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: A5(
-																		_debois$elm_mdl$Material_Toggles$radio,
-																		_user$project$Main$Mdl,
-																		{
-																			ctor: '::',
-																			_0: 5,
-																			_1: {ctor: '[]'}
-																		},
-																		model.mdl,
-																		{
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Toggles$value(true),
-																			_1: {
-																				ctor: '::',
-																				_0: A2(_debois$elm_mdl$Material_Options$css, 'display', 'inline'),
-																				_1: {ctor: '[]'}
-																			}
-																		},
-																		{ctor: '[]'}),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_debois$elm_mdl$Material_List$li,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: A2(
-														_debois$elm_mdl$Material_List$content,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('Include switch?'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_debois$elm_mdl$Material_List$content2,
-															{ctor: '[]'},
-															{
-																ctor: '::',
-																_0: A5(
-																	_debois$elm_mdl$Material_Toggles$switch,
-																	_user$project$Main$Mdl,
-																	{
-																		ctor: '::',
-																		_0: 6,
-																		_1: {ctor: '[]'}
-																	},
-																	model.mdl,
-																	{
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Toggles$value(true),
-																		_1: {ctor: '[]'}
-																	},
-																	{ctor: '[]'}),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$Main$viewStatus = function (model) {
-	return A2(
-		_debois$elm_mdl$Material_Grid$grid,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_debois$elm_mdl$Material_Grid$cell,
-				{
-					ctor: '::',
-					_0: A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 12),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A3(
-						_debois$elm_mdl$Material_Options$styled,
-						_elm_lang$html$Html$p,
-						{
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Typography$title,
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('System Messages'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_debois$elm_mdl$Material_Options$div,
-							{
-								ctor: '::',
-								_0: A2(_debois$elm_mdl$Material_Options$css, 'max-height', '250px'),
-								_1: {
-									ctor: '::',
-									_0: A2(_debois$elm_mdl$Material_Options$css, 'overflow', 'scroll'),
-									_1: {
-										ctor: '::',
-										_0: A2(_debois$elm_mdl$Material_Options$css, 'border', '1px solid grey'),
-										_1: {
-											ctor: '::',
-											_0: A2(_debois$elm_mdl$Material_Options$css, 'border-radius', '4px'),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							},
-							A2(
-								_elm_lang$core$List$map,
-								function (msg) {
-									var msg_color = A2(_elm_lang$core$String$contains, '[ERROR]', msg) ? 'red' : (A2(_elm_lang$core$String$contains, '[WARNING]', msg) ? 'yellow' : 'black');
-									return A3(
-										_debois$elm_mdl$Material_Options$styled,
-										_elm_lang$html$Html$p,
-										{
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Typography$body1,
-											_1: {
-												ctor: '::',
-												_0: A2(_debois$elm_mdl$Material_Options$css, 'color', msg_color),
-												_1: {
-													ctor: '::',
-													_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '100%'),
-													_1: {
-														ctor: '::',
-														_0: A2(_debois$elm_mdl$Material_Options$css, 'padding', '0'),
-														_1: {
-															ctor: '::',
-															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin', '0'),
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(msg),
-											_1: {ctor: '[]'}
-										});
-								},
-								model.currentMsgList)),
-						_1: {
-							ctor: '::',
-							_0: A4(_user$project$Main$button, 10, 'Clear', model, _user$project$Main$ClearMessages),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Main$intTextfield = F6(
-	function (num, model, label, value, input_msg, blur_msg) {
-		return A5(
-			_debois$elm_mdl$Material_Textfield$render,
-			_user$project$Main$Mdl,
-			{
-				ctor: '::',
-				_0: num,
-				_1: {ctor: '[]'}
-			},
-			model.mdl,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-					_1: {
-						ctor: '::',
-						_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Textfield$value(
-									_elm_lang$core$Basics$toString(value)),
-								_1: {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onInput(input_msg),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (lab) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Textfield$label(lab),
-									_1: {ctor: '[]'}
-								};
-							},
-							label)),
-					A2(
-						_elm_lang$core$Maybe$withDefault,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$Maybe$map,
-							function (msg) {
-								return {
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Options$onBlur(msg),
-									_1: {ctor: '[]'}
-								};
-							},
-							blur_msg)))),
-			{ctor: '[]'});
-	});
-var _user$project$Main$toggle = F5(
-	function (num, txt, val, model, msg) {
-		return A5(
-			_debois$elm_mdl$Material_Toggles$switch,
-			_user$project$Main$Mdl,
-			{
-				ctor: '::',
-				_0: num,
-				_1: {ctor: '[]'}
-			},
-			model.mdl,
-			{
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Toggles$ripple,
-				_1: {
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Toggles$value(val),
-					_1: {
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Options$onToggle(msg),
-						_1: {
-							ctor: '::',
-							_0: A2(_debois$elm_mdl$Material_Options$css, 'margin-top', '10px'),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(txt),
-				_1: {ctor: '[]'}
-			});
-	});
 var _user$project$Main$PhotoDiodDiode = {ctor: 'PhotoDiodDiode'};
 var _user$project$Main$MicTime = {ctor: 'MicTime'};
 var _user$project$Main$MicFreq = {ctor: 'MicFreq'};
@@ -30602,7 +30640,17 @@ var _user$project$Main$update = F2(
 					var pas_model = A2(
 						_user$project$Main$asPasIn,
 						newer_model,
-						A3(_user$project$Pas$retrievePasData, 'PAS', _p29, newer_model.pas));
+						A4(
+							_user$project$Pas$truncateFrequencyData,
+							1,
+							1200,
+							1500,
+							A4(
+								_user$project$Pas$truncateFrequencyData,
+								0,
+								1200,
+								1500,
+								A3(_user$project$Pas$retrievePasData, 'PAS', _p29, newer_model.pas))));
 					var n_model = A2(
 						_user$project$Main$asRunningDataIn,
 						pas_model,
@@ -30946,16 +30994,17 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Maybe$withDefault,
 					false,
 					A2(_elm_community$list_extra$List_Extra$getAt, 2, model.pasPlotData)) ? _user$project$Main$MicFreq : _user$project$Main$MicTime;
+				var max_ = _elm_lang$core$Native_Utils.eq(d, _user$project$Main$MicFreq) ? 1200 : 0;
 				var maxdata = A3(
 					_elm_lang$core$List$foldl,
 					_user$project$Main$max3,
 					{ctor: '_Tuple3', _0: 0, _1: 0, _2: 0},
-					A3(_user$project$Main$getPasTimeData, model, 1200, d));
+					A3(_user$project$Main$getPasTimeData, model, max_, d));
 				var mindata = A3(
 					_elm_lang$core$List$foldl,
 					_user$project$Main$min3,
 					maxdata,
-					A3(_user$project$Main$getPasTimeData, model, 1200, d));
+					A3(_user$project$Main$getPasTimeData, model, max_, d));
 				var range = {
 					xmin: _user$project$Main$firstElement(mindata),
 					xmax: _user$project$Main$firstElement(maxdata),
@@ -31148,47 +31197,15 @@ var _user$project$Main$viewPas = function (model) {
 									_user$project$Main$TogglePasLaserPower(0)),
 								_1: {
 									ctor: '::',
-									_0: A5(
-										_debois$elm_mdl$Material_Textfield$render,
-										_user$project$Main$Mdl,
-										{
-											ctor: '::',
-											_0: 12,
-											_1: {ctor: '[]'}
-										},
-										model.mdl,
-										{
-											ctor: '::',
-											_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-											_1: {
-												ctor: '::',
-												_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-												_1: {
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-													_1: {
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Textfield$value(
-															_elm_lang$core$Basics$toString(model.pas.cvt.fmod_0)),
-														_1: {
-															ctor: '::',
-															_0: _debois$elm_mdl$Material_Options$onInput(_user$project$Main$UpdateMod0),
-															_1: {
-																ctor: '::',
-																_0: _debois$elm_mdl$Material_Options$onBlur(
-																	_user$project$Main$SendModulation('0')),
-																_1: {
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Textfield$label('Channel 1'),
-																	_1: {ctor: '[]'}
-																}
-															}
-														}
-													}
-												}
-											}
-										},
-										{ctor: '[]'}),
+									_0: A6(
+										_user$project$Main$intTextfield,
+										11,
+										model,
+										_elm_lang$core$Maybe$Just('Channel 1'),
+										model.pas.cvt.fmod_0,
+										_user$project$Main$UpdateMod0,
+										_elm_lang$core$Maybe$Just(
+											_user$project$Main$SendModulation('0'))),
 									_1: {
 										ctor: '::',
 										_0: A5(
@@ -31200,47 +31217,15 @@ var _user$project$Main$viewPas = function (model) {
 											_user$project$Main$TogglePasLaserPower(1)),
 										_1: {
 											ctor: '::',
-											_0: A5(
-												_debois$elm_mdl$Material_Textfield$render,
-												_user$project$Main$Mdl,
-												{
-													ctor: '::',
-													_0: 12,
-													_1: {ctor: '[]'}
-												},
-												model.mdl,
-												{
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-													_1: {
-														ctor: '::',
-														_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-														_1: {
-															ctor: '::',
-															_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-															_1: {
-																ctor: '::',
-																_0: _debois$elm_mdl$Material_Textfield$value(
-																	_elm_lang$core$Basics$toString(model.pas.cvt.fmod_1)),
-																_1: {
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Options$onInput(_user$project$Main$UpdateMod1),
-																	_1: {
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Options$onBlur(
-																			_user$project$Main$SendModulation('1')),
-																		_1: {
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$label('Channel 2'),
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												},
-												{ctor: '[]'}),
+											_0: A6(
+												_user$project$Main$intTextfield,
+												12,
+												model,
+												_elm_lang$core$Maybe$Just('Channel 2'),
+												model.pas.cvt.fmod_1,
+												_user$project$Main$UpdateMod1,
+												_elm_lang$core$Maybe$Just(
+													_user$project$Main$SendModulation('1'))),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -31311,184 +31296,56 @@ var _user$project$Main$viewPas = function (model) {
 											_user$project$Main$ToggleSpeaker(1)),
 										_1: {
 											ctor: '::',
-											_0: A5(
-												_debois$elm_mdl$Material_Textfield$render,
-												_user$project$Main$Mdl,
-												{
-													ctor: '::',
-													_0: 14,
-													_1: {ctor: '[]'}
+											_0: A6(
+												_user$project$Main$txtfield,
+												14,
+												model,
+												_elm_lang$core$Maybe$Just('Center (Hz)'),
+												model.pas.cvt.spk.center,
+												function (_p45) {
+													return _user$project$Main$Pas(
+														_user$project$Pas$UpdateSpkFcenter(_p45));
 												},
-												model.mdl,
-												{
-													ctor: '::',
-													_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-													_1: {
-														ctor: '::',
-														_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-														_1: {
-															ctor: '::',
-															_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-															_1: {
-																ctor: '::',
-																_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.center),
-																_1: {
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Options$onInput(
-																		function (_p45) {
-																			return _user$project$Main$Pas(
-																				_user$project$Pas$UpdateSpkFcenter(_p45));
-																		}),
-																	_1: {
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateChirp),
-																		_1: {
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$label('Center (Hz)'),
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												},
-												{ctor: '[]'}),
+												_elm_lang$core$Maybe$Just(_user$project$Main$UpdateChirp)),
 											_1: {
 												ctor: '::',
-												_0: A5(
-													_debois$elm_mdl$Material_Textfield$render,
-													_user$project$Main$Mdl,
-													{
-														ctor: '::',
-														_0: 15,
-														_1: {ctor: '[]'}
+												_0: A6(
+													_user$project$Main$txtfield,
+													15,
+													model,
+													_elm_lang$core$Maybe$Just('Df (Hz)'),
+													model.pas.cvt.spk.df,
+													function (_p46) {
+														return _user$project$Main$Pas(
+															_user$project$Pas$UpdateSpkDf(_p46));
 													},
-													model.mdl,
-													{
-														ctor: '::',
-														_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-														_1: {
-															ctor: '::',
-															_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-															_1: {
-																ctor: '::',
-																_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-																_1: {
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.df),
-																	_1: {
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Options$onInput(
-																			function (_p46) {
-																				return _user$project$Main$Pas(
-																					_user$project$Pas$UpdateSpkDf(_p46));
-																			}),
-																		_1: {
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$UpdateChirp),
-																			_1: {
-																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Textfield$label('Df (Hz)'),
-																				_1: {ctor: '[]'}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													},
-													{ctor: '[]'}),
+													_elm_lang$core$Maybe$Just(_user$project$Main$UpdateChirp)),
 												_1: {
 													ctor: '::',
-													_0: A5(
-														_debois$elm_mdl$Material_Textfield$render,
-														_user$project$Main$Mdl,
-														{
-															ctor: '::',
-															_0: 16,
-															_1: {ctor: '[]'}
+													_0: A6(
+														_user$project$Main$txtfield,
+														16,
+														model,
+														_elm_lang$core$Maybe$Just('Vscale (V)'),
+														model.pas.cvt.spk.vscale,
+														function (_p47) {
+															return _user$project$Main$Pas(
+																_user$project$Pas$UpdateSpkVscale(_p47));
 														},
-														model.mdl,
-														{
-															ctor: '::',
-															_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-															_1: {
-																ctor: '::',
-																_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-																_1: {
-																	ctor: '::',
-																	_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-																	_1: {
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.vscale),
-																		_1: {
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Options$onInput(
-																				function (_p47) {
-																					return _user$project$Main$Pas(
-																						_user$project$Pas$UpdateSpkVscale(_p47));
-																				}),
-																			_1: {
-																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$SendSpkVoltage),
-																				_1: {
-																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Textfield$label('Vscale (V)'),
-																					_1: {ctor: '[]'}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														},
-														{ctor: '[]'}),
+														_elm_lang$core$Maybe$Just(_user$project$Main$SendSpkVoltage)),
 													_1: {
 														ctor: '::',
-														_0: A5(
-															_debois$elm_mdl$Material_Textfield$render,
-															_user$project$Main$Mdl,
-															{
-																ctor: '::',
-																_0: 17,
-																_1: {ctor: '[]'}
+														_0: A6(
+															_user$project$Main$txtfield,
+															17,
+															model,
+															_elm_lang$core$Maybe$Just('Voffset (V)'),
+															model.pas.cvt.spk.voffset,
+															function (_p48) {
+																return _user$project$Main$Pas(
+																	_user$project$Pas$UpdateSpkVoffset(_p48));
 															},
-															model.mdl,
-															{
-																ctor: '::',
-																_0: _debois$elm_mdl$Material_Textfield$floatingLabel,
-																_1: {
-																	ctor: '::',
-																	_0: A2(_debois$elm_mdl$Material_Options$css, 'width', '125px'),
-																	_1: {
-																		ctor: '::',
-																		_0: _debois$elm_mdl$Material_Textfield$maxlength(15),
-																		_1: {
-																			ctor: '::',
-																			_0: _debois$elm_mdl$Material_Textfield$value(model.pas.cvt.spk.voffset),
-																			_1: {
-																				ctor: '::',
-																				_0: _debois$elm_mdl$Material_Options$onInput(
-																					function (_p48) {
-																						return _user$project$Main$Pas(
-																							_user$project$Pas$UpdateSpkVoffset(_p48));
-																					}),
-																				_1: {
-																					ctor: '::',
-																					_0: _debois$elm_mdl$Material_Options$onBlur(_user$project$Main$SendSpkVoltage),
-																					_1: {
-																						ctor: '::',
-																						_0: _debois$elm_mdl$Material_Textfield$label('Voffset (V)'),
-																						_1: {ctor: '[]'}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															},
-															{ctor: '[]'}),
+															_elm_lang$core$Maybe$Just(_user$project$Main$SendSpkVoltage)),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -31847,11 +31704,12 @@ var _user$project$Main$viewPas = function (model) {
 													_elm_lang$core$Maybe$withDefault,
 													false,
 													A2(_elm_community$list_extra$List_Extra$getAt, 2, model.pasPlotData)) ? _user$project$Main$MicFreq : _user$project$Main$MicTime;
+												var max_ = _elm_lang$core$Native_Utils.eq(p, _user$project$Main$MicFreq) ? 1200 : 0;
 												return A4(
 													_user$project$Main$timeData,
 													model,
 													model.pasRange,
-													A3(_user$project$Main$getPasTimeData, model, 1200, p),
+													A3(_user$project$Main$getPasTimeData, model, max_, p),
 													A2(_elm_lang$core$List$take, 2, model.pasPlotData));
 											}(),
 											_1: {ctor: '[]'}

@@ -213,7 +213,7 @@ init =
         model =
             defaultModelData
     in
-        ( model, Cmd.none )
+    ( model, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -285,7 +285,7 @@ update msg model =
                 new_model =
                     { model | selectedTab = tab }
             in
-                ( new_model, updateWaveforms new_model )
+            ( new_model, updateWaveforms new_model )
 
         CheckCvtData tick ->
             ( model, getCvtData model "0" )
@@ -309,9 +309,9 @@ update msg model =
                 port_ =
                     new_model.network.port_
             in
-                -- When the network model is updated, remember to update the config on the
-                -- javascript side...
-                ( new_model, Network.updateIpConfig [ ip, port_ ] )
+            -- When the network model is updated, remember to update the config on the
+            -- javascript side...
+            ( new_model, Network.updateIpConfig [ ip, port_ ] )
 
         Pas subMsg ->
             let
@@ -319,7 +319,7 @@ update msg model =
                     Pas.update subMsg model.pas
                         |> asPasIn model
             in
-                ( new_model, Cmd.none )
+            ( new_model, Cmd.none )
 
         Crd subMsg ->
             let
@@ -327,14 +327,14 @@ update msg model =
                     Crd.update subMsg model.crd
                         |> asCrdIn model
             in
-                ( new_model, Cmd.none )
+            ( new_model, Cmd.none )
 
         SaveData ->
             let
                 new_model =
                     { model | save = not model.save }
             in
-                ( new_model, toggleSave new_model )
+            ( new_model, toggleSave new_model )
 
         StopServer ->
             ( model, shutdownSystem model )
@@ -353,7 +353,7 @@ update msg model =
                     else
                         "0"
             in
-                ( new_model, toggleO3 new_model val )
+            ( new_model, toggleO3 new_model val )
 
         ToggleO2 ->
             let
@@ -369,7 +369,7 @@ update msg model =
                     else
                         "0"
             in
-                ( new_model, toggleO2 new_model val )
+            ( new_model, toggleO2 new_model val )
 
         ToggleFilter ->
             let
@@ -379,7 +379,7 @@ update msg model =
                         |> asFilterIn model.cvt
                         |> asCvtIn model
             in
-                ( new_model, toggleFilter new_model )
+            ( new_model, toggleFilter new_model )
 
         TogglePump ->
             let
@@ -388,7 +388,7 @@ update msg model =
                         |> switchPump
                         |> asCvtIn model
             in
-                ( new_model, togglePump new_model )
+            ( new_model, togglePump new_model )
 
         ToggleUVLamp ->
             let
@@ -404,7 +404,7 @@ update msg model =
                     else
                         "1"
             in
-                ( new_model, toggleUV new_model val )
+            ( new_model, toggleUV new_model val )
 
         ToggleUSB ->
             ( model, Cmd.none )
@@ -451,14 +451,14 @@ update msg model =
                     else
                         model_with_pas
             in
-                ( nmodel, Cmd.none )
+            ( nmodel, Cmd.none )
 
         GetCVT (Err err) ->
             let
                 data_ =
                     Debug.log "CVT-Error" "There was an error contacting " ++ Network.buildAddress model.network
             in
-                ( model, Cmd.none )
+            ( model, Cmd.none )
 
         GetData (Ok data) ->
             let
@@ -489,8 +489,8 @@ update msg model =
                 pas_model =
                     newer_model.pas
                         |> Pas.retrievePasData "PAS" data
-                        --|> Pas.truncateFrequencyData 0 1200 1500
-                        --|> Pas.truncateFrequencyData 1 1200 1500
+                        |> Pas.truncateFrequencyData 0 1200 1500
+                        |> Pas.truncateFrequencyData 1 1200 1500
                         |> asPasIn newer_model
 
                 -- The following is for testing purposes for handling running data.  There is a better, more generic
@@ -533,7 +533,7 @@ update msg model =
                             List.append nn_model.currentMsgList nn_model.genData.msg
                     }
             in
-                ( nn_msgs, Cmd.none )
+            ( nn_msgs, Cmd.none )
 
         GetData (Err _) ->
             ( model, Cmd.none )
@@ -561,7 +561,7 @@ update msg model =
                 new_model =
                     { model | network = { network_ | port_ = p } }
             in
-                ( new_model, getCvtData new_model "1" )
+            ( new_model, getCvtData new_model "1" )
 
         ToggleSpeaker cell ->
             let
@@ -605,7 +605,7 @@ update msg model =
                     else
                         "1"
             in
-                ( new_model, toggleSpk new_model val ncell )
+            ( new_model, toggleSpk new_model val ncell )
 
         UpdateMod0 f ->
             let
@@ -618,7 +618,7 @@ update msg model =
                         |> Pas.asCvtIn model.pas
                         |> asPasIn model
             in
-                ( new_model, Cmd.none )
+            ( new_model, Cmd.none )
 
         UpdateMod1 f ->
             let
@@ -631,7 +631,7 @@ update msg model =
                         |> Pas.asCvtIn model.pas
                         |> asPasIn model
             in
-                ( new_model, Cmd.none )
+            ( new_model, Cmd.none )
 
         SendModulation cell ->
             let
@@ -647,7 +647,7 @@ update msg model =
                 f =
                     toString freq
             in
-                ( model, setCellFrequency model cell f )
+            ( model, setCellFrequency model cell f )
 
         SendCrdFrequency ->
             ( model, setCrdFrequency model )
@@ -669,7 +669,7 @@ update msg model =
                     else
                         "0"
             in
-                ( new_model, toggleCrdPower model val )
+            ( new_model, toggleCrdPower model val )
 
         UpdateHeaterSP id sp ->
             case id of
@@ -685,7 +685,7 @@ update msg model =
                                 |> Pas.asCvtIn model.pas
                                 |> asPasIn model
                     in
-                        ( new_model, Cmd.none )
+                    ( new_model, Cmd.none )
 
                 Pas1Heater ->
                     let
@@ -696,7 +696,7 @@ update msg model =
                                 |> Pas.asCvtIn model.pas
                                 |> asPasIn model
                     in
-                        ( new_model, Cmd.none )
+                    ( new_model, Cmd.none )
 
         TogglePasLaserPower cell ->
             let
@@ -718,7 +718,7 @@ update msg model =
                                     else
                                         "0"
                             in
-                                togglePasLaserPower new_model val (toString cell)
+                            togglePasLaserPower new_model val (toString cell)
 
                         1 ->
                             let
@@ -728,12 +728,12 @@ update msg model =
                                     else
                                         "0"
                             in
-                                togglePasLaserPower new_model val (toString cell)
+                            togglePasLaserPower new_model val (toString cell)
 
                         _ ->
                             Cmd.none
             in
-                ( new_model, cmd )
+            ( new_model, cmd )
 
         ClearMessages ->
             ( { model | currentMsgList = [] }, Cmd.none )
@@ -757,7 +757,7 @@ update msg model =
                     else
                         "0"
             in
-                ( new_model, toggleFan new_model val )
+            ( new_model, toggleFan new_model val )
 
         UpdateFanVoltage sp ->
             let
@@ -765,7 +765,7 @@ update msg model =
                     setFanVoltage sp model.cvt
                         |> asCvtIn model
             in
-                ( new_model, sendFanVoltage new_model )
+            ( new_model, sendFanVoltage new_model )
 
         UpdateDevSP idx sp ->
             let
@@ -781,7 +781,7 @@ update msg model =
                         |> Alicat.asCvtIn model.alicats
                         |> asAlicatIn model
             in
-                ( new_model, Cmd.none )
+            ( new_model, Cmd.none )
 
         -- TODO: Implement device setpoint updating for the server
         SendDevSP idx ->
@@ -790,7 +790,7 @@ update msg model =
                     Maybe.withDefault Device.defaultDevice
                         (Dict.get idx model.alicats.cvt)
             in
-                ( model, sendDevSp idx dev model )
+            ( model, sendDevSp idx dev model )
 
         -- TODO: Implement time updating so that user can apply correct time to server.
         UpdateTime t ->
@@ -809,7 +809,7 @@ update msg model =
                 newModel =
                     { model | pasPlotData = ListExtra.setAt input (not d) model.pasPlotData }
             in
-                ( newModel, Cmd.none )
+            ( newModel, Cmd.none )
 
         -- TODO: Make this more generic for range entry
         UpdatePasRange entry val ->
@@ -837,7 +837,7 @@ update msg model =
                         default ->
                             range
             in
-                ( { model | pasRange = newRange }, Cmd.none )
+            ( { model | pasRange = newRange }, Cmd.none )
 
         UpdatePasScaling ->
             let
@@ -847,11 +847,17 @@ update msg model =
                     else
                         MicTime
 
+                max_ =
+                    if d == MicFreq then
+                        1200
+                    else
+                        0
+
                 maxdata =
-                    List.foldl max3 ( 0, 0, 0 ) (getPasTimeData model 1200 d)
+                    List.foldl max3 ( 0, 0, 0 ) (getPasTimeData model max_ d)
 
                 mindata =
-                    List.foldl min3 maxdata (getPasTimeData model 1200 d)
+                    List.foldl min3 maxdata (getPasTimeData model max_ d)
 
                 range =
                     { xmin = firstElement mindata
@@ -860,7 +866,7 @@ update msg model =
                     , ymin = toFloat (floor (min (secondElement mindata) (thirdElement mindata)))
                     }
             in
-                ( { model | pasRange = range }, Cmd.none )
+            ( { model | pasRange = range }, Cmd.none )
 
         UpdateCrdRange entry val ->
             let
@@ -887,7 +893,7 @@ update msg model =
                         default ->
                             range
             in
-                ( { model | crdRange = newRange }, Cmd.none )
+            ( { model | crdRange = newRange }, Cmd.none )
 
         UpdateCrdScaling ->
             let
@@ -904,7 +910,7 @@ update msg model =
                     , ymin = toFloat (floor (min (secondElement mindata) (thirdElement mindata)))
                     }
             in
-                ( { model | crdRange = range }, Cmd.none )
+            ( { model | crdRange = range }, Cmd.none )
 
         ToggleCrdPlot input ->
             let
@@ -914,7 +920,7 @@ update msg model =
                 newModel =
                     { model | crdPlotData = ListExtra.setAt input (not d) model.crdPlotData }
             in
-                ( newModel, Cmd.none )
+            ( newModel, Cmd.none )
 
         SequenceState ->
             let
@@ -924,7 +930,7 @@ update msg model =
                     else
                         "Run"
             in
-                ( model, changeSequenceState newState model )
+            ( model, changeSequenceState newState model )
 
         ResetSequence ->
             ( model, changeSequenceState "Reset" model )
@@ -953,12 +959,12 @@ sendNewTime t model =
             )
                 / 1000
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "time?t="
-                    ++ toString lvTime
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "time?t="
+                ++ toString lvTime
+            )
 
 
 changeSequenceState : String -> Model -> Cmd Msg
@@ -980,12 +986,12 @@ toggleSave model =
             else
                 "0"
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "SaveMain?save_="
-                    ++ s
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "SaveMain?save_="
+                ++ s
+            )
 
 
 sendDevSp : String -> Device.Device -> Model -> Cmd Msg
@@ -994,14 +1000,14 @@ sendDevSp idx dev model =
         sp =
             Maybe.withDefault "0" dev.sp
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "UpdateDevSP?sp="
-                    ++ sp
-                    ++ "&idx="
-                    ++ idx
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "UpdateDevSP?sp="
+                ++ sp
+                ++ "&idx="
+                ++ idx
+            )
 
 
 updateWaveforms : Model -> Cmd Msg
@@ -1020,12 +1026,12 @@ sendFanVoltage model =
         val =
             toString model.cvt.fan_voltage
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "UpdateFanVoltage?voltage="
-                    ++ val
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "UpdateFanVoltage?voltage="
+                ++ val
+            )
 
 
 setCrdRate : Model -> Cmd Msg
@@ -1034,12 +1040,12 @@ setCrdRate model =
         s =
             toString model.crd.cvt.dc
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "CRD/samp_per_cycle?samp_cycle="
-                    ++ s
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "CRD/samp_per_cycle?samp_cycle="
+                ++ s
+            )
 
 
 setCrdFrequency : Model -> Cmd Msg
@@ -1048,12 +1054,12 @@ setCrdFrequency model =
         f =
             toString model.crd.cvt.rate
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "CRD/laser_rep_rate?RepRate="
-                    ++ f
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "CRD/laser_rep_rate?RepRate="
+                ++ f
+            )
 
 
 
@@ -1069,14 +1075,14 @@ sendChirp model =
         center =
             toString model.pas.cvt.spk.center
     in
-        Http.send HandleGeneric <|
-            Http.getString
-                (Network.buildAddress model.network
-                    ++ "PAS/chirp?fcenter="
-                    ++ center
-                    ++ "&df="
-                    ++ df
-                )
+    Http.send HandleGeneric <|
+        Http.getString
+            (Network.buildAddress model.network
+                ++ "PAS/chirp?fcenter="
+                ++ center
+                ++ "&df="
+                ++ df
+            )
 
 
 toggleSpk : Model -> String -> String -> Cmd Msg
@@ -1189,8 +1195,8 @@ togglePump model =
             else
                 "0"
     in
-        Http.send HandleGeneric <|
-            Http.getString (Network.buildAddress model.network ++ "TogglePump?Pump=" ++ val)
+    Http.send HandleGeneric <|
+        Http.getString (Network.buildAddress model.network ++ "TogglePump?Pump=" ++ val)
 
 
 toggleCrdPower : Model -> String -> Cmd Msg
@@ -1646,14 +1652,14 @@ viewAux model =
                                             else
                                                 "red"
                                     in
-                                        Table.tr [ css "color" c ]
-                                            [ Table.td [] [ Html.text device.label ]
-                                            , Table.td [] [ Html.text device.type_ ]
-                                            , Table.td [] [ Html.text device.sn ]
-                                            , Table.td [] [ Html.text device.address ]
-                                            , Table.td [] [ Html.text device.model ]
-                                            , Table.td [] [ Html.text (toString device.active) ]
-                                            ]
+                                    Table.tr [ css "color" c ]
+                                        [ Table.td [] [ Html.text device.label ]
+                                        , Table.td [] [ Html.text device.type_ ]
+                                        , Table.td [] [ Html.text device.sn ]
+                                        , Table.td [] [ Html.text device.address ]
+                                        , Table.td [] [ Html.text device.model ]
+                                        , Table.td [] [ Html.text (toString device.active) ]
+                                        ]
                                 )
                                 (List.concat
                                     [ Dict.toList model.alicats.cvt
@@ -1696,7 +1702,7 @@ viewAux model =
                                     else
                                         Html.text ""
                             in
-                                m
+                            m
                         )
                         (Dict.toList model.alicats.cvt)
                     )
@@ -1734,14 +1740,14 @@ viewAux model =
                                             Maybe.withDefault Alicat.defaultData
                                                 (Dict.get id model.alicats.data)
                                     in
-                                        Table.tr []
-                                            [ Table.td [] [ Html.text dcvt.label ]
-                                            , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.pressure)) ]
-                                            , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.temperature)) ]
-                                            , Table.td [] [ Html.text (toString data.output) ]
-                                            , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.setpoint)) ]
-                                            , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.mass_flow)) ]
-                                            ]
+                                    Table.tr []
+                                        [ Table.td [] [ Html.text dcvt.label ]
+                                        , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.pressure)) ]
+                                        , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.temperature)) ]
+                                        , Table.td [] [ Html.text (toString data.output) ]
+                                        , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.setpoint)) ]
+                                        , Table.td [] [ Html.text (toString (Maybe.withDefault 0 data.mass_flow)) ]
+                                        ]
                                 )
                                 (Dict.toList
                                     model.alicats.cvt
@@ -1784,12 +1790,12 @@ viewAux model =
                                             Maybe.withDefault (Vaisala.Data 0 0 0)
                                                 (Dict.get id model.vaisalas.data)
                                     in
-                                        Table.tr []
-                                            [ Table.td [] [ Html.text dcvt.label ]
-                                            , Table.td [] [ Html.text (toString data.temperature) ]
-                                            , Table.td [] [ Html.text (toString data.relative_humidity) ]
-                                            , Table.td [] [ Html.text (toString data.dewpoint) ]
-                                            ]
+                                    Table.tr []
+                                        [ Table.td [] [ Html.text dcvt.label ]
+                                        , Table.td [] [ Html.text (toString data.temperature) ]
+                                        , Table.td [] [ Html.text (toString data.relative_humidity) ]
+                                        , Table.td [] [ Html.text (toString data.dewpoint) ]
+                                        ]
                                 )
                                 (Dict.toList
                                     model.vaisalas.cvt
@@ -1830,11 +1836,11 @@ viewAux model =
                                             Maybe.withDefault (Ppt.Data 0 0)
                                                 (Dict.get id model.ppts.data)
                                     in
-                                        Table.tr []
-                                            [ Table.td [] [ Html.text dcvt.label ]
-                                            , Table.td [] [ Html.text (toString data.pressure) ]
-                                            , Table.td [] [ Html.text (toString data.temperature) ]
-                                            ]
+                                    Table.tr []
+                                        [ Table.td [] [ Html.text dcvt.label ]
+                                        , Table.td [] [ Html.text (toString data.pressure) ]
+                                        , Table.td [] [ Html.text (toString data.temperature) ]
+                                        ]
                                 )
                                 (Dict.toList
                                     model.ppts.cvt
@@ -1859,31 +1865,19 @@ viewPas model =
                 ]
                 [ Material.Options.styled Html.p [ Typo.title ] [ Html.text "Laser Input" ]
                 , toggle 18 "Power 1" model.pas.cvt.enable_0 model (TogglePasLaserPower 0)
-                , Textfield.render Mdl
-                    [ 12 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value (toString model.pas.cvt.fmod_0)
-                    , onInput UpdateMod0
-                    , onBlur (SendModulation <| "0")
-                    , Textfield.label "Channel 1"
-                    ]
-                    []
+                , intTextfield 11
+                    model
+                    (Just "Channel 1")
+                    model.pas.cvt.fmod_0
+                    UpdateMod0
+                    (Just (SendModulation <| "0"))
                 , toggle 19 "Power 2" model.pas.cvt.enable_1 model (TogglePasLaserPower 1)
-                , Textfield.render Mdl
-                    [ 12 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value (toString model.pas.cvt.fmod_1)
-                    , onInput UpdateMod1
-                    , onBlur (SendModulation <| "1")
-                    , Textfield.label "Channel 2"
-                    ]
-                    []
+                , intTextfield 12
+                    model
+                    (Just "Channel 2")
+                    model.pas.cvt.fmod_1
+                    UpdateMod1
+                    (Just (SendModulation <| "1"))
                 ]
             , Material.Options.div
                 [ css "border-style" "solid"
@@ -1896,54 +1890,30 @@ viewPas model =
                 [ Material.Options.styled Html.p [ Typo.title ] [ Html.text "Speaker Input" ]
                 , toggle 10 "Channel 1" model.pas.cvt.speaker_0 model (ToggleSpeaker 0)
                 , toggle 11 "Channel 2" model.pas.cvt.speaker_1 model (ToggleSpeaker 1)
-                , Textfield.render Mdl
-                    [ 14 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value model.pas.cvt.spk.center
-                    , onInput (Pas << Pas.UpdateSpkFcenter)
-                    , onBlur UpdateChirp
-                    , Textfield.label "Center (Hz)"
-                    ]
-                    []
-                , Textfield.render Mdl
-                    [ 15 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value model.pas.cvt.spk.df
-                    , onInput (Pas << Pas.UpdateSpkDf)
-                    , onBlur UpdateChirp
-                    , Textfield.label "Df (Hz)"
-                    ]
-                    []
-                , Textfield.render Mdl
-                    [ 16 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value model.pas.cvt.spk.vscale
-                    , onInput (Pas << Pas.UpdateSpkVscale)
-                    , onBlur SendSpkVoltage
-                    , Textfield.label "Vscale (V)"
-                    ]
-                    []
-                , Textfield.render Mdl
-                    [ 17 ]
-                    model.mdl
-                    [ Textfield.floatingLabel
-                    , css "width" "125px"
-                    , Textfield.maxlength 15
-                    , Textfield.value model.pas.cvt.spk.voffset
-                    , onInput (Pas << Pas.UpdateSpkVoffset)
-                    , onBlur SendSpkVoltage
-                    , Textfield.label "Voffset (V)"
-                    ]
-                    []
+                , txtfield 14
+                    model
+                    (Just "Center (Hz)")
+                    model.pas.cvt.spk.center
+                    (Pas << Pas.UpdateSpkFcenter)
+                    (Just UpdateChirp)
+                , txtfield 15
+                    model
+                    (Just "Df (Hz)")
+                    model.pas.cvt.spk.df
+                    (Pas << Pas.UpdateSpkDf)
+                    (Just UpdateChirp)
+                , txtfield 16
+                    model
+                    (Just "Vscale (V)")
+                    model.pas.cvt.spk.vscale
+                    (Pas << Pas.UpdateSpkVscale)
+                    (Just SendSpkVoltage)
+                , txtfield 17
+                    model
+                    (Just "Voffset (V)")
+                    model.pas.cvt.spk.voffset
+                    (Pas << Pas.UpdateSpkVoffset)
+                    (Just SendSpkVoltage)
                 ]
             ]
         , Grid.cell
@@ -1982,14 +1952,14 @@ viewPas model =
                                         data =
                                             Tuple.second cell
                                     in
-                                        Table.tr []
-                                            [ Table.td [] [ Html.text name ]
-                                            , Table.td [] [ Html.text (printableNumeric data.resonant_frequency) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.q) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.integrated_area) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.absorption) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.laserRMS) ]
-                                            ]
+                                    Table.tr []
+                                        [ Table.td [] [ Html.text name ]
+                                        , Table.td [] [ Html.text (printableNumeric data.resonant_frequency) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.q) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.integrated_area) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.absorption) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.laserRMS) ]
+                                        ]
                                 )
                              <|
                                 List.map2 (,) [ "Channel 1", "Channel 2" ] (Array.toList model.pas.data.cell)
@@ -2005,8 +1975,14 @@ viewPas model =
                                 MicFreq
                             else
                                 MicTime
+
+                        max_ =
+                            if p == MicFreq then
+                                1200
+                            else
+                                0
                       in
-                        timeData model model.pasRange (getPasTimeData model 1200 p) (List.take 2 model.pasPlotData)
+                      timeData model model.pasRange (getPasTimeData model max_ p) (List.take 2 model.pasPlotData)
                     ]
                 , Grid.cell [ Grid.size Grid.All 12 ]
                     [ Toggles.checkbox Mdl
@@ -2045,7 +2021,7 @@ viewPas model =
                                 else
                                     "Time"
                           in
-                            Html.text s
+                          Html.text s
                         ]
                     , Textfield.render Mdl
                         [ 103 ]
@@ -2126,14 +2102,7 @@ viewCrd model =
                 , onBlur SendCrdSampleRate
                 ]
                 []
-            , Toggles.switch Mdl
-                [ 11 ]
-                model.mdl
-                [ Toggles.ripple
-                , Toggles.value model.crd.cvt.power
-                , Material.Options.onToggle ToggleCrdPower
-                ]
-                [ Html.text "Power" ]
+            , toggle 11 "Power" model.crd.cvt.power model ToggleCrdPower
             ]
         , Grid.cell [ Grid.size Grid.Desktop 10, Grid.size Grid.Tablet 6 ]
             [ Grid.grid []
@@ -2169,15 +2138,15 @@ viewCrd model =
                                         data =
                                             Tuple.second cell
                                     in
-                                        Table.tr []
-                                            [ Table.td [] [ Html.text id ]
-                                            , Table.td [] [ Html.text (printableNumeric data.tau) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.tau0) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.tau0corr) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.tauCorrected) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.extinction) ]
-                                            , Table.td [] [ Html.text (printableNumeric data.max) ]
-                                            ]
+                                    Table.tr []
+                                        [ Table.td [] [ Html.text id ]
+                                        , Table.td [] [ Html.text (printableNumeric data.tau) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.tau0) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.tau0corr) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.tauCorrected) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.extinction) ]
+                                        , Table.td [] [ Html.text (printableNumeric data.max) ]
+                                        ]
                                 )
                              <|
                                 List.map2 (,) model.crd.cvt.labels (Array.toList model.crd.data)
@@ -2386,9 +2355,9 @@ viewStatus model =
                                 else
                                     "black"
                         in
-                            Material.Options.styled Html.p
-                                [ Typo.body1, css "color" msg_color, css "width" "100%", css "padding" "0", css "margin" "0" ]
-                                [ Html.text msg ]
+                        Material.Options.styled Html.p
+                            [ Typo.body1, css "color" msg_color, css "width" "100%", css "padding" "0", css "margin" "0" ]
+                            [ Html.text msg ]
                     )
                  <|
                     model.currentMsgList
@@ -2430,19 +2399,19 @@ timeData model range data selectData =
                 )
                 (List.map2 (,) [ Plot.line <| cell0, Plot.line <| cell1 ] selectData)
     in
-        Plot.viewSeriesCustom
-            { defaultSeriesPlotCustomizations
-                | height = 200
-                , toRangeLowest = \y -> range.xmin
-                , toRangeHighest = \y -> range.xmax
-                , toDomainLowest = \y -> range.ymin
-                , toDomainHighest = \y -> range.ymax
-                , margin = { top = 25, right = 25, bottom = 25, left = 50 }
+    Plot.viewSeriesCustom
+        { defaultSeriesPlotCustomizations
+            | height = 200
+            , toRangeLowest = \y -> range.xmin
+            , toRangeHighest = \y -> range.xmax
+            , toDomainLowest = \y -> range.ymin
+            , toDomainHighest = \y -> range.ymax
+            , margin = { top = 25, right = 25, bottom = 25, left = 50 }
 
-                --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
-            }
-            seriesList
-            data
+            --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
+        }
+        seriesList
+        data
 
 
 selectData : Bool -> Plot.Series data msg -> Maybe (Plot.Series data msg)
@@ -2488,21 +2457,21 @@ plotData data data_index =
         plotf coords =
             List.map (\( x, y ) -> Plot.dot (Plot.viewCircle 2 "blue") x y) coords
     in
-        Plot.viewSeriesCustom
-            { defaultSeriesPlotCustomizations
-                | height = 200
-                , horizontalAxis = dataAxis
+    Plot.viewSeriesCustom
+        { defaultSeriesPlotCustomizations
+            | height = 200
+            , horizontalAxis = dataAxis
 
-                --, toRangeLowest = \y -> min y 0
-                --, toRangeHighest = \_ -> 100
-                , toDomainLowest = \y -> max y 0
-                , toDomainHighest = \y -> min y 1500
-                , margin = { top = 25, right = 25, bottom = 25, left = 50 }
+            --, toRangeLowest = \y -> min y 0
+            --, toRangeHighest = \_ -> 100
+            , toDomainLowest = \y -> max y 0
+            , toDomainHighest = \y -> min y 1500
+            , margin = { top = 25, right = 25, bottom = 25, left = 50 }
 
-                --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
-            }
-            [ Plot.line <| plotf ]
-            pdata
+            --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
+        }
+        [ Plot.line <| plotf ]
+        pdata
 
 
 {-| Retrieve the ringdown data for plotting.
@@ -2522,11 +2491,11 @@ getRingdownData model =
         raw_data_1 =
             Maybe.withDefault [] (List.head cell_1.ringdowns)
     in
-        List.map3
-            (\i a b -> ( i, a, b ))
-            (convertToFloat (List.range 0 (List.length raw_data_0)))
-            (convertToFloat raw_data_0)
-            (convertToFloat raw_data_1)
+    List.map3
+        (\i a b -> ( i, a, b ))
+        (convertToFloat (List.range 0 (List.length raw_data_0)))
+        (convertToFloat raw_data_0)
+        (convertToFloat raw_data_1)
 
 
 {-| Basic type for expressing exactly what time data we need from the PAS.
@@ -2565,10 +2534,10 @@ getPasTimeData model xstart dataType =
                 PhotoDiodDiode ->
                     ( convertToFloat cell_0.laserDiodeData, convertToFloat cell_1.laserDiodeData )
     in
-        List.map3 (\i a b -> ( xstart + i, a, b ))
-            (convertToFloat (List.range 0 (List.length (Tuple.first data_in))))
-            (Tuple.first data_in)
-            (Tuple.second data_in)
+    List.map3 (\i a b -> ( xstart + i, a, b ))
+        (convertToFloat (List.range 0 (List.length (Tuple.first data_in))))
+        (Tuple.first data_in)
+        (Tuple.second data_in)
 
 
 {-| Convert a list of ints to a list of floats.
@@ -2608,7 +2577,7 @@ toScientific x y =
             else
                 toString exp
     in
-        num ++ "e" ++ e
+    num ++ "e" ++ e
 
 
 getNumericField : Int -> Int -> String
@@ -2772,6 +2741,38 @@ intTextfield num model label value input_msg blur_msg =
          , css "width" "125px"
          , Textfield.maxlength 15
          , Textfield.value (toString value)
+         , onInput input_msg
+         ]
+            ++ (label
+                    |> Maybe.map (\lab -> [ Textfield.label lab ])
+                    |> Maybe.withDefault []
+               )
+            ++ -- Handle onBlur events if there
+               (blur_msg
+                    |> Maybe.map
+                        (\msg -> [ onBlur msg ])
+                    |> Maybe.withDefault []
+               )
+        )
+        []
+
+
+txtfield :
+    Int -- mdl id
+    -> Model
+    -> Maybe String -- label for the text field
+    -> String --value of text field
+    -> (String -> Msg) -- message handled by onInput
+    -> Maybe Msg -- possible message handled by onBlur
+    -> Html Msg
+txtfield num model label value input_msg blur_msg =
+    Textfield.render Mdl
+        [ num ]
+        model.mdl
+        ([ Textfield.floatingLabel
+         , css "width" "125px"
+         , Textfield.maxlength 15
+         , Textfield.value value
          , onInput input_msg
          ]
             ++ (label
