@@ -19,16 +19,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8241563">
+    <splitter split-orientation="horizontal" split-proportion="0.31024274">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.721064">
+        <splitter split-orientation="horizontal" split-proportion="0.25089863">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
               <file leaf-file-name="main.elm" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="416">
-                      <caret line="856" column="43" lean-forward="false" selection-start-line="856" selection-start-column="43" selection-end-line="856" selection-end-column="43" />
+                    <state relative-caret-position="254">
+                      <caret line="1059" column="29" lean-forward="false" selection-start-line="1059" selection-start-column="24" selection-end-line="1059" selection-end-column="29" />
                       <folding />
                     </state>
                   </provider>
@@ -101,8 +101,8 @@
               <file leaf-file-name="main.elm" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-664">
-                      <caret line="491" column="44" lean-forward="false" selection-start-line="491" selection-start-column="44" selection-end-line="491" selection-end-column="44" />
+                    <state relative-caret-position="272">
+                      <caret line="543" column="19" lean-forward="false" selection-start-line="543" selection-start-column="19" selection-end-line="543" selection-end-column="19" />
                       <folding />
                     </state>
                   </provider>
@@ -167,8 +167,8 @@
           <file leaf-file-name="Pas.elm" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Pas.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="265">
-                  <caret line="352" column="0" lean-forward="false" selection-start-line="352" selection-start-column="0" selection-end-line="352" selection-end-column="0" />
+                <state relative-caret-position="308">
+                  <caret line="393" column="17" lean-forward="true" selection-start-line="393" selection-start-column="17" selection-end-line="393" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -247,10 +247,10 @@
         <option value="$PROJECT_DIR$/src/Devices/Device.elm" />
         <option value="$PROJECT_DIR$/src/Devices/Alicat.elm" />
         <option value="$PROJECT_DIR$/src/Crd.elm" />
-        <option value="$PROJECT_DIR$/src/Pas.elm" />
         <option value="$PROJECT_DIR$/src/GcrdTypes.elm" />
         <option value="$PROJECT_DIR$/src/ui.elm" />
         <option value="$PROJECT_DIR$/src/main.elm" />
+        <option value="$PROJECT_DIR$/src/Pas.elm" />
       </list>
     </option>
   </component>
@@ -440,12 +440,12 @@
       <workItem from="1519835802015" duration="5489000" />
       <workItem from="1519925735359" duration="6883000" />
       <workItem from="1520380214994" duration="4817000" />
-      <workItem from="1520541451718" duration="2416000" />
+      <workItem from="1520541451718" duration="3413000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="554822000" />
+    <option name="totallyTimeSpent" value="555819000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -805,18 +805,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pas.elm">
+    <entry file="file://$PROJECT_DIR$/src/main.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="352" column="0" lean-forward="false" selection-start-line="352" selection-start-column="0" selection-end-line="352" selection-end-column="0" />
+        <state relative-caret-position="254">
+          <caret line="1059" column="29" lean-forward="false" selection-start-line="1059" selection-start-column="24" selection-end-line="1059" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.elm">
+    <entry file="file://$PROJECT_DIR$/src/Pas.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="856" column="43" lean-forward="false" selection-start-line="856" selection-start-column="43" selection-end-line="856" selection-end-column="43" />
+        <state relative-caret-position="308">
+          <caret line="393" column="17" lean-forward="true" selection-start-line="393" selection-start-column="17" selection-end-line="393" selection-end-column="17" />
           <folding />
         </state>
       </provider>

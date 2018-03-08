@@ -25621,12 +25621,15 @@ var _user$project$Pas$retrievePasCvt = F3(
 			_elm_lang$core$Result$withDefault,
 			cvt,
 			A2(
-				_elm_lang$core$Json_Decode$decodeString,
+				_elm_lang$core$Debug$log,
+				'pas_cvt',
 				A2(
-					_elm_lang$core$Json_Decode$field,
-					heading,
-					_user$project$Pas$decodePasCvt(cvt)),
-				data));
+					_elm_lang$core$Json_Decode$decodeString,
+					A2(
+						_elm_lang$core$Json_Decode$field,
+						heading,
+						_user$project$Pas$decodePasCvt(cvt)),
+					data)));
 	});
 var _user$project$Pas$defaultHeater = A2(
 	_user$project$Pas$Heater,

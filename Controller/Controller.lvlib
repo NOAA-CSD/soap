@@ -9,6 +9,12 @@
 		<Item Name="Forward" Type="Folder">
 			<Item Name="Forward Command MSG.lvclass" Type="LVClass" URL="../Messages/Forward Command/Forward Command MSG.lvclass"/>
 		</Item>
+		<Item Name="Heater" Type="Folder">
+			<Item Name="Change Heater SP MSG.lvclass" Type="LVClass" URL="../Messages/Change Heater SP MSG/Change Heater SP MSG.lvclass"/>
+			<Item Name="Enable Heater MSG.lvclass" Type="LVClass" URL="../Messages/Enable Heater v MSG/Enable Heater MSG.lvclass"/>
+			<Item Name="Update Heater DC MSG.lvclass" Type="LVClass" URL="../Messages/Update Heater DC MSG/Update Heater DC MSG.lvclass"/>
+			<Item Name="Change Heater Ctl Params.lvclass" Type="LVClass" URL="../Messages/Change Heater Ctl Params MSG/Change Heater Ctl Params.lvclass"/>
+		</Item>
 		<Item Name="Change Filter Position MSG.lvclass" Type="LVClass" URL="../Messages/Change Filter MSG/Change Filter Position MSG.lvclass"/>
 		<Item Name="Enable Fan MSG.lvclass" Type="LVClass" URL="../Messages/Enable Fan MSG/Enable Fan MSG.lvclass"/>
 		<Item Name="Generic Boolean Message.lvclass" Type="LVClass" URL="../Messages/Generic Boolean MSG/Generic Boolean Message.lvclass"/>
@@ -21,9 +27,7 @@
 		<Item Name="Update gController Data MSG.lvclass" Type="LVClass" URL="../Messages/Update Controller Data MSG/Update gController Data MSG.lvclass"/>
 		<Item Name="Update Vacuum Pump State MSG.lvclass" Type="LVClass" URL="../Messages/Update Vacuum Pump State MSG/Update Vacuum Pump State MSG.lvclass"/>
 		<Item Name="Stop MSG.lvclass" Type="LVClass" URL="../Messages/Stop MSG/Stop MSG.lvclass"/>
-		<Item Name="Change Heater Ctl Params.lvclass" Type="LVClass" URL="../Messages/Change Heater Ctl Params MSG/Change Heater Ctl Params.lvclass"/>
 		<Item Name="Update Device Config MSG.lvclass" Type="LVClass" URL="../Messages/Update Device Configuration/Update Device Config MSG.lvclass"/>
-		<Item Name="Change Heater SP MSG.lvclass" Type="LVClass" URL="../Messages/Change Heater SP MSG/Change Heater SP MSG.lvclass"/>
 		<Item Name="Initialize Device SP MSG.lvclass" Type="LVClass" URL="../Messages/Initialize Device SP MSG/Initialize Device SP MSG.lvclass"/>
 		<Item Name="Remove Log Message MSG.lvclass" Type="LVClass" URL="../Messages/Remove Log Messages MSG/Remove Log Message MSG.lvclass"/>
 		<Item Name="Update Fan Voltage MSG.lvclass" Type="LVClass" URL="../Messages/Update Fan Voltage MSG/Update Fan Voltage MSG.lvclass"/>
@@ -32,9 +36,7 @@
 		<Item Name="Toggle AC Spare MSG.lvclass" Type="LVClass" URL="../Messages/Toggle AC Spare MSG/Toggle AC Spare MSG.lvclass"/>
 		<Item Name="Save Data MSG.lvclass" Type="LVClass" URL="../Messages/Save Data MSG/Save Data MSG.lvclass"/>
 		<Item Name="Change Sequence State MSG.lvclass" Type="LVClass" URL="../Messages/Change Sequence State MSG/Change Sequence State MSG.lvclass"/>
-		<Item Name="Update Heater DC MSG.lvclass" Type="LVClass" URL="../Messages/Update Heater DC MSG/Update Heater DC MSG.lvclass"/>
 		<Item Name="Sync Time MSG.lvclass" Type="LVClass" URL="../Messages/Sync Time MSG/Sync Time MSG.lvclass"/>
-		<Item Name="Enable Heater MSG.lvclass" Type="LVClass" URL="../Messages/Enable Heater v MSG/Enable Heater MSG.lvclass"/>
 		<Item Name="Send Shutdown MSG.lvclass" Type="LVClass" URL="../Messages/Send Shutdown MSG/Send Shutdown MSG.lvclass"/>
 	</Item>
 	<Item Name="Commands" Type="Folder">
