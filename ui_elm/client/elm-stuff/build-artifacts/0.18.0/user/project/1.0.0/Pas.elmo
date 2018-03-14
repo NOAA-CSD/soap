@@ -67,6 +67,7 @@ var _user$project$Pas$setPasHeater1 = F2(
 			cvt,
 			{heater_1: htr});
 	});
+var _user$project$Pas$asHeater1In = _elm_lang$core$Basics$flip(_user$project$Pas$setPasHeater1);
 var _user$project$Pas$setPasHeater0 = F2(
 	function (htr, cvt) {
 		return _elm_lang$core$Native_Utils.update(
@@ -74,7 +75,6 @@ var _user$project$Pas$setPasHeater0 = F2(
 			{heater_0: htr});
 	});
 var _user$project$Pas$asHeater0In = _elm_lang$core$Basics$flip(_user$project$Pas$setPasHeater0);
-var _user$project$Pas$asHeater1In = _elm_lang$core$Basics$flip(_user$project$Pas$setPasHeater0);
 var _user$project$Pas$setSpkVscale = F2(
 	function (vscale, spk) {
 		return _elm_lang$core$Native_Utils.update(
@@ -442,18 +442,19 @@ var _user$project$Pas$decodeSpeaker = A5(
 	A2(_elm_lang$core$Json_Decode$field, 'center', _user$project$Pas$intString),
 	A2(_elm_lang$core$Json_Decode$field, 'df', _user$project$Pas$intString));
 var _user$project$Pas$defaultSpk = A4(_user$project$Pas$Speaker_, '1', '0.5', '1350', '100');
-var _user$project$Pas$Heater = F2(
-	function (a, b) {
-		return {pid: a, sp: b};
+var _user$project$Pas$Heater = F3(
+	function (a, b, c) {
+		return {pid: a, sp: b, enable_pid: c};
 	});
-var _user$project$Pas$decodeHeater = A3(
-	_elm_lang$core$Json_Decode$map2,
+var _user$project$Pas$decodeHeater = A4(
+	_elm_lang$core$Json_Decode$map3,
 	_user$project$Pas$Heater,
 	A2(
 		_elm_lang$core$Json_Decode$field,
 		'pid',
 		_elm_lang$core$Json_Decode$array(_elm_lang$core$Json_Decode$string)),
-	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string));
+	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'enable', _elm_lang$core$Json_Decode$bool));
 var _user$project$Pas$decodePasCvt = function (cvt) {
 	return A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
@@ -555,17 +556,14 @@ var _user$project$Pas$retrievePasCvt = F3(
 			_elm_lang$core$Result$withDefault,
 			cvt,
 			A2(
-				_elm_lang$core$Debug$log,
-				'pas_cvt',
+				_elm_lang$core$Json_Decode$decodeString,
 				A2(
-					_elm_lang$core$Json_Decode$decodeString,
-					A2(
-						_elm_lang$core$Json_Decode$field,
-						heading,
-						_user$project$Pas$decodePasCvt(cvt)),
-					data)));
+					_elm_lang$core$Json_Decode$field,
+					heading,
+					_user$project$Pas$decodePasCvt(cvt)),
+				data));
 	});
-var _user$project$Pas$defaultHeater = A2(
+var _user$project$Pas$defaultHeater = A3(
 	_user$project$Pas$Heater,
 	_elm_lang$core$Array$fromList(
 		{
@@ -581,7 +579,8 @@ var _user$project$Pas$defaultHeater = A2(
 				}
 			}
 		}),
-	'18');
+	'18',
+	false);
 var _user$project$Pas$defaultCvt = _user$project$Pas$PasCvt(_user$project$Pas$defaultSpk)(
 	{
 		ctor: '::',

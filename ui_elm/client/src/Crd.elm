@@ -38,7 +38,7 @@ update msg model =
                         |> setRate f
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         UpdateDutyCycle dc ->
             let
@@ -50,7 +50,7 @@ update msg model =
                         |> setDc dc_
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         TogglePower ->
             model.cvt
@@ -88,12 +88,18 @@ type alias CrdCvt =
 type alias Heater =
     { pid : Array String
     , sp : String
+    , enable_pid : Bool
     }
 
 
 defaultCvt : CrdCvt
 defaultCvt =
-    CrdCvt [ "cell_0", "cell_1" ] 1000 400 (Heater (Array.fromList [ "1", "0", "0" ]) "18") False
+    CrdCvt
+        [ "cell_0", "cell_1" ]
+        1000
+        400
+        (Heater (Array.fromList [ "1", "0", "0" ]) "18" False)
+        False
 
 
 setRate : Int -> CrdCvt -> CrdCvt
@@ -121,11 +127,17 @@ setHeaterPID pid htr =
     { htr | pid = pid }
 
 
+asHeaterIn : CrdCvt -> Heater -> CrdCvt
+asHeaterIn cvt htr =
+    { cvt | heater = htr }
+
+
 decodeHeater : Decoder Heater
 decodeHeater =
-    map2 Heater
+    map3 Heater
         (field "pid" (array string))
         (field "sp" string)
+        (field "enable" bool)
 
 
 asCvtIn : Model -> CrdCvt -> Model
@@ -195,9 +207,9 @@ viewRingdown model =
         data =
             List.indexedMap (,) raw_data
     in
-    Plot.viewSeries
-        [ Plot.line <| List.map (\( x, y ) -> Plot.circle (toFloat x) (toFloat y)) ]
-        data
+        Plot.viewSeries
+            [ Plot.line <| List.map (\( x, y ) -> Plot.circle (toFloat x) (toFloat y)) ]
+            data
 
 
 {-| This command actually retrieves the CVT data from the json string returned by the server.

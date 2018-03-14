@@ -10,6 +10,12 @@ var _user$project$Crd$asCvtIn = F2(
 			model,
 			{cvt: cvt});
 	});
+var _user$project$Crd$asHeaterIn = F2(
+	function (cvt, htr) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{heater: htr});
+	});
 var _user$project$Crd$setHeaterPID = F2(
 	function (pid, htr) {
 		return _elm_lang$core$Native_Utils.update(
@@ -291,9 +297,9 @@ var _user$project$Crd$CrdCvt = F5(
 	function (a, b, c, d, e) {
 		return {labels: a, rate: b, dc: c, heater: d, power: e};
 	});
-var _user$project$Crd$Heater = F2(
-	function (a, b) {
-		return {pid: a, sp: b};
+var _user$project$Crd$Heater = F3(
+	function (a, b, c) {
+		return {pid: a, sp: b, enable_pid: c};
 	});
 var _user$project$Crd$defaultCvt = A5(
 	_user$project$Crd$CrdCvt,
@@ -308,7 +314,7 @@ var _user$project$Crd$defaultCvt = A5(
 	},
 	1000,
 	400,
-	A2(
+	A3(
 		_user$project$Crd$Heater,
 		_elm_lang$core$Array$fromList(
 			{
@@ -324,7 +330,8 @@ var _user$project$Crd$defaultCvt = A5(
 					}
 				}
 			}),
-		'18'),
+		'18',
+		false),
 	false);
 var _user$project$Crd$init = {
 	cvt: _user$project$Crd$defaultCvt,
@@ -344,14 +351,15 @@ var _user$project$Crd$init = {
 			_1: {ctor: '[]'}
 		})
 };
-var _user$project$Crd$decodeHeater = A3(
-	_elm_lang$core$Json_Decode$map2,
+var _user$project$Crd$decodeHeater = A4(
+	_elm_lang$core$Json_Decode$map3,
 	_user$project$Crd$Heater,
 	A2(
 		_elm_lang$core$Json_Decode$field,
 		'pid',
 		_elm_lang$core$Json_Decode$array(_elm_lang$core$Json_Decode$string)),
-	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string));
+	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'enable', _elm_lang$core$Json_Decode$bool));
 var _user$project$Crd$decodeCvt = function (cvt) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,

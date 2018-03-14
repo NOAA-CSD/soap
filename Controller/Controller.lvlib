@@ -54,4 +54,5 @@
 	</Item>
 	<Item Name="SOAP Data.lvclass" Type="LVClass" URL="../../Data/SOAP Data.lvclass"/>
 	<Item Name="gController.lvclass" Type="LVClass" URL="../gController.lvclass"/>
+	<Item Name="Heater Data.lvclass" Type="LVClass" URL="../../Data/Heater Data/Heater Data.lvclass"/>
 </Library>
