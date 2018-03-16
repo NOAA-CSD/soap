@@ -16,6 +16,21 @@ type alias VaisalaData =
     }
 
 
+
+{- The following are some elm-plot helpers -}
+
+
+type alias PlotLimits =
+    { max : Float -> Float, min : Float -> Float }
+
+
+type alias PlotDescription =
+    { xLim : PlotLimits
+    , yLim : PlotLimits
+    , autoscale : Bool
+    }
+
+
 defaultVaisalaData : VaisalaData
 defaultVaisalaData =
     { id = "default", temperature = 0, relative_humidity = 0, dewpoint = 0 }
@@ -46,6 +61,9 @@ type alias Data =
     , msg : List String
     , interlock : Bool
     , temperatures : Temperatures
+    , pas0_heater : HeaterData
+    , pas1_heater : HeaterData
+    , crd_heater : HeaterData
     }
 
 
@@ -57,15 +75,18 @@ setMessages msgs data =
 decodeData : Decoder Data
 decodeData =
     decode Data
-        |> required "Time" string
-        |> required "msgs" (list string)
-        |> required "interlock" bool
-        |> required "temperatures" decodeTemperatures
+        |> requiredAt [ "general", "Time" ] string
+        |> requiredAt [ "general", "msgs" ] (list string)
+        |> requiredAt [ "general", "interlock" ] bool
+        |> requiredAt [ "general", "temperatures" ] decodeTemperatures
+        |> required "pas_1_heater" decodeHeaterData
+        |> required "pas_2_heater" decodeHeaterData
+        |> required "crd_heater" decodeHeaterData
 
 
 defaultData : Data
 defaultData =
-    Data "0" [] False (Temperatures 0 0 0 0 0 0 0 0 0 0)
+    Data "0" [] False (Temperatures 0 0 0 0 0 0 0 0 0 0) defaultHeaterData defaultHeaterData defaultHeaterData
 
 
 
@@ -87,7 +108,7 @@ toggleFilterPosition f =
             else
                 0
     in
-    { f | pos = val }
+        { f | pos = val }
 
 
 {-| -}
@@ -114,12 +135,12 @@ type alias Temperatures =
     , pasCell2 : Float
     , pasLaserHead1 : Float
     , pasLaserHead2 : Float
-    , cjc0 : Float
     , boxExit : Float
     , crdHeater : Float
     , boxInlet : Float
     , crdLaserHead : Float
-    , cjc1 : Float
+    , cjc : Float
+    , autozero : Float
     }
 
 
@@ -130,12 +151,12 @@ temperatureToArray t =
         , t.pasCell2
         , t.pasLaserHead1
         , t.pasLaserHead2
-        , t.cjc0
         , t.boxExit
         , t.crdHeater
         , t.boxInlet
         , t.crdLaserHead
-        , t.cjc1
+        , t.cjc
+        , t.autozero
         ]
 
 
@@ -151,12 +172,12 @@ decodeTemperatures =
         |> required "pas_cell_2" float
         |> required "pas_las_head_1" float
         |> required "pas_las_head_2" float
-        |> required "cjc0" float
         |> required "box_exit" float
         |> required "crd_heater" float
         |> required "box_inlet" float
         |> required "crd_laser_head" float
-        |> required "cjc1" float
+        |> required "cjc" float
+        |> required "autozero" float
 
 
 type alias Calibration =
@@ -257,6 +278,23 @@ decodeCvt cvt =
         |> requiredAt [ "general", "fan_speed" ] float
         |> requiredAt [ "general", "seq_state" ] string
         |> requiredAt [ "general", "save" ] bool
+
+
+type alias HeaterData =
+    { enable : Bool, sp : Float, dc : Int }
+
+
+defaultHeaterData : HeaterData
+defaultHeaterData =
+    { enable = False, sp = 0, dc = 0 }
+
+
+decodeHeaterData : Decoder HeaterData
+decodeHeaterData =
+    decode HeaterData
+        |> required "enable" bool
+        |> required "sp" float
+        |> required "dc" int
 
 
 

@@ -503,7 +503,7 @@ update msg model =
                         |> asPptIn newestest_model
 
                 newer_model =
-                    Result.withDefault p_model.genData (Decoder.decodeString (Decoder.field "general" decodeData) data)
+                    Result.withDefault p_model.genData (Decoder.decodeString decodeData data)
                         |> asDataIn p_model
 
                 pas_model =
@@ -1744,6 +1744,31 @@ viewAux model =
 
                                 _ ->
                                     CrdHeater
+
+                        y =
+                            case index of
+                                0 ->
+                                    model.pas.cvt.heater_0.enable_pid
+
+                                1 ->
+                                    model.pas.cvt.heater_1.enable_pid
+
+                                2 ->
+                                    model.crd.cvt.heater.enable_pid
+
+                                _ ->
+                                    model.crd.cvt.heater.enable_pid
+
+                        z =
+                            case index of
+                                0 ->
+                                    model.genData.pas0_heater.dc
+
+                                1 ->
+                                    model.genData.pas1_heater.dc
+
+                                _ ->
+                                    model.genData.crd_heater.dc
                     in
                         Grid.cell [ Grid.size Grid.All 2 ]
                             [ Material.Options.div
@@ -1758,6 +1783,8 @@ viewAux model =
                                     [ 18 + 5 * index ]
                                     model.mdl
                                     [ Toggles.ripple
+                                    , Material.Options.onToggle (ToggleHeaterPid x)
+                                    , Toggles.value y
                                     ]
                                     [ Html.text "Power" ]
                                 , Textfield.render Mdl
@@ -1808,6 +1835,16 @@ viewAux model =
                                     , Textfield.label "D"
                                     ]
                                     []
+                                , Textfield.render Mdl
+                                    [ 23 + 5 * index ]
+                                    model.mdl
+                                    [ Textfield.floatingLabel
+                                    , css "width" "125px"
+                                    , Textfield.maxlength 15
+                                    , Textfield.value (toString z)
+                                    , Textfield.label "DC"
+                                    ]
+                                    []
                                 ]
                             ]
                 )
@@ -1852,9 +1889,9 @@ viewAux model =
                             , "PAS Laser Head 1"
                             , "PAS Laser Head 2"
                             , "Box Exit"
-                            , "CRD Heater"
-                            , "Box Inlet"
                             , "CRD Laser Head"
+                            , "Box Inlet"
+                            , "CRD Heater"
                             , "CJC 1"
                             ]
                         )
@@ -2693,20 +2730,11 @@ plotData data data_index =
 
         plotf coords =
             List.map (\( x, y ) -> Plot.dot (Plot.viewCircle 2 "blue") x y) coords
+
+        plotCustomizations =
+            pcs { min = (\y -> max y 0), max = (\y -> min y 1500) } { min = identity, max = identity }
     in
-        Plot.viewSeriesCustom
-            { defaultSeriesPlotCustomizations
-                | height = 200
-                , horizontalAxis = dataAxis
-
-                --, toRangeLowest = \y -> min y 0
-                --, toRangeHighest = \_ -> 100
-                , toDomainLowest = \y -> max y 0
-                , toDomainHighest = \y -> min y 1500
-                , margin = { top = 25, right = 25, bottom = 25, left = 50 }
-
-                --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
-            }
+        Plot.viewSeriesCustom plotCustomizations
             [ Plot.line <| plotf ]
             pdata
 
@@ -3037,3 +3065,17 @@ toggle num txt val model msg =
         , css "margin-top" "10px"
         ]
         [ Html.text txt ]
+
+
+pcs : PlotLimits -> PlotLimits -> Plot.PlotCustomizations msg
+pcs xlim ylim =
+    { defaultSeriesPlotCustomizations
+        | height = 200
+        , margin = { top = 25, right = 25, bottom = 25, left = 50 }
+        , toDomainLowest = ylim.min
+        , toDomainHighest = ylim.max
+        , toRangeLowest = xlim.min
+        , toRangeHighest = xlim.max
+
+        --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
+    }
