@@ -18,7 +18,7 @@ The sequence tags that are used are as follows:
 * `wait` - **integer** indicating the number of seconds before the next step should execute.
 * `uv-lamp` - **boolean** indicating the power state of the UV lamp; `TRUE` is on and `FALSE` is off.
 * `speaker` - this is a two-value, comma separated list with the first entry being an **integer** indicating the PAS cell affected and the other a **boolean** indicating the speaker state.  The cell value can be 0 or 1 while `TRUE` indicates the speaker is on.
-* `o3-flow` - misnamed; should be `o2-flow` but is what it is.  This is a *float* indicating the desired O2 flow rate.
+* `o3-flow` - misnamed; should be `o2-flow` but is what it is.  This is a **float** indicating the desired O2 flow rate.
 
 ## An example
 
