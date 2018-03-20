@@ -39,7 +39,7 @@ var _user$project$Devices_Ppt$decodeData = A3(
 		_elm_lang$core$Json_Decode$float,
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Devices_Ppt$Data)));
 var _user$project$Devices_Ppt$getPptData = F2(
-	function (model, data) {
+	function (data, model) {
 		var d = A2(
 			_elm_lang$core$List$map,
 			function (d) {

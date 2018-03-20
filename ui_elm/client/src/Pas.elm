@@ -13,6 +13,7 @@ This includes both the control and display of the photoacoustic data.
 
 import Array exposing (Array)
 import Http
+import List.Extra exposing (getAt, setAt)
 import Json.Decode exposing (..)
 import Json.Decode.Pipeline exposing (..)
 
@@ -20,13 +21,14 @@ import Json.Decode.Pipeline exposing (..)
 type alias Model =
     { cvt : PasCvt
     , data : PasData
+    , dataLength : Int
     }
 
 
 {-| -}
 init : Model
 init =
-    { cvt = defaultCvt, data = defaultPasData }
+    { cvt = defaultCvt, data = defaultPasData, dataLength = 300 }
 
 
 {-| Update messages for the PAS
@@ -119,7 +121,22 @@ type Drive
 type alias PasData =
     { cell : Array PasCell
     , drive : Drive
+    , runningData : List RunningData
     }
+
+
+type alias RunningData =
+    { f0 : List Float
+    , ia : List Float
+    , q : List Float
+    , max : List Float
+    , lrms : List Float
+    }
+
+
+defaultRunningData : RunningData
+defaultRunningData =
+    RunningData [] [] [] [] []
 
 
 {-| Definition of the PAS data that is returned by cell.
@@ -137,6 +154,36 @@ type alias PasCell =
     , fittedData : List Float
     , iaBackground : Float
     }
+
+
+getIntegratedArea : PasCell -> Float
+getIntegratedArea cell =
+    cell.integrated_area
+
+
+getResonantFrequency : PasCell -> Float
+getResonantFrequency cell =
+    cell.resonant_frequency
+
+
+getMax : PasCell -> List Float
+getMax cell =
+    cell.max
+
+
+getQ : PasCell -> Float
+getQ cell =
+    cell.q
+
+
+getLrms : PasCell -> Float
+getLrms cell =
+    cell.laserRMS
+
+
+handleRunningData : Model -> Model
+handleRunningData model =
+    model
 
 
 type alias PasCvt =
@@ -190,18 +237,22 @@ asDataIn model data =
     { model | data = data }
 
 
-decodePASData : Decoder PasData
-decodePASData =
-    map2 PasData
-        (field "CellData" (array decodeCellData))
-        (field "Drive" decodeDrive)
+{-| Retrieve the PAS data. Running data is hard coded as the current value as
+we will populate further down after the new data values are returned.
+-}
+decodePASData : Model -> Decoder PasData
+decodePASData model =
+    decode PasData
+        |> required "CellData" (array decodeCellData)
+        |> required "Drive" decodeDrive
+        |> hardcoded model.data.runningData
 
 
-retrievePasData : String -> String -> Model -> Model
-retrievePasData head data model =
+retrieveData : String -> String -> Model -> Model
+retrieveData head data model =
     let
         new_model =
-            Result.withDefault model.data (decodeString (field head decodePASData) data)
+            Result.withDefault model.data (decodeString (field head (decodePASData model)) data)
                 |> asDataIn model
     in
         new_model
@@ -410,7 +461,12 @@ retrievePasCvt heading data cvt =
 
 defaultPasData : PasData
 defaultPasData =
-    PasData defaultPasCellData Laser
+    PasData defaultPasCellData Laser [ defaultRunningData ]
+
+
+defaultCellData : PasCell
+defaultCellData =
+    PasCell 0 0 0 [ 0, 0 ] 0 0 [ 0 ] [ 0 ] [ 0 ] [ 0 ] 0
 
 
 defaultPasCellData : Array PasCell
@@ -448,3 +504,41 @@ intString =
 floatString : Decoder String
 floatString =
     map toString float
+
+
+populateRunningData : Model -> Model
+populateRunningData model =
+    model
+
+
+getCelliData : Int -> List RunningData -> RunningData
+getCelliData cell data =
+    Maybe.withDefault defaultRunningData (getAt cell data)
+
+
+setCelliData : Int -> RunningData -> List RunningData -> List RunningData
+setCelliData cell data ldata =
+    setAt cell data ldata
+
+
+asF0In : Model -> Model
+asF0In model =
+    let
+        cell0Data =
+            getCelliData 0 model.data.runningData
+
+        cell_0_f0 =
+            getPasCell 0 model
+                |> getResonantFrequency
+
+        --f0_1 =
+        --   List.take model.dataLength ()
+        cell1Data =
+            getCelliData 1 model.data.runningData
+    in
+        model
+
+
+getPasCell : Int -> Model -> PasCell
+getPasCell cell model =
+    Maybe.withDefault defaultCellData (Array.get cell model.data.cell)

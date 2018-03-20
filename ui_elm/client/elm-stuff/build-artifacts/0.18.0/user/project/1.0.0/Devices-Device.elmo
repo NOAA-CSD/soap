@@ -36,6 +36,3 @@ var _user$project$Devices_Device$defaultDeviceDict = A2(
 	_elm_lang$core$Dict$singleton,
 	'null_device',
 	A8(_user$project$Devices_Device$Device, 'n', 'label', '-1', false, '-1', 'not_present', false, _elm_lang$core$Maybe$Nothing));
-var _user$project$Devices_Device$Vaisala = {ctor: 'Vaisala'};
-var _user$project$Devices_Device$Alicat = {ctor: 'Alicat'};
-var _user$project$Devices_Device$Ppt = {ctor: 'Ppt'};

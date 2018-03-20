@@ -1,3 +1,10 @@
+var _user$project$Pas$setCelliData = F3(
+	function (cell, data, ldata) {
+		return A3(_elm_community$list_extra$List_Extra$setAt, cell, data, ldata);
+	});
+var _user$project$Pas$populateRunningData = function (model) {
+	return model;
+};
 var _user$project$Pas$floatString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$float);
 var _user$project$Pas$intString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$int);
 var _user$project$Pas$setCellData = F3(
@@ -133,6 +140,24 @@ var _user$project$Pas$asDataIn = F2(
 			model,
 			{data: data});
 	});
+var _user$project$Pas$handleRunningData = function (model) {
+	return model;
+};
+var _user$project$Pas$getLrms = function (cell) {
+	return cell.laserRMS;
+};
+var _user$project$Pas$getQ = function (cell) {
+	return cell.q;
+};
+var _user$project$Pas$getMax = function (cell) {
+	return cell.max;
+};
+var _user$project$Pas$getResonantFrequency = function (cell) {
+	return cell.resonant_frequency;
+};
+var _user$project$Pas$getIntegratedArea = function (cell) {
+	return cell.integrated_area;
+};
 var _user$project$Pas$update = F2(
 	function (msg, model) {
 		var _p1 = msg;
@@ -179,13 +204,31 @@ var _user$project$Pas$update = F2(
 				return new_model;
 		}
 	});
-var _user$project$Pas$Model = F2(
-	function (a, b) {
-		return {cvt: a, data: b};
+var _user$project$Pas$Model = F3(
+	function (a, b, c) {
+		return {cvt: a, data: b, dataLength: c};
 	});
-var _user$project$Pas$PasData = F2(
-	function (a, b) {
-		return {cell: a, drive: b};
+var _user$project$Pas$PasData = F3(
+	function (a, b, c) {
+		return {cell: a, drive: b, runningData: c};
+	});
+var _user$project$Pas$RunningData = F5(
+	function (a, b, c, d, e) {
+		return {f0: a, ia: b, q: c, max: d, lrms: e};
+	});
+var _user$project$Pas$defaultRunningData = A5(
+	_user$project$Pas$RunningData,
+	{ctor: '[]'},
+	{ctor: '[]'},
+	{ctor: '[]'},
+	{ctor: '[]'},
+	{ctor: '[]'});
+var _user$project$Pas$getCelliData = F2(
+	function (cell, data) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_user$project$Pas$defaultRunningData,
+			A2(_elm_community$list_extra$List_Extra$getAt, cell, data));
 	});
 var _user$project$Pas$PasCell = function (a) {
 	return function (b) {
@@ -372,6 +415,50 @@ var _user$project$Pas$truncateFrequencyData = F4(
 		var new_cell = A2(_user$project$Pas$asFreqIn, cellData, newFreqData);
 		return A3(_user$project$Pas$setCellData, model, cell, new_cell);
 	});
+var _user$project$Pas$defaultCellData = _user$project$Pas$PasCell(0)(0)(0)(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {
+			ctor: '::',
+			_0: 0,
+			_1: {ctor: '[]'}
+		}
+	})(0)(0)(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(0);
+var _user$project$Pas$getPasCell = F2(
+	function (cell, model) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_user$project$Pas$defaultCellData,
+			A2(_elm_lang$core$Array$get, cell, model.data.cell));
+	});
+var _user$project$Pas$asF0In = function (model) {
+	var cell1Data = A2(_user$project$Pas$getCelliData, 1, model.data.runningData);
+	var cell_0_f0 = _user$project$Pas$getResonantFrequency(
+		A2(_user$project$Pas$getPasCell, 0, model));
+	var cell0Data = A2(_user$project$Pas$getCelliData, 0, model.data.runningData);
+	return model;
+};
 var _user$project$Pas$defaultPasCellData = _elm_lang$core$Array$fromList(
 	{
 		ctor: '::',
@@ -621,23 +708,37 @@ var _user$project$Pas$UpdateFreq = F2(
 	});
 var _user$project$Pas$Speaker = {ctor: 'Speaker'};
 var _user$project$Pas$Laser = {ctor: 'Laser'};
-var _user$project$Pas$defaultPasData = A2(_user$project$Pas$PasData, _user$project$Pas$defaultPasCellData, _user$project$Pas$Laser);
-var _user$project$Pas$init = {cvt: _user$project$Pas$defaultCvt, data: _user$project$Pas$defaultPasData};
+var _user$project$Pas$defaultPasData = A3(
+	_user$project$Pas$PasData,
+	_user$project$Pas$defaultPasCellData,
+	_user$project$Pas$Laser,
+	{
+		ctor: '::',
+		_0: _user$project$Pas$defaultRunningData,
+		_1: {ctor: '[]'}
+	});
+var _user$project$Pas$init = {cvt: _user$project$Pas$defaultCvt, data: _user$project$Pas$defaultPasData, dataLength: 300};
 var _user$project$Pas$decodeDrive = function () {
 	var helper = function (d) {
 		return d ? _elm_lang$core$Json_Decode$succeed(_user$project$Pas$Speaker) : _elm_lang$core$Json_Decode$succeed(_user$project$Pas$Laser);
 	};
 	return A2(_elm_lang$core$Json_Decode$andThen, helper, _elm_lang$core$Json_Decode$bool);
 }();
-var _user$project$Pas$decodePASData = A3(
-	_elm_lang$core$Json_Decode$map2,
-	_user$project$Pas$PasData,
-	A2(
-		_elm_lang$core$Json_Decode$field,
-		'CellData',
-		_elm_lang$core$Json_Decode$array(_user$project$Pas$decodeCellData)),
-	A2(_elm_lang$core$Json_Decode$field, 'Drive', _user$project$Pas$decodeDrive));
-var _user$project$Pas$retrievePasData = F3(
+var _user$project$Pas$decodePASData = function (model) {
+	return A2(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+		model.data.runningData,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'Drive',
+			_user$project$Pas$decodeDrive,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'CellData',
+				_elm_lang$core$Json_Decode$array(_user$project$Pas$decodeCellData),
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Pas$PasData))));
+};
+var _user$project$Pas$retrieveData = F3(
 	function (head, data, model) {
 		var new_model = A2(
 			_user$project$Pas$asDataIn,
@@ -647,7 +748,10 @@ var _user$project$Pas$retrievePasData = F3(
 				model.data,
 				A2(
 					_elm_lang$core$Json_Decode$decodeString,
-					A2(_elm_lang$core$Json_Decode$field, head, _user$project$Pas$decodePASData),
+					A2(
+						_elm_lang$core$Json_Decode$field,
+						head,
+						_user$project$Pas$decodePASData(model)),
 					data)));
 		return new_model;
 	});

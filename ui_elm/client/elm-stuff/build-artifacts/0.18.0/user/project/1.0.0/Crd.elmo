@@ -83,6 +83,10 @@ var _user$project$Crd$Model = F2(
 	function (a, b) {
 		return {cvt: a, data: b};
 	});
+var _user$project$Crd$Data = F2(
+	function (a, b) {
+		return {cellData: a, runningData: b};
+	});
 var _user$project$Crd$CrdsCell = function (a) {
 	return function (b) {
 		return function (c) {
@@ -218,7 +222,7 @@ var _user$project$Crd$decodeExtData = A3(
 										},
 										_elm_lang$core$Json_Decode$float,
 										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Crd$CrdsCell)))))))))));
-var _user$project$Crd$retrieveCrdData = F3(
+var _user$project$Crd$retrieveData = F3(
 	function (head, data, cell_data) {
 		return A2(
 			_elm_lang$core$Result$withDefault,

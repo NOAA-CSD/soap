@@ -74,8 +74,8 @@ insertPptDev devs model =
     { model | cvt = Dict.fromList dev_ }
 
 
-getPptData : Model -> String -> Model
-getPptData model data =
+getPptData : String -> Model -> Model
+getPptData data model =
     let
         d =
             List.map

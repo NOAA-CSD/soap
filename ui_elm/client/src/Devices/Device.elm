@@ -14,15 +14,6 @@ import Dict
 import Json.Decode exposing (..)
 
 
---import Json.Decode.Pipeline exposing (..)
-
-
-type Dtype
-    = Ppt
-    | Alicat
-    | Vaisala
-
-
 type alias DeviceList =
     Dict.Dict String Device
 

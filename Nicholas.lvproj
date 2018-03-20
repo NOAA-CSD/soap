@@ -2984,9 +2984,9 @@ DirectoryIndex index.htm
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 			</Item>
 			<Item Name="AF Debug.lvlib" Type="Library" URL="/&lt;resource&gt;/AFDebug/AF Debug.lvlib"/>
-			<Item Name="cRIO Convert Thermocouple Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Convert Thermocouple Reading.vi"/>
-			<Item Name="cRIO Temperature to Volts.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Temperature to Volts.vi"/>
-			<Item Name="cRIO Volts to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Volts to Temperature.vi"/>
+			<Item Name="cRIO Convert Thermocouple Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Convert Thermocouple Reading.vi"/>
+			<Item Name="cRIO Temperature to Volts.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Temperature to Volts.vi"/>
+			<Item Name="cRIO Volts to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Volts to Temperature.vi"/>
 			<Item Name="LV Config Read String.vi" Type="VI" URL="/&lt;resource&gt;/dialog/lvconfig.llb/LV Config Read String.vi"/>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
 			<Item Name="NI 9213 Convert Thermistor Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert Thermistor Reading.vi"/>
@@ -2996,15 +2996,12 @@ DirectoryIndex index.htm
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="nisyscfg.dll" Type="Document" URL="nisyscfg.dll">
-				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
-			</Item>
 			<Item Name="server.lvbitx" Type="Document" URL="../FPGA Bitfiles/server.lvbitx"/>
 			<Item Name="systemLogging.dll" Type="Document" URL="systemLogging.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
-			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
+			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
+			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
 			<Item Name="Update Device Setpoint MSG.lvclass" Type="LVClass" URL="../Controller/Messages/Update Device Setpoint MSG/Update Device Setpoint MSG.lvclass"/>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>

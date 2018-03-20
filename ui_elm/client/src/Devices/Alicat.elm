@@ -191,8 +191,8 @@ decodeData =
         (field "Q" float)
 
 
-getAlicatData : Model -> String -> Model
-getAlicatData model data =
+getAlicatData : String -> Model -> Model
+getAlicatData data model =
     let
         test =
             List.map

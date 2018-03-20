@@ -63,7 +63,7 @@ var _user$project$Devices_Alicat$decodeData = A6(
 		A2(_elm_lang$core$Json_Decode$field, 'Q0', _elm_lang$core$Json_Decode$float)),
 	A2(_elm_lang$core$Json_Decode$field, 'Q', _elm_lang$core$Json_Decode$float));
 var _user$project$Devices_Alicat$getAlicatData = F2(
-	function (model, data) {
+	function (data, model) {
 		var test = A2(
 			_elm_lang$core$List$map,
 			function (d) {

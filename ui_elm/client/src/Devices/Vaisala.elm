@@ -76,8 +76,8 @@ insertVaisalaDev devs model =
     { model | cvt = Dict.fromList v_dev }
 
 
-getVaisalaData : Model -> String -> Model
-getVaisalaData model data =
+getVaisalaData : String -> Model -> Model
+getVaisalaData data model =
     let
         test =
             List.map

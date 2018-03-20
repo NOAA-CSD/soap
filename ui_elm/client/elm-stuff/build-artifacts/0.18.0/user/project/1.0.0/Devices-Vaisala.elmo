@@ -43,7 +43,7 @@ var _user$project$Devices_Vaisala$decodeData = A3(
 			_elm_lang$core$Json_Decode$float,
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Devices_Vaisala$Data))));
 var _user$project$Devices_Vaisala$getVaisalaData = F2(
-	function (model, data) {
+	function (data, model) {
 		var test = A2(
 			_elm_lang$core$List$map,
 			function (d) {

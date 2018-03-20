@@ -8,10 +8,17 @@ import Plot
 import Svg.Attributes as Attributes
 
 
+--TODO: Fix the CRDS data type so that it can take cell data *and* running data
+
+
 type alias Model =
     { cvt : CrdCvt
     , data : Array CrdsCell
     }
+
+
+type alias Data =
+    { cellData : Array CrdsCell, runningData : Array (Array Float) }
 
 
 init : Model
@@ -38,7 +45,7 @@ update msg model =
                         |> setRate f
                         |> asCvtIn model
             in
-                new_model
+            new_model
 
         UpdateDutyCycle dc ->
             let
@@ -50,7 +57,7 @@ update msg model =
                         |> setDc dc_
                         |> asCvtIn model
             in
-                new_model
+            new_model
 
         TogglePower ->
             model.cvt
@@ -181,8 +188,8 @@ decodeExtData =
         |> required "Ringdowns" (list (list int))
 
 
-retrieveCrdData : String -> String -> Array CrdsCell -> Array CrdsCell
-retrieveCrdData head data cell_data =
+retrieveData : String -> String -> Array CrdsCell -> Array CrdsCell
+retrieveData head data cell_data =
     Result.withDefault cell_data (decodeString (field head (array decodeExtData)) data)
 
 
@@ -207,9 +214,9 @@ viewRingdown model =
         data =
             List.indexedMap (,) raw_data
     in
-        Plot.viewSeries
-            [ Plot.line <| List.map (\( x, y ) -> Plot.circle (toFloat x) (toFloat y)) ]
-            data
+    Plot.viewSeries
+        [ Plot.line <| List.map (\( x, y ) -> Plot.circle (toFloat x) (toFloat y)) ]
+        data
 
 
 {-| This command actually retrieves the CVT data from the json string returned by the server.

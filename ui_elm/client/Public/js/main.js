@@ -24069,6 +24069,10 @@ var _user$project$Crd$Model = F2(
 	function (a, b) {
 		return {cvt: a, data: b};
 	});
+var _user$project$Crd$Data = F2(
+	function (a, b) {
+		return {cellData: a, runningData: b};
+	});
 var _user$project$Crd$CrdsCell = function (a) {
 	return function (b) {
 		return function (c) {
@@ -24204,7 +24208,7 @@ var _user$project$Crd$decodeExtData = A3(
 										},
 										_elm_lang$core$Json_Decode$float,
 										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Crd$CrdsCell)))))))))));
-var _user$project$Crd$retrieveCrdData = F3(
+var _user$project$Crd$retrieveData = F3(
 	function (head, data, cell_data) {
 		return A2(
 			_elm_lang$core$Result$withDefault,
@@ -24429,9 +24433,6 @@ var _user$project$Devices_Device$defaultDeviceDict = A2(
 	_elm_lang$core$Dict$singleton,
 	'null_device',
 	A8(_user$project$Devices_Device$Device, 'n', 'label', '-1', false, '-1', 'not_present', false, _elm_lang$core$Maybe$Nothing));
-var _user$project$Devices_Device$Vaisala = {ctor: 'Vaisala'};
-var _user$project$Devices_Device$Alicat = {ctor: 'Alicat'};
-var _user$project$Devices_Device$Ppt = {ctor: 'Ppt'};
 
 var _user$project$Devices_Alicat$update = F2(
 	function (msg, model) {
@@ -24498,7 +24499,7 @@ var _user$project$Devices_Alicat$decodeData = A6(
 		A2(_elm_lang$core$Json_Decode$field, 'Q0', _elm_lang$core$Json_Decode$float)),
 	A2(_elm_lang$core$Json_Decode$field, 'Q', _elm_lang$core$Json_Decode$float));
 var _user$project$Devices_Alicat$getAlicatData = F2(
-	function (model, data) {
+	function (data, model) {
 		var test = A2(
 			_elm_lang$core$List$map,
 			function (d) {
@@ -24584,7 +24585,7 @@ var _user$project$Devices_Ppt$decodeData = A3(
 		_elm_lang$core$Json_Decode$float,
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Devices_Ppt$Data)));
 var _user$project$Devices_Ppt$getPptData = F2(
-	function (model, data) {
+	function (data, model) {
 		var d = A2(
 			_elm_lang$core$List$map,
 			function (d) {
@@ -24651,7 +24652,7 @@ var _user$project$Devices_Vaisala$decodeData = A3(
 			_elm_lang$core$Json_Decode$float,
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Devices_Vaisala$Data))));
 var _user$project$Devices_Vaisala$getVaisalaData = F2(
-	function (model, data) {
+	function (data, model) {
 		var test = A2(
 			_elm_lang$core$List$map,
 			function (d) {
@@ -25145,6 +25146,13 @@ var _user$project$Network$UpdateIP = function (a) {
 	return {ctor: 'UpdateIP', _0: a};
 };
 
+var _user$project$Pas$setCelliData = F3(
+	function (cell, data, ldata) {
+		return A3(_elm_community$list_extra$List_Extra$setAt, cell, data, ldata);
+	});
+var _user$project$Pas$populateRunningData = function (model) {
+	return model;
+};
 var _user$project$Pas$floatString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$float);
 var _user$project$Pas$intString = A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$int);
 var _user$project$Pas$setCellData = F3(
@@ -25280,6 +25288,24 @@ var _user$project$Pas$asDataIn = F2(
 			model,
 			{data: data});
 	});
+var _user$project$Pas$handleRunningData = function (model) {
+	return model;
+};
+var _user$project$Pas$getLrms = function (cell) {
+	return cell.laserRMS;
+};
+var _user$project$Pas$getQ = function (cell) {
+	return cell.q;
+};
+var _user$project$Pas$getMax = function (cell) {
+	return cell.max;
+};
+var _user$project$Pas$getResonantFrequency = function (cell) {
+	return cell.resonant_frequency;
+};
+var _user$project$Pas$getIntegratedArea = function (cell) {
+	return cell.integrated_area;
+};
 var _user$project$Pas$update = F2(
 	function (msg, model) {
 		var _p1 = msg;
@@ -25326,13 +25352,31 @@ var _user$project$Pas$update = F2(
 				return new_model;
 		}
 	});
-var _user$project$Pas$Model = F2(
-	function (a, b) {
-		return {cvt: a, data: b};
+var _user$project$Pas$Model = F3(
+	function (a, b, c) {
+		return {cvt: a, data: b, dataLength: c};
 	});
-var _user$project$Pas$PasData = F2(
-	function (a, b) {
-		return {cell: a, drive: b};
+var _user$project$Pas$PasData = F3(
+	function (a, b, c) {
+		return {cell: a, drive: b, runningData: c};
+	});
+var _user$project$Pas$RunningData = F5(
+	function (a, b, c, d, e) {
+		return {f0: a, ia: b, q: c, max: d, lrms: e};
+	});
+var _user$project$Pas$defaultRunningData = A5(
+	_user$project$Pas$RunningData,
+	{ctor: '[]'},
+	{ctor: '[]'},
+	{ctor: '[]'},
+	{ctor: '[]'},
+	{ctor: '[]'});
+var _user$project$Pas$getCelliData = F2(
+	function (cell, data) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_user$project$Pas$defaultRunningData,
+			A2(_elm_community$list_extra$List_Extra$getAt, cell, data));
 	});
 var _user$project$Pas$PasCell = function (a) {
 	return function (b) {
@@ -25519,6 +25563,50 @@ var _user$project$Pas$truncateFrequencyData = F4(
 		var new_cell = A2(_user$project$Pas$asFreqIn, cellData, newFreqData);
 		return A3(_user$project$Pas$setCellData, model, cell, new_cell);
 	});
+var _user$project$Pas$defaultCellData = _user$project$Pas$PasCell(0)(0)(0)(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {
+			ctor: '::',
+			_0: 0,
+			_1: {ctor: '[]'}
+		}
+	})(0)(0)(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	})(0);
+var _user$project$Pas$getPasCell = F2(
+	function (cell, model) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_user$project$Pas$defaultCellData,
+			A2(_elm_lang$core$Array$get, cell, model.data.cell));
+	});
+var _user$project$Pas$asF0In = function (model) {
+	var cell1Data = A2(_user$project$Pas$getCelliData, 1, model.data.runningData);
+	var cell_0_f0 = _user$project$Pas$getResonantFrequency(
+		A2(_user$project$Pas$getPasCell, 0, model));
+	var cell0Data = A2(_user$project$Pas$getCelliData, 0, model.data.runningData);
+	return model;
+};
 var _user$project$Pas$defaultPasCellData = _elm_lang$core$Array$fromList(
 	{
 		ctor: '::',
@@ -25768,23 +25856,37 @@ var _user$project$Pas$UpdateFreq = F2(
 	});
 var _user$project$Pas$Speaker = {ctor: 'Speaker'};
 var _user$project$Pas$Laser = {ctor: 'Laser'};
-var _user$project$Pas$defaultPasData = A2(_user$project$Pas$PasData, _user$project$Pas$defaultPasCellData, _user$project$Pas$Laser);
-var _user$project$Pas$init = {cvt: _user$project$Pas$defaultCvt, data: _user$project$Pas$defaultPasData};
+var _user$project$Pas$defaultPasData = A3(
+	_user$project$Pas$PasData,
+	_user$project$Pas$defaultPasCellData,
+	_user$project$Pas$Laser,
+	{
+		ctor: '::',
+		_0: _user$project$Pas$defaultRunningData,
+		_1: {ctor: '[]'}
+	});
+var _user$project$Pas$init = {cvt: _user$project$Pas$defaultCvt, data: _user$project$Pas$defaultPasData, dataLength: 300};
 var _user$project$Pas$decodeDrive = function () {
 	var helper = function (d) {
 		return d ? _elm_lang$core$Json_Decode$succeed(_user$project$Pas$Speaker) : _elm_lang$core$Json_Decode$succeed(_user$project$Pas$Laser);
 	};
 	return A2(_elm_lang$core$Json_Decode$andThen, helper, _elm_lang$core$Json_Decode$bool);
 }();
-var _user$project$Pas$decodePASData = A3(
-	_elm_lang$core$Json_Decode$map2,
-	_user$project$Pas$PasData,
-	A2(
-		_elm_lang$core$Json_Decode$field,
-		'CellData',
-		_elm_lang$core$Json_Decode$array(_user$project$Pas$decodeCellData)),
-	A2(_elm_lang$core$Json_Decode$field, 'Drive', _user$project$Pas$decodeDrive));
-var _user$project$Pas$retrievePasData = F3(
+var _user$project$Pas$decodePASData = function (model) {
+	return A2(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$hardcoded,
+		model.data.runningData,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'Drive',
+			_user$project$Pas$decodeDrive,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'CellData',
+				_elm_lang$core$Json_Decode$array(_user$project$Pas$decodeCellData),
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Pas$PasData))));
+};
+var _user$project$Pas$retrieveData = F3(
 	function (head, data, model) {
 		var new_model = A2(
 			_user$project$Pas$asDataIn,
@@ -25794,7 +25896,10 @@ var _user$project$Pas$retrievePasData = F3(
 				model.data,
 				A2(
 					_elm_lang$core$Json_Decode$decodeString,
-					A2(_elm_lang$core$Json_Decode$field, head, _user$project$Pas$decodePASData),
+					A2(
+						_elm_lang$core$Json_Decode$field,
+						head,
+						_user$project$Pas$decodePASData(model)),
 					data)));
 		return new_model;
 	});
@@ -26498,9 +26603,148 @@ var _user$project$Main$asRunningDataIn = F2(
 var _user$project$Main$getPasCvt = function (model) {
 	return model.pas.cvt;
 };
+var _user$project$Main$getPptModel = function (model) {
+	return model.ppts;
+};
+var _user$project$Main$getVaisalaModel = function (model) {
+	return model.vaisalas;
+};
+var _user$project$Main$getAlicatModel = function (model) {
+	return model.alicats;
+};
 var _user$project$Main$getCrdCvt = function (model) {
 	return model.crd.cvt;
 };
+var _user$project$Main$populateMsgData = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			currentMsgList: A2(_elm_lang$core$List$append, model.currentMsgList, model.genData.msg)
+		});
+};
+var _user$project$Main$populateVaisalaData = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				vaisalas: func(model.vaisalas)
+			});
+	});
+var _user$project$Main$populatePptData = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				ppts: func(model.ppts)
+			});
+	});
+var _user$project$Main$populateAlicatData = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				alicats: func(model.alicats)
+			});
+	});
+var _user$project$Main$performPasTruncation = function (model) {
+	return A2(
+		_user$project$Main$asPasIn,
+		model,
+		A4(
+			_user$project$Pas$truncateFrequencyData,
+			1,
+			1200,
+			1500,
+			A4(_user$project$Pas$truncateFrequencyData, 0, 1200, 1500, model.pas)));
+};
+var _user$project$Main$populatePasData = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				pas: func(model.pas)
+			});
+	});
+var _user$project$Main$populateCrdData = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				crd: A2(
+					_user$project$Crd$asDataIn,
+					model.crd,
+					func(model.crd.data))
+			});
+	});
+var _user$project$Main$populateGeneralData = F2(
+	function (data, model) {
+		return A2(
+			_user$project$Main$asDataIn,
+			model,
+			A2(
+				_elm_lang$core$Result$withDefault,
+				model.genData,
+				A2(_elm_lang$core$Json_Decode$decodeString, _user$project$GcrdTypes$decodeData, data)));
+	});
+var _user$project$Main$populateGeneralCvt = F2(
+	function (data, model) {
+		return A2(
+			_user$project$Main$asCvtIn,
+			model,
+			A2(
+				_elm_lang$core$Result$withDefault,
+				_user$project$GcrdTypes$defaultCvtData,
+				A2(
+					_elm_lang$core$Json_Decode$decodeString,
+					_user$project$GcrdTypes$decodeCvt(model.cvt),
+					data)));
+	});
+var _user$project$Main$populatePasCvt = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				pas: A2(
+					_user$project$Pas$asCvtIn,
+					model.pas,
+					func(model.pas.cvt))
+			});
+	});
+var _user$project$Main$populateCrdCvt = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				crd: A2(
+					_user$project$Crd$asCvtIn,
+					model.crd,
+					func(model.crd.cvt))
+			});
+	});
+var _user$project$Main$populatePptDevices = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				ppts: func(model.ppts)
+			});
+	});
+var _user$project$Main$populateVaisalaDevices = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				vaisalas: func(model.vaisalas)
+			});
+	});
+var _user$project$Main$populateAlicatDevices = F2(
+	function (func, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				alicats: func(model.alicats)
+			});
+	});
 var _user$project$Main$webService = 'soap';
 var _user$project$Main$RangeData = F4(
 	function (a, b, c, d) {
@@ -30885,48 +31129,36 @@ var _user$project$Main$update = F2(
 			case 'GetCVT':
 				if (_p33._0.ctor === 'Ok') {
 					var _p34 = _p33._0._0;
-					var dev_cvt = A2(
-						_elm_lang$core$Result$withDefault,
-						_user$project$Devices_Device$defaultDeviceDict,
-						A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Devices_Device$decodeDeviceCvt, _p34));
-					var a_model = A2(
-						_user$project$Main$asAlicatIn,
-						model,
-						A2(_user$project$Devices_Alicat$insertAlicatDev, dev_cvt, model.alicats));
-					var v_model = A2(
-						_user$project$Main$asVaisalaIn,
-						a_model,
-						A2(_user$project$Devices_Vaisala$insertVaisalaDev, dev_cvt, a_model.vaisalas));
-					var p_model = A2(
-						_user$project$Main$asPptIn,
-						v_model,
-						A2(_user$project$Devices_Ppt$insertPptDev, dev_cvt, v_model.ppts));
-					var new_model = A2(
-						_user$project$Main$asCvtIn,
-						p_model,
-						A2(
-							_elm_lang$core$Result$withDefault,
-							_user$project$GcrdTypes$defaultCvtData,
-							A2(
-								_elm_lang$core$Json_Decode$decodeString,
-								_user$project$GcrdTypes$decodeCvt(p_model.cvt),
-								_p34)));
-					var model_with_crd = A2(
-						_user$project$Main$asCrdIn,
-						new_model,
-						A2(
-							_user$project$Crd$asCvtIn,
-							new_model.crd,
-							A3(_user$project$Crd$retrieveCrdCvt, 'crd', _p34, new_model.crd.cvt)));
-					var model_with_pas = A2(
-						_user$project$Main$asPasIn,
-						model_with_crd,
-						A2(
-							_user$project$Pas$asCvtIn,
-							model_with_crd.pas,
-							A3(_user$project$Pas$retrievePasCvt, 'pas', _p34, model_with_crd.pas.cvt)));
-					var nmodel = _elm_lang$core$Native_Utils.eq(_p34, '{}') ? model : model_with_pas;
-					return {ctor: '_Tuple2', _0: nmodel, _1: _elm_lang$core$Platform_Cmd$none};
+					var new_model = function () {
+						if (_elm_lang$core$Native_Utils.eq(_p34, '{}')) {
+							return model;
+						} else {
+							var dev_cvt = A2(
+								_elm_lang$core$Result$withDefault,
+								_user$project$Devices_Device$defaultDeviceDict,
+								A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Devices_Device$decodeDeviceCvt, _p34));
+							return A2(
+								_user$project$Main$populateGeneralCvt,
+								_p34,
+								A2(
+									_user$project$Main$populatePasCvt,
+									A2(_user$project$Pas$retrievePasCvt, 'pas', _p34),
+									A2(
+										_user$project$Main$populateCrdCvt,
+										A2(_user$project$Crd$retrieveCrdCvt, 'crd', _p34),
+										A2(
+											_user$project$Main$populatePptDevices,
+											_user$project$Devices_Ppt$insertPptDev(dev_cvt),
+											A2(
+												_user$project$Main$populateVaisalaDevices,
+												_user$project$Devices_Vaisala$insertVaisalaDev(dev_cvt),
+												A2(
+													_user$project$Main$populateAlicatDevices,
+													_user$project$Devices_Alicat$insertAlicatDev(dev_cvt),
+													model))))));
+						}
+					}();
+					return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
 					var data_ = A2(
 						_elm_lang$core$Basics_ops['++'],
@@ -31013,58 +31245,36 @@ var _user$project$Main$update = F2(
 							}
 						}
 					};
-					var crd_cell_data = A3(_user$project$Crd$retrieveCrdData, 'CellData', _p35, model.crd.data);
-					var new_model = A2(
-						_user$project$Main$asCrdIn,
-						model,
-						A2(_user$project$Crd$asDataIn, model.crd, crd_cell_data));
-					var newest_model = A2(
-						_user$project$Main$asAlicatIn,
-						new_model,
-						A2(_user$project$Devices_Alicat$getAlicatData, new_model.alicats, _p35));
-					var newestest_model = A2(
-						_user$project$Main$asVaisalaIn,
-						newest_model,
-						A2(_user$project$Devices_Vaisala$getVaisalaData, newest_model.vaisalas, _p35));
-					var p_model = A2(
-						_user$project$Main$asPptIn,
-						newestest_model,
-						A2(_user$project$Devices_Ppt$getPptData, newestest_model.ppts, _p35));
-					var newer_model = A2(
-						_user$project$Main$asDataIn,
-						p_model,
-						A2(
-							_elm_lang$core$Result$withDefault,
-							p_model.genData,
-							A2(_elm_lang$core$Json_Decode$decodeString, _user$project$GcrdTypes$decodeData, _p35)));
-					var pas_model = A2(
-						_user$project$Main$asPasIn,
-						newer_model,
-						A4(
-							_user$project$Pas$truncateFrequencyData,
-							1,
-							1200,
-							1500,
-							A4(
-								_user$project$Pas$truncateFrequencyData,
-								0,
-								1200,
-								1500,
-								A3(_user$project$Pas$retrievePasData, 'PAS', _p35, newer_model.pas))));
+					var new_model = _user$project$Main$performPasTruncation(
+						_user$project$Main$populateMsgData(
+							A2(
+								_user$project$Main$populateGeneralData,
+								_p35,
+								A2(
+									_user$project$Main$populatePasData,
+									A2(_user$project$Pas$retrieveData, 'PAS', _p35),
+									A2(
+										_user$project$Main$populateCrdData,
+										A2(_user$project$Crd$retrieveData, 'CellData', _p35),
+										A2(
+											_user$project$Main$populateVaisalaData,
+											_user$project$Devices_Vaisala$getVaisalaData(_p35),
+											A2(
+												_user$project$Main$populatePptData,
+												_user$project$Devices_Ppt$getPptData(_p35),
+												A2(
+													_user$project$Main$populateAlicatData,
+													_user$project$Devices_Alicat$getAlicatData(_p35),
+													model))))))));
 					var n_model = A2(
 						_user$project$Main$asRunningDataIn,
-						pas_model,
-						A3(_user$project$Main$addDataToList, 10, listData, pas_model.runningData));
+						new_model,
+						A3(_user$project$Main$addDataToList, 10, listData, new_model.runningData));
 					var nn_model = A2(
 						_user$project$Main$asCrdRunningDataIn,
 						n_model,
 						A3(_user$project$Main$addDataToList, 100, cListData, n_model.crdRunningData));
-					var nn_msgs = _elm_lang$core$Native_Utils.update(
-						nn_model,
-						{
-							currentMsgList: A2(_elm_lang$core$List$append, nn_model.currentMsgList, nn_model.genData.msg)
-						});
-					return {ctor: '_Tuple2', _0: nn_msgs, _1: _elm_lang$core$Platform_Cmd$none};
+					return {ctor: '_Tuple2', _0: nn_model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
