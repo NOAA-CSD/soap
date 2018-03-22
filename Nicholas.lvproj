@@ -2871,6 +2871,7 @@ DirectoryIndex index.htm
 			</Item>
 		</Item>
 		<Item Name="Switch.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/Switch/Switch.lvclass"/>
+		<Item Name="Update Device Setpoint MSG.lvclass" Type="LVClass" URL="../Controller/Messages/Update Device Setpoint MSG/Update Device Setpoint MSG.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="Array of VData to VArray__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Array of VData to VArray__ogtk.vi"/>
@@ -3002,7 +3003,6 @@ DirectoryIndex index.htm
 			</Item>
 			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
 			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
-			<Item Name="Update Device Setpoint MSG.lvclass" Type="LVClass" URL="../Controller/Messages/Update Device Setpoint MSG/Update Device Setpoint MSG.lvclass"/>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
