@@ -1,14 +1,111 @@
-<!-- 	This is the file for the ozone calibrations.
-		This file determines the sequence of events 
-		for the operation of the ozone cals.  Steps 
-		are labeled as such and control the flow of
-		the cal.  
--->
 <?xml version="1.0" encoding="utf-8"?>
-<ozone>
-<o3-valve>TRUE</o3-valve>
-<o2-valve>TRUE</o2-valve>
-<filter>0</filter>
-<wait>20</wait>
-<speaker>0,FALSE</speaker>
-</ozone>
+<SOAP_Sampling_w_cals_lab_test>
+	<speaker>0,FALSE</speaker>
+	<speaker>1,FALSE</speaker>
+	<uv-lamp>TRUE</uv-lamp>
+	<o3-valve>FALSE</o3-valve>
+	<o2-valve>FALSE</o2-valve>
+	<o3-flow>50</o3-flow>
+	<filter>0</filter>
+		<wait>10</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>260</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>10</wait>
+	<filter>1</filter>
+		<wait>10</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>260</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>10</wait>
+	<filter>0</filter>
+		<wait>10</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>30</wait>
+		<o3-valve>TRUE</o3-valve>
+   		<wait>10</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>30</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>10</wait>
+		<o3-valve>FALSE</o3-valve>
+		<wait>10</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>30</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<o2-valve>TRUE</o2-valve>
+  		<wait>10</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>30</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>10</wait>
+		<o2-valve>FALSE</o2-valve>
+		<wait>30</wait>
+		<speaker>1,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>1,FALSE</speaker>
+		<wait>10</wait>
+	<filter>0</filter>
+		<wait>10</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>30</wait>
+		<o3-valve>TRUE</o3-valve>
+   		<wait>10</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>30</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>10</wait>
+		<o3-valve>FALSE</o3-valve>
+		<wait>10</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>30</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<o2-valve>TRUE</o2-valve>
+  		<wait>10</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>30</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>10</wait>
+		<o2-valve>FALSE</o2-valve>
+		<wait>30</wait>
+		<speaker>0,TRUE</speaker>
+		<wait>10</wait>
+		<speaker>0,FALSE</speaker>
+		<wait>10</wait>
+</SOAP_Sampling_w_cals_lab_test>

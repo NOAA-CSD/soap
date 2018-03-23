@@ -572,8 +572,8 @@ update msg model =
                         |> populatePasData (Pas.retrieveData "PAS" data)
                         |> populateGeneralData data
                         |> populateMsgData
-                        |> performPasTruncation
 
+                --|> performPasTruncation
                 -- The following is for testing purposes for handling running data.  There is a better, more generic
                 -- way of doing this that needs to be implemented.
                 -- TODO: implement generic functionality for doing running data.

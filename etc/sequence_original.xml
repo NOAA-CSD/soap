@@ -1,0 +1,14 @@
+<!-- 	This is the file for the ozone calibrations.
+		This file determines the sequence of events 
+		for the operation of the ozone cals.  Steps 
+		are labeled as such and control the flow of
+		the cal.  
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<ozone>
+<o3-valve>TRUE</o3-valve>
+<o2-valve>TRUE</o2-valve>
+<filter>0</filter>
+<wait>20</wait>
+<speaker>0,FALSE</speaker>
+</ozone>

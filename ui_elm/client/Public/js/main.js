@@ -31245,27 +31245,26 @@ var _user$project$Main$update = F2(
 							}
 						}
 					};
-					var new_model = _user$project$Main$performPasTruncation(
-						_user$project$Main$populateMsgData(
+					var new_model = _user$project$Main$populateMsgData(
+						A2(
+							_user$project$Main$populateGeneralData,
+							_p35,
 							A2(
-								_user$project$Main$populateGeneralData,
-								_p35,
+								_user$project$Main$populatePasData,
+								A2(_user$project$Pas$retrieveData, 'PAS', _p35),
 								A2(
-									_user$project$Main$populatePasData,
-									A2(_user$project$Pas$retrieveData, 'PAS', _p35),
+									_user$project$Main$populateCrdData,
+									A2(_user$project$Crd$retrieveData, 'CellData', _p35),
 									A2(
-										_user$project$Main$populateCrdData,
-										A2(_user$project$Crd$retrieveData, 'CellData', _p35),
+										_user$project$Main$populateVaisalaData,
+										_user$project$Devices_Vaisala$getVaisalaData(_p35),
 										A2(
-											_user$project$Main$populateVaisalaData,
-											_user$project$Devices_Vaisala$getVaisalaData(_p35),
+											_user$project$Main$populatePptData,
+											_user$project$Devices_Ppt$getPptData(_p35),
 											A2(
-												_user$project$Main$populatePptData,
-												_user$project$Devices_Ppt$getPptData(_p35),
-												A2(
-													_user$project$Main$populateAlicatData,
-													_user$project$Devices_Alicat$getAlicatData(_p35),
-													model))))))));
+												_user$project$Main$populateAlicatData,
+												_user$project$Devices_Alicat$getAlicatData(_p35),
+												model)))))));
 					var n_model = A2(
 						_user$project$Main$asRunningDataIn,
 						new_model,
