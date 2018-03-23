@@ -1903,7 +1903,7 @@ viewAux model =
                             ]
                         ]
                 )
-                [ "PAS 0", "PAS 1", "CRD" ]
+                [ "PAS Cell 1", "PAS Cell 2", "CRD" ]
             ++ [ Grid.cell [ Grid.size Grid.All 12 ]
                     [ Material.Options.styled Html.p
                         [ Typo.headline ]

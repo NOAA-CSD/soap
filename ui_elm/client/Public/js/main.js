@@ -27847,10 +27847,10 @@ var _user$project$Main$viewAux = function (model) {
 						}),
 					{
 						ctor: '::',
-						_0: 'PAS 0',
+						_0: 'PAS Cell 1',
 						_1: {
 							ctor: '::',
-							_0: 'PAS 1',
+							_0: 'PAS Cell 2',
 							_1: {
 								ctor: '::',
 								_0: 'CRD',

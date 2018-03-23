@@ -27,8 +27,8 @@
               <file leaf-file-name="main.elm" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="372">
-                      <caret line="581" column="33" lean-forward="false" selection-start-line="581" selection-start-column="33" selection-end-line="581" selection-end-column="33" />
+                    <state relative-caret-position="246">
+                      <caret line="1905" column="43" lean-forward="false" selection-start-line="1905" selection-start-column="43" selection-end-line="1905" selection-end-column="43" />
                       <folding />
                     </state>
                   </provider>
@@ -492,7 +492,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="604562000" />
+    <option name="totallyTimeSpent" value="604608000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -889,8 +889,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="581" column="33" lean-forward="false" selection-start-line="581" selection-start-column="33" selection-end-line="581" selection-end-column="33" />
+        <state relative-caret-position="246">
+          <caret line="1905" column="43" lean-forward="false" selection-start-line="1905" selection-start-column="43" selection-end-line="1905" selection-end-column="43" />
           <folding />
         </state>
       </provider>
