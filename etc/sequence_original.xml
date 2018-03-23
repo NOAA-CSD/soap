@@ -6,9 +6,11 @@
 -->
 <?xml version="1.0" encoding="utf-8"?>
 <ozone>
+<o3-flow>0</o3-flow>
 <o3-valve>TRUE</o3-valve>
 <o2-valve>TRUE</o2-valve>
 <filter>0</filter>
 <wait>20</wait>
 <speaker>0,FALSE</speaker>
+<o3-flow>50</o3-flow>
 </ozone>
