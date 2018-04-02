@@ -49,8 +49,12 @@
 		<Item Name="O2 Valve Step.lvclass" Type="LVClass" URL="../Sequence/O2 Valve Step/O2 Valve Step.lvclass"/>
 		<Item Name="Filter Step.lvclass" Type="LVClass" URL="../Sequence/Filter Step/Filter Step.lvclass"/>
 		<Item Name="O3 Flow Rate Step.lvclass" Type="LVClass" URL="../Sequence/O3 Flow Rate Step/O3 Flow Rate Step.lvclass"/>
+		<Item Name="MFC Cell 1 Rate Step.lvclass" Type="LVClass" URL="../Sequence/MFC Cell 1 Rate Step/MFC Cell 1 Rate Step.lvclass"/>
+		<Item Name="MFC Purge Rate Step.lvclass" Type="LVClass" URL="../Sequence/MFC Purge Rate Step/MFC Purge Rate Step.lvclass"/>
+		<Item Name="MFC Cell 2 Rate Step.lvclass" Type="LVClass" URL="../Sequence/MFC Cell 2 Rate Step/MFC Cell 2 Rate Step.lvclass"/>
 		<Item Name="Wait Step.lvclass" Type="LVClass" URL="../Sequence/Wait Step/Wait Step.lvclass"/>
 		<Item Name="sequenceState.ctl" Type="VI" URL="../Sequencer/sequenceState.ctl"/>
+		<Item Name="Message Step.lvclass" Type="LVClass" URL="../Commands/Message Step/Message Step.lvclass"/>
 	</Item>
 	<Item Name="SOAP Data.lvclass" Type="LVClass" URL="../../Data/SOAP Data.lvclass"/>
 	<Item Name="gController.lvclass" Type="LVClass" URL="../gController.lvclass"/>

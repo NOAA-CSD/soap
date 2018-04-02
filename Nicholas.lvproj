@@ -378,7 +378,6 @@ DirectoryIndex index.htm
 			<Item Name="Devices" Type="Folder">
 				<Item Name="Alicat Lib.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/Devices/Alicats/Alicat Lib.lvlib"/>
 				<Item Name="PPT Library.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/Devices/PPT/PPT Library.lvlib"/>
-				<Item Name="TE Cooler.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/Devices/TE Tech/TE Cooler.lvlib"/>
 				<Item Name="Vaisala Library.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/Devices/Vaisala/Vaisala Library.lvlib"/>
 			</Item>
 			<Item Name="Config Data.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/Session APIs/File Access/Config Data/Config Data.lvclass"/>
@@ -2386,7 +2385,7 @@ DirectoryIndex index.htm
 		<Item Name="Sequence Composition.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/Sequence/Sequence Composition.lvlib"/>
 		<Item Name="soap" Type="Web Service">
 			<Property Name="Bld_buildSpecName" Type="Str"></Property>
-			<Property Name="Bld_version.build" Type="Int">8</Property>
+			<Property Name="Bld_version.build" Type="Int">10</Property>
 			<Property Name="ws.autoIncrementVersion" Type="Bool">true</Property>
 			<Property Name="ws.disconnectInline" Type="Bool">true</Property>
 			<Property Name="ws.disconnectTypeDefs" Type="Bool">false</Property>
@@ -2399,7 +2398,7 @@ DirectoryIndex index.htm
 			<Property Name="ws.serveDefaultDoc" Type="Bool">true</Property>
 			<Property Name="ws.SSE2" Type="Bool">true</Property>
 			<Property Name="ws.static_permissions" Type="Str"></Property>
-			<Property Name="ws.version.build" Type="Int">8</Property>
+			<Property Name="ws.version.build" Type="Int">10</Property>
 			<Property Name="ws.version.fix" Type="Int">0</Property>
 			<Property Name="ws.version.major" Type="Int">1</Property>
 			<Property Name="ws.version.minor" Type="Int">0</Property>
@@ -2938,7 +2937,6 @@ DirectoryIndex index.htm
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
 				<Item Name="Find First Error.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Find First Error.vi"/>
 				<Item Name="Gen Tophat.vi" Type="VI" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/PAS/Utilities/Gen Tophat.vi"/>
-				<Item Name="Generic TEC.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/Devices/TEC/Base/Generic TEC.lvlib"/>
 				<Item Name="Get LV Class Name.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/LVClass/Get LV Class Name.vi"/>
 				<Item Name="Get Std Devs.vi" Type="VI" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/General/Math/Get Std Devs.vi"/>
 				<Item Name="Get Waveform Subset.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/Get Waveform Subset.vi"/>
