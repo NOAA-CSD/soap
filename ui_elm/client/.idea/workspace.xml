@@ -28,7 +28,7 @@
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
                     <state relative-caret-position="246">
-                      <caret line="1905" column="43" lean-forward="false" selection-start-line="1905" selection-start-column="43" selection-end-line="1905" selection-end-column="43" />
+                      <caret line="1905" column="53" lean-forward="false" selection-start-line="1905" selection-start-column="53" selection-end-line="1905" selection-end-column="53" />
                       <folding />
                     </state>
                   </provider>
@@ -37,7 +37,7 @@
               <file leaf-file-name="DateTime.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-stuff/packages/Bogdanp/elm-time/1.4.0/src/Time/DateTime.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="7794">
+                    <state relative-caret-position="7361">
                       <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
                       <folding />
                     </state>
@@ -47,7 +47,7 @@
               <file leaf-file-name="Device.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/Devices/Device.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="234">
+                    <state relative-caret-position="221">
                       <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
                       <folding />
                     </state>
@@ -57,7 +57,7 @@
               <file leaf-file-name="Network.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/Network.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="810">
+                    <state relative-caret-position="765">
                       <caret line="45" column="9" lean-forward="false" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
                       <folding />
                     </state>
@@ -67,7 +67,7 @@
               <file leaf-file-name="elm-package.json" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-package.json">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="342">
+                    <state relative-caret-position="323">
                       <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
                       <folding />
                     </state>
@@ -77,7 +77,7 @@
               <file leaf-file-name="Plot.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-stuff/packages/terezka/elm-plot/5.1.0/src/Plot.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="18774">
+                    <state relative-caret-position="17731">
                       <caret line="1043" column="0" lean-forward="false" selection-start-line="1043" selection-start-column="0" selection-end-line="1043" selection-end-column="0" />
                       <folding />
                     </state>
@@ -87,7 +87,7 @@
               <file leaf-file-name="Basics.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Basics.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="10260">
+                    <state relative-caret-position="9690">
                       <caret line="570" column="0" lean-forward="false" selection-start-line="570" selection-start-column="0" selection-end-line="570" selection-end-column="0" />
                       <folding />
                     </state>
@@ -97,7 +97,7 @@
               <file leaf-file-name="String.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/String.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="7938">
+                    <state relative-caret-position="7497">
                       <caret line="441" column="0" lean-forward="false" selection-start-line="441" selection-start-column="0" selection-end-line="441" selection-end-column="0" />
                       <folding />
                     </state>
@@ -107,11 +107,11 @@
             </leaf>
           </split-first>
           <split-second>
-            <leaf>
+            <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
               <file leaf-file-name="main.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="218">
+                    <state relative-caret-position="2856">
                       <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="18" />
                       <folding />
                     </state>
@@ -121,7 +121,7 @@
               <file leaf-file-name="Instrument.elm" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/Instrument/Instrument.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="324">
+                    <state relative-caret-position="306">
                       <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
                       <folding />
                     </state>
@@ -137,7 +137,7 @@
           <file leaf-file-name="Alicat.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Devices/Alicat.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2826">
+                <state relative-caret-position="3281">
                   <caret line="193" column="35" lean-forward="false" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
                   <folding />
                 </state>
@@ -147,7 +147,7 @@
           <file leaf-file-name="Vaisala.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Devices/Vaisala.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="521">
+                <state relative-caret-position="1343">
                   <caret line="79" column="26" lean-forward="false" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
                   <folding />
                 </state>
@@ -167,7 +167,7 @@
           <file leaf-file-name="Ppt.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Devices/Ppt.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="509">
+                <state relative-caret-position="1309">
                   <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
                   <folding />
                 </state>
@@ -177,7 +177,7 @@
           <file leaf-file-name="Tec.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Devices/Tec.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="576">
+                <state relative-caret-position="544">
                   <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
                   <folding />
                 </state>
@@ -187,7 +187,7 @@
           <file leaf-file-name="GcrdTypes.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/GcrdTypes.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="347">
+                <state relative-caret-position="4675">
                   <caret line="275" column="0" lean-forward="false" selection-start-line="275" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
                   <folding />
                 </state>
@@ -197,7 +197,7 @@
           <file leaf-file-name="Pas.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Pas.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1100">
+                <state relative-caret-position="4199">
                   <caret line="247" column="43" lean-forward="false" selection-start-line="247" selection-start-column="43" selection-end-line="247" selection-end-column="43" />
                   <folding />
                 </state>
@@ -207,7 +207,7 @@
           <file leaf-file-name="Decode.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Json/Decode.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="7056">
+                <state relative-caret-position="6664">
                   <caret line="392" column="0" lean-forward="false" selection-start-line="392" selection-start-column="0" selection-end-line="392" selection-end-column="0" />
                   <folding />
                 </state>
@@ -325,6 +325,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -342,7 +343,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -488,11 +488,13 @@
       <workItem from="1521134269332" duration="5222000" />
       <workItem from="1521475369845" duration="14623000" />
       <workItem from="1521555535075" duration="8049000" />
+      <workItem from="1522872888123" duration="118000" />
+      <workItem from="1522873019929" duration="669000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="604608000" />
+    <option name="totallyTimeSpent" value="605395000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -504,38 +506,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="34" width="1920" height="1166" extended-state="6" />
+    <frame x="0" y="34" width="1920" height="1046" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09791667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49813133" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24764594" sideWeight="0.490625" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="JSON Utils" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28831726" sideWeight="0.4984375" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32515338" sideWeight="0.486053" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24764594" sideWeight="0.509375" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28831726" sideWeight="0.5015625" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49813133" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28831726" sideWeight="0.49427083" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32515338" sideWeight="0.486053" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28831726" sideWeight="0.50572914" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JSON Utils" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -698,7 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1458">
           <caret line="81" column="16" lean-forward="false" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -711,7 +703,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/String.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7938">
+        <state relative-caret-position="7497">
           <caret line="441" column="0" lean-forward="false" selection-start-line="441" selection-start-column="0" selection-end-line="441" selection-end-column="0" />
           <folding />
         </state>
@@ -719,7 +711,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="323">
           <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
           <folding />
         </state>
@@ -727,7 +719,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Network.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
+        <state relative-caret-position="765">
           <caret line="45" column="9" lean-forward="false" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
           <folding />
         </state>
@@ -746,7 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="38" column="11" lean-forward="false" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -754,13 +745,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-stuff/packages/Bogdanp/elm-time/1.4.0/src/Time/DateTime.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7794">
+        <state relative-caret-position="7361">
           <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
           <folding />
         </state>
@@ -777,7 +767,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Basics.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10260">
+        <state relative-caret-position="9690">
           <caret line="570" column="0" lean-forward="false" selection-start-line="570" selection-start-column="0" selection-end-line="570" selection-end-column="0" />
           <folding />
         </state>
@@ -785,7 +775,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-stuff/packages/terezka/elm-plot/5.1.0/src/Plot.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18774">
+        <state relative-caret-position="17731">
           <caret line="1043" column="0" lean-forward="false" selection-start-line="1043" selection-start-column="0" selection-end-line="1043" selection-end-column="0" />
           <folding />
         </state>
@@ -793,7 +783,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Devices/Device.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
+        <state relative-caret-position="221">
           <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
           <folding />
         </state>
@@ -801,7 +791,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Devices/Vaisala.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
+        <state relative-caret-position="1343">
           <caret line="79" column="26" lean-forward="false" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
           <folding />
         </state>
@@ -809,7 +799,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Devices/Ppt.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
+        <state relative-caret-position="1309">
           <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
           <folding />
         </state>
@@ -817,7 +807,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Devices/Tec.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
+        <state relative-caret-position="544">
           <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
           <folding />
         </state>
@@ -825,7 +815,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GcrdTypes.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
+        <state relative-caret-position="4675">
           <caret line="275" column="0" lean-forward="false" selection-start-line="275" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
           <folding />
         </state>
@@ -833,7 +823,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Json/Decode.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7056">
+        <state relative-caret-position="6664">
           <caret line="392" column="0" lean-forward="false" selection-start-line="392" selection-start-column="0" selection-end-line="392" selection-end-column="0" />
           <folding />
         </state>
@@ -849,7 +839,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Devices/Alicat.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2826">
+        <state relative-caret-position="3281">
           <caret line="193" column="35" lean-forward="false" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
           <folding />
         </state>
@@ -857,7 +847,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Instrument/Instrument.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
+        <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
@@ -867,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
           <caret line="456" column="0" lean-forward="false" selection-start-line="456" selection-start-column="0" selection-end-line="456" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -875,13 +864,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
           <caret line="694" column="0" lean-forward="false" selection-start-line="694" selection-start-column="0" selection-end-line="694" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pas.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
+        <state relative-caret-position="4199">
           <caret line="247" column="43" lean-forward="false" selection-start-line="247" selection-start-column="43" selection-end-line="247" selection-end-column="43" />
           <folding />
         </state>
@@ -890,7 +878,7 @@
     <entry file="file://$PROJECT_DIR$/src/main.elm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
-          <caret line="1905" column="43" lean-forward="false" selection-start-line="1905" selection-start-column="43" selection-end-line="1905" selection-end-column="43" />
+          <caret line="1905" column="53" lean-forward="false" selection-start-line="1905" selection-start-column="53" selection-end-line="1905" selection-end-column="53" />
           <folding />
         </state>
       </provider>
