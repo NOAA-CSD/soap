@@ -29989,6 +29989,7 @@ var _user$project$Main$viewStatus = function (model) {
 							A2(
 								_elm_lang$core$List$map,
 								function (msg) {
+									var fw = A2(_elm_lang$core$String$contains, '[SEQ]', msg) ? 'bold' : 'normal';
 									var msg_color = A2(_elm_lang$core$String$contains, '[ERROR]', msg) ? 'red' : (A2(_elm_lang$core$String$contains, '[WARNING]', msg) ? 'yellow' : 'black');
 									return A3(
 										_debois$elm_mdl$Material_Options$styled,
@@ -30008,7 +30009,11 @@ var _user$project$Main$viewStatus = function (model) {
 														_1: {
 															ctor: '::',
 															_0: A2(_debois$elm_mdl$Material_Options$css, 'margin', '0'),
-															_1: {ctor: '[]'}
+															_1: {
+																ctor: '::',
+																_0: A2(_debois$elm_mdl$Material_Options$css, 'font-weight', fw),
+																_1: {ctor: '[]'}
+															}
 														}
 													}
 												}

@@ -2683,9 +2683,21 @@ viewStatus model =
                                     "yellow"
                                 else
                                     "black"
+
+                            fw =
+                                if String.contains "[SEQ]" msg then
+                                    "bold"
+                                else
+                                    "normal"
                         in
                         Material.Options.styled Html.p
-                            [ Typo.body1, css "color" msg_color, css "width" "100%", css "padding" "0", css "margin" "0" ]
+                            [ Typo.body1
+                            , css "color" msg_color
+                            , css "width" "100%"
+                            , css "padding" "0"
+                            , css "margin" "0"
+                            , css "font-weight" fw
+                            ]
                             [ Html.text msg ]
                     )
                  <|
