@@ -387,6 +387,8 @@ asFreqIn cell freqData =
     { cell | frequencyData = freqData }
 
 
+{-| Replace the cell data object in an array of cells at position defined by `cint`
+-}
 setCellData : Model -> Int -> PasCell -> Model
 setCellData model cint cell =
     let
@@ -402,6 +404,9 @@ setCellData model cint cell =
         { model | data = nn_data }
 
 
+{-| Truncate the PAS frequency data - this is important for the performance of the
+PAS page on the rPi.
+-}
 truncateFrequencyData : Int -> Int -> Int -> Model -> Model
 truncateFrequencyData cell min max model =
     let

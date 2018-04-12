@@ -2420,7 +2420,7 @@ DirectoryIndex index.htm
 		<Item Name="Sequence Composition.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/Sequence/Sequence Composition.lvlib"/>
 		<Item Name="soap" Type="Web Service">
 			<Property Name="Bld_buildSpecName" Type="Str"></Property>
-			<Property Name="Bld_version.build" Type="Int">11</Property>
+			<Property Name="Bld_version.build" Type="Int">13</Property>
 			<Property Name="ws.autoIncrementVersion" Type="Bool">true</Property>
 			<Property Name="ws.disconnectInline" Type="Bool">true</Property>
 			<Property Name="ws.disconnectTypeDefs" Type="Bool">false</Property>
@@ -2433,7 +2433,7 @@ DirectoryIndex index.htm
 			<Property Name="ws.serveDefaultDoc" Type="Bool">true</Property>
 			<Property Name="ws.SSE2" Type="Bool">true</Property>
 			<Property Name="ws.static_permissions" Type="Str"></Property>
-			<Property Name="ws.version.build" Type="Int">11</Property>
+			<Property Name="ws.version.build" Type="Int">13</Property>
 			<Property Name="ws.version.fix" Type="Int">0</Property>
 			<Property Name="ws.version.major" Type="Int">1</Property>
 			<Property Name="ws.version.minor" Type="Int">0</Property>
@@ -2970,6 +2970,7 @@ DirectoryIndex index.htm
 				<Item Name="DWDT Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Error Code.vi"/>
 				<Item Name="DWDT Get Waveform Subset.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/DWDTOps.llb/DWDT Get Waveform Subset.vi"/>
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
+				<Item Name="Find Discontinuity.vi" Type="VI" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/General/Math/Find Discontinuity.vi"/>
 				<Item Name="Find First Error.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Find First Error.vi"/>
 				<Item Name="Gen Tophat.vi" Type="VI" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/PAS/Utilities/Gen Tophat.vi"/>
 				<Item Name="Get LV Class Name.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/LVClass/Get LV Class Name.vi"/>
@@ -3019,9 +3020,9 @@ DirectoryIndex index.htm
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 			</Item>
 			<Item Name="AF Debug.lvlib" Type="Library" URL="/&lt;resource&gt;/AFDebug/AF Debug.lvlib"/>
-			<Item Name="cRIO Convert Thermocouple Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Convert Thermocouple Reading.vi"/>
-			<Item Name="cRIO Temperature to Volts.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Temperature to Volts.vi"/>
-			<Item Name="cRIO Volts to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Volts to Temperature.vi"/>
+			<Item Name="cRIO Convert Thermocouple Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Convert Thermocouple Reading.vi"/>
+			<Item Name="cRIO Temperature to Volts.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Temperature to Volts.vi"/>
+			<Item Name="cRIO Volts to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Volts to Temperature.vi"/>
 			<Item Name="LV Config Read String.vi" Type="VI" URL="/&lt;resource&gt;/dialog/lvconfig.llb/LV Config Read String.vi"/>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
 			<Item Name="NI 9213 Convert Thermistor Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert Thermistor Reading.vi"/>
@@ -3031,12 +3032,15 @@ DirectoryIndex index.htm
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="nisyscfg.dll" Type="Document" URL="nisyscfg.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
 			<Item Name="server.lvbitx" Type="Document" URL="../FPGA Bitfiles/server.lvbitx"/>
 			<Item Name="systemLogging.dll" Type="Document" URL="systemLogging.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
-			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2016/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
+			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
+			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
