@@ -20274,6 +20274,32 @@ var _elm_community$list_extra$List_Extra$last = function (items) {
 	}
 };
 
+var _elm_lang$dom$Dom$blur = _elm_lang$dom$Native_Dom.blur;
+var _elm_lang$dom$Dom$focus = _elm_lang$dom$Native_Dom.focus;
+var _elm_lang$dom$Dom$NotFound = function (a) {
+	return {ctor: 'NotFound', _0: a};
+};
+
+var _elm_lang$dom$Dom_Size$width = _elm_lang$dom$Native_Dom.width;
+var _elm_lang$dom$Dom_Size$height = _elm_lang$dom$Native_Dom.height;
+var _elm_lang$dom$Dom_Size$VisibleContentWithBordersAndMargins = {ctor: 'VisibleContentWithBordersAndMargins'};
+var _elm_lang$dom$Dom_Size$VisibleContentWithBorders = {ctor: 'VisibleContentWithBorders'};
+var _elm_lang$dom$Dom_Size$VisibleContent = {ctor: 'VisibleContent'};
+var _elm_lang$dom$Dom_Size$Content = {ctor: 'Content'};
+
+var _elm_lang$dom$Dom_Scroll$toX = _elm_lang$dom$Native_Dom.setScrollLeft;
+var _elm_lang$dom$Dom_Scroll$x = _elm_lang$dom$Native_Dom.getScrollLeft;
+var _elm_lang$dom$Dom_Scroll$toRight = _elm_lang$dom$Native_Dom.toRight;
+var _elm_lang$dom$Dom_Scroll$toLeft = function (id) {
+	return A2(_elm_lang$dom$Dom_Scroll$toX, id, 0);
+};
+var _elm_lang$dom$Dom_Scroll$toY = _elm_lang$dom$Native_Dom.setScrollTop;
+var _elm_lang$dom$Dom_Scroll$y = _elm_lang$dom$Native_Dom.getScrollTop;
+var _elm_lang$dom$Dom_Scroll$toBottom = _elm_lang$dom$Native_Dom.toBottom;
+var _elm_lang$dom$Dom_Scroll$toTop = function (id) {
+	return A2(_elm_lang$dom$Dom_Scroll$toY, id, 0);
+};
+
 var _elm_lang$http$Native_Http = function() {
 
 
@@ -26801,7 +26827,7 @@ var _user$project$Main$defaultModelData = {
 			}
 		}
 	},
-	pasRange: A4(_user$project$Main$RangeData, 0, 1000, 0, 1500),
+	pasRange: A4(_user$project$Main$RangeData, 1200, 1500, 0, 1500),
 	crdPlotData: {
 		ctor: '::',
 		_0: true,
@@ -26866,6 +26892,9 @@ var _user$project$Main$Pas1Heater = {ctor: 'Pas1Heater'};
 var _user$project$Main$Pas0Heater = {ctor: 'Pas0Heater'};
 var _user$project$Main$CrdHeater = {ctor: 'CrdHeater'};
 var _user$project$Main$RunningData = {ctor: 'RunningData'};
+var _user$project$Main$UpdateWaveforms = function (a) {
+	return {ctor: 'UpdateWaveforms', _0: a};
+};
 var _user$project$Main$ResetSequence = {ctor: 'ResetSequence'};
 var _user$project$Main$SequenceState = {ctor: 'SequenceState'};
 var _user$project$Main$SendDevSP = function (a) {
@@ -29981,7 +30010,11 @@ var _user$project$Main$viewStatus = function (model) {
 										_1: {
 											ctor: '::',
 											_0: A2(_debois$elm_mdl$Material_Options$css, 'border-radius', '4px'),
-											_1: {ctor: '[]'}
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Options$id('message-div'),
+												_1: {ctor: '[]'}
+											}
 										}
 									}
 								}
@@ -30996,7 +31029,18 @@ var _user$project$Main$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: new_model,
-					_1: _user$project$Main$updateWaveforms(new_model)
+					_1: A2(
+						_elm_lang$core$Task$attempt,
+						_elm_lang$core$Basics$always(
+							_user$project$Main$UpdateWaveforms(new_model)),
+						_elm_lang$dom$Dom_Scroll$toBottom('message-div'))
+				};
+			case 'UpdateWaveforms':
+				var _p34 = _p33._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _p34,
+					_1: _user$project$Main$updateWaveforms(_p34)
 				};
 			case 'CheckCvtData':
 				return {
@@ -31133,24 +31177,24 @@ var _user$project$Main$update = F2(
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'GetCVT':
 				if (_p33._0.ctor === 'Ok') {
-					var _p34 = _p33._0._0;
+					var _p35 = _p33._0._0;
 					var new_model = function () {
-						if (_elm_lang$core$Native_Utils.eq(_p34, '{}')) {
+						if (_elm_lang$core$Native_Utils.eq(_p35, '{}')) {
 							return model;
 						} else {
 							var dev_cvt = A2(
 								_elm_lang$core$Result$withDefault,
 								_user$project$Devices_Device$defaultDeviceDict,
-								A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Devices_Device$decodeDeviceCvt, _p34));
+								A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Devices_Device$decodeDeviceCvt, _p35));
 							return A2(
 								_user$project$Main$populateGeneralCvt,
-								_p34,
+								_p35,
 								A2(
 									_user$project$Main$populatePasCvt,
-									A2(_user$project$Pas$retrievePasCvt, 'pas', _p34),
+									A2(_user$project$Pas$retrievePasCvt, 'pas', _p35),
 									A2(
 										_user$project$Main$populateCrdCvt,
-										A2(_user$project$Crd$retrieveCrdCvt, 'crd', _p34),
+										A2(_user$project$Crd$retrieveCrdCvt, 'crd', _p35),
 										A2(
 											_user$project$Main$populatePptDevices,
 											_user$project$Devices_Ppt$insertPptDev(dev_cvt),
@@ -31173,7 +31217,7 @@ var _user$project$Main$update = F2(
 				}
 			case 'GetData':
 				if (_p33._0.ctor === 'Ok') {
-					var _p35 = _p33._0._0;
+					var _p36 = _p33._0._0;
 					var rCrdData = A2(
 						_elm_lang$core$Maybe$withDefault,
 						_user$project$Crd$CrdsCell(0)(0)(0)(0)(0)(0)(0)(0)(0)(
@@ -31254,22 +31298,22 @@ var _user$project$Main$update = F2(
 						_user$project$Main$populateMsgData(
 							A2(
 								_user$project$Main$populateGeneralData,
-								_p35,
+								_p36,
 								A2(
 									_user$project$Main$populatePasData,
-									A2(_user$project$Pas$retrieveData, 'PAS', _p35),
+									A2(_user$project$Pas$retrieveData, 'PAS', _p36),
 									A2(
 										_user$project$Main$populateCrdData,
-										A2(_user$project$Crd$retrieveData, 'CellData', _p35),
+										A2(_user$project$Crd$retrieveData, 'CellData', _p36),
 										A2(
 											_user$project$Main$populateVaisalaData,
-											_user$project$Devices_Vaisala$getVaisalaData(_p35),
+											_user$project$Devices_Vaisala$getVaisalaData(_p36),
 											A2(
 												_user$project$Main$populatePptData,
-												_user$project$Devices_Ppt$getPptData(_p35),
+												_user$project$Devices_Ppt$getPptData(_p36),
 												A2(
 													_user$project$Main$populateAlicatData,
-													_user$project$Devices_Alicat$getAlicatData(_p35),
+													_user$project$Devices_Alicat$getAlicatData(_p36),
 													model))))))));
 					var n_model = A2(
 						_user$project$Main$asRunningDataIn,
@@ -31290,9 +31334,9 @@ var _user$project$Main$update = F2(
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
 			case 'InitializeNetwork':
-				var _p36 = _p33._0;
-				var p = _elm_lang$core$Tuple$second(_p36);
-				var ip = _elm_lang$core$Tuple$first(_p36);
+				var _p37 = _p33._0;
+				var p = _elm_lang$core$Tuple$second(_p37);
+				var ip = _elm_lang$core$Tuple$first(_p37);
 				var network = model.network;
 				var network_ = _elm_lang$core$Native_Utils.update(
 					network,
@@ -31310,11 +31354,11 @@ var _user$project$Main$update = F2(
 					_1: A2(_user$project$Main$getCvtData, new_model, '1')
 				};
 			case 'ToggleSpeaker':
-				var _p39 = _p33._0;
-				var ncell = _elm_lang$core$Native_Utils.eq(_p39, 0) ? '0' : '1';
+				var _p40 = _p33._0;
+				var ncell = _elm_lang$core$Native_Utils.eq(_p40, 0) ? '0' : '1';
 				var new_model = function () {
-					var _p37 = _p39;
-					switch (_p37) {
+					var _p38 = _p40;
+					switch (_p38) {
 						case 0:
 							return A2(
 								_user$project$Main$asPasIn,
@@ -31336,8 +31380,8 @@ var _user$project$Main$update = F2(
 					}
 				}();
 				var val = function () {
-					var _p38 = _p39;
-					switch (_p38) {
+					var _p39 = _p40;
+					switch (_p39) {
 						case 0:
 							return new_model.pas.cvt.speaker_0 ? '1' : '0';
 						case 1:
@@ -31378,17 +31422,17 @@ var _user$project$Main$update = F2(
 						A2(_user$project$Pas$setFrequency1, f_, model.pas.cvt)));
 				return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SendModulation':
-				var _p40 = _p33._0;
-				var freq = _elm_lang$core$Native_Utils.eq(_p40, '1') ? model.pas.cvt.fmod_1 : model.pas.cvt.fmod_0;
+				var _p41 = _p33._0;
+				var freq = _elm_lang$core$Native_Utils.eq(_p41, '1') ? model.pas.cvt.fmod_1 : model.pas.cvt.fmod_0;
 				var f = _elm_lang$core$Basics$toString(freq);
 				var index = A2(
 					_elm_lang$core$Result$withDefault,
 					0,
-					_elm_lang$core$String$toInt(_p40));
+					_elm_lang$core$String$toInt(_p41));
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: A3(_user$project$Main$setCellFrequency, model, _p40, f)
+					_1: A3(_user$project$Main$setCellFrequency, model, _p41, f)
 				};
 			case 'SendCrdFrequency':
 				return {
@@ -31423,12 +31467,12 @@ var _user$project$Main$update = F2(
 					_1: A2(_user$project$Main$toggleHeaterPid, _p33._0, model)
 				};
 			case 'UpdateHeaterSP':
-				var _p43 = _p33._1;
-				var _p42 = _p33._0;
-				var nsp = A2(_elm_lang$core$Debug$log, 'heater_sp', _p43);
-				var nid = A2(_elm_lang$core$Debug$log, 'heater_id', _p42);
-				var _p41 = _p42;
-				switch (_p41.ctor) {
+				var _p44 = _p33._1;
+				var _p43 = _p33._0;
+				var nsp = A2(_elm_lang$core$Debug$log, 'heater_sp', _p44);
+				var nid = A2(_elm_lang$core$Debug$log, 'heater_id', _p43);
+				var _p42 = _p43;
+				switch (_p42.ctor) {
 					case 'CrdHeater':
 						var new_model = A2(
 							_user$project$Main$asCrdIn,
@@ -31439,7 +31483,7 @@ var _user$project$Main$update = F2(
 								A2(
 									_user$project$Crd$asHeaterIn,
 									model.crd.cvt,
-									A2(_user$project$Crd$setHeaterSP, _p43, model.crd.cvt.heater))));
+									A2(_user$project$Crd$setHeaterSP, _p44, model.crd.cvt.heater))));
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 					case 'Pas0Heater':
 						var new_model = A2(
@@ -31451,7 +31495,7 @@ var _user$project$Main$update = F2(
 								A2(
 									_user$project$Pas$asHeater0In,
 									model.pas.cvt,
-									A2(_user$project$Pas$setHeaterSP, _p43, model.pas.cvt.heater_0))));
+									A2(_user$project$Pas$setHeaterSP, _p44, model.pas.cvt.heater_0))));
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 					default:
 						var new_model = A2(
@@ -31463,14 +31507,14 @@ var _user$project$Main$update = F2(
 								A2(
 									_user$project$Pas$asHeater1In,
 									model.pas.cvt,
-									A2(_user$project$Pas$setHeaterSP, _p43, model.pas.cvt.heater_1))));
+									A2(_user$project$Pas$setHeaterSP, _p44, model.pas.cvt.heater_1))));
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
 			case 'UpdateHeaterCtl':
-				var _p46 = _p33._2;
-				var _p45 = _p33._1;
-				var _p44 = _p33._0;
-				switch (_p44.ctor) {
+				var _p47 = _p33._2;
+				var _p46 = _p33._1;
+				var _p45 = _p33._0;
+				switch (_p45.ctor) {
 					case 'CrdHeater':
 						var new_model = A2(
 							_user$project$Main$asCrdIn,
@@ -31483,7 +31527,7 @@ var _user$project$Main$update = F2(
 									model.crd.cvt,
 									A2(
 										_user$project$Crd$setHeaterPID,
-										A3(_elm_lang$core$Array$set, _p45, _p46, model.crd.cvt.heater.pid),
+										A3(_elm_lang$core$Array$set, _p46, _p47, model.crd.cvt.heater.pid),
 										model.crd.cvt.heater))));
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 					case 'Pas0Heater':
@@ -31498,7 +31542,7 @@ var _user$project$Main$update = F2(
 									model.pas.cvt,
 									A2(
 										_user$project$Pas$setHeaterPID,
-										A3(_elm_lang$core$Array$set, _p45, _p46, model.pas.cvt.heater_0.pid),
+										A3(_elm_lang$core$Array$set, _p46, _p47, model.pas.cvt.heater_0.pid),
 										model.pas.cvt.heater_0))));
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 					default:
@@ -31513,7 +31557,7 @@ var _user$project$Main$update = F2(
 									model.pas.cvt,
 									A2(
 										_user$project$Pas$setHeaterPID,
-										A3(_elm_lang$core$Array$set, _p45, _p46, model.pas.cvt.heater_1.pid),
+										A3(_elm_lang$core$Array$set, _p46, _p47, model.pas.cvt.heater_1.pid),
 										model.pas.cvt.heater_1))));
 						return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
@@ -31530,32 +31574,32 @@ var _user$project$Main$update = F2(
 					_1: A2(_user$project$Main$sendHeaterCtl, _p33._0, model)
 				};
 			case 'TogglePasLaserPower':
-				var _p48 = _p33._0;
-				var c = _elm_lang$core$Basics$toString(_p48);
+				var _p49 = _p33._0;
+				var c = _elm_lang$core$Basics$toString(_p49);
 				var new_model = A2(
 					_user$project$Main$asPasIn,
 					model,
 					A2(
 						_user$project$Pas$asCvtIn,
 						model.pas,
-						A2(_user$project$Pas$toggleLaserPower, _p48, model.pas.cvt)));
+						A2(_user$project$Pas$toggleLaserPower, _p49, model.pas.cvt)));
 				var cmd = function () {
-					var _p47 = _p48;
-					switch (_p47) {
+					var _p48 = _p49;
+					switch (_p48) {
 						case 0:
 							var val = new_model.pas.cvt.enable_0 ? '1' : '0';
 							return A3(
 								_user$project$Main$togglePasLaserPower,
 								new_model,
 								val,
-								_elm_lang$core$Basics$toString(_p48));
+								_elm_lang$core$Basics$toString(_p49));
 						case 1:
 							var val = new_model.pas.cvt.enable_1 ? '1' : '0';
 							return A3(
 								_user$project$Main$togglePasLaserPower,
 								new_model,
 								val,
-								_elm_lang$core$Basics$toString(_p48));
+								_elm_lang$core$Basics$toString(_p49));
 						default:
 							return _elm_lang$core$Platform_Cmd$none;
 					}
@@ -31605,11 +31649,11 @@ var _user$project$Main$update = F2(
 					_1: _user$project$Main$sendFanVoltage(new_model)
 				};
 			case 'UpdateDevSP':
-				var _p49 = _p33._0;
+				var _p50 = _p33._0;
 				var dev = A2(
 					_elm_lang$core$Maybe$withDefault,
 					_user$project$Devices_Device$defaultDevice,
-					A2(_elm_lang$core$Dict$get, _p49, model.alicats.cvt));
+					A2(_elm_lang$core$Dict$get, _p50, model.alicats.cvt));
 				var new_dev = A2(_user$project$Devices_Device$setSpIn, _p33._1, dev);
 				var new_model = A2(
 					_user$project$Main$asAlicatIn,
@@ -31617,18 +31661,18 @@ var _user$project$Main$update = F2(
 					A2(
 						_user$project$Devices_Alicat$asCvtIn,
 						model.alicats,
-						A3(_elm_lang$core$Dict$insert, _p49, new_dev, model.alicats.cvt)));
+						A3(_elm_lang$core$Dict$insert, _p50, new_dev, model.alicats.cvt)));
 				return {ctor: '_Tuple2', _0: new_model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SendDevSP':
-				var _p50 = _p33._0;
+				var _p51 = _p33._0;
 				var dev = A2(
 					_elm_lang$core$Maybe$withDefault,
 					_user$project$Devices_Device$defaultDevice,
-					A2(_elm_lang$core$Dict$get, _p50, model.alicats.cvt));
+					A2(_elm_lang$core$Dict$get, _p51, model.alicats.cvt));
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: A3(_user$project$Main$sendDevSp, _p50, dev, model)
+					_1: A3(_user$project$Main$sendDevSp, _p51, dev, model)
 				};
 			case 'UpdateTime':
 				return {
@@ -31639,15 +31683,15 @@ var _user$project$Main$update = F2(
 			case 'SyncTime':
 				return {ctor: '_Tuple2', _0: model, _1: _user$project$Main$getCurrentTime};
 			case 'TogglePasPlot':
-				var _p51 = _p33._0;
+				var _p52 = _p33._0;
 				var d = A2(
 					_elm_lang$core$Maybe$withDefault,
 					false,
-					A2(_elm_community$list_extra$List_Extra$getAt, _p51, model.pasPlotData));
+					A2(_elm_community$list_extra$List_Extra$getAt, _p52, model.pasPlotData));
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						pasPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p51, !d, model.pasPlotData)
+						pasPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p52, !d, model.pasPlotData)
 					});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'UpdatePasRange':
@@ -31657,8 +31701,8 @@ var _user$project$Main$update = F2(
 					0,
 					_elm_lang$core$String$toFloat(_p33._1));
 				var newRange = function () {
-					var _p52 = _p33._0;
-					switch (_p52) {
+					var _p53 = _p33._0;
+					switch (_p53) {
 						case 'xmin':
 							return _elm_lang$core$Native_Utils.update(
 								range,
@@ -31732,8 +31776,8 @@ var _user$project$Main$update = F2(
 					0,
 					_elm_lang$core$String$toFloat(_p33._1));
 				var newRange = function () {
-					var _p53 = _p33._0;
-					switch (_p53) {
+					var _p54 = _p33._0;
+					switch (_p54) {
 						case 'xmin':
 							return _elm_lang$core$Native_Utils.update(
 								range,
@@ -31796,15 +31840,15 @@ var _user$project$Main$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'ToggleCrdPlot':
-				var _p54 = _p33._0;
+				var _p55 = _p33._0;
 				var d = A2(
 					_elm_lang$core$Maybe$withDefault,
 					false,
-					A2(_elm_community$list_extra$List_Extra$getAt, _p54, model.crdPlotData));
+					A2(_elm_community$list_extra$List_Extra$getAt, _p55, model.crdPlotData));
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						crdPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p54, !d, model.crdPlotData)
+						crdPlotData: A3(_elm_community$list_extra$List_Extra$setAt, _p55, !d, model.crdPlotData)
 					});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SequenceState':
@@ -31999,9 +32043,9 @@ var _user$project$Main$viewPas = function (model) {
 												model,
 												_elm_lang$core$Maybe$Just('Center (Hz)'),
 												model.pas.cvt.spk.center,
-												function (_p55) {
+												function (_p56) {
 													return _user$project$Main$Pas(
-														_user$project$Pas$UpdateSpkFcenter(_p55));
+														_user$project$Pas$UpdateSpkFcenter(_p56));
 												},
 												_elm_lang$core$Maybe$Just(_user$project$Main$UpdateChirp)),
 											_1: {
@@ -32012,9 +32056,9 @@ var _user$project$Main$viewPas = function (model) {
 													model,
 													_elm_lang$core$Maybe$Just('Df (Hz)'),
 													model.pas.cvt.spk.df,
-													function (_p56) {
+													function (_p57) {
 														return _user$project$Main$Pas(
-															_user$project$Pas$UpdateSpkDf(_p56));
+															_user$project$Pas$UpdateSpkDf(_p57));
 													},
 													_elm_lang$core$Maybe$Just(_user$project$Main$UpdateChirp)),
 												_1: {
@@ -32025,9 +32069,9 @@ var _user$project$Main$viewPas = function (model) {
 														model,
 														_elm_lang$core$Maybe$Just('Vscale (V)'),
 														model.pas.cvt.spk.vscale,
-														function (_p57) {
+														function (_p58) {
 															return _user$project$Main$Pas(
-																_user$project$Pas$UpdateSpkVscale(_p57));
+																_user$project$Pas$UpdateSpkVscale(_p58));
 														},
 														_elm_lang$core$Maybe$Just(_user$project$Main$SendSpkVoltage)),
 													_1: {
@@ -32038,9 +32082,9 @@ var _user$project$Main$viewPas = function (model) {
 															model,
 															_elm_lang$core$Maybe$Just('Voffset (V)'),
 															model.pas.cvt.spk.voffset,
-															function (_p58) {
+															function (_p59) {
 																return _user$project$Main$Pas(
-																	_user$project$Pas$UpdateSpkVoffset(_p58));
+																	_user$project$Pas$UpdateSpkVoffset(_p59));
 															},
 															_elm_lang$core$Maybe$Just(_user$project$Main$SendSpkVoltage)),
 														_1: {ctor: '[]'}
@@ -32730,8 +32774,8 @@ var _user$project$Main$viewBody = function (model) {
 				{
 					ctor: '::',
 					_0: function () {
-						var _p59 = model.selectedTab;
-						switch (_p59) {
+						var _p60 = model.selectedTab;
+						switch (_p60) {
 							case 0:
 								return _user$project$Main$viewMain(model);
 							case 1:

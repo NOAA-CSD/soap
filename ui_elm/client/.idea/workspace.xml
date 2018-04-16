@@ -2,8 +2,8 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/Crd.elm" line="56" mnemonic="9" />
-    <bookmark url="file://$PROJECT_DIR$/src/main.elm" line="2939" />
-    <bookmark url="file://$PROJECT_DIR$/src/main.elm" line="2945" />
+    <bookmark url="file://$PROJECT_DIR$/src/main.elm" line="2947" />
+    <bookmark url="file://$PROJECT_DIR$/src/main.elm" line="2953" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11e093f1-b2f0-4fc7-87bb-0821a21436a3" name="Default" comment="" />
@@ -19,16 +19,26 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6327381">
+    <splitter split-orientation="horizontal" split-proportion="0.76964283">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.69774014">
+        <splitter split-orientation="horizontal" split-proportion="0.74922603">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
               <file leaf-file-name="main.elm" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="306">
-                      <caret line="291" column="21" lean-forward="true" selection-start-line="291" selection-start-column="21" selection-end-line="291" selection-end-column="21" />
+                    <state relative-caret-position="250">
+                      <caret line="398" column="38" lean-forward="false" selection-start-line="398" selection-start-column="38" selection-end-line="398" selection-end-column="38" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="Options.elm" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/elm-stuff/packages/debois/elm-mdl/8.1.0/src/Material/Options.elm">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="3655">
+                      <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
@@ -67,8 +77,8 @@
               <file leaf-file-name="elm-package.json" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-package.json">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="323">
-                      <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+                    <state relative-caret-position="340">
+                      <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
                       <folding />
                     </state>
                   </provider>
@@ -87,8 +97,8 @@
               <file leaf-file-name="Basics.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Basics.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="9690">
-                      <caret line="570" column="0" lean-forward="false" selection-start-line="570" selection-start-column="0" selection-end-line="570" selection-end-column="0" />
+                    <state relative-caret-position="9911">
+                      <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
@@ -111,8 +121,8 @@
               <file leaf-file-name="main.elm" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/main.elm">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="2856">
-                      <caret line="168" column="18" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="18" />
+                    <state relative-caret-position="2873">
+                      <caret line="169" column="18" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="18" />
                       <folding />
                     </state>
                   </provider>
@@ -157,7 +167,7 @@
           <file leaf-file-name="Crd.elm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Crd.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="329">
+                <state relative-caret-position="340">
                   <caret line="20" column="63" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
                   <folding />
                 </state>
@@ -197,7 +207,7 @@
           <file leaf-file-name="Pas.elm" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Pas.elm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6507">
+                <state relative-caret-position="604">
                   <caret line="389" column="83" lean-forward="false" selection-start-line="389" selection-start-column="83" selection-end-line="389" selection-end-column="83" />
                   <folding />
                 </state>
@@ -220,9 +230,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>HeaterID</find>
-      <find>Button</find>
-      <find>SendSpkVoltage</find>
       <find>truncat</find>
       <find>UpdatePasScaling</find>
       <find>getHeaterPid</find>
@@ -250,6 +257,9 @@
       <find>performPasTruncation</find>
       <find>xMin</find>
       <find>xmin</find>
+      <find>messages</find>
+      <find>viewStatus</find>
+      <find>Select</find>
     </findStrings>
     <replaceStrings>
       <replace>Textfield</replace>
@@ -306,8 +316,8 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="34" />
-    <option name="width" value="1920" />
-    <option name="height" value="1166" />
+    <option name="width" value="960" />
+    <option name="height" value="1046" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -325,6 +335,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -341,7 +352,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -495,12 +505,14 @@
       <workItem from="1522873019929" duration="669000" />
       <workItem from="1522964880092" duration="1586000" />
       <workItem from="1523420827293" duration="143000" />
-      <workItem from="1523477989476" duration="5792000" />
+      <workItem from="1523477989476" duration="9065000" />
+      <workItem from="1523574035831" duration="1631000" />
+      <workItem from="1523917133051" duration="592000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="612916000" />
+    <option name="totallyTimeSpent" value="618412000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -513,16 +525,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="34" width="1920" height="1046" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.038541667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969034" sideWeight="0.49813133" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JSON Utils" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28724545" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28724545" sideWeight="0.5072917" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32515338" sideWeight="0.486053" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28724545" sideWeight="0.496875" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28724545" sideWeight="0.49270833" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -554,14 +567,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Json/Decode.elm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6664">
-          <caret line="392" column="0" lean-forward="false" selection-start-line="392" selection-start-column="0" selection-end-line="392" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Crd.elm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -717,8 +722,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/elm-package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+        <state relative-caret-position="340">
+          <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -767,14 +772,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="647">
           <caret line="191" column="17" lean-forward="false" selection-start-line="191" selection-start-column="17" selection-end-line="191" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Basics.elm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9690">
-          <caret line="570" column="0" lean-forward="false" selection-start-line="570" selection-start-column="0" selection-end-line="570" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -866,7 +863,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Crd.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
+        <state relative-caret-position="340">
           <caret line="20" column="63" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
           <folding />
         </state>
@@ -874,16 +871,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pas.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6507">
+        <state relative-caret-position="604">
           <caret line="389" column="83" lean-forward="false" selection-start-line="389" selection-start-column="83" selection-end-line="389" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elm-stuff/packages/debois/elm-mdl/8.1.0/src/Material/Options.elm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3655">
+          <caret line="215" column="0" lean-forward="false" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elm-stuff/packages/elm-lang/core/5.1.1/src/Basics.elm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9911">
+          <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="291" column="21" lean-forward="true" selection-start-line="291" selection-start-column="21" selection-end-line="291" selection-end-column="21" />
+        <state relative-caret-position="250">
+          <caret line="398" column="38" lean-forward="false" selection-start-line="398" selection-start-column="38" selection-end-line="398" selection-end-column="38" />
           <folding />
         </state>
       </provider>

@@ -11,6 +11,7 @@ module Main exposing (..)
 --import ContextMenu as CM
 
 import Array
+import Dom.Scroll exposing (toBottom)
 import Crd
 import Debug exposing (log)
 import Devices.Alicat as Alicat
@@ -34,7 +35,7 @@ import Material.Grid as Grid
 import Material.Icon as Icon
 import Material.Layout as Layout
 import Material.List as MList
-import Material.Options exposing (Style, css, onBlur, onInput)
+import Material.Options exposing (Style, css, onBlur, onInput, id)
 import Material.Slider as Slider
 import Material.Table as Table
 import Material.Textfield as Textfield
@@ -392,6 +393,7 @@ type Msg
       -- Sequence
     | SequenceState
     | ResetSequence
+    | UpdateWaveforms Model
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -405,7 +407,12 @@ update msg model =
                 new_model =
                     { model | selectedTab = tab }
             in
-                ( new_model, updateWaveforms new_model )
+                ( new_model
+                , Task.attempt (always <| UpdateWaveforms new_model) <| toBottom "message-div"
+                )
+
+        UpdateWaveforms nmodel ->
+            ( nmodel, updateWaveforms nmodel )
 
         CheckCvtData tick ->
             ( model, getCvtData model "0" )
@@ -2672,6 +2679,7 @@ viewStatus model =
                 , css "overflow" "scroll"
                 , css "border" "1px solid grey"
                 , css "border-radius" "4px"
+                , id "message-div"
                 ]
                 (List.map
                     (\msg ->

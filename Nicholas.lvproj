@@ -2420,7 +2420,7 @@ DirectoryIndex index.htm
 		<Item Name="Sequence Composition.lvlib" Type="Library" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/Sequence/Sequence Composition.lvlib"/>
 		<Item Name="soap" Type="Web Service">
 			<Property Name="Bld_buildSpecName" Type="Str"></Property>
-			<Property Name="Bld_version.build" Type="Int">13</Property>
+			<Property Name="Bld_version.build" Type="Int">14</Property>
 			<Property Name="ws.autoIncrementVersion" Type="Bool">true</Property>
 			<Property Name="ws.disconnectInline" Type="Bool">true</Property>
 			<Property Name="ws.disconnectTypeDefs" Type="Bool">false</Property>
@@ -2433,7 +2433,7 @@ DirectoryIndex index.htm
 			<Property Name="ws.serveDefaultDoc" Type="Bool">true</Property>
 			<Property Name="ws.SSE2" Type="Bool">true</Property>
 			<Property Name="ws.static_permissions" Type="Str"></Property>
-			<Property Name="ws.version.build" Type="Int">13</Property>
+			<Property Name="ws.version.build" Type="Int">14</Property>
 			<Property Name="ws.version.fix" Type="Int">0</Property>
 			<Property Name="ws.version.major" Type="Int">1</Property>
 			<Property Name="ws.version.minor" Type="Int">0</Property>
