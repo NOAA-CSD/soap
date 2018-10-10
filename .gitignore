@@ -17,6 +17,6 @@
 
 # Ignore elm stuff
 ui_elm/client/elm-stuff/
-ui_elm/client/Public/
+# ui_elm/client/Public/
 .idea/
 ui_elm/client/.idea/

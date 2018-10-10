@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gCRDS-PAS</title>
+    <!-- MDL -->
+    <link rel="stylesheet" href="mdl/material-blue-lightblue.min.css" />
+    <link rel="stylesheet" href="material-design-icons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+<div id="main"></div>
+<script src="js/main.js"></script>
+<script>
+    var node = document.getElementById('main');
+    var app = Elm.Main.embed(node);
+
+    // Set default values if localStorage variables are not set
+    var ip = localStorage.getItem("ip") === null? "10.172.240.107": localStorage.getItem("ip");
+    var port = localStorage.getItem("port") === null? "8001": localStorage.getItem("port");
+
+    // Function responds to changes in the network settings on the elm side
+    app.ports.updateIpConfig.subscribe(function(data){
+        localStorage.setItem("ip", data[0]);
+        localStorage.setItem("port", data[1])
+    });
+
+    // This is for initializing the user interface with the correct IP settings...
+    window.onload =
+        app.ports.initPort.send([ip, port]);
+
+</script>
+</body>
+</html>
