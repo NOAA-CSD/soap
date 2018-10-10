@@ -1,0 +1,4 @@
+var _terezka$line_charts$LineChart_Area$percentage = _terezka$line_charts$Internal_Area$percentage;
+var _terezka$line_charts$LineChart_Area$stacked = _terezka$line_charts$Internal_Area$stacked;
+var _terezka$line_charts$LineChart_Area$normal = _terezka$line_charts$Internal_Area$normal;
+var _terezka$line_charts$LineChart_Area$default = _terezka$line_charts$Internal_Area$none;

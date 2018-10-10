@@ -1,0 +1,265 @@
+var _terezka$line_charts$Internal_Path$bool = function (bool) {
+	return bool ? '1' : '0';
+};
+var _terezka$line_charts$Internal_Path$point = function (_p0) {
+	var _p1 = _p0;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(_p1.x),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			' ',
+			_elm_lang$core$Basics$toString(_p1.y)));
+};
+var _terezka$line_charts$Internal_Path$points = function (points) {
+	return A2(
+		_elm_lang$core$String$join,
+		',',
+		A2(_elm_lang$core$List$map, _terezka$line_charts$Internal_Path$point, points));
+};
+var _terezka$line_charts$Internal_Path$join = function (commands) {
+	return A2(_elm_lang$core$String$join, ' ', commands);
+};
+var _terezka$line_charts$Internal_Path$toString = function (command) {
+	var _p2 = command;
+	switch (_p2.ctor) {
+		case 'Close':
+			return 'Z';
+		case 'Move':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'M',
+				_terezka$line_charts$Internal_Path$point(_p2._0));
+		case 'Line':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'L',
+				_terezka$line_charts$Internal_Path$point(_p2._0));
+		case 'Horizontal':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'H',
+				_elm_lang$core$Basics$toString(_p2._0));
+		case 'Vertical':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'V',
+				_elm_lang$core$Basics$toString(_p2._0));
+		case 'CubicBeziers':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'C',
+				_terezka$line_charts$Internal_Path$points(
+					{
+						ctor: '::',
+						_0: _p2._0,
+						_1: {
+							ctor: '::',
+							_0: _p2._1,
+							_1: {
+								ctor: '::',
+								_0: _p2._2,
+								_1: {ctor: '[]'}
+							}
+						}
+					}));
+		case 'CubicBeziersShort':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'Q',
+				_terezka$line_charts$Internal_Path$points(
+					{
+						ctor: '::',
+						_0: _p2._0,
+						_1: {
+							ctor: '::',
+							_0: _p2._1,
+							_1: {ctor: '[]'}
+						}
+					}));
+		case 'QuadraticBeziers':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'Q',
+				_terezka$line_charts$Internal_Path$points(
+					{
+						ctor: '::',
+						_0: _p2._0,
+						_1: {
+							ctor: '::',
+							_0: _p2._1,
+							_1: {ctor: '[]'}
+						}
+					}));
+		case 'QuadraticBeziersShort':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'T',
+				_terezka$line_charts$Internal_Path$point(_p2._0));
+		default:
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'A',
+				_terezka$line_charts$Internal_Path$join(
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(_p2._0),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Basics$toString(_p2._1),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Basics$toString(_p2._2),
+								_1: {
+									ctor: '::',
+									_0: _terezka$line_charts$Internal_Path$bool(_p2._3),
+									_1: {
+										ctor: '::',
+										_0: _terezka$line_charts$Internal_Path$bool(_p2._4),
+										_1: {
+											ctor: '::',
+											_0: _terezka$line_charts$Internal_Path$point(_p2._5),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}));
+	}
+};
+var _terezka$line_charts$Internal_Path$toPoint = function (command) {
+	var _p3 = command;
+	switch (_p3.ctor) {
+		case 'Close':
+			return A2(_terezka$line_charts$LineChart_Coordinate$Point, 0, 0);
+		case 'Move':
+			return _p3._0;
+		case 'Line':
+			return _p3._0;
+		case 'Horizontal':
+			return A2(_terezka$line_charts$LineChart_Coordinate$Point, _p3._0, 0);
+		case 'Vertical':
+			return A2(_terezka$line_charts$LineChart_Coordinate$Point, 0, _p3._0);
+		case 'CubicBeziers':
+			return _p3._2;
+		case 'CubicBeziersShort':
+			return _p3._1;
+		case 'QuadraticBeziers':
+			return _p3._1;
+		case 'QuadraticBeziersShort':
+			return _p3._0;
+		default:
+			return _p3._5;
+	}
+};
+var _terezka$line_charts$Internal_Path$viewPath = function (attributes) {
+	return A2(
+		_elm_lang$svg$Svg$path,
+		attributes,
+		{ctor: '[]'});
+};
+var _terezka$line_charts$Internal_Path$Close = {ctor: 'Close'};
+var _terezka$line_charts$Internal_Path$Arc = F6(
+	function (a, b, c, d, e, f) {
+		return {ctor: 'Arc', _0: a, _1: b, _2: c, _3: d, _4: e, _5: f};
+	});
+var _terezka$line_charts$Internal_Path$QuadraticBeziersShort = function (a) {
+	return {ctor: 'QuadraticBeziersShort', _0: a};
+};
+var _terezka$line_charts$Internal_Path$QuadraticBeziers = F2(
+	function (a, b) {
+		return {ctor: 'QuadraticBeziers', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Path$CubicBeziersShort = F2(
+	function (a, b) {
+		return {ctor: 'CubicBeziersShort', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Path$CubicBeziers = F3(
+	function (a, b, c) {
+		return {ctor: 'CubicBeziers', _0: a, _1: b, _2: c};
+	});
+var _terezka$line_charts$Internal_Path$Vertical = function (a) {
+	return {ctor: 'Vertical', _0: a};
+};
+var _terezka$line_charts$Internal_Path$Horizontal = function (a) {
+	return {ctor: 'Horizontal', _0: a};
+};
+var _terezka$line_charts$Internal_Path$Line = function (a) {
+	return {ctor: 'Line', _0: a};
+};
+var _terezka$line_charts$Internal_Path$Move = function (a) {
+	return {ctor: 'Move', _0: a};
+};
+var _terezka$line_charts$Internal_Path$translate = F2(
+	function (system, command) {
+		var _p4 = command;
+		switch (_p4.ctor) {
+			case 'Move':
+				return _terezka$line_charts$Internal_Path$Move(
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._0));
+			case 'Line':
+				return _terezka$line_charts$Internal_Path$Line(
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._0));
+			case 'Horizontal':
+				return _terezka$line_charts$Internal_Path$Horizontal(
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, _p4._0));
+			case 'Vertical':
+				return _terezka$line_charts$Internal_Path$Vertical(
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, _p4._0));
+			case 'CubicBeziers':
+				return A3(
+					_terezka$line_charts$Internal_Path$CubicBeziers,
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._0),
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._1),
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._2));
+			case 'CubicBeziersShort':
+				return A2(
+					_terezka$line_charts$Internal_Path$CubicBeziersShort,
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._0),
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._1));
+			case 'QuadraticBeziers':
+				return A2(
+					_terezka$line_charts$Internal_Path$QuadraticBeziers,
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._0),
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._1));
+			case 'QuadraticBeziersShort':
+				return _terezka$line_charts$Internal_Path$QuadraticBeziersShort(
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._0));
+			case 'Arc':
+				return A6(
+					_terezka$line_charts$Internal_Path$Arc,
+					_p4._0,
+					_p4._1,
+					_p4._2,
+					_p4._3,
+					_p4._4,
+					A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, _p4._5));
+			default:
+				return _terezka$line_charts$Internal_Path$Close;
+		}
+	});
+var _terezka$line_charts$Internal_Path$description = F2(
+	function (system, commands) {
+		return _terezka$line_charts$Internal_Path$join(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p5) {
+					return _terezka$line_charts$Internal_Path$toString(
+						A2(_terezka$line_charts$Internal_Path$translate, system, _p5));
+				},
+				commands));
+	});
+var _terezka$line_charts$Internal_Path$view = F3(
+	function (system, attributes, commands) {
+		return _terezka$line_charts$Internal_Path$viewPath(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				attributes,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$d(
+						A2(_terezka$line_charts$Internal_Path$description, system, commands)),
+					_1: {ctor: '[]'}
+				}));
+	});

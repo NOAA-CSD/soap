@@ -1,0 +1,140 @@
+var _terezka$line_charts$LineChart_Junk$hoverAt = _terezka$line_charts$Internal_Junk$hoverAt;
+var _terezka$line_charts$LineChart_Junk$hover = _terezka$line_charts$Internal_Junk$hover;
+var _terezka$line_charts$LineChart_Junk$withinChartArea = _terezka$line_charts$Internal_Svg$withinChartArea;
+var _terezka$line_charts$LineChart_Junk$label = function (color) {
+	return _terezka$line_charts$Internal_Svg$label(
+		_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color));
+};
+var _terezka$line_charts$LineChart_Junk$circle = F5(
+	function (system, radius, color, x, y) {
+		return A3(
+			_terezka$line_charts$Internal_Svg$gridDot,
+			radius,
+			color,
+			A2(
+				_terezka$line_charts$LineChart_Coordinate$toSvg,
+				system,
+				A2(_terezka$line_charts$LineChart_Coordinate$Point, x, y)));
+	});
+var _terezka$line_charts$LineChart_Junk$rectangle = F2(
+	function (system, attributes) {
+		return A2(
+			_terezka$line_charts$Internal_Svg$rectangle,
+			system,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$withinChartArea(system),
+				_1: attributes
+			});
+	});
+var _terezka$line_charts$LineChart_Junk$horizontalCustom = F2(
+	function (system, attributes) {
+		return A2(
+			_terezka$line_charts$Internal_Svg$horizontal,
+			system,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$withinChartArea(system),
+				_1: attributes
+			});
+	});
+var _terezka$line_charts$LineChart_Junk$verticalCustom = F2(
+	function (system, attributes) {
+		return A2(
+			_terezka$line_charts$Internal_Svg$vertical,
+			system,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$withinChartArea(system),
+				_1: attributes
+			});
+	});
+var _terezka$line_charts$LineChart_Junk$horizontal = F3(
+	function (system, attributes, at) {
+		return A5(
+			_terezka$line_charts$Internal_Svg$horizontal,
+			system,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$withinChartArea(system),
+				_1: attributes
+			},
+			at,
+			system.x.min,
+			system.x.max);
+	});
+var _terezka$line_charts$LineChart_Junk$vertical = F3(
+	function (system, attributes, at) {
+		return A5(
+			_terezka$line_charts$Internal_Svg$vertical,
+			system,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$withinChartArea(system),
+				_1: attributes
+			},
+			at,
+			system.y.min,
+			system.y.max);
+	});
+var _terezka$line_charts$LineChart_Junk$offset = _terezka$line_charts$Internal_Svg$offset;
+var _terezka$line_charts$LineChart_Junk$move = _terezka$line_charts$Internal_Svg$move;
+var _terezka$line_charts$LineChart_Junk$transform = _terezka$line_charts$Internal_Svg$transform;
+var _terezka$line_charts$LineChart_Junk$placed = F5(
+	function (system, x, y, xo, yo) {
+		return _elm_lang$svg$Svg$g(
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$transform(
+					{
+						ctor: '::',
+						_0: A3(_terezka$line_charts$LineChart_Junk$move, system, x, y),
+						_1: {
+							ctor: '::',
+							_0: A2(_terezka$line_charts$LineChart_Junk$offset, xo, yo),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$LineChart_Junk$labelAt = F8(
+	function (system, x, y, xo, yo, anchor, color, text) {
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Junk$transform(
+					{
+						ctor: '::',
+						_0: A3(_terezka$line_charts$LineChart_Junk$move, system, x, y),
+						_1: {
+							ctor: '::',
+							_0: A2(_terezka$line_charts$LineChart_Junk$offset, xo, yo),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'text-anchor: ',
+							A2(_elm_lang$core$Basics_ops['++'], anchor, ';'))),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(_terezka$line_charts$LineChart_Junk$label, color, text),
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$LineChart_Junk$custom = _terezka$line_charts$Internal_Junk$custom;
+var _terezka$line_charts$LineChart_Junk$hoverMany = _terezka$line_charts$Internal_Junk$hoverMany;
+var _terezka$line_charts$LineChart_Junk$hoverOne = _terezka$line_charts$Internal_Junk$hoverOne;
+var _terezka$line_charts$LineChart_Junk$default = _terezka$line_charts$Internal_Junk$none;
+var _terezka$line_charts$LineChart_Junk$Layers = F3(
+	function (a, b, c) {
+		return {below: a, above: b, html: c};
+	});

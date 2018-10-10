@@ -1,0 +1,327 @@
+var _terezka$line_charts$Internal_Interpolation$after = F2(
+	function (a, b) {
+		return {
+			ctor: '::',
+			_0: a,
+			_1: {
+				ctor: '::',
+				_0: A2(_terezka$line_charts$Internal_Data$Point, b.x, a.y),
+				_1: {
+					ctor: '::',
+					_0: b,
+					_1: {ctor: '[]'}
+				}
+			}
+		};
+	});
+var _terezka$line_charts$Internal_Interpolation$fakeLast = F2(
+	function (last0, last1) {
+		return A2(_terezka$line_charts$Internal_Data$Point, (last1.x + last1.x) - last0.x, last1.y);
+	});
+var _terezka$line_charts$Internal_Interpolation$stepped = function (sections) {
+	var expand = F2(
+		function (result, section) {
+			expand:
+			while (true) {
+				var _p0 = section;
+				if (_p0._0.ctor === '::') {
+					if (_p0._0._1.ctor === '::') {
+						var _p1 = _p0._0._1._0;
+						var _v1 = A2(
+							_elm_lang$core$Basics_ops['++'],
+							result,
+							A2(_terezka$line_charts$Internal_Interpolation$after, _p0._0._0, _p1)),
+							_v2 = {
+							ctor: '_Tuple2',
+							_0: {ctor: '::', _0: _p1, _1: _p0._0._1._1},
+							_1: _p0._1
+						};
+						result = _v1;
+						section = _v2;
+						continue expand;
+					} else {
+						if (_p0._1.ctor === 'Just') {
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								result,
+								{
+									ctor: '::',
+									_0: A2(_terezka$line_charts$Internal_Data$Point, _p0._1._0.x, _p0._0._0.y),
+									_1: {ctor: '[]'}
+								});
+						} else {
+							return result;
+						}
+					}
+				} else {
+					return result;
+				}
+			}
+		});
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p2) {
+			return A2(
+				_elm_lang$core$List$map,
+				_terezka$line_charts$Internal_Path$Line,
+				A2(
+					expand,
+					{ctor: '[]'},
+					_p2));
+		},
+		sections);
+};
+var _terezka$line_charts$Internal_Interpolation$sign = function (x) {
+	return (_elm_lang$core$Native_Utils.cmp(x, 0) < 0) ? -1 : 1;
+};
+var _terezka$line_charts$Internal_Interpolation$slope2 = F3(
+	function (point0, point1, t) {
+		var h = point1.x - point0.x;
+		return (!_elm_lang$core$Native_Utils.eq(h, 0)) ? ((((3 * (point1.y - point0.y)) / h) - t) / 2) : t;
+	});
+var _terezka$line_charts$Internal_Interpolation$toH = F2(
+	function (h0, h1) {
+		return _elm_lang$core$Native_Utils.eq(h0, 0) ? ((_elm_lang$core$Native_Utils.cmp(h1, 0) < 0) ? (0 * -1) : h1) : h0;
+	});
+var _terezka$line_charts$Internal_Interpolation$slope3 = F3(
+	function (point0, point1, point2) {
+		var h1 = point2.x - point1.x;
+		var h0 = point1.x - point0.x;
+		var s0h = A2(_terezka$line_charts$Internal_Interpolation$toH, h0, h1);
+		var s0 = (point1.y - point0.y) / s0h;
+		var s1h = A2(_terezka$line_charts$Internal_Interpolation$toH, h1, h0);
+		var s1 = (point2.y - point1.y) / s1h;
+		var p = ((s0 * h1) + (s1 * h0)) / (h0 + h1);
+		var slope = (_terezka$line_charts$Internal_Interpolation$sign(s0) + _terezka$line_charts$Internal_Interpolation$sign(s1)) * A2(
+			_elm_lang$core$Basics$min,
+			A2(
+				_elm_lang$core$Basics$min,
+				_elm_lang$core$Basics$abs(s0),
+				_elm_lang$core$Basics$abs(s1)),
+			0.5 * _elm_lang$core$Basics$abs(p));
+		return _elm_lang$core$Basics$isNaN(slope) ? 0 : slope;
+	});
+var _terezka$line_charts$Internal_Interpolation$monotoneCurve = F4(
+	function (point0, point1, tangent0, tangent1) {
+		var dx = (point1.x - point0.x) / 3;
+		return A3(
+			_terezka$line_charts$Internal_Path$CubicBeziers,
+			{x: point0.x + dx, y: point0.y + (dx * tangent0)},
+			{x: point1.x - dx, y: point1.y - (dx * tangent1)},
+			point1);
+	});
+var _terezka$line_charts$Internal_Interpolation$linear = _elm_lang$core$List$map(
+	_elm_lang$core$List$map(_terezka$line_charts$Internal_Path$Line));
+var _terezka$line_charts$Internal_Interpolation$Stepped = {ctor: 'Stepped'};
+var _terezka$line_charts$Internal_Interpolation$Monotone = {ctor: 'Monotone'};
+var _terezka$line_charts$Internal_Interpolation$Linear = {ctor: 'Linear'};
+var _terezka$line_charts$Internal_Interpolation$Previous = function (a) {
+	return {ctor: 'Previous', _0: a};
+};
+var _terezka$line_charts$Internal_Interpolation$monotonePart = F2(
+	function (points, _p3) {
+		monotonePart:
+		while (true) {
+			var _p4 = _p3;
+			var _p17 = _p4._0;
+			var _p16 = _p4._1;
+			var _p5 = {ctor: '_Tuple2', _0: _p17, _1: points};
+			_v4_4:
+			do {
+				if (_p5._0.ctor === 'First') {
+					if ((_p5._1.ctor === '::') && (_p5._1._1.ctor === '::')) {
+						if (_p5._1._1._1.ctor === '::') {
+							var _p8 = _p5._1._1._1._0;
+							var _p7 = _p5._1._1._0;
+							var _p6 = _p5._1._0;
+							var t1 = A3(_terezka$line_charts$Internal_Interpolation$slope3, _p6, _p7, _p8);
+							var t0 = A3(_terezka$line_charts$Internal_Interpolation$slope2, _p6, _p7, t1);
+							var _v5 = {
+								ctor: '::',
+								_0: _p7,
+								_1: {ctor: '::', _0: _p8, _1: _p5._1._1._1._1}
+							},
+								_v6 = {
+								ctor: '_Tuple2',
+								_0: _terezka$line_charts$Internal_Interpolation$Previous(t1),
+								_1: A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p16,
+									{
+										ctor: '::',
+										_0: A4(_terezka$line_charts$Internal_Interpolation$monotoneCurve, _p6, _p7, t0, t1),
+										_1: {ctor: '[]'}
+									})
+							};
+							points = _v5;
+							_p3 = _v6;
+							continue monotonePart;
+						} else {
+							var _p13 = _p5._1._1._0;
+							var _p12 = _p5._1._0;
+							var t1 = A3(_terezka$line_charts$Internal_Interpolation$slope3, _p12, _p13, _p13);
+							return {
+								ctor: '_Tuple2',
+								_0: _terezka$line_charts$Internal_Interpolation$Previous(t1),
+								_1: A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p16,
+									{
+										ctor: '::',
+										_0: A4(_terezka$line_charts$Internal_Interpolation$monotoneCurve, _p12, _p13, t1, t1),
+										_1: {
+											ctor: '::',
+											_0: _terezka$line_charts$Internal_Path$Line(_p13),
+											_1: {ctor: '[]'}
+										}
+									})
+							};
+						}
+					} else {
+						break _v4_4;
+					}
+				} else {
+					if ((_p5._1.ctor === '::') && (_p5._1._1.ctor === '::')) {
+						if (_p5._1._1._1.ctor === '::') {
+							var _p11 = _p5._1._1._1._0;
+							var _p10 = _p5._1._1._0;
+							var _p9 = _p5._1._0;
+							var t1 = A3(_terezka$line_charts$Internal_Interpolation$slope3, _p9, _p10, _p11);
+							var _v7 = {
+								ctor: '::',
+								_0: _p10,
+								_1: {ctor: '::', _0: _p11, _1: _p5._1._1._1._1}
+							},
+								_v8 = {
+								ctor: '_Tuple2',
+								_0: _terezka$line_charts$Internal_Interpolation$Previous(t1),
+								_1: A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p16,
+									{
+										ctor: '::',
+										_0: A4(_terezka$line_charts$Internal_Interpolation$monotoneCurve, _p9, _p10, _p5._0._0, t1),
+										_1: {ctor: '[]'}
+									})
+							};
+							points = _v7;
+							_p3 = _v8;
+							continue monotonePart;
+						} else {
+							var _p15 = _p5._1._1._0;
+							var _p14 = _p5._1._0;
+							var t1 = A3(_terezka$line_charts$Internal_Interpolation$slope3, _p14, _p15, _p15);
+							return {
+								ctor: '_Tuple2',
+								_0: _terezka$line_charts$Internal_Interpolation$Previous(t1),
+								_1: A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p16,
+									{
+										ctor: '::',
+										_0: A4(_terezka$line_charts$Internal_Interpolation$monotoneCurve, _p14, _p15, _p5._0._0, t1),
+										_1: {
+											ctor: '::',
+											_0: _terezka$line_charts$Internal_Path$Line(_p15),
+											_1: {ctor: '[]'}
+										}
+									})
+							};
+						}
+					} else {
+						break _v4_4;
+					}
+				}
+			} while(false);
+			return {ctor: '_Tuple2', _0: _p17, _1: _p16};
+		}
+	});
+var _terezka$line_charts$Internal_Interpolation$monotoneSection = F2(
+	function (points, _p18) {
+		var _p19 = _p18;
+		var _p23 = _p19._0;
+		var _p20 = function () {
+			var _p21 = points;
+			if (_p21.ctor === '::') {
+				var _p22 = _p21._0;
+				return A2(
+					_terezka$line_charts$Internal_Interpolation$monotonePart,
+					{ctor: '::', _0: _p22, _1: _p21._1},
+					{
+						ctor: '_Tuple2',
+						_0: _p23,
+						_1: {
+							ctor: '::',
+							_0: _terezka$line_charts$Internal_Path$Line(_p22),
+							_1: {ctor: '[]'}
+						}
+					});
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _p23,
+					_1: {ctor: '[]'}
+				};
+			}
+		}();
+		var t0 = _p20._0;
+		var commands = _p20._1;
+		return {
+			ctor: '_Tuple2',
+			_0: t0,
+			_1: {ctor: '::', _0: commands, _1: _p19._1}
+		};
+	});
+var _terezka$line_charts$Internal_Interpolation$First = {ctor: 'First'};
+var _terezka$line_charts$Internal_Interpolation$monotone = function (sections) {
+	return _elm_lang$core$Tuple$second(
+		A3(
+			_elm_lang$core$List$foldr,
+			_terezka$line_charts$Internal_Interpolation$monotoneSection,
+			{
+				ctor: '_Tuple2',
+				_0: _terezka$line_charts$Internal_Interpolation$First,
+				_1: {ctor: '[]'}
+			},
+			sections));
+};
+var _terezka$line_charts$Internal_Interpolation$toCommands = F2(
+	function (interpolation, data) {
+		var pointsSections = _elm_lang$core$List$map(
+			function (_p24) {
+				return A2(
+					_elm_lang$core$Tuple$mapSecond,
+					_elm_lang$core$Maybe$map(
+						function (_) {
+							return _.point;
+						}),
+					A2(
+						_elm_lang$core$Tuple$mapFirst,
+						_elm_lang$core$List$map(
+							function (_) {
+								return _.point;
+							}),
+						_p24));
+			});
+		var points = _elm_lang$core$List$map(
+			function (_p25) {
+				return A2(
+					_elm_lang$core$List$map,
+					function (_) {
+						return _.point;
+					},
+					_elm_lang$core$Tuple$first(_p25));
+			});
+		var _p26 = interpolation;
+		switch (_p26.ctor) {
+			case 'Linear':
+				return _terezka$line_charts$Internal_Interpolation$linear(
+					points(data));
+			case 'Monotone':
+				return _terezka$line_charts$Internal_Interpolation$monotone(
+					points(data));
+			default:
+				return _terezka$line_charts$Internal_Interpolation$stepped(
+					pointsSections(data));
+		}
+	});

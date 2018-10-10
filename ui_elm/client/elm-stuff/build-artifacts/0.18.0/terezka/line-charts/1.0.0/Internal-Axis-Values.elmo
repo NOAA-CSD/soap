@@ -1,0 +1,280 @@
+var _terezka$line_charts$Internal_Axis_Values$ceilingTo = F2(
+	function (prec, number) {
+		return prec * _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$ceiling(number / prec));
+	});
+var _terezka$line_charts$Internal_Axis_Values$getPrecision = function (number) {
+	var _p0 = A2(
+		_elm_lang$core$String$split,
+		'e',
+		_elm_lang$core$Basics$toString(number));
+	if (((_p0.ctor === '::') && (_p0._1.ctor === '::')) && (_p0._1._1.ctor === '[]')) {
+		return _elm_lang$core$Basics$abs(
+			A2(
+				_elm_lang$core$Result$withDefault,
+				0,
+				_elm_lang$core$String$toInt(_p0._1._0)));
+	} else {
+		var _p1 = A2(
+			_elm_lang$core$String$split,
+			'.',
+			_elm_lang$core$Basics$toString(number));
+		if (((_p1.ctor === '::') && (_p1._1.ctor === '::')) && (_p1._1._1.ctor === '[]')) {
+			return _elm_lang$core$String$length(_p1._1._0);
+		} else {
+			return 0;
+		}
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values$correctFloat = function (prec) {
+	return function (_p2) {
+		return A2(
+			_elm_lang$core$Result$withDefault,
+			0,
+			_elm_lang$core$String$toFloat(
+				A2(_myrho$elm_round$Round$round, prec, _p2)));
+	};
+};
+var _terezka$line_charts$Internal_Axis_Values$getMultiples = F3(
+	function (magnitude, allowDecimals, hasTickAmount) {
+		var defaults = hasTickAmount ? {
+			ctor: '::',
+			_0: 1,
+			_1: {
+				ctor: '::',
+				_0: 1.2,
+				_1: {
+					ctor: '::',
+					_0: 1.5,
+					_1: {
+						ctor: '::',
+						_0: 2,
+						_1: {
+							ctor: '::',
+							_0: 2.5,
+							_1: {
+								ctor: '::',
+								_0: 3,
+								_1: {
+									ctor: '::',
+									_0: 4,
+									_1: {
+										ctor: '::',
+										_0: 5,
+										_1: {
+											ctor: '::',
+											_0: 6,
+											_1: {
+												ctor: '::',
+												_0: 8,
+												_1: {
+													ctor: '::',
+													_0: 10,
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} : {
+			ctor: '::',
+			_0: 1,
+			_1: {
+				ctor: '::',
+				_0: 2,
+				_1: {
+					ctor: '::',
+					_0: 2.5,
+					_1: {
+						ctor: '::',
+						_0: 5,
+						_1: {
+							ctor: '::',
+							_0: 10,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		};
+		return allowDecimals ? defaults : (_elm_lang$core$Native_Utils.eq(magnitude, 1) ? A2(
+			_elm_lang$core$List$filter,
+			function (n) {
+				return _elm_lang$core$Native_Utils.eq(
+					_elm_lang$core$Basics$toFloat(
+						_elm_lang$core$Basics$round(n)),
+					n);
+			},
+			defaults) : ((_elm_lang$core$Native_Utils.cmp(magnitude, 0.1) < 1) ? {
+			ctor: '::',
+			_0: 1 / magnitude,
+			_1: {ctor: '[]'}
+		} : defaults));
+	});
+var _terezka$line_charts$Internal_Axis_Values$getInterval = F3(
+	function (intervalRaw, allowDecimals, hasTickAmount) {
+		var magnitude = _terezka$line_charts$Internal_Utils$magnitude(intervalRaw);
+		var normalized = intervalRaw / magnitude;
+		var findMultiple = function (multiples) {
+			findMultiple:
+			while (true) {
+				var _p3 = multiples;
+				if (_p3.ctor === '::') {
+					if (_p3._1.ctor === '::') {
+						var _p5 = _p3._1._0;
+						var _p4 = _p3._0;
+						if (_elm_lang$core$Native_Utils.cmp(normalized, (_p4 + _p5) / 2) < 1) {
+							return _p4;
+						} else {
+							var _v3 = {ctor: '::', _0: _p5, _1: _p3._1._1};
+							multiples = _v3;
+							continue findMultiple;
+						}
+					} else {
+						var _p6 = _p3._0;
+						if (_elm_lang$core$Native_Utils.cmp(normalized, _p6) < 1) {
+							return _p6;
+						} else {
+							var _v4 = _p3._1;
+							multiples = _v4;
+							continue findMultiple;
+						}
+					}
+				} else {
+					return 1;
+				}
+			}
+		};
+		var multiples = A3(_terezka$line_charts$Internal_Axis_Values$getMultiples, magnitude, allowDecimals, hasTickAmount);
+		var findMultipleExact = function (multiples) {
+			findMultipleExact:
+			while (true) {
+				var _p7 = multiples;
+				if (_p7.ctor === '::') {
+					var _p8 = _p7._0;
+					if (_elm_lang$core$Native_Utils.cmp(_p8 * magnitude, intervalRaw) > -1) {
+						return _p8;
+					} else {
+						var _v6 = _p7._1;
+						multiples = _v6;
+						continue findMultipleExact;
+					}
+				} else {
+					return 1;
+				}
+			}
+		};
+		var multiple = hasTickAmount ? findMultipleExact(multiples) : findMultiple(multiples);
+		var precision = _terezka$line_charts$Internal_Axis_Values$getPrecision(magnitude) + _terezka$line_charts$Internal_Axis_Values$getPrecision(multiple);
+		return A2(_terezka$line_charts$Internal_Axis_Values$correctFloat, precision, multiple * magnitude);
+	});
+var _terezka$line_charts$Internal_Axis_Values$positions = F5(
+	function (range, beginning, interval, m, acc) {
+		positions:
+		while (true) {
+			var next = A2(
+				_terezka$line_charts$Internal_Axis_Values$correctFloat,
+				_terezka$line_charts$Internal_Axis_Values$getPrecision(interval),
+				beginning + (m * interval));
+			if (_elm_lang$core$Native_Utils.cmp(next, range.max) > 0) {
+				return acc;
+			} else {
+				var _v7 = range,
+					_v8 = beginning,
+					_v9 = interval,
+					_v10 = m + 1,
+					_v11 = A2(
+					_elm_lang$core$Basics_ops['++'],
+					acc,
+					{
+						ctor: '::',
+						_0: next,
+						_1: {ctor: '[]'}
+					});
+				range = _v7;
+				beginning = _v8;
+				interval = _v9;
+				m = _v10;
+				acc = _v11;
+				continue positions;
+			}
+		}
+	});
+var _terezka$line_charts$Internal_Axis_Values$getBeginning = F2(
+	function (min, interval) {
+		var multiple = min / interval;
+		return _elm_lang$core$Native_Utils.eq(
+			multiple,
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(multiple))) ? min : A2(_terezka$line_charts$Internal_Axis_Values$ceilingTo, interval, min);
+	});
+var _terezka$line_charts$Internal_Axis_Values$values = F4(
+	function (allowDecimals, exact, amountRough, range) {
+		var intervalRough = (range.max - range.min) / _elm_lang$core$Basics$toFloat(amountRough);
+		var interval = A3(_terezka$line_charts$Internal_Axis_Values$getInterval, intervalRough, allowDecimals, exact);
+		var intervalSafe = _elm_lang$core$Native_Utils.eq(interval, 0) ? 1 : interval;
+		var beginning = A2(_terezka$line_charts$Internal_Axis_Values$getBeginning, range.min, intervalSafe);
+		var amountRoughSafe = _elm_lang$core$Native_Utils.eq(amountRough, 0) ? 1 : amountRough;
+		return A5(
+			_terezka$line_charts$Internal_Axis_Values$positions,
+			range,
+			beginning,
+			intervalSafe,
+			0,
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Axis_Values$time = _terezka$line_charts$Internal_Axis_Values_Time$values;
+var _terezka$line_charts$Internal_Axis_Values$custom = F3(
+	function (intersection, interval, range) {
+		var offset = function (value) {
+			return interval * _elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$floor(value / interval));
+		};
+		var beginning = intersection - offset(intersection - range.min);
+		return A5(
+			_terezka$line_charts$Internal_Axis_Values$positions,
+			range,
+			beginning,
+			interval,
+			0,
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Axis_Values$float = function (amount) {
+	var _p9 = amount;
+	if (_p9.ctor === 'Exactly') {
+		return A3(_terezka$line_charts$Internal_Axis_Values$values, true, true, _p9._0);
+	} else {
+		return A3(_terezka$line_charts$Internal_Axis_Values$values, true, false, _p9._0);
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values$int = function (amount) {
+	var _p10 = amount;
+	if (_p10.ctor === 'Exactly') {
+		return function (_p11) {
+			return A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Basics$round,
+				A4(_terezka$line_charts$Internal_Axis_Values$values, false, true, _p10._0, _p11));
+		};
+	} else {
+		return function (_p12) {
+			return A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Basics$round,
+				A4(_terezka$line_charts$Internal_Axis_Values$values, false, false, _p10._0, _p12));
+		};
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values$Around = function (a) {
+	return {ctor: 'Around', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Values$around = _terezka$line_charts$Internal_Axis_Values$Around;
+var _terezka$line_charts$Internal_Axis_Values$Exactly = function (a) {
+	return {ctor: 'Exactly', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Values$exactly = _terezka$line_charts$Internal_Axis_Values$Exactly;

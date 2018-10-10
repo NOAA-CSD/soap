@@ -1,0 +1,4 @@
+var _terezka$line_charts$LineChart_Axis_Range$custom = _terezka$line_charts$Internal_Axis_Range$custom;
+var _terezka$line_charts$LineChart_Axis_Range$window = _terezka$line_charts$Internal_Axis_Range$window;
+var _terezka$line_charts$LineChart_Axis_Range$padded = _terezka$line_charts$Internal_Axis_Range$padded;
+var _terezka$line_charts$LineChart_Axis_Range$default = _terezka$line_charts$Internal_Axis_Range$default;

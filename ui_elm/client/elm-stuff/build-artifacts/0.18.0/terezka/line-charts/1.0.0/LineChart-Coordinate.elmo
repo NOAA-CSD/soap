@@ -1,0 +1,66 @@
+var _terezka$line_charts$LineChart_Coordinate$scaleDataY = F2(
+	function (system, value) {
+		return (value * _terezka$line_charts$Internal_Coordinate$reachY(system)) / _terezka$line_charts$Internal_Coordinate$lengthY(system);
+	});
+var _terezka$line_charts$LineChart_Coordinate$scaleDataX = F2(
+	function (system, value) {
+		return (value * _terezka$line_charts$Internal_Coordinate$reachX(system)) / _terezka$line_charts$Internal_Coordinate$lengthX(system);
+	});
+var _terezka$line_charts$LineChart_Coordinate$scaleSvgY = F2(
+	function (system, value) {
+		return (value * _terezka$line_charts$Internal_Coordinate$lengthY(system)) / _terezka$line_charts$Internal_Coordinate$reachY(system);
+	});
+var _terezka$line_charts$LineChart_Coordinate$scaleSvgX = F2(
+	function (system, value) {
+		return (value * _terezka$line_charts$Internal_Coordinate$lengthX(system)) / _terezka$line_charts$Internal_Coordinate$reachX(system);
+	});
+var _terezka$line_charts$LineChart_Coordinate$toDataY = F2(
+	function (system, value) {
+		return system.y.max - A2(_terezka$line_charts$LineChart_Coordinate$scaleDataY, system, value - system.frame.margin.top);
+	});
+var _terezka$line_charts$LineChart_Coordinate$toDataX = F2(
+	function (system, value) {
+		return system.x.min + A2(_terezka$line_charts$LineChart_Coordinate$scaleDataX, system, value - system.frame.margin.left);
+	});
+var _terezka$line_charts$LineChart_Coordinate$toData = F2(
+	function (system, point) {
+		return {
+			x: A2(_terezka$line_charts$LineChart_Coordinate$toDataX, system, point.x),
+			y: A2(_terezka$line_charts$LineChart_Coordinate$toDataY, system, point.y)
+		};
+	});
+var _terezka$line_charts$LineChart_Coordinate$toSvgY = F2(
+	function (system, value) {
+		return A2(_terezka$line_charts$LineChart_Coordinate$scaleSvgY, system, system.y.max - value) + system.frame.margin.top;
+	});
+var _terezka$line_charts$LineChart_Coordinate$toSvgX = F2(
+	function (system, value) {
+		return A2(_terezka$line_charts$LineChart_Coordinate$scaleSvgX, system, value - system.x.min) + system.frame.margin.left;
+	});
+var _terezka$line_charts$LineChart_Coordinate$toSvg = F2(
+	function (system, point) {
+		return {
+			x: A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, point.x),
+			y: A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, point.y)
+		};
+	});
+var _terezka$line_charts$LineChart_Coordinate$Frame = F2(
+	function (a, b) {
+		return {margin: a, size: b};
+	});
+var _terezka$line_charts$LineChart_Coordinate$Size = F2(
+	function (a, b) {
+		return {width: a, height: b};
+	});
+var _terezka$line_charts$LineChart_Coordinate$System = F6(
+	function (a, b, c, d, e, f) {
+		return {frame: a, x: b, y: c, xData: d, yData: e, id: f};
+	});
+var _terezka$line_charts$LineChart_Coordinate$Range = F2(
+	function (a, b) {
+		return {min: a, max: b};
+	});
+var _terezka$line_charts$LineChart_Coordinate$Point = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});

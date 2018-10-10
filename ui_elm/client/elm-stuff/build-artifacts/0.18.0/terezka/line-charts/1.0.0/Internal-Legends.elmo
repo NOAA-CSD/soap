@@ -1,0 +1,279 @@
+var _terezka$line_charts$Internal_Legends$defaultLegend = F2(
+	function (index, _p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__legend'),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Svg$transform(
+						{
+							ctor: '::',
+							_0: A2(
+								_terezka$line_charts$Internal_Svg$offset,
+								20,
+								_elm_lang$core$Basics$toFloat(index) * 20),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _p1.sample,
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$g,
+						{
+							ctor: '::',
+							_0: _terezka$line_charts$Internal_Svg$transform(
+								{
+									ctor: '::',
+									_0: A2(_terezka$line_charts$Internal_Svg$offset, 40, 4),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(_terezka$line_charts$Internal_Svg$label, 'inherit', _p1.label),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Legends$defaultLegends = F8(
+	function (toX, toY, offsetX, offsetY, hovered, $arguments, system, legends) {
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__legends'),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Svg$transform(
+						{
+							ctor: '::',
+							_0: A3(
+								_terezka$line_charts$Internal_Svg$move,
+								system,
+								toX(system.x),
+								toY(system.y)),
+							_1: {
+								ctor: '::',
+								_0: A2(_terezka$line_charts$Internal_Svg$offset, offsetX, offsetY),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			A2(_elm_lang$core$List$indexedMap, _terezka$line_charts$Internal_Legends$defaultLegend, legends));
+	});
+var _terezka$line_charts$Internal_Legends$viewSample = F4(
+	function (_p2, sampleWidth, line, data) {
+		var _p3 = _p2;
+		var _p5 = _p3.system;
+		var _p4 = _p3.lineConfig;
+		var shape = _terezka$line_charts$Internal_Line$shape(line);
+		var color = A3(_terezka$line_charts$Internal_Line$color, _p4, line, data);
+		var dotPosition = A2(
+			_terezka$line_charts$LineChart_Coordinate$toData,
+			_p5,
+			A2(_terezka$line_charts$Internal_Data$Point, sampleWidth / 2, 0));
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__sample'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A5(_terezka$line_charts$Internal_Line$viewSample, _p4, line, _p3.area, data, sampleWidth),
+				_1: {
+					ctor: '::',
+					_0: A6(_terezka$line_charts$Internal_Dots$viewSample, _p3.dotsConfig, shape, color, _p5, data, dotPosition),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Legends$viewGrouped = F3(
+	function ($arguments, sampleWidth, container) {
+		var toLegend = F2(
+			function (line, data) {
+				return {
+					sample: A4(_terezka$line_charts$Internal_Legends$viewSample, $arguments, sampleWidth, line, data),
+					label: _terezka$line_charts$Internal_Line$label(line)
+				};
+			});
+		var legends = A3(_elm_lang$core$List$map2, toLegend, $arguments.lines, $arguments.data);
+		return A2(container, $arguments.system, legends);
+	});
+var _terezka$line_charts$Internal_Legends$viewFree = F5(
+	function (system, placement, viewLabel, line, data) {
+		var _p6 = function () {
+			var _p7 = placement;
+			if (_p7.ctor === 'Beginning') {
+				return {ctor: '_Tuple3', _0: data, _1: _terezka$line_charts$Internal_Svg$End, _2: -10};
+			} else {
+				return {
+					ctor: '_Tuple3',
+					_0: _elm_lang$core$List$reverse(data),
+					_1: _terezka$line_charts$Internal_Svg$Start,
+					_2: 10
+				};
+			}
+		}();
+		var orderedPoints = _p6._0;
+		var anchor = _p6._1;
+		var xOffset = _p6._2;
+		var transform = function (_p8) {
+			var _p9 = _p8;
+			return _terezka$line_charts$Internal_Svg$transform(
+				{
+					ctor: '::',
+					_0: A3(_terezka$line_charts$Internal_Svg$move, system, _p9.x, _p9.y),
+					_1: {
+						ctor: '::',
+						_0: A2(_terezka$line_charts$Internal_Svg$offset, xOffset, 3),
+						_1: {ctor: '[]'}
+					}
+				});
+		};
+		var viewLegend = function (_p10) {
+			var _p11 = _p10;
+			return A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: transform(_p11.point),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Svg$anchorStyle(anchor),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: viewLabel(
+						_terezka$line_charts$Internal_Line$label(line)),
+					_1: {ctor: '[]'}
+				});
+		};
+		return A2(
+			_terezka$line_charts$Internal_Utils$viewMaybe,
+			_elm_lang$core$List$head(orderedPoints),
+			viewLegend);
+	});
+var _terezka$line_charts$Internal_Legends$viewFrees = F3(
+	function (_p12, placement, view) {
+		var _p13 = _p12;
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__legends'),
+				_1: {ctor: '[]'}
+			},
+			A3(
+				_elm_lang$core$List$map2,
+				A3(_terezka$line_charts$Internal_Legends$viewFree, _p13.system, placement, view),
+				_p13.lines,
+				_p13.data));
+	});
+var _terezka$line_charts$Internal_Legends$view = function ($arguments) {
+	var _p14 = $arguments.legends;
+	switch (_p14.ctor) {
+		case 'Free':
+			return A3(_terezka$line_charts$Internal_Legends$viewFrees, $arguments, _p14._0, _p14._1);
+		case 'Grouped':
+			return A3(
+				_terezka$line_charts$Internal_Legends$viewGrouped,
+				$arguments,
+				_p14._0,
+				_p14._1($arguments));
+		default:
+			return _elm_lang$svg$Svg$text('');
+	}
+};
+var _terezka$line_charts$Internal_Legends$Legend = F2(
+	function (a, b) {
+		return {sample: a, label: b};
+	});
+var _terezka$line_charts$Internal_Legends$Arguments = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {system: a, dotsConfig: b, lineConfig: c, area: d, lines: e, data: f, x: g, y: h, legends: i};
+	});
+var _terezka$line_charts$Internal_Legends$Grouped = F2(
+	function (a, b) {
+		return {ctor: 'Grouped', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Legends$hover = function (data) {
+	return A2(
+		_terezka$line_charts$Internal_Legends$Grouped,
+		30,
+		A5(
+			_terezka$line_charts$Internal_Legends$defaultLegends,
+			function (_) {
+				return _.max;
+			},
+			function (_) {
+				return _.max;
+			},
+			0,
+			10,
+			data));
+};
+var _terezka$line_charts$Internal_Legends$default = _terezka$line_charts$Internal_Legends$hover(
+	{ctor: '[]'});
+var _terezka$line_charts$Internal_Legends$hoverOne = function (maybeOne) {
+	var _p15 = maybeOne;
+	if (_p15.ctor === 'Just') {
+		return _terezka$line_charts$Internal_Legends$hover(
+			{
+				ctor: '::',
+				_0: _p15._0,
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return _terezka$line_charts$Internal_Legends$hover(
+			{ctor: '[]'});
+	}
+};
+var _terezka$line_charts$Internal_Legends$grouped = F4(
+	function (toX, toY, offsetX, offsetY) {
+		return A2(
+			_terezka$line_charts$Internal_Legends$Grouped,
+			30,
+			A5(
+				_terezka$line_charts$Internal_Legends$defaultLegends,
+				toX,
+				toY,
+				offsetX,
+				offsetY,
+				{ctor: '[]'}));
+	});
+var _terezka$line_charts$Internal_Legends$groupedCustom = F2(
+	function (sampleWidth, container) {
+		return A2(
+			_terezka$line_charts$Internal_Legends$Grouped,
+			sampleWidth,
+			function (_p16) {
+				return container;
+			});
+	});
+var _terezka$line_charts$Internal_Legends$Free = F2(
+	function (a, b) {
+		return {ctor: 'Free', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Legends$None = {ctor: 'None'};
+var _terezka$line_charts$Internal_Legends$none = _terezka$line_charts$Internal_Legends$None;
+var _terezka$line_charts$Internal_Legends$Ending = {ctor: 'Ending'};
+var _terezka$line_charts$Internal_Legends$byEnding = _terezka$line_charts$Internal_Legends$Free(_terezka$line_charts$Internal_Legends$Ending);
+var _terezka$line_charts$Internal_Legends$Beginning = {ctor: 'Beginning'};
+var _terezka$line_charts$Internal_Legends$byBeginning = _terezka$line_charts$Internal_Legends$Free(_terezka$line_charts$Internal_Legends$Beginning);

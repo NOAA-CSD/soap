@@ -1,0 +1,9 @@
+var _terezka$line_charts$LineChart_Axis_Line$custom = _terezka$line_charts$Internal_Axis_Line$custom;
+var _terezka$line_charts$LineChart_Axis_Line$none = _terezka$line_charts$Internal_Axis_Line$none;
+var _terezka$line_charts$LineChart_Axis_Line$rangeFrame = _terezka$line_charts$Internal_Axis_Line$rangeFrame;
+var _terezka$line_charts$LineChart_Axis_Line$full = _terezka$line_charts$Internal_Axis_Line$full;
+var _terezka$line_charts$LineChart_Axis_Line$default = _terezka$line_charts$Internal_Axis_Line$default;
+var _terezka$line_charts$LineChart_Axis_Line$Properties = F5(
+	function (a, b, c, d, e) {
+		return {color: a, width: b, events: c, start: d, end: e};
+	});

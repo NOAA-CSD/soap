@@ -1,0 +1,16 @@
+var _terezka$line_charts$Internal_Data$isWithinRange = F2(
+	function (system, point) {
+		return _elm_lang$core$Native_Utils.eq(
+			A3(_elm_lang$core$Basics$clamp, system.x.min, system.x.max, point.x),
+			point.x) && _elm_lang$core$Native_Utils.eq(
+			A3(_elm_lang$core$Basics$clamp, system.y.min, system.y.max, point.y),
+			point.y);
+	});
+var _terezka$line_charts$Internal_Data$Data = F3(
+	function (a, b, c) {
+		return {user: a, point: b, isReal: c};
+	});
+var _terezka$line_charts$Internal_Data$Point = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});

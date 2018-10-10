@@ -1,0 +1,67 @@
+var _terezka$line_charts$Internal_Area$opacityContainer = function (config) {
+	var _p0 = config;
+	switch (_p0.ctor) {
+		case 'None':
+			return 1;
+		case 'Normal':
+			return 1;
+		case 'Stacked':
+			return _p0._0;
+		default:
+			return _p0._0;
+	}
+};
+var _terezka$line_charts$Internal_Area$opacitySingle = function (config) {
+	var _p1 = config;
+	switch (_p1.ctor) {
+		case 'None':
+			return 0;
+		case 'Normal':
+			return _p1._0;
+		case 'Stacked':
+			return 1;
+		default:
+			return 1;
+	}
+};
+var _terezka$line_charts$Internal_Area$opacity = function (config) {
+	var _p2 = config;
+	switch (_p2.ctor) {
+		case 'None':
+			return 0;
+		case 'Normal':
+			return _p2._0;
+		case 'Stacked':
+			return _p2._0;
+		default:
+			return _p2._0;
+	}
+};
+var _terezka$line_charts$Internal_Area$hasArea = function (config) {
+	var _p3 = config;
+	switch (_p3.ctor) {
+		case 'None':
+			return false;
+		case 'Normal':
+			return true;
+		case 'Stacked':
+			return true;
+		default:
+			return true;
+	}
+};
+var _terezka$line_charts$Internal_Area$Percentage = function (a) {
+	return {ctor: 'Percentage', _0: a};
+};
+var _terezka$line_charts$Internal_Area$percentage = _terezka$line_charts$Internal_Area$Percentage;
+var _terezka$line_charts$Internal_Area$Stacked = function (a) {
+	return {ctor: 'Stacked', _0: a};
+};
+var _terezka$line_charts$Internal_Area$stacked = _terezka$line_charts$Internal_Area$Stacked;
+var _terezka$line_charts$Internal_Area$Normal = function (a) {
+	return {ctor: 'Normal', _0: a};
+};
+var _terezka$line_charts$Internal_Area$normal = _terezka$line_charts$Internal_Area$Normal;
+var _terezka$line_charts$Internal_Area$None = {ctor: 'None'};
+var _terezka$line_charts$Internal_Area$none = _terezka$line_charts$Internal_Area$None;
+var _terezka$line_charts$Internal_Area$default = _terezka$line_charts$Internal_Area$none;

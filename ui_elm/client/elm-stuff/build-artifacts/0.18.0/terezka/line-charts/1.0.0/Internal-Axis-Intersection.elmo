@@ -1,0 +1,52 @@
+var _terezka$line_charts$Internal_Axis_Intersection$getY = function (_p0) {
+	var _p1 = _p0;
+	return function (_p2) {
+		return function (_) {
+			return _.y;
+		}(
+			_p1._0(_p2));
+	};
+};
+var _terezka$line_charts$Internal_Axis_Intersection$getX = function (_p3) {
+	var _p4 = _p3;
+	return function (_p5) {
+		return function (_) {
+			return _.x;
+		}(
+			_p4._0(_p5));
+	};
+};
+var _terezka$line_charts$Internal_Axis_Intersection$towardsZero = function (_p6) {
+	var _p7 = _p6;
+	return A3(_elm_lang$core$Basics$clamp, _p7.min, _p7.max, 0);
+};
+var _terezka$line_charts$Internal_Axis_Intersection$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Intersection$custom = F2(
+	function (toX, toY) {
+		return _terezka$line_charts$Internal_Axis_Intersection$Config(
+			function (_p8) {
+				var _p9 = _p8;
+				return A2(
+					_terezka$line_charts$Internal_Data$Point,
+					toX(_p9.x),
+					toY(_p9.y));
+			});
+	});
+var _terezka$line_charts$Internal_Axis_Intersection$default = A2(
+	_terezka$line_charts$Internal_Axis_Intersection$custom,
+	function (_) {
+		return _.min;
+	},
+	function (_) {
+		return _.min;
+	});
+var _terezka$line_charts$Internal_Axis_Intersection$atOrigin = A2(_terezka$line_charts$Internal_Axis_Intersection$custom, _terezka$line_charts$Internal_Axis_Intersection$towardsZero, _terezka$line_charts$Internal_Axis_Intersection$towardsZero);
+var _terezka$line_charts$Internal_Axis_Intersection$at = F2(
+	function (x, y) {
+		return A2(
+			_terezka$line_charts$Internal_Axis_Intersection$custom,
+			_elm_lang$core$Basics$always(x),
+			_elm_lang$core$Basics$always(y));
+	});

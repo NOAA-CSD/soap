@@ -1,0 +1,215 @@
+var _terezka$line_charts$Internal_Utils$part = F4(
+	function (isReal, points, current, parts) {
+		part:
+		while (true) {
+			var _p0 = points;
+			if (_p0.ctor === '::') {
+				var _p2 = _p0._1;
+				var _p1 = _p0._0;
+				if (isReal(_p1)) {
+					var _v1 = isReal,
+						_v2 = _p2,
+						_v3 = A2(
+						_elm_lang$core$Basics_ops['++'],
+						current,
+						{
+							ctor: '::',
+							_0: _p1,
+							_1: {ctor: '[]'}
+						}),
+						_v4 = parts;
+					isReal = _v1;
+					points = _v2;
+					current = _v3;
+					parts = _v4;
+					continue part;
+				} else {
+					var _v5 = isReal,
+						_v6 = _p2,
+						_v7 = {ctor: '[]'},
+						_v8 = {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: current,
+							_1: _elm_lang$core$Maybe$Just(_p1)
+						},
+						_1: parts
+					};
+					isReal = _v5;
+					points = _v6;
+					current = _v7;
+					parts = _v8;
+					continue part;
+				}
+			} else {
+				return {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: current, _1: _elm_lang$core$Maybe$Nothing},
+					_1: parts
+				};
+			}
+		}
+	});
+var _terezka$line_charts$Internal_Utils$magnitude = function (num) {
+	return _elm_lang$core$Basics$toFloat(
+		Math.pow(
+			10,
+			_elm_lang$core$Basics$floor(
+				A2(_elm_lang$core$Basics$logBase, _elm_lang$core$Basics$e, num) / A2(_elm_lang$core$Basics$logBase, _elm_lang$core$Basics$e, 10))));
+};
+var _terezka$line_charts$Internal_Utils$toChartAreaId = function (id) {
+	return A2(_elm_lang$core$Basics_ops['++'], 'chart__chart-area--', id);
+};
+var _terezka$line_charts$Internal_Utils$last = function (list) {
+	return _elm_lang$core$List$head(
+		A2(
+			_elm_lang$core$List$drop,
+			_elm_lang$core$List$length(list) - 1,
+			list));
+};
+var _terezka$line_charts$Internal_Utils$lastSafe = F2(
+	function (first, rest) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			first,
+			_terezka$line_charts$Internal_Utils$last(rest));
+	});
+var _terezka$line_charts$Internal_Utils$towardsZero = function (_p3) {
+	var _p4 = _p3;
+	return A3(_elm_lang$core$Basics$clamp, _p4.min, _p4.max, 0);
+};
+var _terezka$line_charts$Internal_Utils$viewWithEdges = F2(
+	function (stuff, view) {
+		var _p5 = stuff;
+		if (_p5.ctor === '::') {
+			var _p7 = _p5._1;
+			var _p6 = _p5._0;
+			return A3(
+				view,
+				_p6,
+				_p7,
+				A2(_terezka$line_charts$Internal_Utils$lastSafe, _p6, _p7));
+		} else {
+			return _elm_lang$svg$Svg$text('');
+		}
+	});
+var _terezka$line_charts$Internal_Utils$viewWithFirst = F2(
+	function (stuff, view) {
+		var _p8 = stuff;
+		if (_p8.ctor === '::') {
+			return A2(view, _p8._0, _p8._1);
+		} else {
+			return _elm_lang$svg$Svg$text('');
+		}
+	});
+var _terezka$line_charts$Internal_Utils$withFirst = F2(
+	function (stuff, process) {
+		var _p9 = stuff;
+		if (_p9.ctor === '::') {
+			return _elm_lang$core$Maybe$Just(
+				A2(process, _p9._0, _p9._1));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _terezka$line_charts$Internal_Utils$nonEmptyList = function (list) {
+	return _elm_lang$core$List$isEmpty(list) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(list);
+};
+var _terezka$line_charts$Internal_Utils$viewMaybeHtml = F2(
+	function (a, view) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_elm_lang$html$Html$text(''),
+			A2(_elm_lang$core$Maybe$map, view, a));
+	});
+var _terezka$line_charts$Internal_Utils$viewMaybe = F2(
+	function (a, view) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_elm_lang$svg$Svg$text(''),
+			A2(_elm_lang$core$Maybe$map, view, a));
+	});
+var _terezka$line_charts$Internal_Utils$viewIf = F2(
+	function (condition, view) {
+		return condition ? view(
+			{ctor: '_Tuple0'}) : _elm_lang$svg$Svg$text('');
+	});
+var _terezka$line_charts$Internal_Utils$indexedMap2 = F3(
+	function (f, a, b) {
+		var collect = F4(
+			function (a, b, i, c) {
+				collect:
+				while (true) {
+					var _p10 = {ctor: '_Tuple2', _0: a, _1: b};
+					if (_p10._0.ctor === '::') {
+						if (_p10._1.ctor === '::') {
+							var _v14 = _p10._0._1,
+								_v15 = _p10._1._1,
+								_v16 = i + 1,
+								_v17 = A2(
+								_elm_lang$core$Basics_ops['++'],
+								c,
+								{
+									ctor: '::',
+									_0: A3(f, i, _p10._0._0, _p10._1._0),
+									_1: {ctor: '[]'}
+								});
+							a = _v14;
+							b = _v15;
+							i = _v16;
+							c = _v17;
+							continue collect;
+						} else {
+							return c;
+						}
+					} else {
+						return c;
+					}
+				}
+			});
+		return A4(
+			collect,
+			a,
+			b,
+			0,
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Utils$unzip3 = function (pairs) {
+	var step = F2(
+		function (_p12, _p11) {
+			var _p13 = _p12;
+			var _p14 = _p11;
+			return {
+				ctor: '_Tuple3',
+				_0: {ctor: '::', _0: _p13._0, _1: _p14._0},
+				_1: {ctor: '::', _0: _p13._1, _1: _p14._1},
+				_2: {ctor: '::', _0: _p13._2, _1: _p14._2}
+			};
+		});
+	return A3(
+		_elm_lang$core$List$foldr,
+		step,
+		{
+			ctor: '_Tuple3',
+			_0: {ctor: '[]'},
+			_1: {ctor: '[]'},
+			_2: {ctor: '[]'}
+		},
+		pairs);
+};
+var _terezka$line_charts$Internal_Utils$concat = F3(
+	function (first, second, third) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			first,
+			A2(_elm_lang$core$Basics_ops['++'], second, third));
+	});
+var _terezka$line_charts$Internal_Utils$apply2 = F3(
+	function (stuff1, stuff2, toNewStuff) {
+		return A2(toNewStuff, stuff1, stuff2);
+	});
+var _terezka$line_charts$Internal_Utils$apply = F2(
+	function (stuff, toNewStuff) {
+		return toNewStuff(stuff);
+	});

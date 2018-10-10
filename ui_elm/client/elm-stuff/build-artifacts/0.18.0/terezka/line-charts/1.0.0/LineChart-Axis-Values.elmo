@@ -1,0 +1,6 @@
+var _terezka$line_charts$LineChart_Axis_Values$time = _terezka$line_charts$Internal_Axis_Values$time;
+var _terezka$line_charts$LineChart_Axis_Values$custom = _terezka$line_charts$Internal_Axis_Values$custom;
+var _terezka$line_charts$LineChart_Axis_Values$float = _terezka$line_charts$Internal_Axis_Values$float;
+var _terezka$line_charts$LineChart_Axis_Values$int = _terezka$line_charts$Internal_Axis_Values$int;
+var _terezka$line_charts$LineChart_Axis_Values$exactly = _terezka$line_charts$Internal_Axis_Values$exactly;
+var _terezka$line_charts$LineChart_Axis_Values$around = _terezka$line_charts$Internal_Axis_Values$around;

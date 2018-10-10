@@ -1,0 +1,46 @@
+var _terezka$line_charts$Internal_Axis_Title$config = function (_p0) {
+	var _p1 = _p0;
+	return _p1._0;
+};
+var _terezka$line_charts$Internal_Axis_Title$Properties = F3(
+	function (a, b, c) {
+		return {view: a, position: b, offset: c};
+	});
+var _terezka$line_charts$Internal_Axis_Title$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Title$custom = F4(
+	function (position, x, y, title) {
+		return _terezka$line_charts$Internal_Axis_Title$Config(
+			{
+				view: title,
+				position: position,
+				offset: {ctor: '_Tuple2', _0: x, _1: y}
+			});
+	});
+var _terezka$line_charts$Internal_Axis_Title$atPosition = F3(
+	function (position, x, y) {
+		return function (_p2) {
+			return A4(
+				_terezka$line_charts$Internal_Axis_Title$custom,
+				position,
+				x,
+				y,
+				A2(_terezka$line_charts$Internal_Svg$label, 'inherit', _p2));
+		};
+	});
+var _terezka$line_charts$Internal_Axis_Title$atAxisMax = function () {
+	var position = F2(
+		function (data, range) {
+			return range.max;
+		});
+	return _terezka$line_charts$Internal_Axis_Title$atPosition(position);
+}();
+var _terezka$line_charts$Internal_Axis_Title$default = A2(_terezka$line_charts$Internal_Axis_Title$atAxisMax, 0, 0);
+var _terezka$line_charts$Internal_Axis_Title$atDataMax = function () {
+	var position = F2(
+		function (data, range) {
+			return A2(_elm_lang$core$Basics$min, data.max, range.max);
+		});
+	return _terezka$line_charts$Internal_Axis_Title$atPosition(position);
+}();

@@ -1,0 +1,10 @@
+var _terezka$line_charts$LineChart_Legends$groupedCustom = _terezka$line_charts$Internal_Legends$groupedCustom;
+var _terezka$line_charts$LineChart_Legends$grouped = _terezka$line_charts$Internal_Legends$grouped;
+var _terezka$line_charts$LineChart_Legends$byBeginning = _terezka$line_charts$Internal_Legends$byBeginning;
+var _terezka$line_charts$LineChart_Legends$byEnding = _terezka$line_charts$Internal_Legends$byEnding;
+var _terezka$line_charts$LineChart_Legends$none = _terezka$line_charts$Internal_Legends$none;
+var _terezka$line_charts$LineChart_Legends$default = _terezka$line_charts$Internal_Legends$default;
+var _terezka$line_charts$LineChart_Legends$Legend = F2(
+	function (a, b) {
+		return {sample: a, label: b};
+	});

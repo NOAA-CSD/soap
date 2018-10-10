@@ -1,0 +1,379 @@
+var _terezka$line_charts$Internal_Events$position = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: _debois$elm_dom$DOM$boundingClientRect,
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$lazy(
+				function (_p0) {
+					return _debois$elm_dom$DOM$parentElement(_terezka$line_charts$Internal_Events$position);
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _terezka$line_charts$Internal_Events$toJsonDecoder = F3(
+	function (data, system, _p1) {
+		var _p2 = _p1;
+		var handle = F3(
+			function (mouseX, mouseY, _p3) {
+				var _p4 = _p3;
+				var _p6 = _p4.width;
+				var _p5 = _p4.height;
+				var y = mouseY - _p4.top;
+				var x = mouseX - _p4.left;
+				var newSize = {width: _p6, height: _p5};
+				var heightPercent = _p5 / system.frame.size.height;
+				var widthPercent = _p6 / system.frame.size.width;
+				var newMargin = {top: system.frame.margin.top * heightPercent, right: system.frame.margin.right * widthPercent, bottom: system.frame.margin.bottom * heightPercent, left: system.frame.margin.left * widthPercent};
+				var newSystem = _elm_lang$core$Native_Utils.update(
+					system,
+					{
+						frame: {size: newSize, margin: newMargin}
+					});
+				return A3(
+					_p2._0,
+					data,
+					newSystem,
+					A2(_terezka$line_charts$LineChart_Coordinate$Point, x, y));
+			});
+		return A4(
+			_elm_lang$core$Json_Decode$map3,
+			handle,
+			A2(_elm_lang$core$Json_Decode$field, 'pageX', _elm_lang$core$Json_Decode$float),
+			A2(_elm_lang$core$Json_Decode$field, 'pageY', _elm_lang$core$Json_Decode$float),
+			_debois$elm_dom$DOM$target(_terezka$line_charts$Internal_Events$position));
+	});
+var _terezka$line_charts$Internal_Events$distanceY = F3(
+	function (system, searched, dot) {
+		return _elm_lang$core$Basics$abs(
+			A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, dot.y) - A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, searched.y));
+	});
+var _terezka$line_charts$Internal_Events$distanceX = F3(
+	function (system, searched, dot) {
+		return _elm_lang$core$Basics$abs(
+			A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, dot.x) - A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, searched.x));
+	});
+var _terezka$line_charts$Internal_Events$distance = F3(
+	function (system, searched, dot) {
+		return _elm_lang$core$Basics$sqrt(
+			Math.pow(
+				A3(_terezka$line_charts$Internal_Events$distanceX, system, searched, dot),
+				2) + Math.pow(
+				A3(_terezka$line_charts$Internal_Events$distanceY, system, searched, dot),
+				2));
+	});
+var _terezka$line_charts$Internal_Events$withinRadius = F4(
+	function (system, radius, searched, dot) {
+		return _elm_lang$core$Native_Utils.cmp(
+			A3(_terezka$line_charts$Internal_Events$distance, system, searched, dot),
+			radius) < 1;
+	});
+var _terezka$line_charts$Internal_Events$withinRadiusX = F4(
+	function (system, radius, searched, dot) {
+		return _elm_lang$core$Native_Utils.cmp(
+			A3(_terezka$line_charts$Internal_Events$distanceX, system, searched, dot),
+			radius) < 1;
+	});
+var _terezka$line_charts$Internal_Events$getNearestXHelp = F3(
+	function (points, system, searched) {
+		var distanceX_ = A2(_terezka$line_charts$Internal_Events$distanceX, system, searched);
+		var getClosest = F2(
+			function (point, allClosest) {
+				var _p7 = _elm_lang$core$List$head(allClosest);
+				if (_p7.ctor === 'Just') {
+					var _p8 = _p7._0;
+					return _elm_lang$core$Native_Utils.eq(_p8.point.x, point.point.x) ? {ctor: '::', _0: point, _1: allClosest} : ((_elm_lang$core$Native_Utils.cmp(
+						distanceX_(_p8.point),
+						distanceX_(point.point)) > 0) ? {
+						ctor: '::',
+						_0: point,
+						_1: {ctor: '[]'}
+					} : allClosest);
+				} else {
+					return {
+						ctor: '::',
+						_0: point,
+						_1: {ctor: '[]'}
+					};
+				}
+			});
+		return A3(
+			_elm_lang$core$List$foldl,
+			getClosest,
+			{ctor: '[]'},
+			points);
+	});
+var _terezka$line_charts$Internal_Events$getNearestHelp = F3(
+	function (points, system, searched) {
+		var distance_ = A2(_terezka$line_charts$Internal_Events$distance, system, searched);
+		var getClosest = F2(
+			function (point, closest) {
+				return (_elm_lang$core$Native_Utils.cmp(
+					distance_(closest.point),
+					distance_(point.point)) < 0) ? closest : point;
+			});
+		return A2(
+			_terezka$line_charts$Internal_Utils$withFirst,
+			A2(
+				_elm_lang$core$List$filter,
+				function (_) {
+					return _.isReal;
+				},
+				points),
+			_elm_lang$core$List$foldl(getClosest));
+	});
+var _terezka$line_charts$Internal_Events$toContainerAttributes = F3(
+	function (data, system, _p9) {
+		var _p10 = _p9;
+		var order = function (_p11) {
+			var _p12 = _p11;
+			return _p12._0 ? _elm_lang$core$Maybe$Just(
+				A2(_p12._1, data, system)) : _elm_lang$core$Maybe$Nothing;
+		};
+		return A2(_elm_lang$core$List$filterMap, order, _p10._0);
+	});
+var _terezka$line_charts$Internal_Events$toChartAttributes = F3(
+	function (data, system, _p13) {
+		var _p14 = _p13;
+		var order = function (_p15) {
+			var _p16 = _p15;
+			return _p16._0 ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+				A2(_p16._1, data, system));
+		};
+		return A2(_elm_lang$core$List$filterMap, order, _p14._0);
+	});
+var _terezka$line_charts$Internal_Events$Options = F3(
+	function (a, b, c) {
+		return {stopPropagation: a, preventDefault: b, catchOutsideChart: c};
+	});
+var _terezka$line_charts$Internal_Events$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Events$custom = _terezka$line_charts$Internal_Events$Config;
+var _terezka$line_charts$Internal_Events$default = _terezka$line_charts$Internal_Events$custom(
+	{ctor: '[]'});
+var _terezka$line_charts$Internal_Events$Event = F2(
+	function (a, b) {
+		return {ctor: 'Event', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Events$onMouseLeave = function (msg) {
+	return A2(
+		_terezka$line_charts$Internal_Events$Event,
+		false,
+		F2(
+			function (_p18, _p17) {
+				return A2(
+					_elm_lang$svg$Svg_Events$on,
+					'mouseleave',
+					_elm_lang$core$Json_Decode$succeed(msg));
+			}));
+};
+var _terezka$line_charts$Internal_Events$Decoder = function (a) {
+	return {ctor: 'Decoder', _0: a};
+};
+var _terezka$line_charts$Internal_Events$getSvg = _terezka$line_charts$Internal_Events$Decoder(
+	F3(
+		function (points, system, searched) {
+			return searched;
+		}));
+var _terezka$line_charts$Internal_Events$getData = _terezka$line_charts$Internal_Events$Decoder(
+	F3(
+		function (points, system, searchedSvg) {
+			return A2(_terezka$line_charts$LineChart_Coordinate$toData, system, searchedSvg);
+		}));
+var _terezka$line_charts$Internal_Events$getNearest = _terezka$line_charts$Internal_Events$Decoder(
+	F3(
+		function (points, system, searchedSvg) {
+			var searched = A2(_terezka$line_charts$LineChart_Coordinate$toData, system, searchedSvg);
+			return A2(
+				_elm_lang$core$Maybe$map,
+				function (_) {
+					return _.user;
+				},
+				A3(_terezka$line_charts$Internal_Events$getNearestHelp, points, system, searched));
+		}));
+var _terezka$line_charts$Internal_Events$getWithin = function (radius) {
+	return _terezka$line_charts$Internal_Events$Decoder(
+		F3(
+			function (points, system, searchedSvg) {
+				var searched = A2(_terezka$line_charts$LineChart_Coordinate$toData, system, searchedSvg);
+				var keepIfEligible = function (closest) {
+					return A4(_terezka$line_charts$Internal_Events$withinRadius, system, radius, searched, closest.point) ? _elm_lang$core$Maybe$Just(closest.user) : _elm_lang$core$Maybe$Nothing;
+				};
+				return A2(
+					_elm_lang$core$Maybe$andThen,
+					keepIfEligible,
+					A3(_terezka$line_charts$Internal_Events$getNearestHelp, points, system, searched));
+			}));
+};
+var _terezka$line_charts$Internal_Events$getNearestX = _terezka$line_charts$Internal_Events$Decoder(
+	F3(
+		function (points, system, searchedSvg) {
+			var searched = A2(_terezka$line_charts$LineChart_Coordinate$toData, system, searchedSvg);
+			return A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.user;
+				},
+				A3(_terezka$line_charts$Internal_Events$getNearestXHelp, points, system, searched));
+		}));
+var _terezka$line_charts$Internal_Events$getWithinX = function (radius) {
+	return _terezka$line_charts$Internal_Events$Decoder(
+		F3(
+			function (points, system, searchedSvg) {
+				var searched = A2(_terezka$line_charts$LineChart_Coordinate$toData, system, searchedSvg);
+				var keepIfEligible = function (_p19) {
+					return A4(
+						_terezka$line_charts$Internal_Events$withinRadiusX,
+						system,
+						radius,
+						searched,
+						function (_) {
+							return _.point;
+						}(_p19));
+				};
+				return A2(
+					_elm_lang$core$List$map,
+					function (_) {
+						return _.user;
+					},
+					A2(
+						_elm_lang$core$List$filter,
+						keepIfEligible,
+						A3(_terezka$line_charts$Internal_Events$getNearestXHelp, points, system, searched)));
+			}));
+};
+var _terezka$line_charts$Internal_Events$map = F2(
+	function (f, _p20) {
+		var _p21 = _p20;
+		return _terezka$line_charts$Internal_Events$Decoder(
+			F3(
+				function (ps, s, p) {
+					return f(
+						A3(_p21._0, ps, s, p));
+				}));
+	});
+var _terezka$line_charts$Internal_Events$on = F3(
+	function (event, toMsg, decoder) {
+		return A2(
+			_terezka$line_charts$Internal_Events$Event,
+			false,
+			F2(
+				function (data, system) {
+					return A2(
+						_elm_lang$svg$Svg_Events$on,
+						event,
+						A3(
+							_terezka$line_charts$Internal_Events$toJsonDecoder,
+							data,
+							system,
+							A2(_terezka$line_charts$Internal_Events$map, toMsg, decoder)));
+				}));
+	});
+var _terezka$line_charts$Internal_Events$onClick = _terezka$line_charts$Internal_Events$on('click');
+var _terezka$line_charts$Internal_Events$click = function (msg) {
+	return _terezka$line_charts$Internal_Events$custom(
+		{
+			ctor: '::',
+			_0: A2(
+				_terezka$line_charts$Internal_Events$onClick,
+				msg,
+				_terezka$line_charts$Internal_Events$getWithin(30)),
+			_1: {ctor: '[]'}
+		});
+};
+var _terezka$line_charts$Internal_Events$onMouseMove = _terezka$line_charts$Internal_Events$on('mousemove');
+var _terezka$line_charts$Internal_Events$hoverMany = function (msg) {
+	return _terezka$line_charts$Internal_Events$custom(
+		{
+			ctor: '::',
+			_0: A2(_terezka$line_charts$Internal_Events$onMouseMove, msg, _terezka$line_charts$Internal_Events$getNearestX),
+			_1: {
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Events$onMouseLeave(
+					msg(
+						{ctor: '[]'})),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _terezka$line_charts$Internal_Events$hoverOne = function (msg) {
+	return _terezka$line_charts$Internal_Events$custom(
+		{
+			ctor: '::',
+			_0: A2(
+				_terezka$line_charts$Internal_Events$onMouseMove,
+				msg,
+				_terezka$line_charts$Internal_Events$getWithin(30)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_terezka$line_charts$Internal_Events$on,
+					'touchstart',
+					msg,
+					_terezka$line_charts$Internal_Events$getWithin(100)),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_terezka$line_charts$Internal_Events$on,
+						'touchmove',
+						msg,
+						_terezka$line_charts$Internal_Events$getWithin(100)),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Events$onMouseLeave(
+							msg(_elm_lang$core$Maybe$Nothing)),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _terezka$line_charts$Internal_Events$onMouseDown = _terezka$line_charts$Internal_Events$on('mousedown');
+var _terezka$line_charts$Internal_Events$onMouseUp = _terezka$line_charts$Internal_Events$on('mouseup');
+var _terezka$line_charts$Internal_Events$onWithOptions = F4(
+	function (event, options, toMsg, decoder) {
+		return A2(
+			_terezka$line_charts$Internal_Events$Event,
+			options.catchOutsideChart,
+			F2(
+				function (data, system) {
+					return A3(
+						_elm_lang$html$Html_Events$onWithOptions,
+						event,
+						A2(_elm_lang$html$Html_Events$Options, options.stopPropagation, options.preventDefault),
+						A3(
+							_terezka$line_charts$Internal_Events$toJsonDecoder,
+							data,
+							system,
+							A2(_terezka$line_charts$Internal_Events$map, toMsg, decoder)));
+				}));
+	});
+var _terezka$line_charts$Internal_Events$map2 = F3(
+	function (f, _p23, _p22) {
+		var _p24 = _p23;
+		var _p25 = _p22;
+		return _terezka$line_charts$Internal_Events$Decoder(
+			F3(
+				function (ps, s, p) {
+					return A2(
+						f,
+						A3(_p24._0, ps, s, p),
+						A3(_p25._0, ps, s, p));
+				}));
+	});
+var _terezka$line_charts$Internal_Events$map3 = F4(
+	function (f, _p28, _p27, _p26) {
+		var _p29 = _p28;
+		var _p30 = _p27;
+		var _p31 = _p26;
+		return _terezka$line_charts$Internal_Events$Decoder(
+			F3(
+				function (ps, s, p) {
+					return A3(
+						f,
+						A3(_p29._0, ps, s, p),
+						A3(_p30._0, ps, s, p),
+						A3(_p31._0, ps, s, p));
+				}));
+	});

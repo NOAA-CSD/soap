@@ -1,0 +1,422 @@
+var _terezka$line_charts$Internal_Junk$find = F2(
+	function (hovered, data) {
+		find:
+		while (true) {
+			var _p0 = hovered;
+			if (_p0.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p1 = _p0._0;
+				if (A2(
+					_elm_lang$core$List$any,
+					F2(
+						function (x, y) {
+							return _elm_lang$core$Native_Utils.eq(x, y);
+						})(_p1),
+					data)) {
+					return _elm_lang$core$Maybe$Just(_p1);
+				} else {
+					var _v1 = _p0._1,
+						_v2 = data;
+					hovered = _v1;
+					data = _v2;
+					continue find;
+				}
+			}
+		}
+	});
+var _terezka$line_charts$Internal_Junk$findSeries = F2(
+	function (hovered, datas) {
+		findSeries:
+		while (true) {
+			var _p2 = datas;
+			if (_p2.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p4 = _p2._0._2;
+				var _p3 = A2(
+					_terezka$line_charts$Internal_Junk$find,
+					{
+						ctor: '::',
+						_0: hovered,
+						_1: {ctor: '[]'}
+					},
+					_p4);
+				if (_p3.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Just(
+						{ctor: '_Tuple3', _0: _p2._0._0, _1: _p2._0._1, _2: _p4});
+				} else {
+					var _v5 = hovered,
+						_v6 = _p2._1;
+					hovered = _v5;
+					datas = _v6;
+					continue findSeries;
+				}
+			}
+		}
+	});
+var _terezka$line_charts$Internal_Junk$shouldFlip = F2(
+	function (system, x) {
+		return _elm_lang$core$Native_Utils.cmp(x - system.x.min, system.x.max - x) > 0;
+	});
+var _terezka$line_charts$Internal_Junk$middle = F2(
+	function (r, system) {
+		var range = r(system);
+		return range.min + ((range.max - range.min) / 2);
+	});
+var _terezka$line_charts$Internal_Junk$viewRow = F3(
+	function (color, label, value) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'margin', _1: '3px'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'color', _1: color},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						label,
+						A2(_elm_lang$core$Basics_ops['++'], ': ', value))),
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$Internal_Junk$viewHeader = _elm_lang$html$Html$p(
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '3px'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'margin-bottom', _1: '5px'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'padding', _1: '3px'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'border-bottom', _1: '1px solid rgb(163, 163, 163)'},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _terezka$line_charts$Internal_Junk$standardStyles = {
+	ctor: '::',
+	_0: {ctor: '_Tuple2', _0: 'padding', _1: '5px'},
+	_1: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'min-width', _1: '100px'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'background', _1: 'rgba(255,255,255,0.8)'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #d3d3d3'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '5px'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'pointer-events', _1: 'none'},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	}
+};
+var _terezka$line_charts$Internal_Junk$hoverAt = F5(
+	function (system, x, y, styles, view) {
+		var yPercentage = (A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, y) * 100) / system.frame.size.height;
+		var space = A2(_terezka$line_charts$Internal_Junk$shouldFlip, system, x) ? -15 : 15;
+		var xPercentage = ((A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, x) + space) * 100) / system.frame.size.width;
+		var posititonStyles = {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'left',
+				_1: A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(xPercentage),
+					'%')
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'top',
+					_1: A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(yPercentage),
+						'%')
+				},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'margin-right', _1: '-400px'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+						_1: {
+							ctor: '::',
+							_0: A2(_terezka$line_charts$Internal_Junk$shouldFlip, system, x) ? {ctor: '_Tuple2', _0: 'transform', _1: 'translateX(-100%)'} : {ctor: '_Tuple2', _0: 'transform', _1: 'translateX(0)'},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		};
+		var containerStyles = A2(
+			_elm_lang$core$Basics_ops['++'],
+			_terezka$line_charts$Internal_Junk$standardStyles,
+			A2(_elm_lang$core$Basics_ops['++'], posititonStyles, styles));
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(containerStyles),
+				_1: {ctor: '[]'}
+			},
+			view);
+	});
+var _terezka$line_charts$Internal_Junk$hover = F3(
+	function (system, x, styles) {
+		var containerStyles = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A2(_terezka$line_charts$Internal_Junk$shouldFlip, system, x) ? {ctor: '_Tuple2', _0: 'transform', _1: 'translate(-100%, -50%)'} : {ctor: '_Tuple2', _0: 'transform', _1: 'translate(0, -50%)'},
+				_1: {ctor: '[]'}
+			},
+			styles);
+		var y = A2(
+			_terezka$line_charts$Internal_Junk$middle,
+			function (_) {
+				return _.y;
+			},
+			system);
+		return A4(_terezka$line_charts$Internal_Junk$hoverAt, system, x, y, containerStyles);
+	});
+var _terezka$line_charts$Internal_Junk$hoverManyHtml = F8(
+	function (system, toX, toY, formatX, formatY, first, hovered, series) {
+		var viewValue = function (_p5) {
+			var _p6 = _p5;
+			return A2(
+				_terezka$line_charts$Internal_Utils$viewMaybe,
+				A2(_terezka$line_charts$Internal_Junk$find, hovered, _p6._2),
+				function (hovered) {
+					return A3(
+						_terezka$line_charts$Internal_Junk$viewRow,
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_p6._0),
+						_p6._1,
+						formatY(hovered));
+				});
+		};
+		var x = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(
+				_terezka$line_charts$Internal_Junk$middle,
+				function (_) {
+					return _.x;
+				},
+				system),
+			toX(first));
+		return A4(
+			_terezka$line_charts$Internal_Junk$hover,
+			system,
+			x,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Junk$viewHeader(
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							formatX(first)),
+						_1: {ctor: '[]'}
+					}),
+				_1: A2(_elm_lang$core$List$map, viewValue, series)
+			});
+	});
+var _terezka$line_charts$Internal_Junk$hoverOneHtml = F6(
+	function (series, system, toX, toY, properties, hovered) {
+		var viewValue = function (_p7) {
+			var _p8 = _p7;
+			return A3(
+				_terezka$line_charts$Internal_Junk$viewRow,
+				'inherit',
+				_p8._0,
+				_p8._1(hovered));
+		};
+		var viewColorLabel = F2(
+			function (color, label) {
+				return A2(
+					_elm_lang$html$Html$p,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'margin', _1: '0'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'color', _1: color},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(label),
+						_1: {ctor: '[]'}
+					});
+			});
+		var viewHeaderOne = A2(
+			_terezka$line_charts$Internal_Utils$viewMaybe,
+			A2(_terezka$line_charts$Internal_Junk$findSeries, hovered, series),
+			function (_p9) {
+				var _p10 = _p9;
+				return _terezka$line_charts$Internal_Junk$viewHeader(
+					{
+						ctor: '::',
+						_0: A2(
+							viewColorLabel,
+							_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_p10._0),
+							_p10._1),
+						_1: {ctor: '[]'}
+					});
+			});
+		var y = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(
+				_terezka$line_charts$Internal_Junk$middle,
+				function (_) {
+					return _.y;
+				},
+				system),
+			toY(hovered));
+		var x = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(
+				_terezka$line_charts$Internal_Junk$middle,
+				function (_) {
+					return _.x;
+				},
+				system),
+			toX(hovered));
+		return A5(
+			_terezka$line_charts$Internal_Junk$hoverAt,
+			system,
+			x,
+			y,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: viewHeaderOne,
+				_1: A2(_elm_lang$core$List$map, viewValue, properties)
+			});
+	});
+var _terezka$line_charts$Internal_Junk$addBelow = F2(
+	function (below, layers) {
+		return _elm_lang$core$Native_Utils.update(
+			layers,
+			{
+				below: A2(_elm_lang$core$Basics_ops['++'], below, layers.below)
+			});
+	});
+var _terezka$line_charts$Internal_Junk$getLayers = F5(
+	function (series, toX, toY, system, _p11) {
+		var _p12 = _p11;
+		return A4(_p12._0, series, toX, toY, system);
+	});
+var _terezka$line_charts$Internal_Junk$Layers = F3(
+	function (a, b, c) {
+		return {below: a, above: b, html: c};
+	});
+var _terezka$line_charts$Internal_Junk$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Junk$none = _terezka$line_charts$Internal_Junk$Config(
+	F4(
+		function (_p16, _p15, _p14, _p13) {
+			return A3(
+				_terezka$line_charts$Internal_Junk$Layers,
+				{ctor: '[]'},
+				{ctor: '[]'},
+				{ctor: '[]'});
+		}));
+var _terezka$line_charts$Internal_Junk$custom = function (func) {
+	return _terezka$line_charts$Internal_Junk$Config(
+		F3(
+			function (_p19, _p18, _p17) {
+				return func;
+			}));
+};
+var _terezka$line_charts$Internal_Junk$hoverOne = F2(
+	function (hovered, properties) {
+		return _terezka$line_charts$Internal_Junk$Config(
+			F4(
+				function (series, toX, toY, system) {
+					return {
+						below: {ctor: '[]'},
+						above: {ctor: '[]'},
+						html: {
+							ctor: '::',
+							_0: A2(
+								_terezka$line_charts$Internal_Utils$viewMaybe,
+								hovered,
+								A5(_terezka$line_charts$Internal_Junk$hoverOneHtml, series, system, toX, toY, properties)),
+							_1: {ctor: '[]'}
+						}
+					};
+				}));
+	});
+var _terezka$line_charts$Internal_Junk$hoverMany = F3(
+	function (hovered, formatX, formatY) {
+		var _p20 = hovered;
+		if (_p20.ctor === '[]') {
+			return _terezka$line_charts$Internal_Junk$none;
+		} else {
+			var _p21 = _p20._0;
+			return _terezka$line_charts$Internal_Junk$Config(
+				F4(
+					function (series, toX, toY, system) {
+						var xValue = A2(
+							_elm_lang$core$Maybe$withDefault,
+							0,
+							toX(_p21));
+						return {
+							below: {
+								ctor: '::',
+								_0: A3(
+									_terezka$line_charts$Internal_Svg$verticalGrid,
+									system,
+									{ctor: '[]'},
+									xValue),
+								_1: {ctor: '[]'}
+							},
+							above: {ctor: '[]'},
+							html: {
+								ctor: '::',
+								_0: A8(_terezka$line_charts$Internal_Junk$hoverManyHtml, system, toX, toY, formatX, formatY, _p21, hovered, series),
+								_1: {ctor: '[]'}
+							}
+						};
+					}));
+		}
+	});

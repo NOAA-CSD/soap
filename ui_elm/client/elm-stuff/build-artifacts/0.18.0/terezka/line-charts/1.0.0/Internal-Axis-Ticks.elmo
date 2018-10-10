@@ -1,0 +1,63 @@
+var _terezka$line_charts$Internal_Axis_Ticks$ticks = F3(
+	function (dataRange, range, _p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$core$List$map,
+			_terezka$line_charts$Internal_Axis_Tick$properties,
+			A2(_p1._0, dataRange, range));
+	});
+var _terezka$line_charts$Internal_Axis_Ticks$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Ticks$custom = _terezka$line_charts$Internal_Axis_Ticks$Config;
+var _terezka$line_charts$Internal_Axis_Ticks$intCustom = F2(
+	function (amount, tick) {
+		return _terezka$line_charts$Internal_Axis_Ticks$custom(
+			F2(
+				function (data, range) {
+					return A2(
+						_elm_lang$core$List$map,
+						tick,
+						A2(
+							_terezka$line_charts$Internal_Axis_Values$int,
+							_terezka$line_charts$Internal_Axis_Values$around(amount),
+							A2(_terezka$line_charts$Internal_Coordinate$smallestRange, data, range)));
+				}));
+	});
+var _terezka$line_charts$Internal_Axis_Ticks$int = function (amount) {
+	return A2(_terezka$line_charts$Internal_Axis_Ticks$intCustom, amount, _terezka$line_charts$LineChart_Axis_Tick$int);
+};
+var _terezka$line_charts$Internal_Axis_Ticks$floatCustom = F2(
+	function (amount, tick) {
+		return _terezka$line_charts$Internal_Axis_Ticks$custom(
+			F2(
+				function (data, range) {
+					return A2(
+						_elm_lang$core$List$map,
+						tick,
+						A2(
+							_terezka$line_charts$Internal_Axis_Values$float,
+							_terezka$line_charts$Internal_Axis_Values$around(amount),
+							A2(_terezka$line_charts$Internal_Coordinate$smallestRange, data, range)));
+				}));
+	});
+var _terezka$line_charts$Internal_Axis_Ticks$float = function (amount) {
+	return A2(_terezka$line_charts$Internal_Axis_Ticks$floatCustom, amount, _terezka$line_charts$LineChart_Axis_Tick$float);
+};
+var _terezka$line_charts$Internal_Axis_Ticks$timeCustom = F2(
+	function (amount, tick) {
+		return _terezka$line_charts$Internal_Axis_Ticks$custom(
+			F2(
+				function (data, range) {
+					return A2(
+						_elm_lang$core$List$map,
+						tick,
+						A2(
+							_terezka$line_charts$Internal_Axis_Values$time,
+							amount,
+							A2(_terezka$line_charts$Internal_Coordinate$smallestRange, data, range)));
+				}));
+	});
+var _terezka$line_charts$Internal_Axis_Ticks$time = function (amount) {
+	return A2(_terezka$line_charts$Internal_Axis_Ticks$timeCustom, amount, _terezka$line_charts$LineChart_Axis_Tick$time);
+};

@@ -1,0 +1,363 @@
+var _terezka$line_charts$Internal_Svg$anchorStyle = function (anchor) {
+	var anchorString = function () {
+		var _p0 = anchor;
+		switch (_p0.ctor) {
+			case 'Start':
+				return 'start';
+			case 'Middle':
+				return 'middle';
+			default:
+				return 'end';
+		}
+	}();
+	return _elm_lang$svg$Svg_Attributes$style(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'text-anchor: ',
+			A2(_elm_lang$core$Basics_ops['++'], anchorString, ';')));
+};
+var _terezka$line_charts$Internal_Svg$label = F2(
+	function (color, string) {
+		return A2(
+			_elm_lang$svg$Svg$text_,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$fill(color),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style('pointer-events: none;'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$tspan,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg$text(string),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$Internal_Svg$yTick = F5(
+	function (system, width, userAttributes, x, y) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__tick'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$stroke(
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+					_1: {ctor: '[]'}
+				}
+			},
+			userAttributes,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$x1(
+					_elm_lang$core$Basics$toString(
+						A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, x))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$x2(
+						_elm_lang$core$Basics$toString(
+							A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, x) - width)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$y1(
+							_elm_lang$core$Basics$toString(
+								A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, y))),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$y2(
+								_elm_lang$core$Basics$toString(
+									A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, y))),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+		return A2(
+			_elm_lang$svg$Svg$line,
+			attributes,
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Svg$xTick = F5(
+	function (system, height, userAttributes, y, x) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+				_1: {ctor: '[]'}
+			},
+			userAttributes,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$x1(
+					_elm_lang$core$Basics$toString(
+						A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, x))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$x2(
+						_elm_lang$core$Basics$toString(
+							A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, x))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$y1(
+							_elm_lang$core$Basics$toString(
+								A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, y))),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$y2(
+								_elm_lang$core$Basics$toString(
+									A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, y) + height)),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+		return A2(
+			_elm_lang$svg$Svg$line,
+			attributes,
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Svg$rectangle = F6(
+	function (system, userAttributes, x1, x2, y1, y2) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$fill(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+				_1: {ctor: '[]'}
+			},
+			userAttributes,
+			{ctor: '[]'});
+		return A3(
+			_terezka$line_charts$Internal_Path$view,
+			system,
+			attributes,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Path$Move(
+					{x: x1, y: y1}),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Path$Line(
+						{x: x1, y: y2}),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Path$Line(
+							{x: x2, y: y2}),
+						_1: {
+							ctor: '::',
+							_0: _terezka$line_charts$Internal_Path$Line(
+								{x: x2, y: y1}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Svg$vertical = F5(
+	function (system, userAttributes, x, y1, y2) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style('pointer-events: none;'),
+					_1: {ctor: '[]'}
+				}
+			},
+			userAttributes,
+			{ctor: '[]'});
+		return A3(
+			_terezka$line_charts$Internal_Path$view,
+			system,
+			attributes,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Path$Move(
+					{x: x, y: y1}),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Path$Line(
+						{x: x, y: y1}),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Path$Line(
+							{x: x, y: y2}),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Svg$verticalGrid = F3(
+	function (system, userAttributes, x) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style('pointer-events: none;'),
+					_1: {ctor: '[]'}
+				}
+			},
+			userAttributes,
+			{ctor: '[]'});
+		return A5(_terezka$line_charts$Internal_Svg$vertical, system, attributes, x, system.y.min, system.y.max);
+	});
+var _terezka$line_charts$Internal_Svg$horizontal = F5(
+	function (system, userAttributes, y, x1, x2) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style('pointer-events: none;'),
+					_1: {ctor: '[]'}
+				}
+			},
+			userAttributes,
+			{ctor: '[]'});
+		return A3(
+			_terezka$line_charts$Internal_Path$view,
+			system,
+			attributes,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Path$Move(
+					{x: x1, y: y}),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Path$Line(
+						{x: x1, y: y}),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Path$Line(
+							{x: x2, y: y}),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Svg$horizontalGrid = F3(
+	function (system, userAttributes, y) {
+		var attributes = A3(
+			_terezka$line_charts$Internal_Utils$concat,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_terezka$line_charts$LineChart_Colors$gray)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$style('pointer-events: none;'),
+					_1: {ctor: '[]'}
+				}
+			},
+			userAttributes,
+			{ctor: '[]'});
+		return A5(_terezka$line_charts$Internal_Svg$horizontal, system, attributes, y, system.x.min, system.x.max);
+	});
+var _terezka$line_charts$Internal_Svg$gridDot = F3(
+	function (radius, color, point) {
+		return A2(
+			_elm_lang$svg$Svg$circle,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$cx(
+					_elm_lang$core$Basics$toString(point.x)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$cy(
+						_elm_lang$core$Basics$toString(point.y)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$r(
+							_elm_lang$core$Basics$toString(radius)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill(
+								_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Svg$withinChartArea = function (_p1) {
+	var _p2 = _p1;
+	return _elm_lang$svg$Svg_Attributes$clipPath(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'url(#',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_terezka$line_charts$Internal_Utils$toChartAreaId(_p2.id),
+				')')));
+};
+var _terezka$line_charts$Internal_Svg$End = {ctor: 'End'};
+var _terezka$line_charts$Internal_Svg$Middle = {ctor: 'Middle'};
+var _terezka$line_charts$Internal_Svg$Start = {ctor: 'Start'};
+var _terezka$line_charts$Internal_Svg$Transfrom = F2(
+	function (a, b) {
+		return {ctor: 'Transfrom', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Svg$move = F3(
+	function (system, x, y) {
+		return A2(
+			_terezka$line_charts$Internal_Svg$Transfrom,
+			A2(_terezka$line_charts$LineChart_Coordinate$toSvgX, system, x),
+			A2(_terezka$line_charts$LineChart_Coordinate$toSvgY, system, y));
+	});
+var _terezka$line_charts$Internal_Svg$offset = F2(
+	function (x, y) {
+		return A2(_terezka$line_charts$Internal_Svg$Transfrom, x, y);
+	});
+var _terezka$line_charts$Internal_Svg$addPosition = F2(
+	function (_p4, _p3) {
+		var _p5 = _p4;
+		var _p6 = _p3;
+		return A2(_terezka$line_charts$Internal_Svg$Transfrom, _p6._0 + _p5._0, _p6._1 + _p5._1);
+	});
+var _terezka$line_charts$Internal_Svg$toPosition = A2(
+	_elm_lang$core$List$foldr,
+	_terezka$line_charts$Internal_Svg$addPosition,
+	A2(_terezka$line_charts$Internal_Svg$Transfrom, 0, 0));
+var _terezka$line_charts$Internal_Svg$transform = function (translations) {
+	var _p7 = _terezka$line_charts$Internal_Svg$toPosition(translations);
+	var x = _p7._0;
+	var y = _p7._1;
+	return _elm_lang$svg$Svg_Attributes$transform(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'translate(',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(x),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					', ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(y),
+						')')))));
+};

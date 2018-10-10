@@ -1,0 +1,85 @@
+var _terezka$line_charts$Internal_Axis_Range$applyY = F2(
+	function (range, system) {
+		var _p0 = range;
+		switch (_p0.ctor) {
+			case 'Padded':
+				var _p4 = _p0._0;
+				var _p3 = _p0._1;
+				var _p1 = system;
+				var frame = _p1.frame;
+				var _p2 = frame;
+				var size = _p2.size;
+				var system_ = _elm_lang$core$Native_Utils.update(
+					system,
+					{
+						frame: _elm_lang$core$Native_Utils.update(
+							frame,
+							{
+								size: _elm_lang$core$Native_Utils.update(
+									size,
+									{
+										height: A2(_elm_lang$core$Basics$max, 1, (size.height - _p4) - _p3)
+									})
+							})
+					});
+				var scale = _terezka$line_charts$LineChart_Coordinate$scaleDataY(system_);
+				return A2(
+					_terezka$line_charts$LineChart_Coordinate$Range,
+					system.y.min - scale(_p4),
+					system.y.max + scale(_p3));
+			case 'Window':
+				return A2(_terezka$line_charts$LineChart_Coordinate$Range, _p0._0, _p0._1);
+			default:
+				return _p0._0(system.y);
+		}
+	});
+var _terezka$line_charts$Internal_Axis_Range$applyX = F2(
+	function (range, system) {
+		var _p5 = range;
+		switch (_p5.ctor) {
+			case 'Padded':
+				var _p9 = _p5._0;
+				var _p8 = _p5._1;
+				var _p6 = system;
+				var frame = _p6.frame;
+				var _p7 = frame;
+				var size = _p7.size;
+				var system_ = _elm_lang$core$Native_Utils.update(
+					system,
+					{
+						frame: _elm_lang$core$Native_Utils.update(
+							frame,
+							{
+								size: _elm_lang$core$Native_Utils.update(
+									size,
+									{
+										width: A2(_elm_lang$core$Basics$max, 1, (size.width - _p9) - _p8)
+									})
+							})
+					});
+				var scale = _terezka$line_charts$LineChart_Coordinate$scaleDataX(system_);
+				return A2(
+					_terezka$line_charts$LineChart_Coordinate$Range,
+					system.x.min - scale(_p9),
+					system.x.max + scale(_p8));
+			case 'Window':
+				return A2(_terezka$line_charts$LineChart_Coordinate$Range, _p5._0, _p5._1);
+			default:
+				return _p5._0(system.x);
+		}
+	});
+var _terezka$line_charts$Internal_Axis_Range$Custom = function (a) {
+	return {ctor: 'Custom', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Range$custom = _terezka$line_charts$Internal_Axis_Range$Custom;
+var _terezka$line_charts$Internal_Axis_Range$Window = F2(
+	function (a, b) {
+		return {ctor: 'Window', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Axis_Range$window = _terezka$line_charts$Internal_Axis_Range$Window;
+var _terezka$line_charts$Internal_Axis_Range$Padded = F2(
+	function (a, b) {
+		return {ctor: 'Padded', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Axis_Range$padded = _terezka$line_charts$Internal_Axis_Range$Padded;
+var _terezka$line_charts$Internal_Axis_Range$default = A2(_terezka$line_charts$Internal_Axis_Range$padded, 0, 0);

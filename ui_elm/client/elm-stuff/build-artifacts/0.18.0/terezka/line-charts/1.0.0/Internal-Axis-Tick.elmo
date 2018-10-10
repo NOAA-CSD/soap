@@ -1,0 +1,106 @@
+var _terezka$line_charts$Internal_Axis_Tick$properties = function (_p0) {
+	var _p1 = _p0;
+	return _p1._0;
+};
+var _terezka$line_charts$Internal_Axis_Tick$isPositive = function (direction) {
+	var _p2 = direction;
+	if (_p2.ctor === 'Positive') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _terezka$line_charts$Internal_Axis_Tick$Properties = F7(
+	function (a, b, c, d, e, f, g) {
+		return {position: a, color: b, width: c, length: d, grid: e, direction: f, label: g};
+	});
+var _terezka$line_charts$Internal_Axis_Tick$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Tick$custom = _terezka$line_charts$Internal_Axis_Tick$Config;
+var _terezka$line_charts$Internal_Axis_Tick$Positive = {ctor: 'Positive'};
+var _terezka$line_charts$Internal_Axis_Tick$opposite = function (n) {
+	return _terezka$line_charts$Internal_Axis_Tick$custom(
+		{
+			position: n,
+			color: _terezka$line_charts$LineChart_Colors$gray,
+			width: 1,
+			length: 5,
+			grid: true,
+			direction: _terezka$line_charts$Internal_Axis_Tick$Positive,
+			label: _elm_lang$core$Maybe$Just(
+				A2(
+					_terezka$line_charts$Internal_Svg$label,
+					'inherit',
+					_elm_lang$core$Basics$toString(n)))
+		});
+};
+var _terezka$line_charts$Internal_Axis_Tick$Negative = {ctor: 'Negative'};
+var _terezka$line_charts$Internal_Axis_Tick$int = function (n) {
+	return _terezka$line_charts$Internal_Axis_Tick$custom(
+		{
+			position: _elm_lang$core$Basics$toFloat(n),
+			color: _terezka$line_charts$LineChart_Colors$gray,
+			width: 1,
+			length: 5,
+			grid: true,
+			direction: _terezka$line_charts$Internal_Axis_Tick$Negative,
+			label: _elm_lang$core$Maybe$Just(
+				A2(
+					_terezka$line_charts$Internal_Svg$label,
+					'inherit',
+					_elm_lang$core$Basics$toString(n)))
+		});
+};
+var _terezka$line_charts$Internal_Axis_Tick$float = function (n) {
+	return _terezka$line_charts$Internal_Axis_Tick$custom(
+		{
+			position: n,
+			color: _terezka$line_charts$LineChart_Colors$gray,
+			width: 1,
+			length: 5,
+			grid: true,
+			direction: _terezka$line_charts$Internal_Axis_Tick$Negative,
+			label: _elm_lang$core$Maybe$Just(
+				A2(
+					_terezka$line_charts$Internal_Svg$label,
+					'inherit',
+					_elm_lang$core$Basics$toString(n)))
+		});
+};
+var _terezka$line_charts$Internal_Axis_Tick$gridless = function (n) {
+	return _terezka$line_charts$Internal_Axis_Tick$custom(
+		{
+			position: n,
+			color: _terezka$line_charts$LineChart_Colors$gray,
+			width: 1,
+			length: 5,
+			grid: false,
+			direction: _terezka$line_charts$Internal_Axis_Tick$Negative,
+			label: _elm_lang$core$Maybe$Just(
+				A2(
+					_terezka$line_charts$Internal_Svg$label,
+					'inherit',
+					_elm_lang$core$Basics$toString(n)))
+		});
+};
+var _terezka$line_charts$Internal_Axis_Tick$labelless = function (n) {
+	return _terezka$line_charts$Internal_Axis_Tick$custom(
+		{position: n, color: _terezka$line_charts$LineChart_Colors$gray, width: 1, length: 5, grid: true, direction: _terezka$line_charts$Internal_Axis_Tick$Negative, label: _elm_lang$core$Maybe$Nothing});
+};
+var _terezka$line_charts$Internal_Axis_Tick$long = function (n) {
+	return _terezka$line_charts$Internal_Axis_Tick$custom(
+		{
+			position: n,
+			color: _terezka$line_charts$LineChart_Colors$gray,
+			width: 1,
+			length: 20,
+			grid: true,
+			direction: _terezka$line_charts$Internal_Axis_Tick$Negative,
+			label: _elm_lang$core$Maybe$Just(
+				A2(
+					_terezka$line_charts$Internal_Svg$label,
+					'inherit',
+					_elm_lang$core$Basics$toString(n)))
+		});
+};

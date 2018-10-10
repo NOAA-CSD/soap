@@ -1,0 +1,91 @@
+var _terezka$line_charts$Internal_Coordinate$largestRange = F2(
+	function (data, range) {
+		return {
+			min: A2(_elm_lang$core$Basics$min, data.min, range.min),
+			max: A2(_elm_lang$core$Basics$max, data.max, range.max)
+		};
+	});
+var _terezka$line_charts$Internal_Coordinate$smallestRange = F2(
+	function (data, range) {
+		return {
+			min: A2(_elm_lang$core$Basics$max, data.min, range.min),
+			max: A2(_elm_lang$core$Basics$min, data.max, range.max)
+		};
+	});
+var _terezka$line_charts$Internal_Coordinate$lengthY = function (system) {
+	return A2(_elm_lang$core$Basics$max, 1, (system.frame.size.height - system.frame.margin.bottom) - system.frame.margin.top);
+};
+var _terezka$line_charts$Internal_Coordinate$lengthX = function (system) {
+	return A2(_elm_lang$core$Basics$max, 1, (system.frame.size.width - system.frame.margin.left) - system.frame.margin.right);
+};
+var _terezka$line_charts$Internal_Coordinate$reachY = function (system) {
+	var diff = system.y.max - system.y.min;
+	return (_elm_lang$core$Native_Utils.cmp(diff, 0) > 0) ? diff : 1;
+};
+var _terezka$line_charts$Internal_Coordinate$reachX = function (system) {
+	var diff = system.x.max - system.x.min;
+	return (_elm_lang$core$Native_Utils.cmp(diff, 0) > 0) ? diff : 1;
+};
+var _terezka$line_charts$Internal_Coordinate$ground = function (range) {
+	return _elm_lang$core$Native_Utils.update(
+		range,
+		{
+			min: A2(_elm_lang$core$Basics$min, range.min, 0)
+		});
+};
+var _terezka$line_charts$Internal_Coordinate$maximum = function (toValue) {
+	return function (_p0) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			1,
+			_elm_lang$core$List$maximum(
+				A2(_elm_lang$core$List$map, toValue, _p0)));
+	};
+};
+var _terezka$line_charts$Internal_Coordinate$minimum = function (toValue) {
+	return function (_p1) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			0,
+			_elm_lang$core$List$minimum(
+				A2(_elm_lang$core$List$map, toValue, _p1)));
+	};
+};
+var _terezka$line_charts$Internal_Coordinate$minimumOrZero = function (toValue) {
+	return function (_p2) {
+		return A2(
+			_elm_lang$core$Basics$min,
+			0,
+			A2(_terezka$line_charts$Internal_Coordinate$minimum, toValue, _p2));
+	};
+};
+var _terezka$line_charts$Internal_Coordinate$range = F2(
+	function (toValue, data) {
+		var range = {
+			min: A2(_terezka$line_charts$Internal_Coordinate$minimum, toValue, data),
+			max: A2(_terezka$line_charts$Internal_Coordinate$maximum, toValue, data)
+		};
+		return _elm_lang$core$Native_Utils.eq(range.min, range.max) ? _elm_lang$core$Native_Utils.update(
+			range,
+			{max: range.max + 1}) : range;
+	});
+var _terezka$line_charts$Internal_Coordinate$System = F6(
+	function (a, b, c, d, e, f) {
+		return {frame: a, x: b, y: c, xData: d, yData: e, id: f};
+	});
+var _terezka$line_charts$Internal_Coordinate$Frame = F2(
+	function (a, b) {
+		return {margin: a, size: b};
+	});
+var _terezka$line_charts$Internal_Coordinate$Size = F2(
+	function (a, b) {
+		return {width: a, height: b};
+	});
+var _terezka$line_charts$Internal_Coordinate$Margin = F4(
+	function (a, b, c, d) {
+		return {top: a, right: b, bottom: c, left: d};
+	});
+var _terezka$line_charts$Internal_Coordinate$Range = F2(
+	function (a, b) {
+		return {min: a, max: b};
+	});

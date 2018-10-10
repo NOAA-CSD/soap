@@ -1,0 +1,4 @@
+var _terezka$line_charts$LineChart_Interpolation$stepped = _terezka$line_charts$Internal_Interpolation$Stepped;
+var _terezka$line_charts$LineChart_Interpolation$monotone = _terezka$line_charts$Internal_Interpolation$Monotone;
+var _terezka$line_charts$LineChart_Interpolation$linear = _terezka$line_charts$Internal_Interpolation$Linear;
+var _terezka$line_charts$LineChart_Interpolation$default = _terezka$line_charts$LineChart_Interpolation$linear;

@@ -1,0 +1,483 @@
+var _terezka$line_charts$Internal_Line$toAreaAttributes = F3(
+	function (_p1, _p0, area) {
+		var _p2 = _p1;
+		var _p3 = _p0;
+		return {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$class('chart__interpolation__area__fragment'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$fill(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(
+						_p3._0.color(_p2._0.color))),
+				_1: {ctor: '[]'}
+			}
+		};
+	});
+var _terezka$line_charts$Internal_Line$viewArea = F5(
+	function (_p4, line, style, interpolation, data) {
+		var _p5 = _p4;
+		var _p7 = _p5.system;
+		var _p6 = _p5.area;
+		var attributes = {
+			ctor: '::',
+			_0: _terezka$line_charts$LineChart_Junk$withinChartArea(_p7),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$fillOpacity(
+					_elm_lang$core$Basics$toString(
+						_terezka$line_charts$Internal_Area$opacitySingle(_p6))),
+				_1: A3(_terezka$line_charts$Internal_Line$toAreaAttributes, line, style, _p6)
+			}
+		};
+		var ground = function (point) {
+			return A2(
+				_terezka$line_charts$Internal_Data$Point,
+				point.x,
+				_terezka$line_charts$Internal_Utils$towardsZero(_p7.y));
+		};
+		var commands = F3(
+			function (first, middle, last) {
+				return A3(
+					_terezka$line_charts$Internal_Utils$concat,
+					{
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Path$Move(
+							ground(
+								_terezka$line_charts$Internal_Path$toPoint(first))),
+						_1: {
+							ctor: '::',
+							_0: _terezka$line_charts$Internal_Path$Line(
+								_terezka$line_charts$Internal_Path$toPoint(first)),
+							_1: {ctor: '[]'}
+						}
+					},
+					interpolation,
+					{
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Path$Line(
+							ground(
+								_terezka$line_charts$Internal_Path$toPoint(last))),
+						_1: {ctor: '[]'}
+					});
+			});
+		return A2(
+			_terezka$line_charts$Internal_Utils$viewWithEdges,
+			interpolation,
+			F3(
+				function (first, middle, last) {
+					return A3(
+						_terezka$line_charts$Internal_Path$view,
+						_p7,
+						attributes,
+						A3(commands, first, middle, last));
+				}));
+	});
+var _terezka$line_charts$Internal_Line$toSeriesAttributes = F2(
+	function (_p9, _p8) {
+		var _p10 = _p9;
+		var _p11 = _p8;
+		var _p12 = _p11._0;
+		return {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$style('pointer-events: none;'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__interpolation__line__fragment'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$stroke(
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(
+							_p12.color(_p10._0.color))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+							_elm_lang$core$Basics$toString(_p12.width)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$strokeDasharray(
+								A2(
+									_elm_lang$core$String$join,
+									' ',
+									A2(_elm_lang$core$List$map, _elm_lang$core$Basics$toString, _p10._0.dashing))),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$fill('transparent'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		};
+	});
+var _terezka$line_charts$Internal_Line$viewSample = F5(
+	function (_p13, line, area, data, sampleWidth) {
+		var _p14 = _p13;
+		var rectangleAttributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$x('0'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$y('0'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height('9'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width(
+							_elm_lang$core$Basics$toString(sampleWidth)),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		};
+		var sizeAttributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$x1('0'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$y1('0'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$x2(
+						_elm_lang$core$Basics$toString(sampleWidth)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$y2('0'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		};
+		var style = _p14._0(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.user;
+				},
+				data));
+		var lineAttributes = A2(_terezka$line_charts$Internal_Line$toSeriesAttributes, line, style);
+		var areaAttributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$fillOpacity(
+				_elm_lang$core$Basics$toString(
+					_terezka$line_charts$Internal_Area$opacity(area))),
+			_1: A3(_terezka$line_charts$Internal_Line$toAreaAttributes, line, style, area)
+		};
+		var viewRectangle = function (_p15) {
+			var _p16 = _p15;
+			return A2(
+				_elm_lang$svg$Svg$rect,
+				A2(_elm_lang$core$Basics_ops['++'], areaAttributes, rectangleAttributes),
+				{ctor: '[]'});
+		};
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$line,
+					A2(_elm_lang$core$Basics_ops['++'], lineAttributes, sizeAttributes),
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_terezka$line_charts$Internal_Utils$viewIf,
+						_terezka$line_charts$Internal_Area$hasArea(area),
+						viewRectangle),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Line$viewSeries = F5(
+	function (_p17, line, style, interpolation, data) {
+		var _p18 = _p17;
+		var _p20 = _p18.system;
+		var attributes = {
+			ctor: '::',
+			_0: _terezka$line_charts$LineChart_Junk$withinChartArea(_p20),
+			_1: A2(_terezka$line_charts$Internal_Line$toSeriesAttributes, line, style)
+		};
+		return A2(
+			_terezka$line_charts$Internal_Utils$viewWithFirst,
+			data,
+			F2(
+				function (first, _p19) {
+					return A3(
+						_terezka$line_charts$Internal_Path$view,
+						_p20,
+						attributes,
+						{
+							ctor: '::',
+							_0: _terezka$line_charts$Internal_Path$Move(first.point),
+							_1: interpolation
+						});
+				}));
+	});
+var _terezka$line_charts$Internal_Line$viewDot = F3(
+	function ($arguments, _p22, _p21) {
+		var _p23 = _p22;
+		var _p25 = _p23._0;
+		var _p24 = _p21;
+		return _terezka$line_charts$Internal_Dots$view(
+			{
+				system: $arguments.system,
+				dotsConfig: $arguments.dotsConfig,
+				shape: _p25.shape,
+				color: _p24._0.color(_p25.color)
+			});
+	});
+var _terezka$line_charts$Internal_Line$viewSingle = F3(
+	function ($arguments, line, data) {
+		var style = function (_p26) {
+			var _p27 = _p26;
+			return _p27._0(
+				A2(
+					_elm_lang$core$List$map,
+					function (_) {
+						return _.user;
+					},
+					data));
+		}($arguments.lineConfig);
+		var sections = A4(
+			_terezka$line_charts$Internal_Utils$part,
+			function (_) {
+				return _.isReal;
+			},
+			data,
+			{ctor: '[]'},
+			{ctor: '[]'});
+		var parts = A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, sections);
+		var viewDots = A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__dots'),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$List$map,
+				A3(_terezka$line_charts$Internal_Line$viewDot, $arguments, line, style),
+				A2(
+					_elm_lang$core$List$filter,
+					function (_p28) {
+						return A2(
+							_terezka$line_charts$Internal_Data$isWithinRange,
+							$arguments.system,
+							function (_) {
+								return _.point;
+							}(_p28));
+					},
+					_elm_lang$core$List$concat(parts))));
+		var commands = A2(_terezka$line_charts$Internal_Interpolation$toCommands, $arguments.interpolation, sections);
+		var viewAreas = function (_p29) {
+			var _p30 = _p29;
+			return A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$class('chart__interpolation__area'),
+					_1: {ctor: '[]'}
+				},
+				A3(
+					_elm_lang$core$List$map2,
+					A3(_terezka$line_charts$Internal_Line$viewArea, $arguments, line, style),
+					commands,
+					parts));
+		};
+		var viewSeriess = A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__interpolation__line'),
+				_1: {ctor: '[]'}
+			},
+			A3(
+				_elm_lang$core$List$map2,
+				A3(_terezka$line_charts$Internal_Line$viewSeries, $arguments, line, style),
+				commands,
+				parts));
+		return {
+			ctor: '_Tuple3',
+			_0: A2(
+				_terezka$line_charts$Internal_Utils$viewIf,
+				_terezka$line_charts$Internal_Area$hasArea($arguments.area),
+				viewAreas),
+			_1: viewSeriess,
+			_2: viewDots
+		};
+	});
+var _terezka$line_charts$Internal_Line$viewStacked = F2(
+	function (area, _p31) {
+		var _p32 = _p31;
+		var toList = F2(
+			function (l, d) {
+				return {
+					ctor: '::',
+					_0: l,
+					_1: {
+						ctor: '::',
+						_0: d,
+						_1: {ctor: '[]'}
+					}
+				};
+			});
+		var bottoms = _elm_lang$core$List$concat(
+			A3(_elm_lang$core$List$map2, toList, _p32._1, _p32._2));
+		var opacity = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'opacity: ',
+			_elm_lang$core$Basics$toString(
+				_terezka$line_charts$Internal_Area$opacityContainer(area)));
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$class('chart__bottoms'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$style(opacity),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p32._0),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$g,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$class('chart__tops'),
+						_1: {ctor: '[]'}
+					},
+					bottoms),
+				_1: {ctor: '[]'}
+			}
+		};
+	});
+var _terezka$line_charts$Internal_Line$viewNormal = function (_p33) {
+	var _p34 = _p33;
+	var view = F3(
+		function (area, line, dots) {
+			return A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$class('chart__line'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: area,
+					_1: {
+						ctor: '::',
+						_0: line,
+						_1: {
+							ctor: '::',
+							_0: dots,
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+		});
+	return A4(_elm_lang$core$List$map3, view, _p34._0, _p34._1, _p34._2);
+};
+var _terezka$line_charts$Internal_Line$view = F3(
+	function ($arguments, lines, datas) {
+		var buildSeriesViews = (_elm_lang$core$Native_Utils.cmp(
+			_terezka$line_charts$Internal_Area$opacityContainer($arguments.area),
+			1) < 0) ? _terezka$line_charts$Internal_Line$viewStacked($arguments.area) : _terezka$line_charts$Internal_Line$viewNormal;
+		var container = _elm_lang$svg$Svg$g(
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__lines'),
+				_1: {ctor: '[]'}
+			});
+		return container(
+			buildSeriesViews(
+				_terezka$line_charts$Internal_Utils$unzip3(
+					A3(
+						_elm_lang$core$List$map2,
+						_terezka$line_charts$Internal_Line$viewSingle($arguments),
+						lines,
+						datas))));
+	});
+var _terezka$line_charts$Internal_Line$color = F3(
+	function (_p36, _p35, data) {
+		var _p37 = _p36;
+		var _p38 = _p35;
+		var _p39 = _p37._0(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.user;
+				},
+				data));
+		var style = _p39._0;
+		return style.color(_p38._0.color);
+	});
+var _terezka$line_charts$Internal_Line$data = function (_p40) {
+	var _p41 = _p40;
+	return _p41._0.data;
+};
+var _terezka$line_charts$Internal_Line$shape = function (_p42) {
+	var _p43 = _p42;
+	return _p43._0.shape;
+};
+var _terezka$line_charts$Internal_Line$label = function (_p44) {
+	var _p45 = _p44;
+	return _p45._0.label;
+};
+var _terezka$line_charts$Internal_Line$SeriesConfig = F5(
+	function (a, b, c, d, e) {
+		return {color: a, shape: b, dashing: c, label: d, data: e};
+	});
+var _terezka$line_charts$Internal_Line$Arguments = F5(
+	function (a, b, c, d, e) {
+		return {system: a, dotsConfig: b, interpolation: c, lineConfig: d, area: e};
+	});
+var _terezka$line_charts$Internal_Line$Series = function (a) {
+	return {ctor: 'Series', _0: a};
+};
+var _terezka$line_charts$Internal_Line$line = F4(
+	function (color, shape, label, data) {
+		return _terezka$line_charts$Internal_Line$Series(
+			A5(
+				_terezka$line_charts$Internal_Line$SeriesConfig,
+				color,
+				shape,
+				{ctor: '[]'},
+				label,
+				data));
+	});
+var _terezka$line_charts$Internal_Line$dash = F5(
+	function (color, shape, label, dashing, data) {
+		return _terezka$line_charts$Internal_Line$Series(
+			A5(_terezka$line_charts$Internal_Line$SeriesConfig, color, shape, dashing, label, data));
+	});
+var _terezka$line_charts$Internal_Line$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Line$custom = _terezka$line_charts$Internal_Line$Config;
+var _terezka$line_charts$Internal_Line$Style = function (a) {
+	return {ctor: 'Style', _0: a};
+};
+var _terezka$line_charts$Internal_Line$style = F2(
+	function (width, color) {
+		return _terezka$line_charts$Internal_Line$Style(
+			{width: width, color: color});
+	});
+var _terezka$line_charts$Internal_Line$default = _terezka$line_charts$Internal_Line$Config(
+	function (_p46) {
+		return A2(_terezka$line_charts$Internal_Line$style, 1, _elm_lang$core$Basics$identity);
+	});
+var _terezka$line_charts$Internal_Line$wider = function (width) {
+	return _terezka$line_charts$Internal_Line$Config(
+		function (_p47) {
+			return A2(_terezka$line_charts$Internal_Line$style, width, _elm_lang$core$Basics$identity);
+		});
+};

@@ -1,0 +1,556 @@
+var _terezka$line_charts$Internal_Dots$varietyAttributes = F2(
+	function (color, variety) {
+		var _p0 = variety;
+		switch (_p0.ctor) {
+			case 'Empty':
+				return {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$stroke(
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+							_elm_lang$core$Basics$toString(_p0._0)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+							_1: {ctor: '[]'}
+						}
+					}
+				};
+			case 'Aura':
+				return {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$stroke(
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+							_elm_lang$core$Basics$toString(_p0._0)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$strokeOpacity(
+								_elm_lang$core$Basics$toString(_p0._1)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$fill(
+									_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				};
+			case 'Disconnected':
+				return {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$stroke('white'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+							_elm_lang$core$Basics$toString(_p0._0)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill(
+								_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+							_1: {ctor: '[]'}
+						}
+					}
+				};
+			default:
+				return {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fill(
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+					_1: {ctor: '[]'}
+				};
+		}
+	});
+var _terezka$line_charts$Internal_Dots$pathPlus = F2(
+	function (area, point) {
+		var side = _elm_lang$core$Basics$sqrt(area / 5);
+		var r3 = side;
+		var r6 = side / 2;
+		var commands = {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Basics_ops['++'],
+				'M',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(point.x - r6),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' ',
+						_elm_lang$core$Basics$toString((point.y - r3) - r6)))),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Basics_ops['++'],
+					'v',
+					_elm_lang$core$Basics$toString(r3)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$core$Basics_ops['++'],
+						'h',
+						_elm_lang$core$Basics$toString(0 - r3)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$core$Basics_ops['++'],
+							'v',
+							_elm_lang$core$Basics$toString(r3)),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'h',
+								_elm_lang$core$Basics$toString(r3)),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$core$Basics_ops['++'],
+									'v',
+									_elm_lang$core$Basics$toString(r3)),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$core$Basics_ops['++'],
+										'h',
+										_elm_lang$core$Basics$toString(r3)),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$core$Basics_ops['++'],
+											'v',
+											_elm_lang$core$Basics$toString(0 - r3)),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$core$Basics_ops['++'],
+												'h',
+												_elm_lang$core$Basics$toString(r3)),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$core$Basics_ops['++'],
+													'v',
+													_elm_lang$core$Basics$toString(0 - r3)),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$core$Basics_ops['++'],
+														'h',
+														_elm_lang$core$Basics$toString(0 - r3)),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$core$Basics_ops['++'],
+															'v',
+															_elm_lang$core$Basics$toString(0 - r3)),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$core$Basics_ops['++'],
+																'h',
+																_elm_lang$core$Basics$toString(0 - r3)),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	'v',
+																	_elm_lang$core$Basics$toString(r3)),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		};
+		return A2(_elm_lang$core$String$join, ' ', commands);
+	});
+var _terezka$line_charts$Internal_Dots$pathTriangle = F2(
+	function (area, point) {
+		var side = _elm_lang$core$Basics$sqrt(
+			(area * 4) / _elm_lang$core$Basics$sqrt(3));
+		var height = (_elm_lang$core$Basics$sqrt(3) * side) / 2;
+		var fromMiddle = height - ((_elm_lang$core$Basics$tan(
+			_elm_lang$core$Basics$degrees(30)) * side) / 2);
+		var commands = {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Basics_ops['++'],
+				'M',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(point.x),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' ',
+						_elm_lang$core$Basics$toString(point.y - fromMiddle)))),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Basics_ops['++'],
+					'l',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString((0 - side) / 2),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							' ',
+							_elm_lang$core$Basics$toString(height)))),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$core$Basics_ops['++'],
+						'h',
+						_elm_lang$core$Basics$toString(side)),
+					_1: {
+						ctor: '::',
+						_0: 'z',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		};
+		return A2(_elm_lang$core$String$join, ' ', commands);
+	});
+var _terezka$line_charts$Internal_Dots$viewCross = F5(
+	function (events, variety, color, area, point) {
+		var rotation = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'rotate(45 ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(point.x),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(point.y),
+						')'))));
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$d(
+				A2(_terezka$line_charts$Internal_Dots$pathPlus, area, point)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$transform(rotation),
+				_1: {ctor: '[]'}
+			}
+		};
+		return A2(
+			_elm_lang$svg$Svg$path,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				events,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					attributes,
+					A2(_terezka$line_charts$Internal_Dots$varietyAttributes, color, variety))),
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Dots$viewPlus = F5(
+	function (events, variety, color, area, point) {
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$d(
+				A2(_terezka$line_charts$Internal_Dots$pathPlus, area, point)),
+			_1: {ctor: '[]'}
+		};
+		return A2(
+			_elm_lang$svg$Svg$path,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				events,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					attributes,
+					A2(_terezka$line_charts$Internal_Dots$varietyAttributes, color, variety))),
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Dots$viewDiamond = F5(
+	function (events, variety, color, area, point) {
+		var rotation = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'rotate(45 ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(point.x),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(point.y),
+						')'))));
+		var side = _elm_lang$core$Basics$sqrt(area);
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$x(
+				_elm_lang$core$Basics$toString(point.x - (side / 2))),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$y(
+					_elm_lang$core$Basics$toString(point.y - (side / 2))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width(
+						_elm_lang$core$Basics$toString(side)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height(
+							_elm_lang$core$Basics$toString(side)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$transform(rotation),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		};
+		return A2(
+			_elm_lang$svg$Svg$rect,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				events,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					attributes,
+					A2(_terezka$line_charts$Internal_Dots$varietyAttributes, color, variety))),
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Dots$viewSquare = F5(
+	function (events, variety, color, area, point) {
+		var side = _elm_lang$core$Basics$sqrt(area);
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$x(
+				_elm_lang$core$Basics$toString(point.x - (side / 2))),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$y(
+					_elm_lang$core$Basics$toString(point.y - (side / 2))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width(
+						_elm_lang$core$Basics$toString(side)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height(
+							_elm_lang$core$Basics$toString(side)),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		};
+		return A2(
+			_elm_lang$svg$Svg$rect,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				events,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					attributes,
+					A2(_terezka$line_charts$Internal_Dots$varietyAttributes, color, variety))),
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Dots$viewTriangle = F5(
+	function (events, variety, color, area, point) {
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$d(
+				A2(_terezka$line_charts$Internal_Dots$pathTriangle, area, point)),
+			_1: {ctor: '[]'}
+		};
+		return A2(
+			_elm_lang$svg$Svg$path,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				events,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					attributes,
+					A2(_terezka$line_charts$Internal_Dots$varietyAttributes, color, variety))),
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Dots$viewCircle = F5(
+	function (events, variety, color, area, point) {
+		var radius = _elm_lang$core$Basics$sqrt(area / _elm_lang$core$Basics$pi);
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$cx(
+				_elm_lang$core$Basics$toString(point.x)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$cy(
+					_elm_lang$core$Basics$toString(point.y)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$r(
+						_elm_lang$core$Basics$toString(radius)),
+					_1: {ctor: '[]'}
+				}
+			}
+		};
+		return A2(
+			_elm_lang$svg$Svg$circle,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				events,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					attributes,
+					A2(_terezka$line_charts$Internal_Dots$varietyAttributes, color, variety))),
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$Internal_Dots$viewShape = F5(
+	function (system, _p1, shape, color, point) {
+		var _p2 = _p1;
+		var view = function () {
+			var _p3 = shape;
+			switch (_p3.ctor) {
+				case 'Circle':
+					return _terezka$line_charts$Internal_Dots$viewCircle;
+				case 'Triangle':
+					return _terezka$line_charts$Internal_Dots$viewTriangle;
+				case 'Square':
+					return _terezka$line_charts$Internal_Dots$viewSquare;
+				case 'Diamond':
+					return _terezka$line_charts$Internal_Dots$viewDiamond;
+				case 'Cross':
+					return _terezka$line_charts$Internal_Dots$viewCross;
+				case 'Plus':
+					return _terezka$line_charts$Internal_Dots$viewPlus;
+				default:
+					return F5(
+						function (_p8, _p7, _p6, _p5, _p4) {
+							return _elm_lang$svg$Svg$text('');
+						});
+			}
+		}();
+		var pointSvg = A2(_terezka$line_charts$LineChart_Coordinate$toSvg, system, point);
+		var size = (2 * _elm_lang$core$Basics$pi) * _p2.radius;
+		return A5(
+			view,
+			{ctor: '[]'},
+			_p2.variety,
+			color,
+			size,
+			pointSvg);
+	});
+var _terezka$line_charts$Internal_Dots$viewSample = F5(
+	function (_p9, shape, color, system, data) {
+		var _p10 = _p9;
+		var _p11 = _p10._0.legend(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.user;
+				},
+				data));
+		var style = _p11._0;
+		return A4(_terezka$line_charts$Internal_Dots$viewShape, system, style, shape, color);
+	});
+var _terezka$line_charts$Internal_Dots$view = F2(
+	function (_p12, data) {
+		var _p13 = _p12;
+		var _p14 = _p13.dotsConfig;
+		var config = _p14._0;
+		var _p15 = config.individual(data.user);
+		var style = _p15._0;
+		return A5(_terezka$line_charts$Internal_Dots$viewShape, _p13.system, style, _p13.shape, _p13.color, data.point);
+	});
+var _terezka$line_charts$Internal_Dots$StyleConfig = F2(
+	function (a, b) {
+		return {radius: a, variety: b};
+	});
+var _terezka$line_charts$Internal_Dots$Arguments = F4(
+	function (a, b, c, d) {
+		return {system: a, dotsConfig: b, shape: c, color: d};
+	});
+var _terezka$line_charts$Internal_Dots$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Dots$custom = function (style) {
+	return _terezka$line_charts$Internal_Dots$Config(
+		{
+			legend: function (_p16) {
+				return style;
+			},
+			individual: function (_p17) {
+				return style;
+			}
+		});
+};
+var _terezka$line_charts$Internal_Dots$customAny = _terezka$line_charts$Internal_Dots$Config;
+var _terezka$line_charts$Internal_Dots$Style = function (a) {
+	return {ctor: 'Style', _0: a};
+};
+var _terezka$line_charts$Internal_Dots$style = F2(
+	function (radius, variety) {
+		return _terezka$line_charts$Internal_Dots$Style(
+			{radius: radius, variety: variety});
+	});
+var _terezka$line_charts$Internal_Dots$Full = {ctor: 'Full'};
+var _terezka$line_charts$Internal_Dots$full = function (radius) {
+	return A2(_terezka$line_charts$Internal_Dots$style, radius, _terezka$line_charts$Internal_Dots$Full);
+};
+var _terezka$line_charts$Internal_Dots$Aura = F2(
+	function (a, b) {
+		return {ctor: 'Aura', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Dots$aura = F3(
+	function (radius, aura, opacity) {
+		return A2(
+			_terezka$line_charts$Internal_Dots$style,
+			radius,
+			A2(_terezka$line_charts$Internal_Dots$Aura, aura, opacity));
+	});
+var _terezka$line_charts$Internal_Dots$Disconnected = function (a) {
+	return {ctor: 'Disconnected', _0: a};
+};
+var _terezka$line_charts$Internal_Dots$disconnected = F2(
+	function (radius, border) {
+		return A2(
+			_terezka$line_charts$Internal_Dots$style,
+			radius,
+			_terezka$line_charts$Internal_Dots$Disconnected(border));
+	});
+var _terezka$line_charts$Internal_Dots$default = _terezka$line_charts$Internal_Dots$Config(
+	{
+		legend: function (_p18) {
+			return A2(_terezka$line_charts$Internal_Dots$disconnected, 10, 2);
+		},
+		individual: function (_p19) {
+			return A2(_terezka$line_charts$Internal_Dots$disconnected, 10, 2);
+		}
+	});
+var _terezka$line_charts$Internal_Dots$Empty = function (a) {
+	return {ctor: 'Empty', _0: a};
+};
+var _terezka$line_charts$Internal_Dots$empty = F2(
+	function (radius, border) {
+		return A2(
+			_terezka$line_charts$Internal_Dots$style,
+			radius,
+			_terezka$line_charts$Internal_Dots$Empty(border));
+	});
+var _terezka$line_charts$Internal_Dots$Plus = {ctor: 'Plus'};
+var _terezka$line_charts$Internal_Dots$Cross = {ctor: 'Cross'};
+var _terezka$line_charts$Internal_Dots$Diamond = {ctor: 'Diamond'};
+var _terezka$line_charts$Internal_Dots$Square = {ctor: 'Square'};
+var _terezka$line_charts$Internal_Dots$Triangle = {ctor: 'Triangle'};
+var _terezka$line_charts$Internal_Dots$Circle = {ctor: 'Circle'};
+var _terezka$line_charts$Internal_Dots$None = {ctor: 'None'};

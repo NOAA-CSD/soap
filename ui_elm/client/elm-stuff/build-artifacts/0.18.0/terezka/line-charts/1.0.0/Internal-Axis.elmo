@@ -1,0 +1,511 @@
+var _terezka$line_charts$Internal_Axis$viewVerticalLabel = F4(
+	function (system, _p0, position, view) {
+		var _p1 = _p0;
+		var _p3 = _p1.length;
+		var _p2 = _p1.direction;
+		var xOffset = _terezka$line_charts$Internal_Axis_Tick$isPositive(_p2) ? (5 + _p3) : (-5 - _p3);
+		var anchor = _terezka$line_charts$Internal_Axis_Tick$isPositive(_p2) ? _terezka$line_charts$Internal_Svg$Start : _terezka$line_charts$Internal_Svg$End;
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Svg$transform(
+					{
+						ctor: '::',
+						_0: A3(_terezka$line_charts$Internal_Svg$move, system, position.x, position.y),
+						_1: {
+							ctor: '::',
+							_0: A2(_terezka$line_charts$Internal_Svg$offset, xOffset, 5),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Svg$anchorStyle(anchor),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: view,
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$viewHorizontalLabel = F4(
+	function (system, _p4, position, view) {
+		var _p5 = _p4;
+		var _p6 = _p5.length;
+		var yOffset = _terezka$line_charts$Internal_Axis_Tick$isPositive(_p5.direction) ? (-5 - _p6) : (15 + _p6);
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _terezka$line_charts$Internal_Svg$transform(
+					{
+						ctor: '::',
+						_0: A3(_terezka$line_charts$Internal_Svg$move, system, position.x, position.y),
+						_1: {
+							ctor: '::',
+							_0: A2(_terezka$line_charts$Internal_Svg$offset, 0, yOffset),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Svg$anchorStyle(_terezka$line_charts$Internal_Svg$Middle),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: view,
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$attributesTick = function (_p7) {
+	var _p8 = _p7;
+	return {
+		ctor: '::',
+		_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+			_elm_lang$core$Basics$toString(_p8.width)),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$stroke(
+				_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_p8.color)),
+			_1: {ctor: '[]'}
+		}
+	};
+};
+var _terezka$line_charts$Internal_Axis$lengthOfTick = function (_p9) {
+	var _p10 = _p9;
+	var _p11 = _p10.length;
+	return _terezka$line_charts$Internal_Axis_Tick$isPositive(_p10.direction) ? (0 - _p11) : _p11;
+};
+var _terezka$line_charts$Internal_Axis$viewVerticalTick = F3(
+	function (system, _p12, tick) {
+		var _p13 = _p12;
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__tick'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A5(
+					_terezka$line_charts$Internal_Svg$yTick,
+					system,
+					_terezka$line_charts$Internal_Axis$lengthOfTick(tick),
+					_terezka$line_charts$Internal_Axis$attributesTick(tick),
+					_p13.x,
+					_p13.y),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_terezka$line_charts$Internal_Utils$viewMaybe,
+						tick.label,
+						A3(_terezka$line_charts$Internal_Axis$viewVerticalLabel, system, tick, _p13)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$viewHorizontalTick = F3(
+	function (system, _p14, tick) {
+		var _p15 = _p14;
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__tick'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A5(
+					_terezka$line_charts$Internal_Svg$xTick,
+					system,
+					_terezka$line_charts$Internal_Axis$lengthOfTick(tick),
+					_terezka$line_charts$Internal_Axis$attributesTick(tick),
+					_p15.y,
+					_p15.x),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_terezka$line_charts$Internal_Utils$viewMaybe,
+						tick.label,
+						A3(_terezka$line_charts$Internal_Axis$viewHorizontalLabel, system, tick, _p15)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$attributesLine = F2(
+	function (system, _p16) {
+		var _p17 = _p16;
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_p17.events,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+					_elm_lang$core$Basics$toString(_p17.width)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$stroke(
+						_eskimoblood$elm_color_extra$Color_Convert$colorToHex(_p17.color)),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Svg$withinChartArea(system),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$viewVerticalAxisLine = F3(
+	function (system, axisPosition, config) {
+		return A5(
+			_terezka$line_charts$Internal_Svg$vertical,
+			system,
+			A2(_terezka$line_charts$Internal_Axis$attributesLine, system, config),
+			axisPosition,
+			config.start,
+			config.end);
+	});
+var _terezka$line_charts$Internal_Axis$viewHorizontalAxisLine = F3(
+	function (system, axisPosition, config) {
+		return A5(
+			_terezka$line_charts$Internal_Svg$horizontal,
+			system,
+			A2(_terezka$line_charts$Internal_Axis$attributesLine, system, config),
+			axisPosition,
+			config.start,
+			config.end);
+	});
+var _terezka$line_charts$Internal_Axis$viewVerticalTitle = F3(
+	function (system, at, _p18) {
+		var _p19 = _p18;
+		var _p21 = _p19.title;
+		var _p20 = _p21.offset;
+		var xOffset = _p20._0;
+		var yOffset = _p20._1;
+		var position = at(
+			A2(_p21.position, system.yData, system.y));
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__title'),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Svg$transform(
+						{
+							ctor: '::',
+							_0: A3(_terezka$line_charts$Internal_Svg$move, system, position.x, position.y),
+							_1: {
+								ctor: '::',
+								_0: A2(_terezka$line_charts$Internal_Svg$offset, xOffset + 2, yOffset - 10),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Svg$anchorStyle(_terezka$line_charts$Internal_Svg$End),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _p21.view,
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$viewHorizontalTitle = F3(
+	function (system, at, _p22) {
+		var _p23 = _p22;
+		var _p25 = _p23.title;
+		var _p24 = _p25.offset;
+		var xOffset = _p24._0;
+		var yOffset = _p24._1;
+		var position = at(
+			A2(_p25.position, system.xData, system.x));
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__title'),
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$Internal_Svg$transform(
+						{
+							ctor: '::',
+							_0: A3(_terezka$line_charts$Internal_Svg$move, system, position.x, position.y),
+							_1: {
+								ctor: '::',
+								_0: A2(_terezka$line_charts$Internal_Svg$offset, xOffset + 15, yOffset + 5),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$Internal_Svg$anchorStyle(_terezka$line_charts$Internal_Svg$Start),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _p25.view,
+				_1: {ctor: '[]'}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$viewVertical = F3(
+	function (system, intersection, _p26) {
+		var _p27 = _p26;
+		var _p28 = _p27._0;
+		var viewConfig = {
+			line: A3(_terezka$line_charts$Internal_Axis_Line$config, _p28.axisLine, system.yData, system.y),
+			ticks: A3(_terezka$line_charts$Internal_Axis_Ticks$ticks, system.yData, system.y, _p28.ticks),
+			intersection: A2(_terezka$line_charts$Internal_Axis_Intersection$getX, intersection, system),
+			title: _terezka$line_charts$Internal_Axis_Title$config(_p28.title)
+		};
+		var at = function (y) {
+			return {x: viewConfig.intersection, y: y};
+		};
+		var viewTick = function (tick) {
+			return A3(
+				_terezka$line_charts$Internal_Axis$viewVerticalTick,
+				system,
+				at(tick.position),
+				tick);
+		};
+		var viewAxisLine = A2(_terezka$line_charts$Internal_Axis$viewVerticalAxisLine, system, viewConfig.intersection);
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__axis--vertical'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A3(_terezka$line_charts$Internal_Axis$viewVerticalTitle, system, at, viewConfig),
+				_1: {
+					ctor: '::',
+					_0: viewAxisLine(viewConfig.line),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$g,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$class('chart__ticks'),
+								_1: {ctor: '[]'}
+							},
+							A2(_elm_lang$core$List$map, viewTick, viewConfig.ticks)),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$viewHorizontal = F3(
+	function (system, intersection, _p29) {
+		var _p30 = _p29;
+		var _p31 = _p30._0;
+		var viewConfig = {
+			line: A3(_terezka$line_charts$Internal_Axis_Line$config, _p31.axisLine, system.xData, system.x),
+			ticks: A3(_terezka$line_charts$Internal_Axis_Ticks$ticks, system.xData, system.x, _p31.ticks),
+			intersection: A2(_terezka$line_charts$Internal_Axis_Intersection$getY, intersection, system),
+			title: _terezka$line_charts$Internal_Axis_Title$config(_p31.title)
+		};
+		var at = function (x) {
+			return {x: x, y: viewConfig.intersection};
+		};
+		var viewTick = function (tick) {
+			return A3(
+				_terezka$line_charts$Internal_Axis$viewHorizontalTick,
+				system,
+				at(tick.position),
+				tick);
+		};
+		var viewAxisLine = A2(_terezka$line_charts$Internal_Axis$viewHorizontalAxisLine, system, viewConfig.intersection);
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$class('chart__axis--horizontal'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A3(_terezka$line_charts$Internal_Axis$viewHorizontalTitle, system, at, viewConfig),
+				_1: {
+					ctor: '::',
+					_0: viewAxisLine(viewConfig.line),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$g,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$class('chart__ticks'),
+								_1: {ctor: '[]'}
+							},
+							A2(_elm_lang$core$List$map, viewTick, viewConfig.ticks)),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _terezka$line_charts$Internal_Axis$ticks = function (_p32) {
+	var _p33 = _p32;
+	return _p33._0.ticks;
+};
+var _terezka$line_charts$Internal_Axis$range = function (_p34) {
+	var _p35 = _p34;
+	return _p35._0.range;
+};
+var _terezka$line_charts$Internal_Axis$pixels = function (_p36) {
+	var _p37 = _p36;
+	return _elm_lang$core$Basics$toFloat(_p37._0.pixels);
+};
+var _terezka$line_charts$Internal_Axis$variable = function (_p38) {
+	var _p39 = _p38;
+	return _p39._0.variable;
+};
+var _terezka$line_charts$Internal_Axis$Properties = F6(
+	function (a, b, c, d, e, f) {
+		return {title: a, variable: b, pixels: c, range: d, axisLine: e, ticks: f};
+	});
+var _terezka$line_charts$Internal_Axis$ViewConfig = F4(
+	function (a, b, c, d) {
+		return {line: a, ticks: b, intersection: c, title: d};
+	});
+var _terezka$line_charts$Internal_Axis$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Axis$custom = _terezka$line_charts$Internal_Axis$Config;
+var _terezka$line_charts$Internal_Axis$default = F3(
+	function (pixels, title, variable) {
+		return _terezka$line_charts$Internal_Axis$custom(
+			{
+				title: A3(_terezka$line_charts$Internal_Axis_Title$atDataMax, 0, 0, title),
+				variable: function (_p40) {
+					return _elm_lang$core$Maybe$Just(
+						variable(_p40));
+				},
+				pixels: pixels,
+				range: A2(_terezka$line_charts$Internal_Axis_Range$padded, 20, 20),
+				axisLine: _terezka$line_charts$Internal_Axis_Line$rangeFrame(_terezka$line_charts$LineChart_Colors$gray),
+				ticks: _terezka$line_charts$Internal_Axis_Ticks$custom(
+					F2(
+						function (data, range) {
+							var rangeLong = range.max - range.min;
+							var smallest = A2(_terezka$line_charts$Internal_Coordinate$smallestRange, data, range);
+							var rangeSmall = smallest.max - smallest.min;
+							var diff = 1 - ((rangeLong - rangeSmall) / rangeLong);
+							var amount = _elm_lang$core$Basics$round(
+								(diff * _elm_lang$core$Basics$toFloat(pixels)) / 90);
+							return A2(
+								_elm_lang$core$List$map,
+								_terezka$line_charts$LineChart_Axis_Tick$float,
+								A2(
+									_terezka$line_charts$Internal_Axis_Values$float,
+									_terezka$line_charts$Internal_Axis_Values$around(amount),
+									smallest));
+						}))
+			});
+	});
+var _terezka$line_charts$Internal_Axis$full = F3(
+	function (pixels, title, variable) {
+		return _terezka$line_charts$Internal_Axis$custom(
+			{
+				title: A3(_terezka$line_charts$Internal_Axis_Title$atAxisMax, 0, 0, title),
+				variable: function (_p41) {
+					return _elm_lang$core$Maybe$Just(
+						variable(_p41));
+				},
+				pixels: pixels,
+				range: A2(_terezka$line_charts$Internal_Axis_Range$padded, 20, 20),
+				axisLine: _terezka$line_charts$Internal_Axis_Line$default,
+				ticks: _terezka$line_charts$Internal_Axis_Ticks$custom(
+					F2(
+						function (data, range) {
+							var amount = (pixels / 90) | 0;
+							var largest = A2(_terezka$line_charts$Internal_Coordinate$largestRange, data, range);
+							return A2(
+								_elm_lang$core$List$map,
+								_terezka$line_charts$LineChart_Axis_Tick$float,
+								A2(
+									_terezka$line_charts$Internal_Axis_Values$float,
+									_terezka$line_charts$Internal_Axis_Values$around(amount),
+									largest));
+						}))
+			});
+	});
+var _terezka$line_charts$Internal_Axis$time = F3(
+	function (pixels, title, variable) {
+		return _terezka$line_charts$Internal_Axis$custom(
+			{
+				title: A3(_terezka$line_charts$Internal_Axis_Title$atDataMax, 0, 0, title),
+				variable: function (_p42) {
+					return _elm_lang$core$Maybe$Just(
+						variable(_p42));
+				},
+				pixels: pixels,
+				range: A2(_terezka$line_charts$Internal_Axis_Range$padded, 20, 20),
+				axisLine: _terezka$line_charts$Internal_Axis_Line$rangeFrame(_terezka$line_charts$LineChart_Colors$gray),
+				ticks: _terezka$line_charts$Internal_Axis_Ticks$custom(
+					F2(
+						function (data, range) {
+							var rangeLong = range.max - range.min;
+							var smallest = A2(_terezka$line_charts$Internal_Coordinate$smallestRange, data, range);
+							var rangeSmall = smallest.max - smallest.min;
+							var diff = 1 - ((rangeLong - rangeSmall) / rangeLong);
+							var amount = _elm_lang$core$Basics$round(
+								(diff * _elm_lang$core$Basics$toFloat(pixels)) / 90);
+							return A2(
+								_elm_lang$core$List$map,
+								_terezka$line_charts$LineChart_Axis_Tick$time,
+								A2(_terezka$line_charts$Internal_Axis_Values$time, amount, smallest));
+						}))
+			});
+	});
+var _terezka$line_charts$Internal_Axis$none = F2(
+	function (pixels, variable) {
+		return _terezka$line_charts$Internal_Axis$custom(
+			{
+				title: _terezka$line_charts$Internal_Axis_Title$default(''),
+				variable: function (_p43) {
+					return _elm_lang$core$Maybe$Just(
+						variable(_p43));
+				},
+				pixels: pixels,
+				range: A2(_terezka$line_charts$Internal_Axis_Range$padded, 20, 20),
+				axisLine: _terezka$line_charts$Internal_Axis_Line$none,
+				ticks: _terezka$line_charts$Internal_Axis_Ticks$custom(
+					F2(
+						function (_p45, _p44) {
+							return {ctor: '[]'};
+						}))
+			});
+	});
+var _terezka$line_charts$Internal_Axis$picky = F4(
+	function (pixels, title, variable, ticks) {
+		return _terezka$line_charts$Internal_Axis$custom(
+			{
+				title: A3(_terezka$line_charts$Internal_Axis_Title$atAxisMax, 0, 0, title),
+				variable: function (_p46) {
+					return _elm_lang$core$Maybe$Just(
+						variable(_p46));
+				},
+				pixels: pixels,
+				range: A2(_terezka$line_charts$Internal_Axis_Range$padded, 20, 20),
+				axisLine: _terezka$line_charts$Internal_Axis_Line$default,
+				ticks: _terezka$line_charts$Internal_Axis_Ticks$custom(
+					F2(
+						function (_p48, _p47) {
+							return A2(_elm_lang$core$List$map, _terezka$line_charts$LineChart_Axis_Tick$float, ticks);
+						}))
+			});
+	});

@@ -1,0 +1,17 @@
+var _user$project$Repl$t_s_o_l = {ctor: '_Tuple0'};
+var _user$project$Repl$getAge = function (person) {
+	return person.age;
+};
+var _user$project$Repl$Arrays = function (a) {
+	return {runningData: a};
+};
+var _user$project$Repl$d_e_l_t_r_o_n_3_0_3_0 = _user$project$Repl$Arrays;
+var _user$project$Repl$Man = F2(
+	function (a, b) {
+		return {age: a, name: b};
+	});
+var _user$project$Repl$jimmy = A2(_user$project$Repl$Man, 25, 'Jimmy');
+var _user$project$Repl$Person = F3(
+	function (a, b, c) {
+		return {age: a, name: b, sex: c};
+	});

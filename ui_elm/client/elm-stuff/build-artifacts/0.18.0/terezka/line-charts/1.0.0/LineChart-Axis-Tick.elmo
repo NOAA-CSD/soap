@@ -1,0 +1,138 @@
+var _terezka$line_charts$LineChart_Axis_Tick$formatBold = function (unit) {
+	return function (_p0) {
+		return function () {
+			var _p1 = unit;
+			switch (_p1.ctor) {
+				case 'Millisecond':
+					return function (_p2) {
+						return _elm_lang$core$Basics$toString(
+							_elm_lang$core$Date$toTime(_p2));
+					};
+				case 'Second':
+					return _mgold$elm_date_format$Date_Format$format('%S');
+				case 'Minute':
+					return _mgold$elm_date_format$Date_Format$format('%M');
+				case 'Hour':
+					return _mgold$elm_date_format$Date_Format$format('%l%P');
+				case 'Day':
+					return _mgold$elm_date_format$Date_Format$format('%a');
+				case 'Week':
+					return _justinmimbs$elm_date_extra$Date_Extra$toFormattedString('\'Week\' w');
+				case 'Month':
+					return _mgold$elm_date_format$Date_Format$format('%b');
+				default:
+					return _mgold$elm_date_format$Date_Format$format('%Y');
+			}
+		}()(
+			_elm_lang$core$Date$fromTime(_p0));
+	};
+};
+var _terezka$line_charts$LineChart_Axis_Tick$formatNorm = F2(
+	function (unit, time) {
+		var format2 = _justinmimbs$elm_date_extra$Date_Extra$toFormattedString;
+		var format1 = _mgold$elm_date_format$Date_Format$format;
+		var date = _elm_lang$core$Date$fromTime(time);
+		var _p3 = unit;
+		switch (_p3.ctor) {
+			case 'Millisecond':
+				return _elm_lang$core$Basics$toString(time);
+			case 'Second':
+				return A2(format1, '%S', date);
+			case 'Minute':
+				return A2(format1, '%M', date);
+			case 'Hour':
+				return A2(format1, '%l%P', date);
+			case 'Day':
+				return A2(format1, '%e', date);
+			case 'Week':
+				return A2(format2, '\'Week\' w', date);
+			case 'Month':
+				return A2(format1, '%b', date);
+			default:
+				return A2(format1, '%Y', date);
+		}
+	});
+var _terezka$line_charts$LineChart_Axis_Tick$custom = _terezka$line_charts$Internal_Axis_Tick$custom;
+var _terezka$line_charts$LineChart_Axis_Tick$positive = _terezka$line_charts$Internal_Axis_Tick$Positive;
+var _terezka$line_charts$LineChart_Axis_Tick$negative = _terezka$line_charts$Internal_Axis_Tick$Negative;
+var _terezka$line_charts$LineChart_Axis_Tick$long = _terezka$line_charts$Internal_Axis_Tick$long;
+var _terezka$line_charts$LineChart_Axis_Tick$opposite = _terezka$line_charts$Internal_Axis_Tick$opposite;
+var _terezka$line_charts$LineChart_Axis_Tick$labelless = _terezka$line_charts$Internal_Axis_Tick$labelless;
+var _terezka$line_charts$LineChart_Axis_Tick$gridless = _terezka$line_charts$Internal_Axis_Tick$gridless;
+var _terezka$line_charts$LineChart_Axis_Tick$float = _terezka$line_charts$Internal_Axis_Tick$float;
+var _terezka$line_charts$LineChart_Axis_Tick$int = _terezka$line_charts$Internal_Axis_Tick$int;
+var _terezka$line_charts$LineChart_Axis_Tick$Time = F4(
+	function (a, b, c, d) {
+		return {timestamp: a, isFirst: b, interval: c, change: d};
+	});
+var _terezka$line_charts$LineChart_Axis_Tick$Interval = F2(
+	function (a, b) {
+		return {unit: a, multiple: b};
+	});
+var _terezka$line_charts$LineChart_Axis_Tick$Properties = F7(
+	function (a, b, c, d, e, f, g) {
+		return {position: a, color: b, width: c, length: d, grid: e, direction: f, label: g};
+	});
+var _terezka$line_charts$LineChart_Axis_Tick$Year = {ctor: 'Year'};
+var _terezka$line_charts$LineChart_Axis_Tick$Month = {ctor: 'Month'};
+var _terezka$line_charts$LineChart_Axis_Tick$Week = {ctor: 'Week'};
+var _terezka$line_charts$LineChart_Axis_Tick$Day = {ctor: 'Day'};
+var _terezka$line_charts$LineChart_Axis_Tick$Hour = {ctor: 'Hour'};
+var _terezka$line_charts$LineChart_Axis_Tick$Minute = {ctor: 'Minute'};
+var _terezka$line_charts$LineChart_Axis_Tick$Second = {ctor: 'Second'};
+var _terezka$line_charts$LineChart_Axis_Tick$nextUnit = function (unit) {
+	var _p4 = unit;
+	switch (_p4.ctor) {
+		case 'Millisecond':
+			return _terezka$line_charts$LineChart_Axis_Tick$Second;
+		case 'Second':
+			return _terezka$line_charts$LineChart_Axis_Tick$Minute;
+		case 'Minute':
+			return _terezka$line_charts$LineChart_Axis_Tick$Hour;
+		case 'Hour':
+			return _terezka$line_charts$LineChart_Axis_Tick$Day;
+		case 'Day':
+			return _terezka$line_charts$LineChart_Axis_Tick$Week;
+		case 'Week':
+			return _terezka$line_charts$LineChart_Axis_Tick$Month;
+		case 'Month':
+			return _terezka$line_charts$LineChart_Axis_Tick$Year;
+		default:
+			return _terezka$line_charts$LineChart_Axis_Tick$Year;
+	}
+};
+var _terezka$line_charts$LineChart_Axis_Tick$format = function (_p5) {
+	var _p6 = _p5;
+	var _p9 = _p6.timestamp;
+	var _p8 = _p6.interval;
+	if (_p6.isFirst) {
+		return A2(
+			_terezka$line_charts$LineChart_Axis_Tick$formatBold,
+			_terezka$line_charts$LineChart_Axis_Tick$nextUnit(_p8.unit),
+			_p9);
+	} else {
+		var _p7 = _p6.change;
+		if (_p7.ctor === 'Just') {
+			return A2(_terezka$line_charts$LineChart_Axis_Tick$formatBold, _p7._0, _p9);
+		} else {
+			return A2(_terezka$line_charts$LineChart_Axis_Tick$formatNorm, _p8.unit, _p9);
+		}
+	}
+};
+var _terezka$line_charts$LineChart_Axis_Tick$time = function (time) {
+	return _terezka$line_charts$LineChart_Axis_Tick$custom(
+		{
+			position: time.timestamp,
+			color: _elm_lang$core$Color$gray,
+			width: 1,
+			length: 5,
+			grid: true,
+			direction: _terezka$line_charts$LineChart_Axis_Tick$negative,
+			label: _elm_lang$core$Maybe$Just(
+				A2(
+					_terezka$line_charts$Internal_Svg$label,
+					'inherit',
+					_terezka$line_charts$LineChart_Axis_Tick$format(time)))
+		});
+};
+var _terezka$line_charts$LineChart_Axis_Tick$Millisecond = {ctor: 'Millisecond'};

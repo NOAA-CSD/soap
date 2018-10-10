@@ -1,0 +1,5 @@
+var _terezka$line_charts$LineChart_Axis_Title$custom = _terezka$line_charts$Internal_Axis_Title$custom;
+var _terezka$line_charts$LineChart_Axis_Title$atPosition = _terezka$line_charts$Internal_Axis_Title$atPosition;
+var _terezka$line_charts$LineChart_Axis_Title$atAxisMax = _terezka$line_charts$Internal_Axis_Title$atAxisMax;
+var _terezka$line_charts$LineChart_Axis_Title$atDataMax = _terezka$line_charts$Internal_Axis_Title$atDataMax;
+var _terezka$line_charts$LineChart_Axis_Title$default = _terezka$line_charts$Internal_Axis_Title$default;

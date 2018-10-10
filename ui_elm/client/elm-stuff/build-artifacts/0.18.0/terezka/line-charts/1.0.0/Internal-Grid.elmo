@@ -1,0 +1,84 @@
+var _terezka$line_charts$Internal_Grid$viewLines = F5(
+	function (system, verticals, horizontals, width, color) {
+		var attributes = {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$strokeWidth(
+				_elm_lang$core$Basics$toString(width)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke(
+					_eskimoblood$elm_color_extra$Color_Convert$colorToHex(color)),
+				_1: {ctor: '[]'}
+			}
+		};
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(
+				_elm_lang$core$List$map,
+				A2(_terezka$line_charts$Internal_Svg$horizontalGrid, system, attributes),
+				horizontals),
+			A2(
+				_elm_lang$core$List$map,
+				A2(_terezka$line_charts$Internal_Svg$verticalGrid, system, attributes),
+				verticals));
+	});
+var _terezka$line_charts$Internal_Grid$viewDots = F5(
+	function (system, verticals, horizontals, radius, color) {
+		var dot = F2(
+			function (x, y) {
+				return A2(
+					_terezka$line_charts$LineChart_Coordinate$toSvg,
+					system,
+					A2(_terezka$line_charts$LineChart_Coordinate$Point, x, y));
+			});
+		var dots_ = function (g) {
+			return A2(
+				_elm_lang$core$List$map,
+				dot(g),
+				horizontals);
+		};
+		var dots = A2(_elm_lang$core$List$concatMap, dots_, verticals);
+		return A2(
+			_elm_lang$core$List$map,
+			A2(_terezka$line_charts$Internal_Svg$gridDot, radius, color),
+			dots);
+	});
+var _terezka$line_charts$Internal_Grid$view = F4(
+	function (system, xAxis, yAxis, grid) {
+		var hasGrid = function (tick) {
+			return tick.grid ? _elm_lang$core$Maybe$Just(tick.position) : _elm_lang$core$Maybe$Nothing;
+		};
+		var horizontals = A2(
+			_elm_lang$core$List$filterMap,
+			hasGrid,
+			A3(
+				_terezka$line_charts$Internal_Axis_Ticks$ticks,
+				system.yData,
+				system.y,
+				_terezka$line_charts$Internal_Axis$ticks(yAxis)));
+		var verticals = A2(
+			_elm_lang$core$List$filterMap,
+			hasGrid,
+			A3(
+				_terezka$line_charts$Internal_Axis_Ticks$ticks,
+				system.xData,
+				system.x,
+				_terezka$line_charts$Internal_Axis$ticks(xAxis)));
+		var _p0 = grid;
+		if (_p0.ctor === 'Dots') {
+			return A5(_terezka$line_charts$Internal_Grid$viewDots, system, verticals, horizontals, _p0._0, _p0._1);
+		} else {
+			return A5(_terezka$line_charts$Internal_Grid$viewLines, system, verticals, horizontals, _p0._0, _p0._1);
+		}
+	});
+var _terezka$line_charts$Internal_Grid$Lines = F2(
+	function (a, b) {
+		return {ctor: 'Lines', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Grid$lines = _terezka$line_charts$Internal_Grid$Lines;
+var _terezka$line_charts$Internal_Grid$default = A2(_terezka$line_charts$Internal_Grid$lines, 1, _terezka$line_charts$LineChart_Colors$grayLightest);
+var _terezka$line_charts$Internal_Grid$Dots = F2(
+	function (a, b) {
+		return {ctor: 'Dots', _0: a, _1: b};
+	});
+var _terezka$line_charts$Internal_Grid$dots = _terezka$line_charts$Internal_Grid$Dots;

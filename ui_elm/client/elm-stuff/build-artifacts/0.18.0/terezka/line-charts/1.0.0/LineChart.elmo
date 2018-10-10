@@ -1,0 +1,658 @@
+var _terezka$line_charts$LineChart$defaultLabel = {
+	ctor: '::',
+	_0: 'First',
+	_1: {
+		ctor: '::',
+		_0: 'Second',
+		_1: {
+			ctor: '::',
+			_0: 'Third',
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _terezka$line_charts$LineChart$defaultShapes = {
+	ctor: '::',
+	_0: _terezka$line_charts$Internal_Dots$Circle,
+	_1: {
+		ctor: '::',
+		_0: _terezka$line_charts$Internal_Dots$Triangle,
+		_1: {
+			ctor: '::',
+			_0: _terezka$line_charts$Internal_Dots$Cross,
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _terezka$line_charts$LineChart$defaultColors = {
+	ctor: '::',
+	_0: _terezka$line_charts$LineChart_Colors$pink,
+	_1: {
+		ctor: '::',
+		_0: _terezka$line_charts$LineChart_Colors$blue,
+		_1: {
+			ctor: '::',
+			_0: _terezka$line_charts$LineChart_Colors$gold,
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _terezka$line_charts$LineChart$defaultLines = A4(_elm_lang$core$List$map4, _terezka$line_charts$Internal_Line$line, _terezka$line_charts$LineChart$defaultColors, _terezka$line_charts$LineChart$defaultShapes, _terezka$line_charts$LineChart$defaultLabel);
+var _terezka$line_charts$LineChart$defaultConfig = F2(
+	function (toX, toY) {
+		return {
+			y: A3(_terezka$line_charts$LineChart_Axis$default, 400, '', toY),
+			x: A3(_terezka$line_charts$LineChart_Axis$default, 700, '', toX),
+			container: _terezka$line_charts$LineChart_Container$default('line-chart-1'),
+			interpolation: _terezka$line_charts$LineChart_Interpolation$default,
+			intersection: _terezka$line_charts$LineChart_Axis_Intersection$default,
+			legends: _terezka$line_charts$LineChart_Legends$default,
+			events: _terezka$line_charts$LineChart_Events$default,
+			junk: _terezka$line_charts$LineChart_Junk$default,
+			grid: _terezka$line_charts$LineChart_Grid$default,
+			area: _terezka$line_charts$LineChart_Area$default,
+			line: _terezka$line_charts$LineChart_Line$default,
+			dots: _terezka$line_charts$LineChart_Dots$default
+		};
+	});
+var _terezka$line_charts$LineChart$toSystem = F2(
+	function (config, data) {
+		var yRange = A2(
+			_terezka$line_charts$Internal_Coordinate$range,
+			function (_p0) {
+				return function (_) {
+					return _.y;
+				}(
+					function (_) {
+						return _.point;
+					}(_p0));
+			},
+			data);
+		var xRange = A2(
+			_terezka$line_charts$Internal_Coordinate$range,
+			function (_p1) {
+				return function (_) {
+					return _.x;
+				}(
+					function (_) {
+						return _.point;
+					}(_p1));
+			},
+			data);
+		var size = A2(
+			_terezka$line_charts$Internal_Coordinate$Size,
+			_terezka$line_charts$Internal_Axis$pixels(config.x),
+			_terezka$line_charts$Internal_Axis$pixels(config.y));
+		var hasArea = _terezka$line_charts$Internal_Area$hasArea(config.area);
+		var adjustDomainRange = function (domain) {
+			return hasArea ? _terezka$line_charts$Internal_Coordinate$ground(domain) : domain;
+		};
+		var container = A2(_terezka$line_charts$Internal_Container$properties, _elm_lang$core$Basics$identity, config.container);
+		var frame = A2(_terezka$line_charts$Internal_Coordinate$Frame, container.margin, size);
+		var system = {
+			frame: frame,
+			x: xRange,
+			y: adjustDomainRange(yRange),
+			xData: xRange,
+			yData: yRange,
+			id: container.id
+		};
+		return _elm_lang$core$Native_Utils.update(
+			system,
+			{
+				x: A2(
+					_terezka$line_charts$Internal_Axis_Range$applyX,
+					_terezka$line_charts$Internal_Axis$range(config.x),
+					system),
+				y: A2(
+					_terezka$line_charts$Internal_Axis_Range$applyY,
+					_terezka$line_charts$Internal_Axis$range(config.y),
+					system)
+			});
+	});
+var _terezka$line_charts$LineChart$setY = F2(
+	function (datum, y) {
+		return A3(
+			_terezka$line_charts$Internal_Data$Data,
+			datum.user,
+			A2(_terezka$line_charts$Internal_Data$Point, datum.point.x, y),
+			datum.isReal);
+	});
+var _terezka$line_charts$LineChart$normalize = function (datasets) {
+	var _p2 = datasets;
+	if (_p2.ctor === '::') {
+		var _p3 = _p2._0;
+		var toPercentage = F2(
+			function (highest, datum) {
+				return A2(_terezka$line_charts$LineChart$setY, datum, (100 * datum.point.y) / highest.point.y);
+			});
+		return A2(
+			_elm_lang$core$List$map,
+			A2(_elm_lang$core$List$map2, toPercentage, _p3),
+			{ctor: '::', _0: _p3, _1: _p2._1});
+	} else {
+		return datasets;
+	}
+};
+var _terezka$line_charts$LineChart$addBelows = F2(
+	function (data, dataBelow) {
+		var add = F2(
+			function (below, datum) {
+				return A2(_terezka$line_charts$LineChart$setY, below, below.point.y + datum.point.y);
+			});
+		var iterate = F4(
+			function (datum0, data, dataBelow, result) {
+				iterate:
+				while (true) {
+					var _p4 = {ctor: '_Tuple2', _0: data, _1: dataBelow};
+					if (_p4._0.ctor === '::') {
+						if (_p4._1.ctor === '::') {
+							var _p8 = _p4._1._0;
+							var _p7 = _p4._0._0;
+							var _p6 = _p4._1._1;
+							var _p5 = _p4._0._1;
+							if (_elm_lang$core$Native_Utils.cmp(_p7.point.x, _p8.point.x) > 0) {
+								if (_p8.isReal) {
+									var _v2 = datum0,
+										_v3 = {ctor: '::', _0: _p7, _1: _p5},
+										_v4 = _p6,
+										_v5 = {
+										ctor: '::',
+										_0: A2(add, _p8, datum0),
+										_1: result
+									};
+									datum0 = _v2;
+									data = _v3;
+									dataBelow = _v4;
+									result = _v5;
+									continue iterate;
+								} else {
+									var breakdata = _elm_lang$core$Native_Utils.update(
+										datum0,
+										{isReal: false});
+									var _v6 = datum0,
+										_v7 = {ctor: '::', _0: _p7, _1: _p5},
+										_v8 = _p6,
+										_v9 = {
+										ctor: '::',
+										_0: A2(add, _p8, datum0),
+										_1: result
+									};
+									datum0 = _v6;
+									data = _v7;
+									dataBelow = _v8;
+									result = _v9;
+									continue iterate;
+								}
+							} else {
+								var _v10 = _p7,
+									_v11 = _p5,
+									_v12 = {ctor: '::', _0: _p8, _1: _p6},
+									_v13 = result;
+								datum0 = _v10;
+								data = _v11;
+								dataBelow = _v12;
+								result = _v13;
+								continue iterate;
+							}
+						} else {
+							return result;
+						}
+					} else {
+						if (_p4._1.ctor === '::') {
+							var _p10 = _p4._1._0;
+							var _p9 = _p4._1._1;
+							if (_elm_lang$core$Native_Utils.cmp(datum0.point.x, _p10.point.x) < 1) {
+								var _v14 = datum0,
+									_v15 = {ctor: '[]'},
+									_v16 = _p9,
+									_v17 = {
+									ctor: '::',
+									_0: A2(add, _p10, datum0),
+									_1: result
+								};
+								datum0 = _v14;
+								data = _v15;
+								dataBelow = _v16;
+								result = _v17;
+								continue iterate;
+							} else {
+								var _v18 = datum0,
+									_v19 = {ctor: '[]'},
+									_v20 = _p9,
+									_v21 = {ctor: '::', _0: _p10, _1: result};
+								datum0 = _v18;
+								data = _v19;
+								dataBelow = _v20;
+								result = _v21;
+								continue iterate;
+							}
+						} else {
+							return result;
+						}
+					}
+				}
+			});
+		return _elm_lang$core$List$reverse(
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				{ctor: '[]'},
+				A2(
+					_terezka$line_charts$Internal_Utils$withFirst,
+					data,
+					F2(
+						function (first, rest) {
+							return A4(
+								iterate,
+								first,
+								rest,
+								dataBelow,
+								{ctor: '[]'});
+						}))));
+	});
+var _terezka$line_charts$LineChart$stack = function (dataset) {
+	var stackBelows = F2(
+		function (dataset, result) {
+			stackBelows:
+			while (true) {
+				var _p11 = dataset;
+				if (_p11.ctor === '::') {
+					var _p12 = _p11._1;
+					var _v23 = _p12,
+						_v24 = {
+						ctor: '::',
+						_0: A3(_elm_lang$core$List$foldl, _terezka$line_charts$LineChart$addBelows, _p11._0, _p12),
+						_1: result
+					};
+					dataset = _v23;
+					result = _v24;
+					continue stackBelows;
+				} else {
+					return result;
+				}
+			}
+		});
+	return _elm_lang$core$List$reverse(
+		A2(
+			stackBelows,
+			dataset,
+			{ctor: '[]'}));
+};
+var _terezka$line_charts$LineChart$toDataPoints = F2(
+	function (config, lines) {
+		var y = _terezka$line_charts$Internal_Axis$variable(config.y);
+		var x = _terezka$line_charts$Internal_Axis$variable(config.x);
+		var addPoint = function (datum) {
+			var _p13 = {
+				ctor: '_Tuple2',
+				_0: x(datum),
+				_1: y(datum)
+			};
+			if (_p13._0.ctor === 'Just') {
+				if (_p13._1.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Just(
+						A3(
+							_terezka$line_charts$Internal_Data$Data,
+							datum,
+							A2(_terezka$line_charts$Internal_Data$Point, _p13._0._0, _p13._1._0),
+							true));
+				} else {
+					return _elm_lang$core$Maybe$Just(
+						A3(
+							_terezka$line_charts$Internal_Data$Data,
+							datum,
+							A2(_terezka$line_charts$Internal_Data$Point, _p13._0._0, 0),
+							false));
+				}
+			} else {
+				if (_p13._1.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Nothing;
+				} else {
+					return _elm_lang$core$Maybe$Nothing;
+				}
+			}
+		};
+		var data = A2(
+			_elm_lang$core$List$map,
+			function (_p14) {
+				return A2(
+					_elm_lang$core$List$filterMap,
+					addPoint,
+					_terezka$line_charts$Internal_Line$data(_p14));
+			},
+			lines);
+		var _p15 = config.area;
+		switch (_p15.ctor) {
+			case 'None':
+				return data;
+			case 'Normal':
+				return data;
+			case 'Stacked':
+				return _terezka$line_charts$LineChart$stack(data);
+			default:
+				return _terezka$line_charts$LineChart$normalize(
+					_terezka$line_charts$LineChart$stack(data));
+		}
+	});
+var _terezka$line_charts$LineChart$chartAreaAttributes = function (system) {
+	return {
+		ctor: '::',
+		_0: _elm_lang$svg$Svg_Attributes$x(
+			_elm_lang$core$Basics$toString(system.frame.margin.left)),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$y(
+				_elm_lang$core$Basics$toString(system.frame.margin.top)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width(
+					_elm_lang$core$Basics$toString(
+						_terezka$line_charts$Internal_Coordinate$lengthX(system))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height(
+						_elm_lang$core$Basics$toString(
+							_terezka$line_charts$Internal_Coordinate$lengthY(system))),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+};
+var _terezka$line_charts$LineChart$chartAreaPlatform = F3(
+	function (config, data, system) {
+		var attributes = _elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fill('transparent'),
+					_1: {ctor: '[]'}
+				},
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$LineChart$chartAreaAttributes(system),
+					_1: {
+						ctor: '::',
+						_0: A3(_terezka$line_charts$Internal_Events$toChartAttributes, data, system, config.events),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+		return A2(
+			_elm_lang$svg$Svg$rect,
+			attributes,
+			{ctor: '[]'});
+	});
+var _terezka$line_charts$LineChart$clipPath = function (system) {
+	return A2(
+		_elm_lang$svg$Svg$clipPath,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$id(
+				_terezka$line_charts$Internal_Utils$toChartAreaId(system.id)),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$rect,
+				_terezka$line_charts$LineChart$chartAreaAttributes(system),
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
+};
+var _terezka$line_charts$LineChart$container = F4(
+	function (config, _p16, junkHtml, plot) {
+		var _p17 = _p16;
+		var _p18 = _p17.frame;
+		var sizeStyles = A3(_terezka$line_charts$Internal_Container$sizeStyles, config.container, _p18.size.width, _p18.size.height);
+		var styles = _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
+				_1: sizeStyles
+			});
+		var userAttributes = A2(
+			_terezka$line_charts$Internal_Container$properties,
+			function (_) {
+				return _.attributesHtml;
+			},
+			config.container);
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '::', _0: styles, _1: userAttributes},
+			{ctor: '::', _0: plot, _1: junkHtml});
+	});
+var _terezka$line_charts$LineChart$viewBoxAttribute = function (_p19) {
+	var _p20 = _p19;
+	var _p21 = _p20.frame;
+	return _elm_lang$svg$Svg_Attributes$viewBox(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'0 0 ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(_p21.size.width),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					_elm_lang$core$Basics$toString(_p21.size.height)))));
+};
+var _terezka$line_charts$LineChart$viewCustom = F2(
+	function (config, lines) {
+		var junkLineInfo = function (line) {
+			return {
+				ctor: '_Tuple3',
+				_0: A3(
+					_terezka$line_charts$Internal_Line$color,
+					config.line,
+					line,
+					{ctor: '[]'}),
+				_1: _terezka$line_charts$Internal_Line$label(line),
+				_2: _terezka$line_charts$Internal_Line$data(line)
+			};
+		};
+		var getJunk = A3(
+			_terezka$line_charts$Internal_Junk$getLayers,
+			A2(_elm_lang$core$List$map, junkLineInfo, lines),
+			_terezka$line_charts$Internal_Axis$variable(config.x),
+			_terezka$line_charts$Internal_Axis$variable(config.y));
+		var data = A2(_terezka$line_charts$LineChart$toDataPoints, config, lines);
+		var dataSafe = A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$List$filter(
+				function (_) {
+					return _.isReal;
+				}),
+			data);
+		var dataAllSafe = _elm_lang$core$List$concat(dataSafe);
+		var system = A2(_terezka$line_charts$LineChart$toSystem, config, dataAllSafe);
+		var addGrid = _terezka$line_charts$Internal_Junk$addBelow(
+			A4(_terezka$line_charts$Internal_Grid$view, system, config.x, config.y, config.grid));
+		var junk = addGrid(
+			A2(getJunk, system, config.junk));
+		var viewLines = _terezka$line_charts$Internal_Line$view(
+			{system: system, interpolation: config.interpolation, dotsConfig: config.dots, lineConfig: config.line, area: config.area});
+		var viewLegends = _terezka$line_charts$Internal_Legends$view(
+			{
+				system: system,
+				legends: config.legends,
+				x: _terezka$line_charts$Internal_Axis$variable(config.x),
+				y: _terezka$line_charts$Internal_Axis$variable(config.y),
+				dotsConfig: config.dots,
+				lineConfig: config.line,
+				area: config.area,
+				data: dataSafe,
+				lines: lines
+			});
+		var dataAll = _elm_lang$core$List$concat(data);
+		var attributes = _elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: A2(
+					_terezka$line_charts$Internal_Container$properties,
+					function (_) {
+						return _.attributesSvg;
+					},
+					config.container),
+				_1: {
+					ctor: '::',
+					_0: A3(_terezka$line_charts$Internal_Events$toContainerAttributes, dataAll, system, config.events),
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: _terezka$line_charts$LineChart$viewBoxAttribute(system),
+							_1: {ctor: '[]'}
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+		return A4(
+			_terezka$line_charts$LineChart$container,
+			config,
+			system,
+			junk.html,
+			A2(
+				_elm_lang$svg$Svg$svg,
+				attributes,
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$defs,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _terezka$line_charts$LineChart$clipPath(system),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$g,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$class('chart__junk--below'),
+								_1: {ctor: '[]'}
+							},
+							junk.below),
+						_1: {
+							ctor: '::',
+							_0: A2(viewLines, lines, data),
+							_1: {
+								ctor: '::',
+								_0: A3(_terezka$line_charts$LineChart$chartAreaPlatform, config, dataAll, system),
+								_1: {
+									ctor: '::',
+									_0: A3(_terezka$line_charts$Internal_Axis$viewHorizontal, system, config.intersection, config.x),
+									_1: {
+										ctor: '::',
+										_0: A3(_terezka$line_charts$Internal_Axis$viewVertical, system, config.intersection, config.y),
+										_1: {
+											ctor: '::',
+											_0: viewLegends,
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$svg$Svg$g,
+													{
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$class('chart__junk--above'),
+														_1: {ctor: '[]'}
+													},
+													junk.above),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}));
+	});
+var _terezka$line_charts$LineChart$dash = _terezka$line_charts$Internal_Line$dash;
+var _terezka$line_charts$LineChart$line = _terezka$line_charts$Internal_Line$line;
+var _terezka$line_charts$LineChart$view = F2(
+	function (toX, toY) {
+		return _terezka$line_charts$LineChart$viewCustom(
+			A2(_terezka$line_charts$LineChart$defaultConfig, toX, toY));
+	});
+var _terezka$line_charts$LineChart$view3 = F5(
+	function (toX, toY, dataset1, dataset2, dataset3) {
+		return A3(
+			_terezka$line_charts$LineChart$view,
+			toX,
+			toY,
+			_terezka$line_charts$LineChart$defaultLines(
+				{
+					ctor: '::',
+					_0: dataset1,
+					_1: {
+						ctor: '::',
+						_0: dataset2,
+						_1: {
+							ctor: '::',
+							_0: dataset3,
+							_1: {ctor: '[]'}
+						}
+					}
+				}));
+	});
+var _terezka$line_charts$LineChart$view2 = F4(
+	function (toX, toY, dataset1, dataset2) {
+		return A3(
+			_terezka$line_charts$LineChart$view,
+			toX,
+			toY,
+			_terezka$line_charts$LineChart$defaultLines(
+				{
+					ctor: '::',
+					_0: dataset1,
+					_1: {
+						ctor: '::',
+						_0: dataset2,
+						_1: {ctor: '[]'}
+					}
+				}));
+	});
+var _terezka$line_charts$LineChart$view1 = F3(
+	function (toX, toY, dataset) {
+		return A3(
+			_terezka$line_charts$LineChart$view,
+			toX,
+			toY,
+			_terezka$line_charts$LineChart$defaultLines(
+				{
+					ctor: '::',
+					_0: dataset,
+					_1: {ctor: '[]'}
+				}));
+	});
+var _terezka$line_charts$LineChart$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {x: a, y: b, container: c, intersection: d, interpolation: e, legends: f, events: g, area: h, grid: i, line: j, dots: k, junk: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

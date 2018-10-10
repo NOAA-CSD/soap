@@ -1,0 +1,10 @@
+var _terezka$line_charts$LineChart_Axis$custom = _terezka$line_charts$Internal_Axis$custom;
+var _terezka$line_charts$LineChart_Axis$none = _terezka$line_charts$Internal_Axis$none;
+var _terezka$line_charts$LineChart_Axis$picky = _terezka$line_charts$Internal_Axis$picky;
+var _terezka$line_charts$LineChart_Axis$time = _terezka$line_charts$Internal_Axis$time;
+var _terezka$line_charts$LineChart_Axis$full = _terezka$line_charts$Internal_Axis$full;
+var _terezka$line_charts$LineChart_Axis$default = _terezka$line_charts$Internal_Axis$default;
+var _terezka$line_charts$LineChart_Axis$Properties = F6(
+	function (a, b, c, d, e, f) {
+		return {title: a, variable: b, pixels: c, range: d, axisLine: e, ticks: f};
+	});

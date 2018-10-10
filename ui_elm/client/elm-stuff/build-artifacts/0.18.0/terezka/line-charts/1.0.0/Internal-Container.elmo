@@ -1,0 +1,95 @@
+var _terezka$line_charts$Internal_Container$sizeStyles = F3(
+	function (_p0, width, height) {
+		var _p1 = _p0;
+		var _p2 = _p1._0.size;
+		if (_p2.ctor === 'Static') {
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'height',
+					_1: A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(height),
+						'px')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'width',
+						_1: A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(width),
+							'px')
+					},
+					_1: {ctor: '[]'}
+				}
+			};
+		} else {
+			return {ctor: '[]'};
+		}
+	});
+var _terezka$line_charts$Internal_Container$properties = F2(
+	function (f, _p3) {
+		var _p4 = _p3;
+		return f(_p4._0);
+	});
+var _terezka$line_charts$Internal_Container$Properties = F5(
+	function (a, b, c, d, e) {
+		return {attributesHtml: a, attributesSvg: b, size: c, margin: d, id: e};
+	});
+var _terezka$line_charts$Internal_Container$Margin = F4(
+	function (a, b, c, d) {
+		return {top: a, right: b, bottom: c, left: d};
+	});
+var _terezka$line_charts$Internal_Container$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Container$custom = _terezka$line_charts$Internal_Container$Config;
+var _terezka$line_charts$Internal_Container$Relative = {ctor: 'Relative'};
+var _terezka$line_charts$Internal_Container$relative = _terezka$line_charts$Internal_Container$Relative;
+var _terezka$line_charts$Internal_Container$responsive = function (id) {
+	return _terezka$line_charts$Internal_Container$custom(
+		{
+			attributesHtml: {ctor: '[]'},
+			attributesSvg: {ctor: '[]'},
+			size: _terezka$line_charts$Internal_Container$relative,
+			margin: A4(_terezka$line_charts$Internal_Container$Margin, 60, 140, 60, 80),
+			id: id
+		});
+};
+var _terezka$line_charts$Internal_Container$Static = {ctor: 'Static'};
+var _terezka$line_charts$Internal_Container$static = _terezka$line_charts$Internal_Container$Static;
+var _terezka$line_charts$Internal_Container$spaced = F5(
+	function (id, top, right, bottom, left) {
+		return _terezka$line_charts$Internal_Container$custom(
+			{
+				attributesHtml: {ctor: '[]'},
+				attributesSvg: {ctor: '[]'},
+				size: _terezka$line_charts$Internal_Container$static,
+				margin: A4(_terezka$line_charts$Internal_Container$Margin, top, right, bottom, left),
+				id: id
+			});
+	});
+var _terezka$line_charts$Internal_Container$styled = F2(
+	function (id, styles) {
+		return _terezka$line_charts$Internal_Container$custom(
+			{
+				attributesHtml: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(styles),
+					_1: {ctor: '[]'}
+				},
+				attributesSvg: {ctor: '[]'},
+				size: _terezka$line_charts$Internal_Container$static,
+				margin: A4(_terezka$line_charts$Internal_Container$Margin, 60, 140, 60, 80),
+				id: id
+			});
+	});
+var _terezka$line_charts$Internal_Container$default = function (id) {
+	return A2(
+		_terezka$line_charts$Internal_Container$styled,
+		id,
+		{ctor: '[]'});
+};

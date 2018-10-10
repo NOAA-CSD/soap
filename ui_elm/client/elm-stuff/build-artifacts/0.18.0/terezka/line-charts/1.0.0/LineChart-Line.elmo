@@ -1,0 +1,21 @@
+var _terezka$line_charts$LineChart_Line$style = _terezka$line_charts$Internal_Line$style;
+var _terezka$line_charts$LineChart_Line$custom = _terezka$line_charts$Internal_Line$custom;
+var _terezka$line_charts$LineChart_Line$hoverOne = function (hovered) {
+	return _terezka$line_charts$LineChart_Line$custom(
+		function (data) {
+			return A2(
+				_elm_lang$core$List$any,
+				function (_p0) {
+					return A2(
+						F2(
+							function (x, y) {
+								return _elm_lang$core$Native_Utils.eq(x, y);
+							}),
+						hovered,
+						_elm_lang$core$Maybe$Just(_p0));
+				},
+				data) ? A2(_terezka$line_charts$LineChart_Line$style, 3, _elm_lang$core$Basics$identity) : A2(_terezka$line_charts$LineChart_Line$style, 1, _elm_lang$core$Basics$identity);
+		});
+};
+var _terezka$line_charts$LineChart_Line$wider = _terezka$line_charts$Internal_Line$wider;
+var _terezka$line_charts$LineChart_Line$default = _terezka$line_charts$Internal_Line$default;

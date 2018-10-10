@@ -1,0 +1,426 @@
+var _user$project$Crd$addDataToList = F3(
+	function (size, newData, oldData) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(oldData),
+			size) > -1) ? A2(
+			_elm_lang$core$List$append,
+			{
+				ctor: '::',
+				_0: newData,
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$take, size - 1, oldData)) : (_elm_lang$core$List$isEmpty(oldData) ? {
+			ctor: '::',
+			_0: newData,
+			_1: {ctor: '[]'}
+		} : A2(
+			_elm_lang$core$List$append,
+			{
+				ctor: '::',
+				_0: newData,
+				_1: {ctor: '[]'}
+			},
+			oldData));
+	});
+var _user$project$Crd$asDataIn = F2(
+	function (model, data_array) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{data: data_array});
+	});
+var _user$project$Crd$asCvtIn = F2(
+	function (model, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{cvt: cvt});
+	});
+var _user$project$Crd$asHeaterIn = F2(
+	function (cvt, htr) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{heater: htr});
+	});
+var _user$project$Crd$setHeaterPID = F2(
+	function (pid, htr) {
+		return _elm_lang$core$Native_Utils.update(
+			htr,
+			{pid: pid});
+	});
+var _user$project$Crd$setHeaterSP = F2(
+	function (sp, htr) {
+		return _elm_lang$core$Native_Utils.update(
+			htr,
+			{sp: sp});
+	});
+var _user$project$Crd$togglePower = function (cvt) {
+	return _elm_lang$core$Native_Utils.update(
+		cvt,
+		{power: !cvt.power});
+};
+var _user$project$Crd$setDc = F2(
+	function (dc, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{dc: dc});
+	});
+var _user$project$Crd$setRate = F2(
+	function (f, cvt) {
+		return _elm_lang$core$Native_Utils.update(
+			cvt,
+			{rate: f});
+	});
+var _user$project$Crd$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'UpdateFrequency':
+				var f = A2(
+					_elm_lang$core$Result$withDefault,
+					1000,
+					_elm_lang$core$String$toInt(_p0._0));
+				var new_model = A2(
+					_user$project$Crd$asCvtIn,
+					model,
+					A2(_user$project$Crd$setRate, f, model.cvt));
+				return new_model;
+			case 'UpdateDutyCycle':
+				var dc_ = A2(
+					_elm_lang$core$Debug$log,
+					'dc',
+					A2(
+						_elm_lang$core$Result$withDefault,
+						0,
+						_elm_lang$core$String$toInt(_p0._0)));
+				var new_model = A2(
+					_user$project$Crd$asCvtIn,
+					model,
+					A2(_user$project$Crd$setDc, dc_, model.cvt));
+				return new_model;
+			default:
+				return A2(
+					_user$project$Crd$asCvtIn,
+					model,
+					_user$project$Crd$togglePower(model.cvt));
+		}
+	});
+var _user$project$Crd$Model = F2(
+	function (a, b) {
+		return {cvt: a, data: b};
+	});
+var _user$project$Crd$Data = F2(
+	function (a, b) {
+		return {cellData: a, runningData: b};
+	});
+var _user$project$Crd$CrdsCell = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {tau: a, tau0corr: b, extinction: c, extinctionCorrected: d, stdDevTau: e, tauError: f, tauCorrected: g, tau0: h, max: i, ringdowns: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Crd$defaultCell = _user$project$Crd$CrdsCell(0)(0)(0)(0)(0)(0)(0)(0)(0)(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '::',
+			_0: 0,
+			_1: {ctor: '[]'}
+		},
+		_1: {ctor: '[]'}
+	});
+var _user$project$Crd$viewRingdown = function (model) {
+	var cell_0 = A2(
+		_elm_lang$core$Maybe$withDefault,
+		_user$project$Crd$defaultCell,
+		A2(_elm_lang$core$Array$get, 0, model.data));
+	var raw_data = A2(
+		_elm_lang$core$Maybe$withDefault,
+		{ctor: '[]'},
+		_elm_lang$core$List$head(cell_0.ringdowns));
+	var data = A2(
+		_elm_lang$core$List$indexedMap,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		raw_data);
+	var blueCircle = function (_p1) {
+		var _p2 = _p1;
+		return A3(
+			_terezka$elm_plot$Plot$dot,
+			A2(_terezka$elm_plot$Plot$viewCircle, 5, '#cfd8ea'),
+			_p2._0,
+			_p2._1 * 1.2);
+	};
+	var line = {
+		axis: _terezka$elm_plot$Plot$normalAxis,
+		interpolation: A2(
+			_terezka$elm_plot$Plot$Linear,
+			_elm_lang$core$Maybe$Nothing,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$stroke('#cfd8ea'),
+				_1: {ctor: '[]'}
+			}),
+		toDataPoints: _elm_lang$core$List$map(blueCircle)
+	};
+	return A2(
+		_terezka$elm_plot$Plot$viewSeries,
+		{
+			ctor: '::',
+			_0: _terezka$elm_plot$Plot$line(
+				_elm_lang$core$List$map(
+					function (_p3) {
+						var _p4 = _p3;
+						return A2(
+							_terezka$elm_plot$Plot$circle,
+							_elm_lang$core$Basics$toFloat(_p4._0),
+							_elm_lang$core$Basics$toFloat(_p4._1));
+					})),
+			_1: {ctor: '[]'}
+		},
+		data);
+};
+var _user$project$Crd$decodeExtData = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'Ringdowns',
+	_elm_lang$core$Json_Decode$list(
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int)),
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+		{
+			ctor: '::',
+			_0: 'extParam',
+			_1: {
+				ctor: '::',
+				_0: 'max',
+				_1: {ctor: '[]'}
+			}
+		},
+		_elm_lang$core$Json_Decode$float,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+			{
+				ctor: '::',
+				_0: 'extParam',
+				_1: {
+					ctor: '::',
+					_0: 'Tau0',
+					_1: {ctor: '[]'}
+				}
+			},
+			_elm_lang$core$Json_Decode$float,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+				{
+					ctor: '::',
+					_0: 'extParam',
+					_1: {
+						ctor: '::',
+						_0: 'taucorr',
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$Json_Decode$float,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+					{
+						ctor: '::',
+						_0: 'extParam',
+						_1: {
+							ctor: '::',
+							_0: 'eTau',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$float,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+						{
+							ctor: '::',
+							_0: 'extParam',
+							_1: {
+								ctor: '::',
+								_0: 'stdevTau',
+								_1: {ctor: '[]'}
+							}
+						},
+						_elm_lang$core$Json_Decode$float,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+							{
+								ctor: '::',
+								_0: 'extParam',
+								_1: {
+									ctor: '::',
+									_0: 'extCorr',
+									_1: {ctor: '[]'}
+								}
+							},
+							_elm_lang$core$Json_Decode$float,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+								{
+									ctor: '::',
+									_0: 'extParam',
+									_1: {
+										ctor: '::',
+										_0: 'ext',
+										_1: {ctor: '[]'}
+									}
+								},
+								_elm_lang$core$Json_Decode$float,
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+									{
+										ctor: '::',
+										_0: 'extParam',
+										_1: {
+											ctor: '::',
+											_0: 'Tau0cor',
+											_1: {ctor: '[]'}
+										}
+									},
+									_elm_lang$core$Json_Decode$float,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$requiredAt,
+										{
+											ctor: '::',
+											_0: 'extParam',
+											_1: {
+												ctor: '::',
+												_0: 'Tau',
+												_1: {ctor: '[]'}
+											}
+										},
+										_elm_lang$core$Json_Decode$float,
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Crd$CrdsCell)))))))))));
+var _user$project$Crd$retrieveData = F3(
+	function (head, data, cell_data) {
+		return A2(
+			_elm_lang$core$Result$withDefault,
+			cell_data,
+			A2(
+				_elm_lang$core$Json_Decode$decodeString,
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					head,
+					_elm_lang$core$Json_Decode$array(_user$project$Crd$decodeExtData)),
+				data));
+	});
+var _user$project$Crd$CrdCvt = F5(
+	function (a, b, c, d, e) {
+		return {labels: a, rate: b, dc: c, heater: d, power: e};
+	});
+var _user$project$Crd$Heater = F3(
+	function (a, b, c) {
+		return {pid: a, sp: b, enable_pid: c};
+	});
+var _user$project$Crd$defaultCvt = A5(
+	_user$project$Crd$CrdCvt,
+	{
+		ctor: '::',
+		_0: 'cell_0',
+		_1: {
+			ctor: '::',
+			_0: 'cell_1',
+			_1: {ctor: '[]'}
+		}
+	},
+	1000,
+	400,
+	A3(
+		_user$project$Crd$Heater,
+		_elm_lang$core$Array$fromList(
+			{
+				ctor: '::',
+				_0: '1',
+				_1: {
+					ctor: '::',
+					_0: '0',
+					_1: {
+						ctor: '::',
+						_0: '0',
+						_1: {ctor: '[]'}
+					}
+				}
+			}),
+		'18',
+		false),
+	false);
+var _user$project$Crd$init = {
+	cvt: _user$project$Crd$defaultCvt,
+	data: _elm_lang$core$Array$fromList(
+		{
+			ctor: '::',
+			_0: _user$project$Crd$defaultCell,
+			_1: {ctor: '[]'}
+		})
+};
+var _user$project$Crd$decodeHeater = A4(
+	_elm_lang$core$Json_Decode$map3,
+	_user$project$Crd$Heater,
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'pid',
+		_elm_lang$core$Json_Decode$array(_elm_lang$core$Json_Decode$string)),
+	A2(_elm_lang$core$Json_Decode$field, 'sp', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'enable', _elm_lang$core$Json_Decode$bool));
+var _user$project$Crd$decodeCvt = function (cvt) {
+	return A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'laser_enable',
+		_elm_lang$core$Json_Decode$bool,
+		cvt.power,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'heater',
+			_user$project$Crd$decodeHeater,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'samp_per_cycle',
+				_elm_lang$core$Json_Decode$int,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'f',
+					_elm_lang$core$Json_Decode$int,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'cell_ids',
+						_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string),
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Crd$CrdCvt))))));
+};
+var _user$project$Crd$retrieveCrdCvt = F3(
+	function (heading, data, cvt) {
+		return _elm_lang$core$Native_Utils.eq(data, '{}') ? cvt : A2(
+			_elm_lang$core$Result$withDefault,
+			cvt,
+			A2(
+				_elm_lang$core$Json_Decode$decodeString,
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					heading,
+					_user$project$Crd$decodeCvt(cvt)),
+				data));
+	});
+var _user$project$Crd$TogglePower = {ctor: 'TogglePower'};
+var _user$project$Crd$UpdateDutyCycle = function (a) {
+	return {ctor: 'UpdateDutyCycle', _0: a};
+};
+var _user$project$Crd$UpdateFrequency = function (a) {
+	return {ctor: 'UpdateFrequency', _0: a};
+};

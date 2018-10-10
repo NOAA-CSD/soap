@@ -1,0 +1,52 @@
+var _terezka$line_charts$Internal_Axis_Line$config = function (_p0) {
+	var _p1 = _p0;
+	return _p1._0;
+};
+var _terezka$line_charts$Internal_Axis_Line$Properties = F5(
+	function (a, b, c, d, e) {
+		return {color: a, width: b, events: c, start: d, end: e};
+	});
+var _terezka$line_charts$Internal_Axis_Line$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _terezka$line_charts$Internal_Axis_Line$custom = _terezka$line_charts$Internal_Axis_Line$Config;
+var _terezka$line_charts$Internal_Axis_Line$none = _terezka$line_charts$Internal_Axis_Line$custom(
+	F2(
+		function (_p3, _p2) {
+			var _p4 = _p2;
+			return {
+				color: _terezka$line_charts$LineChart_Colors$transparent,
+				width: 0,
+				events: {ctor: '[]'},
+				start: _p4.min,
+				end: _p4.max
+			};
+		}));
+var _terezka$line_charts$Internal_Axis_Line$full = function (color) {
+	return _terezka$line_charts$Internal_Axis_Line$custom(
+		F2(
+			function (data, range) {
+				return {
+					color: color,
+					width: 1,
+					events: {ctor: '[]'},
+					start: range.min,
+					end: range.max
+				};
+			}));
+};
+var _terezka$line_charts$Internal_Axis_Line$default = _terezka$line_charts$Internal_Axis_Line$full(_terezka$line_charts$LineChart_Colors$gray);
+var _terezka$line_charts$Internal_Axis_Line$rangeFrame = function (color) {
+	return _terezka$line_charts$Internal_Axis_Line$custom(
+		F2(
+			function (data, range) {
+				var smallest = A2(_terezka$line_charts$Internal_Coordinate$smallestRange, data, range);
+				return {
+					color: color,
+					width: 1,
+					events: {ctor: '[]'},
+					start: smallest.min,
+					end: smallest.max
+				};
+			}));
+};

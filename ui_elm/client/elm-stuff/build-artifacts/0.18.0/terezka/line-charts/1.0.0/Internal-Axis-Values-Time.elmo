@@ -1,0 +1,645 @@
+var _terezka$line_charts$Internal_Axis_Values_Time$magnitude = F2(
+	function (interval, unit) {
+		var _p0 = unit;
+		if (_p0.ctor === 'Year') {
+			return A2(
+				_elm_lang$core$Basics$max,
+				1,
+				_terezka$line_charts$Internal_Utils$magnitude(interval));
+		} else {
+			return 1;
+		}
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$highestMultiple = function (_p1) {
+	return _elm_lang$core$Basics$toFloat(
+		A2(
+			_elm_lang$core$Maybe$withDefault,
+			0,
+			_elm_lang$core$List$head(
+				_elm_lang$core$List$reverse(_p1))));
+};
+var _terezka$line_charts$Internal_Axis_Values_Time$toParts = function (date) {
+	return {
+		ctor: '_Tuple7',
+		_0: _elm_lang$core$Date$year(date),
+		_1: _elm_lang$core$Date$month(date),
+		_2: _elm_lang$core$Date$day(date),
+		_3: _elm_lang$core$Date$hour(date),
+		_4: _elm_lang$core$Date$minute(date),
+		_5: _elm_lang$core$Date$second(date),
+		_6: _elm_lang$core$Date$millisecond(date)
+	};
+};
+var _terezka$line_charts$Internal_Axis_Values_Time$toExtraUnit = function (unit) {
+	var _p2 = unit;
+	switch (_p2.ctor) {
+		case 'Millisecond':
+			return _justinmimbs$elm_date_extra$Date_Extra$Millisecond;
+		case 'Second':
+			return _justinmimbs$elm_date_extra$Date_Extra$Second;
+		case 'Minute':
+			return _justinmimbs$elm_date_extra$Date_Extra$Minute;
+		case 'Hour':
+			return _justinmimbs$elm_date_extra$Date_Extra$Hour;
+		case 'Day':
+			return _justinmimbs$elm_date_extra$Date_Extra$Day;
+		case 'Week':
+			return _justinmimbs$elm_date_extra$Date_Extra$Week;
+		case 'Month':
+			return _justinmimbs$elm_date_extra$Date_Extra$Month;
+		default:
+			return _justinmimbs$elm_date_extra$Date_Extra$Year;
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values_Time$multiples = function (unit) {
+	var _p3 = unit;
+	switch (_p3.ctor) {
+		case 'Millisecond':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 5,
+						_1: {
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 25,
+									_1: {
+										ctor: '::',
+										_0: 50,
+										_1: {
+											ctor: '::',
+											_0: 100,
+											_1: {
+												ctor: '::',
+												_0: 200,
+												_1: {
+													ctor: '::',
+													_0: 500,
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+		case 'Second':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 5,
+						_1: {
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 15,
+								_1: {
+									ctor: '::',
+									_0: 30,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			};
+		case 'Minute':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 5,
+						_1: {
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 15,
+								_1: {
+									ctor: '::',
+									_0: 30,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			};
+		case 'Hour':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 3,
+						_1: {
+							ctor: '::',
+							_0: 4,
+							_1: {
+								ctor: '::',
+								_0: 6,
+								_1: {
+									ctor: '::',
+									_0: 8,
+									_1: {
+										ctor: '::',
+										_0: 12,
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+		case 'Day':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'Week':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'Month':
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 3,
+						_1: {
+							ctor: '::',
+							_0: 4,
+							_1: {
+								ctor: '::',
+								_0: 6,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 5,
+						_1: {
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 25,
+									_1: {
+										ctor: '::',
+										_0: 50,
+										_1: {
+											ctor: '::',
+											_0: 100,
+											_1: {
+												ctor: '::',
+												_0: 200,
+												_1: {
+													ctor: '::',
+													_0: 500,
+													_1: {
+														ctor: '::',
+														_0: 1000,
+														_1: {
+															ctor: '::',
+															_0: 10000,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values_Time$toMs = function (unit) {
+	var _p4 = unit;
+	switch (_p4.ctor) {
+		case 'Millisecond':
+			return 1;
+		case 'Second':
+			return 1000;
+		case 'Minute':
+			return 60000;
+		case 'Hour':
+			return 3600000;
+		case 'Day':
+			return 24 * 3600000;
+		case 'Week':
+			return (7 * 24) * 3600000;
+		case 'Month':
+			return (28 * 24) * 3600000;
+		default:
+			return (364 * 24) * 3600000;
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values_Time$all = {
+	ctor: '::',
+	_0: _terezka$line_charts$LineChart_Axis_Tick$Millisecond,
+	_1: {
+		ctor: '::',
+		_0: _terezka$line_charts$LineChart_Axis_Tick$Second,
+		_1: {
+			ctor: '::',
+			_0: _terezka$line_charts$LineChart_Axis_Tick$Minute,
+			_1: {
+				ctor: '::',
+				_0: _terezka$line_charts$LineChart_Axis_Tick$Hour,
+				_1: {
+					ctor: '::',
+					_0: _terezka$line_charts$LineChart_Axis_Tick$Day,
+					_1: {
+						ctor: '::',
+						_0: _terezka$line_charts$LineChart_Axis_Tick$Week,
+						_1: {
+							ctor: '::',
+							_0: _terezka$line_charts$LineChart_Axis_Tick$Month,
+							_1: {
+								ctor: '::',
+								_0: _terezka$line_charts$LineChart_Axis_Tick$Year,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _terezka$line_charts$Internal_Axis_Values_Time$allReversed = _elm_lang$core$List$reverse(_terezka$line_charts$Internal_Axis_Values_Time$all);
+var _terezka$line_charts$Internal_Axis_Values_Time$getUnitChange = F3(
+	function (interval, value, next) {
+		var equalBy = function (unit) {
+			return A3(
+				_justinmimbs$elm_date_extra$Date_Extra$equalBy,
+				_terezka$line_charts$Internal_Axis_Values_Time$toExtraUnit(unit),
+				_elm_lang$core$Date$fromTime(value),
+				_elm_lang$core$Date$fromTime(next));
+		};
+		var unitChange_ = function (units) {
+			unitChange_:
+			while (true) {
+				var _p5 = units;
+				if (_p5.ctor === '::') {
+					if (_p5._0.ctor === 'Week') {
+						var _v5 = _p5._1;
+						units = _v5;
+						continue unitChange_;
+					} else {
+						var _p6 = _p5._0;
+						if (_elm_lang$core$Native_Utils.cmp(
+							_terezka$line_charts$Internal_Axis_Values_Time$toMs(_p6),
+							_terezka$line_charts$Internal_Axis_Values_Time$toMs(interval)) < 1) {
+							return _elm_lang$core$Maybe$Nothing;
+						} else {
+							if (!equalBy(_p6)) {
+								return _elm_lang$core$Maybe$Just(_p6);
+							} else {
+								var _v6 = _p5._1;
+								units = _v6;
+								continue unitChange_;
+							}
+						}
+					}
+				} else {
+					return _elm_lang$core$Maybe$Nothing;
+				}
+			}
+		};
+		return unitChange_(_terezka$line_charts$Internal_Axis_Values_Time$allReversed);
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$next = F3(
+	function (timestamp, unit, multiple) {
+		return _elm_lang$core$Date$toTime(
+			A3(
+				_justinmimbs$elm_date_extra$Date_Extra$add,
+				_terezka$line_charts$Internal_Axis_Values_Time$toExtraUnit(unit),
+				multiple,
+				_elm_lang$core$Date$fromTime(timestamp)));
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$ceilingTo = F2(
+	function (number, prec) {
+		return prec * _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$ceiling(number / prec));
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$ceilingToInt = F2(
+	function (number, prec) {
+		return _elm_lang$core$Basics$ceiling(
+			A2(
+				_terezka$line_charts$Internal_Axis_Values_Time$ceilingTo,
+				_elm_lang$core$Basics$toFloat(number),
+				_elm_lang$core$Basics$toFloat(prec)));
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$ceilingToWeek = F2(
+	function (date, multiple) {
+		var weekNumber = A2(
+			_terezka$line_charts$Internal_Axis_Values_Time$ceilingToInt,
+			_justinmimbs$elm_date_extra$Date_Extra$weekNumber(date),
+			multiple);
+		return A3(
+			_justinmimbs$elm_date_extra$Date_Extra$fromSpec,
+			_justinmimbs$elm_date_extra$Date_Extra$utc,
+			_justinmimbs$elm_date_extra$Date_Extra$noTime,
+			A3(
+				_justinmimbs$elm_date_extra$Date_Extra$weekDate,
+				_elm_lang$core$Date$year(date),
+				weekNumber,
+				1));
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$ceilingToMonth = F2(
+	function (date, multiple) {
+		return _justinmimbs$elm_date_extra$Date_Extra_Facts$monthFromMonthNumber(
+			A2(
+				_terezka$line_charts$Internal_Axis_Values_Time$ceilingToInt,
+				_justinmimbs$elm_date_extra$Date_Extra$monthNumber(date),
+				multiple));
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$beginAt = F3(
+	function (min, unit, multiple) {
+		var interval = _terezka$line_charts$Internal_Axis_Values_Time$toMs(unit) * _elm_lang$core$Basics$toFloat(multiple);
+		var date = A2(
+			_justinmimbs$elm_date_extra$Date_Extra$ceiling,
+			_terezka$line_charts$Internal_Axis_Values_Time$toExtraUnit(unit),
+			_elm_lang$core$Date$fromTime(min));
+		var _p7 = _terezka$line_charts$Internal_Axis_Values_Time$toParts(date);
+		var y = _p7._0;
+		var m = _p7._1;
+		var d = _p7._2;
+		var hh = _p7._3;
+		var mm = _p7._4;
+		var ss = _p7._5;
+		var _p8 = unit;
+		switch (_p8.ctor) {
+			case 'Millisecond':
+				return A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingTo, min, interval);
+			case 'Second':
+				return A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingTo, min, interval);
+			case 'Minute':
+				return A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingTo, min, interval);
+			case 'Hour':
+				return _elm_lang$core$Date$toTime(
+					A7(
+						_justinmimbs$elm_date_extra$Date_Extra$fromParts,
+						y,
+						m,
+						d,
+						A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingToInt, hh, multiple),
+						0,
+						0,
+						0));
+			case 'Day':
+				return _elm_lang$core$Date$toTime(
+					A7(
+						_justinmimbs$elm_date_extra$Date_Extra$fromParts,
+						y,
+						m,
+						A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingToInt, d, multiple),
+						0,
+						0,
+						0,
+						0));
+			case 'Week':
+				return _elm_lang$core$Date$toTime(
+					A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingToWeek, date, multiple));
+			case 'Month':
+				return _elm_lang$core$Date$toTime(
+					A7(
+						_justinmimbs$elm_date_extra$Date_Extra$fromParts,
+						y,
+						A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingToMonth, date, multiple),
+						1,
+						0,
+						0,
+						0,
+						0));
+			default:
+				return _elm_lang$core$Date$toTime(
+					A7(
+						_justinmimbs$elm_date_extra$Date_Extra$fromParts,
+						A2(_terezka$line_charts$Internal_Axis_Values_Time$ceilingToInt, y, multiple),
+						_elm_lang$core$Date$Jan,
+						1,
+						0,
+						0,
+						0,
+						0));
+		}
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$findBestMultiple = F2(
+	function (interval, unit) {
+		var middleOfNext = F2(
+			function (m1, m2) {
+				return ((_elm_lang$core$Basics$toFloat(m1) * _terezka$line_charts$Internal_Axis_Values_Time$toMs(unit)) + (_elm_lang$core$Basics$toFloat(m2) * _terezka$line_charts$Internal_Axis_Values_Time$toMs(unit))) / 2;
+			});
+		var findBest_ = function (multiples) {
+			findBest_:
+			while (true) {
+				var _p9 = multiples;
+				if (_p9.ctor === '::') {
+					if (_p9._1.ctor === '::') {
+						var _p11 = _p9._1._0;
+						var _p10 = _p9._0;
+						if (_elm_lang$core$Native_Utils.cmp(
+							interval,
+							A2(middleOfNext, _p10, _p11)) < 1) {
+							return _p10;
+						} else {
+							var _v9 = {ctor: '::', _0: _p11, _1: _p9._1._1};
+							multiples = _v9;
+							continue findBest_;
+						}
+					} else {
+						return _p9._0;
+					}
+				} else {
+					return 1;
+				}
+			}
+		};
+		return findBest_(
+			_terezka$line_charts$Internal_Axis_Values_Time$multiples(unit));
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$findBestUnit = F2(
+	function (interval, units) {
+		var middleOfNext = F2(
+			function (u1, u2) {
+				return ((_terezka$line_charts$Internal_Axis_Values_Time$toMs(u1) * _terezka$line_charts$Internal_Axis_Values_Time$highestMultiple(
+					_terezka$line_charts$Internal_Axis_Values_Time$multiples(u1))) + _terezka$line_charts$Internal_Axis_Values_Time$toMs(u2)) / 2;
+			});
+		var findBest_ = F2(
+			function (units, u0) {
+				findBest_:
+				while (true) {
+					var _p12 = units;
+					if (_p12.ctor === '::') {
+						if (_p12._1.ctor === '::') {
+							var _p14 = _p12._1._0;
+							var _p13 = _p12._0;
+							if (_elm_lang$core$Native_Utils.cmp(
+								interval,
+								A2(middleOfNext, _p13, _p14)) < 1) {
+								return _p13;
+							} else {
+								var _v11 = {ctor: '::', _0: _p14, _1: _p12._1._1},
+									_v12 = _p13;
+								units = _v11;
+								u0 = _v12;
+								continue findBest_;
+							}
+						} else {
+							return _p12._0;
+						}
+					} else {
+						return _terezka$line_charts$LineChart_Axis_Tick$Year;
+					}
+				}
+			});
+		return A2(findBest_, units, _terezka$line_charts$LineChart_Axis_Tick$Year);
+	});
+var _terezka$line_charts$Internal_Axis_Values_Time$values = F2(
+	function (amountRough, range) {
+		var intervalRough = (range.max - range.min) / _elm_lang$core$Basics$toFloat(amountRough);
+		var unit = A2(_terezka$line_charts$Internal_Axis_Values_Time$findBestUnit, intervalRough, _terezka$line_charts$Internal_Axis_Values_Time$all);
+		var multiple = A2(_terezka$line_charts$Internal_Axis_Values_Time$findBestMultiple, intervalRough, unit);
+		var interval = _terezka$line_charts$Internal_Axis_Values_Time$toMs(unit) * _elm_lang$core$Basics$toFloat(multiple);
+		var beginning = A3(_terezka$line_charts$Internal_Axis_Values_Time$beginAt, range.min, unit, multiple);
+		var toPositions = F2(
+			function (acc, i) {
+				toPositions:
+				while (true) {
+					var next_ = A3(_terezka$line_charts$Internal_Axis_Values_Time$next, beginning, unit, i * multiple);
+					if (_elm_lang$core$Native_Utils.cmp(next_, range.max) > 0) {
+						return acc;
+					} else {
+						var _v13 = A2(
+							_elm_lang$core$Basics_ops['++'],
+							acc,
+							{
+								ctor: '::',
+								_0: next_,
+								_1: {ctor: '[]'}
+							}),
+							_v14 = i + 1;
+						acc = _v13;
+						i = _v14;
+						continue toPositions;
+					}
+				}
+			});
+		var toTime = F3(
+			function (unitChange, value, isFirst) {
+				return {
+					change: unitChange,
+					interval: A2(_terezka$line_charts$LineChart_Axis_Tick$Interval, unit, multiple),
+					timestamp: value,
+					isFirst: isFirst
+				};
+			});
+		var toTimes = F3(
+			function (values, unitChange, acc) {
+				toTimes:
+				while (true) {
+					var _p15 = values;
+					if (_p15.ctor === '::') {
+						if (_p15._1.ctor === '::') {
+							var _p17 = _p15._0;
+							var _p16 = _p15._1._0;
+							var newUnitChange = A3(_terezka$line_charts$Internal_Axis_Values_Time$getUnitChange, unit, _p17, _p16);
+							var isFirst = _elm_lang$core$List$isEmpty(acc);
+							var newAcc = {
+								ctor: '::',
+								_0: A3(toTime, unitChange, _p17, isFirst),
+								_1: acc
+							};
+							var _v16 = {ctor: '::', _0: _p16, _1: _p15._1._1},
+								_v17 = newUnitChange,
+								_v18 = newAcc;
+							values = _v16;
+							unitChange = _v17;
+							acc = _v18;
+							continue toTimes;
+						} else {
+							return {
+								ctor: '::',
+								_0: A3(
+									toTime,
+									unitChange,
+									_p15._0,
+									_elm_lang$core$List$isEmpty(acc)),
+								_1: acc
+							};
+						}
+					} else {
+						return acc;
+					}
+				}
+			});
+		return A3(
+			toTimes,
+			A2(
+				toPositions,
+				{ctor: '[]'},
+				0),
+			_elm_lang$core$Maybe$Nothing,
+			{ctor: '[]'});
+	});
