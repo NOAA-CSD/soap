@@ -2969,6 +2969,7 @@ DirectoryIndex index.htm
 				<Item Name="Find First Error.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Find First Error.vi"/>
 				<Item Name="Gen Tophat.vi" Type="VI" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/PAS/Utilities/Gen Tophat.vi"/>
 				<Item Name="Get LV Class Name.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/LVClass/Get LV Class Name.vi"/>
+				<Item Name="Get Serialized Device Configuration MSG.lvclass" Type="LVClass" URL="/&lt;vilib&gt;/MSR Consulting, LLC/Devices/DAQ Device/Messages/Device Configuration/Get Serialized Device Configuration MSG.lvclass"/>
 				<Item Name="Get Std Devs.vi" Type="VI" URL="/&lt;vilib&gt;/MSR Consulting, LLC/General Reuse/General/Math/Get Std Devs.vi"/>
 				<Item Name="Get Waveform Subset.vi" Type="VI" URL="/&lt;vilib&gt;/Waveform/WDTOps.llb/Get Waveform Subset.vi"/>
 				<Item Name="High Resolution Relative Seconds.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/High Resolution Relative Seconds.vi"/>
@@ -3015,15 +3016,15 @@ DirectoryIndex index.htm
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 			</Item>
 			<Item Name="AF Debug.lvlib" Type="Library" URL="/&lt;resource&gt;/AFDebug/AF Debug.lvlib"/>
-			<Item Name="cRIO Convert Thermocouple Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Convert Thermocouple Reading.vi"/>
-			<Item Name="cRIO Temperature to Volts.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Temperature to Volts.vi"/>
-			<Item Name="cRIO Volts to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Volts to Temperature.vi"/>
+			<Item Name="cRIO Convert Thermocouple Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Convert Thermocouple Reading.vi"/>
+			<Item Name="cRIO Temperature to Volts.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Temperature to Volts.vi"/>
+			<Item Name="cRIO Volts to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/cRIO Volts to Temperature.vi"/>
 			<Item Name="LV Config Read String.vi" Type="VI" URL="/&lt;resource&gt;/dialog/lvconfig.llb/LV Config Read String.vi"/>
 			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
-			<Item Name="NI 9213 Convert Thermistor Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert Thermistor Reading.vi"/>
-			<Item Name="NI 9213 Convert to Temperature (Calibrated).vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert to Temperature (Calibrated).vi"/>
-			<Item Name="NI 9213 Convert to Temperature (RAW).vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert to Temperature (RAW).vi"/>
-			<Item Name="NI 9213 Convert to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert to Temperature.vi"/>
+			<Item Name="NI 9213 Convert Thermistor Reading.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert Thermistor Reading.vi"/>
+			<Item Name="NI 9213 Convert to Temperature (Calibrated).vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert to Temperature (Calibrated).vi"/>
+			<Item Name="NI 9213 Convert to Temperature (RAW).vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert to Temperature (RAW).vi"/>
+			<Item Name="NI 9213 Convert to Temperature.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Module Specific/NI 9213/NI 9213 Support Files.llb/NI 9213 Convert to Temperature.vi"/>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -3031,8 +3032,8 @@ DirectoryIndex index.htm
 			<Item Name="systemLogging.dll" Type="Document" URL="systemLogging.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
-			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2017/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
+			<Item Name="TC Table Data.vi" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/TC Table Data.vi"/>
+			<Item Name="Thermocouple Type.ctl" Type="VI" URL="/C/Program Files (x86)/National Instruments/LabVIEW 2018/examples/CompactRIO/Shared/cRIO Convert Thermocouple Readings.llb/Thermocouple Type.ctl"/>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
