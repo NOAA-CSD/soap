@@ -11,6 +11,10 @@ module Main exposing (..)
 --import ContextMenu as CM
 
 import Array
+
+
+--import Array.Extra
+
 import Dom.Scroll exposing (toBottom)
 import Crd
 import Debug exposing (log)
@@ -92,7 +96,8 @@ type alias Model =
     , mdl : Material.Model
     , network : Network.Model
     , runningData : List (List Float)
-    , crdRunningData : List (List Float)
+    , crdRunningData0 : List (List Float)
+    , crdRunningData1 : List (List Float)
     , currentMsgList : List String
     , alicats : Alicat.Model
     , vaisalas : Vaisala.Model
@@ -220,9 +225,14 @@ asRunningDataIn model ldata =
     { model | runningData = ldata }
 
 
-asCrdRunningDataIn : Model -> List (List Float) -> Model
-asCrdRunningDataIn model ldata =
-    { model | crdRunningData = ldata }
+asCrdRunningData0In : Model -> List (List Float) -> Model
+asCrdRunningData0In model ldata =
+    { model | crdRunningData0 = ldata }
+
+
+asCrdRunningData1In : Model -> List (List Float) -> Model
+asCrdRunningData1In model ldata =
+    { model | crdRunningData1 = ldata }
 
 
 asDataIn : Model -> Data -> Model
@@ -286,7 +296,8 @@ defaultModelData =
     , mdl = Material.model
     , network = { ip = "192.168.172.123", port_ = "8001", service = "soap" }
     , runningData = [ [] ]
-    , crdRunningData = [ [] ]
+    , crdRunningData0 = [ [] ]
+    , crdRunningData1 = [ [] ]
     , currentMsgList = []
     , alicats = Alicat.init
     , vaisalas = Vaisala.init
@@ -295,7 +306,7 @@ defaultModelData =
     , pasPlotData = [ True, True, True ]
     , pasRange = RangeData 1200 1500 0 1500
     , crdPlotData = [ True, True, True ]
-    , crdRange = RangeData 0 1000 0 1500
+    , crdRange = RangeData 0 200 0 2500
     }
 
 
@@ -589,15 +600,26 @@ update msg model =
                         (Pas.PasCell 0 0 0 [ 0, 0 ] 0 0 [ 0 ] [ 0 ] [ 0 ] [ 0 ] 0)
                         (Array.get 1 model.pas.data.cell)
 
-                rCrdData =
+                r1CrdData =
                     Maybe.withDefault
-                        (Crd.CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ])
+                        (Crd.defaultCell)
                         (Array.get 1 model.crd.data)
 
-                cListData =
-                    [ rCrdData.tau
-                    , rCrdData.tau0
-                    , rCrdData.max
+                r0CrdData =
+                    Maybe.withDefault
+                        (Crd.defaultCell)
+                        (Array.get 0 model.crd.data)
+
+                c1ListData =
+                    [ r1CrdData.tau
+                    , r1CrdData.tau0
+                    , r1CrdData.max
+                    ]
+
+                c0ListData =
+                    [ r0CrdData.tau
+                    , r0CrdData.tau0
+                    , r0CrdData.max
                     ]
 
                 listData =
@@ -612,10 +634,14 @@ update msg model =
                         |> asRunningDataIn new_model
 
                 nn_model =
-                    addDataToList 100 cListData n_model.crdRunningData
-                        |> asCrdRunningDataIn n_model
+                    addDataToList 100 c1ListData n_model.crdRunningData1
+                        |> asCrdRunningData1In n_model
+
+                nnn_model =
+                    addDataToList 100 c0ListData nn_model.crdRunningData0
+                        |> asCrdRunningData0In nn_model
             in
-                ( nn_model, Cmd.none )
+                ( nnn_model, Cmd.none )
 
         GetData (Err _) ->
             ( model, Cmd.none )
@@ -757,46 +783,39 @@ update msg model =
             ( model, toggleHeaterPid id model )
 
         UpdateHeaterSP id sp ->
-            let
-                nid =
-                    Debug.log "heater_id" id
+            case id of
+                CrdHeater ->
+                    let
+                        new_model =
+                            model.crd.cvt.heater
+                                |> Crd.setHeaterSP sp
+                                |> Crd.asHeaterIn model.crd.cvt
+                                |> Crd.asCvtIn model.crd
+                                |> asCrdIn model
+                    in
+                        ( new_model, Cmd.none )
 
-                nsp =
-                    Debug.log "heater_sp" sp
-            in
-                case id of
-                    CrdHeater ->
-                        let
-                            new_model =
-                                model.crd.cvt.heater
-                                    |> Crd.setHeaterSP sp
-                                    |> Crd.asHeaterIn model.crd.cvt
-                                    |> Crd.asCvtIn model.crd
-                                    |> asCrdIn model
-                        in
-                            ( new_model, Cmd.none )
+                Pas0Heater ->
+                    let
+                        new_model =
+                            model.pas.cvt.heater_0
+                                |> Pas.setHeaterSP sp
+                                |> Pas.asHeater0In model.pas.cvt
+                                |> Pas.asCvtIn model.pas
+                                |> asPasIn model
+                    in
+                        ( new_model, Cmd.none )
 
-                    Pas0Heater ->
-                        let
-                            new_model =
-                                model.pas.cvt.heater_0
-                                    |> Pas.setHeaterSP sp
-                                    |> Pas.asHeater0In model.pas.cvt
-                                    |> Pas.asCvtIn model.pas
-                                    |> asPasIn model
-                        in
-                            ( new_model, Cmd.none )
-
-                    Pas1Heater ->
-                        let
-                            new_model =
-                                model.pas.cvt.heater_1
-                                    |> Pas.setHeaterSP sp
-                                    |> Pas.asHeater1In model.pas.cvt
-                                    |> Pas.asCvtIn model.pas
-                                    |> asPasIn model
-                        in
-                            ( new_model, Cmd.none )
+                Pas1Heater ->
+                    let
+                        new_model =
+                            model.pas.cvt.heater_1
+                                |> Pas.setHeaterSP sp
+                                |> Pas.asHeater1In model.pas.cvt
+                                |> Pas.asCvtIn model.pas
+                                |> asPasIn model
+                    in
+                        ( new_model, Cmd.none )
 
         UpdateHeaterCtl id ctl val ->
             case id of
@@ -2558,8 +2577,15 @@ viewCrd model =
                     , button 106 "Autoscale 1x" model UpdateCrdScaling
                     ]
                 , Grid.cell [ Grid.size Grid.All 12 ]
-                    [ plotData model.crdRunningData 0
+                    [ plotData model.crdRunningData0 0
                     ]
+                , Grid.cell [ Grid.size Grid.All 12 ]
+                    [ plotData model.crdRunningData1 0
+                    ]
+
+                {- , Grid.cell [ Grid.size Grid.All 12 ]
+                   [ plotCrdTimeBasedData model ]
+                -}
                 ]
             ]
         ]
@@ -2725,6 +2751,32 @@ ringdownTitle =
         "Ringdown Data"
 
 
+
+{- plotCrdTimeBasedData : Model -> Html Msg
+   plotCrdTimeBasedData model =
+       let
+           cell0 =
+               (Maybe.withDefault Crd.defaultCell (Array.get 0 model.crd.data))
+
+           cell1 =
+               (Maybe.withDefault Crd.defaultCell (Array.get 0 model.crd.data))
+
+           series =
+               List.map2 (,) cell0.runningTau cell1.runningTau
+
+           series_ =
+               List.indexedMap (\idx s -> ( toFloat idx, Tuple.first s, Tuple.second s )) series
+
+           range =
+               RangeData 0
+                   100
+                   50
+                   100
+       in
+           timeData model range series_ [ True, True ]
+-}
+
+
 {-| This takes enumerated time data for two cells and produces a plot containing
 the data from those two cells. The data is assumed to be in the order of
 ('index', 'cell_1_data', 'cell_2_data').
@@ -2747,15 +2799,19 @@ timeData model range data selectData =
                         Nothing
                 )
                 (List.map2 (,) [ Plot.line <| cell0, Plot.line <| cell1 ] selectData)
+
+        pc =
+            soapPlotCustomizations range
+
+        left_margin =
+            if model.pas.cvt.speaker_0 || model.pas.cvt.speaker_1 then
+                75
+            else
+                50
     in
         Plot.viewSeriesCustom
-            { defaultSeriesPlotCustomizations
-                | height = 200
-                , toRangeLowest = \y -> range.xmin
-                , toRangeHighest = \y -> range.xmax
-                , toDomainLowest = \y -> range.ymin
-                , toDomainHighest = \y -> range.ymax
-                , margin = { top = 25, right = 25, bottom = 25, left = 50 }
+            { pc
+                | margin = { top = 25, right = 25, bottom = 25, left = left_margin }
 
                 --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
             }
@@ -2769,6 +2825,20 @@ selectData selected_ data =
         Just data
     else
         Nothing
+
+
+soapPlotCustomizations : RangeData -> Plot.PlotCustomizations msg
+soapPlotCustomizations range =
+    { defaultSeriesPlotCustomizations
+        | height = 200
+        , toRangeLowest = \y -> range.xmin
+        , toRangeHighest = \y -> range.xmax
+        , toDomainLowest = \y -> range.ymin
+        , toDomainHighest = \y -> range.ymax
+        , margin = { top = 25, right = 25, bottom = 25, left = 50 }
+
+        --, junk = \summary -> [ Plot.junk ringdownTitle 100 1500 ]
+    }
 
 
 {-| Helper function for customizing the lower part of a plot range.
@@ -2820,10 +2890,10 @@ getRingdownData : Model -> List ( Float, Float, Float )
 getRingdownData model =
     let
         cell_0 =
-            Maybe.withDefault (Crd.CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ]) (Array.get 0 model.crd.data)
+            Maybe.withDefault (Crd.defaultCell) (Array.get 0 model.crd.data)
 
         cell_1 =
-            Maybe.withDefault (Crd.CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ]) (Array.get 1 model.crd.data)
+            Maybe.withDefault (Crd.defaultCell) (Array.get 1 model.crd.data)
 
         raw_data_0 =
             Maybe.withDefault [] (List.head cell_0.ringdowns)
@@ -3140,6 +3210,10 @@ toggle num txt val model msg =
         , css "margin-top" "10px"
         ]
         [ Html.text txt ]
+
+
+
+-- TODO: Fix this!!! Duplicates another alias above
 
 
 pcs : PlotLimits -> PlotLimits -> Plot.PlotCustomizations msg

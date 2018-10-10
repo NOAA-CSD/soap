@@ -1,9 +1,10 @@
 module Crd exposing (..)
 
 import Array exposing (Array)
+import Array.Extra
 import Html exposing (Html)
 import Json.Decode exposing (..)
-import Json.Decode.Pipeline exposing (decode, optional, required, requiredAt)
+import Json.Decode.Pipeline exposing (decode, optional, required, requiredAt, hardcoded)
 import Plot
 import Svg.Attributes as Attributes
 
@@ -23,7 +24,7 @@ type alias Data =
 
 init : Model
 init =
-    { cvt = defaultCvt, data = Array.fromList [ CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ] ] }
+    { cvt = defaultCvt, data = Array.fromList [ defaultCell ] }
 
 
 type Msg
@@ -45,7 +46,7 @@ update msg model =
                         |> setRate f
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         UpdateDutyCycle dc ->
             let
@@ -57,7 +58,7 @@ update msg model =
                         |> setDc dc_
                         |> asCvtIn model
             in
-            new_model
+                new_model
 
         TogglePower ->
             model.cvt
@@ -80,6 +81,8 @@ type alias CrdsCell =
     , tau0 : Float
     , max : Float
     , ringdowns : List (List Int)
+
+    --, runningTau : List Float
     }
 
 
@@ -97,6 +100,15 @@ type alias Heater =
     , sp : String
     , enable_pid : Bool
     }
+
+
+defaultCell : CrdsCell
+defaultCell =
+    CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ]
+
+
+
+--[]
 
 
 defaultCvt : CrdCvt
@@ -173,6 +185,9 @@ decodeCvt cvt =
         |> optional "laser_enable" bool cvt.power
 
 
+{-| Decodes the CrdsCell struct that comes back. The runningTaus entry is hardcoded as this is
+is tracked via the client side.
+-}
 decodeExtData : Decoder CrdsCell
 decodeExtData =
     decode CrdsCell
@@ -188,9 +203,37 @@ decodeExtData =
         |> required "Ringdowns" (list (list int))
 
 
+
+--|> hardcoded []
+
+
 retrieveData : String -> String -> Array CrdsCell -> Array CrdsCell
 retrieveData head data cell_data =
-    Result.withDefault cell_data (decodeString (field head (array decodeExtData)) data)
+    {- let
+           icd =
+               Debug.log "init" cell_data
+
+           ncd =
+               Debug.log "new" (Result.withDefault cell_data (decodeString (field head (array decodeExtData)) data))
+
+           fcd =
+               Debug.log "final"
+                   (Array.Extra.map2 populateRunningData
+                       cell_data
+                       (Result.withDefault cell_data (decodeString (field head (array decodeExtData)) data))
+                   )
+       in
+           Array.Extra.map2 populateRunningData
+               cell_data
+    -}
+    (Result.withDefault cell_data (decodeString (field head (array decodeExtData)) data))
+
+
+
+{- populateRunningData : CrdsCell -> CrdsCell -> CrdsCell
+   populateRunningData initial_cell cell =
+       { cell | runningTau = addDataToList 100 cell.tau initial_cell.runningTau }
+-}
 
 
 viewRingdown : Model -> Html Msg
@@ -206,7 +249,7 @@ viewRingdown model =
             }
 
         cell_0 =
-            Maybe.withDefault (CrdsCell 0 0 0 0 0 0 0 0 0 [ [ 0 ] ]) (Array.get 0 model.data)
+            Maybe.withDefault defaultCell (Array.get 0 model.data)
 
         raw_data =
             Maybe.withDefault [] (List.head cell_0.ringdowns)
@@ -214,9 +257,9 @@ viewRingdown model =
         data =
             List.indexedMap (,) raw_data
     in
-    Plot.viewSeries
-        [ Plot.line <| List.map (\( x, y ) -> Plot.circle (toFloat x) (toFloat y)) ]
-        data
+        Plot.viewSeries
+            [ Plot.line <| List.map (\( x, y ) -> Plot.circle (toFloat x) (toFloat y)) ]
+            data
 
 
 {-| This command actually retrieves the CVT data from the json string returned by the server.
@@ -232,3 +275,16 @@ retrieveCrdCvt heading data cvt =
         cvt
     else
         Result.withDefault cvt (decodeString (field heading (decodeCvt cvt)) data)
+
+
+{-| Takes a list of data and appends it to a larger time based list. The size defines
+how large the time based list will be.
+-}
+addDataToList : Int -> Float -> List Float -> List Float
+addDataToList size newData oldData =
+    if List.length oldData >= size then
+        List.append [ newData ] (List.take (size - 1) oldData)
+    else if List.isEmpty oldData then
+        [ newData ]
+    else
+        List.append [ newData ] oldData
